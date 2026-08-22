@@ -1,0 +1,1119 @@
+:host {
+  display: block;
+  font-family: var(--font-body);
+}
+
+/* ===================================================================
+   Shared button styles (scoped to this page — same recipe as the
+   doctors listing page's .btn classes)
+   =================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn--filled {
+  background: var(--color-blue-600);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(36, 84, 230, 0.26);
+}
+
+.btn--filled:hover,
+.btn--filled:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(36, 84, 230, 0.32);
+}
+
+.btn--outline {
+  background: #ffffff;
+  color: var(--color-navy-800);
+  border: 1.5px solid rgba(18, 27, 111, 0.22);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  border-color: var(--color-navy-800);
+  background: rgba(18, 27, 111, 0.04);
+}
+
+/* ===================================================================
+   Page layout — hero, Brief Profile and the sticky booking sidebar
+
+   Below 1100px this is just a plain block wrapper: hero, aside, profile
+   stack in that DOM order with no grid involved.
+
+   At ≥1100px it becomes a 2-column grid where hero and Brief Profile stack
+   in the left column while `.doctor-page__aside` occupies a right-hand
+   grid AREA that spans BOTH their rows (the "booking" name repeats across
+   both rows of the template below, which is what makes it span). Because
+   that area is as tall as hero + profile combined, `.doctor-booking`'s own
+   `position: sticky` (see further down) has room to stay pinned in the
+   viewport while the whole left column scrolls underneath it, releasing
+   only once the bottom of Brief Profile scrolls into view — a standard
+   sticky-sidebar layout.
+   =================================================================== */
+
+.doctor-page__aside {
+  padding-inline: 24px;
+  margin-block: 24px;
+}
+
+@media (max-width: 699.98px) {
+  .doctor-page__aside {
+    padding-inline: 16px;
+    margin-block: 16px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .doctor-page {
+    /* Single source of truth for "equal width": photo, info and the
+       booking sidebar are all exactly this wide. The first grid column
+       (hero + Brief Profile) is sized to `2 * --doctor-col-w + 36px` —
+       exactly what `.doctor-hero__profile`'s two `1fr` tracks (36px gap,
+       see further down) need to render photo/info at precisely
+       `--doctor-col-w` each — rather than a flexible `1fr` that would
+       grow wider than that and leave a dead gap before the booking
+       column. Any leftover space beyond the (capped) column width just
+       shows as blank margin past the booking card on very wide screens,
+       which reads as normal breathing room rather than a layout bug. */
+    --doctor-col-w: clamp(300px, 28vw, 440px);
+    display: grid;
+    grid-template-columns: calc(2 * var(--doctor-col-w) + 36px) var(--doctor-col-w);
+    grid-template-areas:
+      'hero    booking'
+      'profile booking';
+    /* Matches `.doctor-hero__profile`'s own 36px inner gap (photo↔info) so
+       the gap between info and the booking sidebar reads as the same size
+       — all three columns end up equally spaced, not just equally wide. */
+    column-gap: 36px;
+    /* `stretch` (the default, set explicitly for clarity), not `start` —
+       `start` sizes `.doctor-page__aside`'s box to its own content (just
+       the booking card's own height) instead of the full two-row span,
+       leaving `.doctor-booking`'s sticky positioning no room to operate so
+       it silently behaves like `position: static` the whole way down the
+       page. `stretch` gives the aside the full spanned height (hero's row
+       + Brief Profile's row) as its containing block, which is what
+       sticky needs. Hero and Brief Profile are unaffected, since each
+       already fills its own single-row track at its natural content
+       height either way. */
+    align-items: stretch;
+  }
+
+  .doctor-hero {
+    grid-area: hero;
+  }
+
+  .doctor-page__aside {
+    grid-area: booking;
+    padding-inline: 0;
+    padding-right: 24px;
+    margin-block: 0;
+    /* Match hero's background so the two side-by-side columns read as one
+       continuous surface instead of hero-blue next to plain white. Fixed
+       PIXEL stops (not the percentages hero itself uses) are deliberate:
+       this box is much taller than hero alone (it spans hero's row AND
+       Brief Profile's row combined), so copying hero's percentage stops
+       verbatim would stretch the gradient across that full height and
+       reach white far later than hero does — creating a visible seam
+       where they sit side-by-side. Fixed px stops, calibrated to roughly
+       hero's own natural rendered height (~650-700px), let both reach
+       white at about the same vertical position; below that this box
+       just stays white, matching Brief Profile's white background beside
+       it for the remainder of its height. */
+    background: linear-gradient(180deg, #eef2ff 0px, #f6f8ff 320px, #ffffff 680px);
+  }
+
+  .doctor-profile {
+    grid-area: profile;
+  }
+}
+
+/* ===================================================================
+   Hero shell
+   =================================================================== */
+
+.doctor-hero {
+  position: relative;
+  /* `clip`, not `hidden` — deliberate. `hidden` (like `auto`/`scroll`)
+     makes this element a "scroll container", which becomes the reference
+     frame for any sticky descendant's positioning — even though this
+     element itself never actually scrolls, since it's just sized to its
+     content. That silently breaks the sticky booking card below (it ends
+     up pinned relative to this box instead of the viewport, so it just
+     scrolls away with the page). `clip` suppresses the decorative blob's
+     overflow the same way without creating that scroll container. Same
+     root cause as the sticky navbar bug — see styles.css's `html` rule. */
+  overflow: clip;
+  background: linear-gradient(180deg, #eef2ff 0%, #f6f8ff 45%, #ffffff 100%);
+  padding: 28px 24px 64px;
+}
+
+/* ===================================================================
+   Decorative background layer (dot grids, corner wave, floating cross)
+   =================================================================== */
+
+.doctor-hero__decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.doctor-hero__decor-wave {
+  position: absolute;
+  left: -4%;
+  bottom: -6%;
+  width: min(440px, 42%);
+  height: auto;
+}
+
+.doctor-hero__decor-dots {
+  position: absolute;
+  background-image: radial-gradient(rgba(36, 84, 230, 0.4) 1.6px, transparent 1.6px);
+  background-size: 14px 14px;
+}
+
+.doctor-hero__decor-dots--tl {
+  top: 96px;
+  left: 32px;
+  width: 96px;
+  height: 76px;
+}
+
+.doctor-hero__decor-dots--bl {
+  bottom: 64px;
+  left: 20px;
+  width: 68px;
+  height: 52px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.55) 1.6px, transparent 1.6px);
+}
+
+.doctor-hero__decor-cross {
+  position: absolute;
+  color: rgba(36, 84, 230, 0.22);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.doctor-hero__decor-cross--big {
+  top: 37%;
+  left: 51%;
+  font-size: 2.6rem;
+}
+
+@media (max-width: 1099.98px) {
+  .doctor-hero__decor-cross--big {
+    display: none;
+  }
+}
+
+.doctor-hero__decor-cross--photo {
+  position: absolute;
+  bottom: 8%;
+  left: -9%;
+  font-size: 1.5rem;
+  color: rgba(36, 84, 230, 0.3);
+  font-weight: 700;
+  line-height: 1;
+  z-index: 0;
+}
+
+.doctor-hero__decor-arc {
+  position: absolute;
+  top: -4px;
+  right: -18px;
+  width: 60px;
+  height: 96px;
+  overflow: visible;
+}
+
+.doctor-hero__decor-arc path {
+  fill: none;
+  stroke: var(--color-blue-600);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.doctor-hero__decor-arc circle {
+  fill: var(--color-blue-600);
+}
+
+.doctor-hero__back {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(18, 27, 111, 0.18);
+  background: #ffffff;
+  color: var(--color-navy-800);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.doctor-hero__back:hover,
+.doctor-hero__back:focus-visible {
+  border-color: var(--color-navy-800);
+  background: rgba(18, 27, 111, 0.04);
+}
+
+.doctor-hero__back svg {
+  width: 15px;
+  height: 15px;
+}
+
+.doctor-hero--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 96px 24px;
+  text-align: center;
+  color: var(--color-text-gray);
+}
+
+.doctor-hero__grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin-inline: auto;
+  /* Single column — the booking card used to be a second column here but
+     now lives in `.doctor-page__aside` (a sticky sidebar next to this
+     section, see `.doctor-page` further down), so this just wraps the
+     photo/info profile block. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+/* ===================================================================
+   Left: profile
+   =================================================================== */
+
+.doctor-hero__profile {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.doctor-hero__photo-wrap {
+  position: relative;
+  /* Portrait frame (not a square crop) — matches the reference design's
+     taller doctor photo. `object-fit: cover` + `object-position: top`
+     below keeps faces framed nicely even for doctors whose only available
+     source image is a square "-sq" headshot crop. */
+  aspect-ratio: 3 / 4;
+}
+
+.doctor-hero__photo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 28px;
+  box-shadow: 0 24px 48px rgba(18, 27, 111, 0.18);
+  background: #eef1fb;
+}
+
+/* "Framed" photos (the new-doc-images set) are pre-composed hero graphics —
+   the dotted grid, arc, cross and corner wave are already baked into the
+   artwork at its native 942:1670 proportions. Show the whole image as-is,
+   without our own card treatment or CSS decoration layered on top. */
+.doctor-hero__photo-wrap--full {
+  aspect-ratio: 942 / 1670;
+}
+
+.doctor-hero__photo-wrap--full .doctor-hero__photo {
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* On wide screens, the photo bleeds to the true left edge of the browser
+   window: `.doctor-hero` has a fixed, known 24px left padding at this
+   breakpoint (not viewport-dependent), so it can be cancelled exactly with
+   a matching negative margin — simpler and more reliable than a vw-based
+   breakout trick, and correct at every viewport width since nothing here
+   depends on the grid's own max-width centering math. (The booking card
+   used to live in this same grid as a third equal-width column — it has
+   since moved out to `.doctor-page__aside`, a sticky sidebar spanning both
+   this section and Brief Profile below; see `.doctor-page` further down.) */
+@media (min-width: 1100px) {
+  .doctor-hero--framed-photo .doctor-hero__grid {
+    max-width: none;
+    width: calc(100% + 24px);
+    margin-left: -24px;
+    margin-right: 0;
+  }
+
+  /* Zeroing hero's own right padding (normally 24px, see `.doctor-hero`)
+     is what makes the equal-width math in `.doctor-page` above resolve
+     cleanly: with no right padding to account for, `.doctor-hero__grid`'s
+     bleed-adjusted content width becomes exactly
+     `2 * var(--doctor-col-w) + 36px` — precisely what `.doctor-hero__profile`
+     below needs to render its photo/info columns at exactly
+     `var(--doctor-col-w)` each. */
+  .doctor-hero--framed-photo {
+    padding-right: 0;
+  }
+
+  /* Equal width (via `1fr 1fr`, self-resolving to `--doctor-col-w` given
+     the corrected available width from the padding override just above)
+     AND equal height (via `stretch`) between the photo and info columns. */
+  .doctor-hero--framed-photo .doctor-hero__profile {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .doctor-hero--framed-photo .doctor-hero__photo-wrap--full {
+    height: 100%;
+  }
+
+  .doctor-hero--framed-photo .doctor-hero__info {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Below the two-column breakpoint, the photo goes back to sitting above
+   the doctor info in normal document flow, but stays full-bleed — no side
+   margins — rather than the inset, rounded "card" treatment normal photos
+   get. */
+@media (max-width: 1099.98px) {
+  .doctor-hero--framed-photo .doctor-hero__profile {
+    display: block;
+  }
+
+  .doctor-hero--framed-photo .doctor-hero__info {
+    margin-left: 0;
+  }
+
+  /* The source artwork is a very tall 942:1670 portrait — stretched to
+     fill the full (edge-to-edge) device width, its NATURAL aspect-ratio
+     height runs to 700px+ on a phone and 1800px+ on a tablet, most of
+     which is the image's own plain background trailing below the wave —
+     pushing the doctor's name/qualifications far down the page before any
+     real content appears. Capping the height and switching to
+     `object-fit: cover` keeps the photo full-bleed and shows the doctor +
+     the wave/dot decoration, just crops off that excess empty tail. */
+  .doctor-hero--framed-photo .doctor-hero__photo-wrap--full {
+    width: auto;
+    max-width: none;
+    aspect-ratio: auto;
+    height: 58vh;
+    max-height: 520px;
+    margin-inline: -24px;
+    margin-bottom: 24px;
+  }
+
+  .doctor-hero--framed-photo .doctor-hero__photo-wrap--full .doctor-hero__photo {
+    object-fit: cover;
+    /* A box this much wider than the tall source image is dominated by
+       width when `cover` scales it, so the visible vertical window is
+       fairly short — `top` alignment showed mostly hair/forehead. This
+       keeps the face and shoulders in frame instead. */
+    object-position: center 18%;
+  }
+}
+
+@media (max-width: 699.98px) {
+  .doctor-hero--framed-photo .doctor-hero__photo-wrap--full {
+    margin-inline: -16px;
+    height: 50vh;
+    max-height: 440px;
+  }
+}
+
+.doctor-hero__info {
+  position: relative;
+}
+
+.doctor-hero__info h1 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.15;
+}
+
+.doctor-hero__title {
+  margin-top: 8px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--color-blue-600);
+}
+
+.doctor-hero__facts {
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-hero__fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.doctor-hero__fact:first-child {
+  padding-top: 0;
+}
+
+.doctor-hero__fact-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(36, 84, 230, 0.1);
+  color: var(--color-blue-600);
+}
+
+.doctor-hero__fact dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-blue-600);
+  margin-bottom: 3px;
+}
+
+.doctor-hero__fact dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+}
+
+.doctor-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+/* ===================================================================
+   Right: booking card
+   =================================================================== */
+
+.doctor-booking {
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(18, 27, 111, 0.14);
+  padding: 26px 24px 22px;
+  position: sticky;
+  top: calc(var(--header-topbar-height, 50px) + var(--header-mainnav-height, 100px) + 20px);
+}
+
+.doctor-booking__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.doctor-booking__head-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-blue-600);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-booking__head h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-navy-900);
+}
+
+.doctor-booking__step-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 12px;
+}
+
+.doctor-booking__step-label:first-of-type {
+  margin-top: 0;
+}
+
+.doctor-booking__step-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-blue-600);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-booking__step-label h3 {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
+
+.doctor-booking__carousel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doctor-booking__nav {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  color: var(--color-navy-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.doctor-booking__nav:hover {
+  border-color: var(--color-blue-600);
+  color: var(--color-blue-600);
+}
+
+.doctor-booking__nav svg {
+  width: 15px;
+  height: 15px;
+}
+
+.doctor-booking__chips {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 2px;
+}
+
+.doctor-booking__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.doctor-booking__chip {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 62px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(15, 23, 42, 0.1);
+  background: #f8faff;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.doctor-booking__chip-weekday {
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.doctor-booking__chip-day {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.doctor-booking__chip-month {
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.doctor-booking__chip--time {
+  min-width: auto;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.doctor-booking__chip:hover {
+  border-color: var(--color-blue-600);
+}
+
+.doctor-booking__chip.active {
+  background: var(--color-blue-600);
+  border-color: var(--color-blue-600);
+  color: #ffffff;
+}
+
+.doctor-booking__error {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.doctor-booking__cta {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.doctor-booking__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--color-blue-600);
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  padding: 0 0 16px;
+  font-family: inherit;
+}
+
+.doctor-booking__change svg {
+  width: 14px;
+  height: 14px;
+}
+
+.doctor-booking__summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(36, 84, 230, 0.08);
+  color: var(--color-navy-800);
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 18px;
+}
+
+.doctor-booking__summary svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-blue-600);
+  flex-shrink: 0;
+}
+
+.doctor-booking__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+.doctor-booking__field input {
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(15, 23, 42, 0.14);
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--color-text-dark);
+}
+
+.doctor-booking__field input:focus-visible {
+  outline: none;
+  border-color: var(--color-blue-600);
+}
+
+.doctor-booking__field-error {
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.doctor-booking__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 12px 4px 8px;
+}
+
+.doctor-booking__success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(21, 155, 92, 0.12);
+  color: #159b5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.doctor-booking__success-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.doctor-booking__success h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-navy-900);
+}
+
+.doctor-booking__success p {
+  font-size: 0.88rem;
+  color: var(--color-text-gray);
+  line-height: 1.55;
+}
+
+.doctor-booking__success .doctor-booking__cta {
+  margin-top: 10px;
+}
+
+.doctor-booking__secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 18px 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-gray);
+}
+
+.doctor-booking__secure svg {
+  width: 14px;
+  height: 14px;
+  color: #159b5c;
+  flex-shrink: 0;
+}
+
+/* ===================================================================
+   Responsive
+   =================================================================== */
+
+@media (max-width: 1099.98px) {
+  .doctor-hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doctor-booking {
+    position: static;
+    max-width: 460px;
+  }
+}
+
+/* ===================================================================
+   Brief Profile
+   =================================================================== */
+
+.doctor-profile {
+  padding: 56px 24px 72px;
+  background: #ffffff;
+}
+
+.doctor-profile__grid {
+  max-width: 1280px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 48px;
+  align-items: start;
+}
+
+.doctor-profile__eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-blue-600);
+  margin-bottom: 10px;
+}
+
+.doctor-profile__bio h2 {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  margin-bottom: 18px;
+}
+
+.doctor-profile__bio p {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--color-text-gray);
+}
+
+.doctor-profile__bio p + p {
+  margin-top: 16px;
+}
+
+.doctor-profile__expertise {
+  background: #f6f8ff;
+  border-radius: 22px;
+  padding: 28px 26px;
+}
+
+.doctor-profile__expertise h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-navy-900);
+  margin-bottom: 18px;
+}
+
+.doctor-profile__expertise ul {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.doctor-profile__expertise li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+.doctor-profile__expertise-icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(36, 84, 230, 0.12);
+  color: var(--color-blue-600);
+  margin-top: 1px;
+}
+
+.doctor-profile__expertise-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 899.98px) {
+  .doctor-profile__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 699.98px) {
+  .doctor-profile {
+    padding: 40px 16px 56px;
+  }
+
+  .doctor-profile__expertise {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 699.98px) {
+  .doctor-hero {
+    padding: 20px 16px 48px;
+  }
+
+  .doctor-hero__profile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doctor-hero__photo-wrap {
+    max-width: 240px;
+    margin-inline: auto;
+  }
+
+  .doctor-hero__actions {
+    flex-direction: column;
+  }
+
+  .doctor-hero__actions .btn {
+    width: 100%;
+  }
+
+  .doctor-booking {
+    max-width: none;
+    padding: 22px 18px 18px;
+  }
+}
+
+/* ===================================================================
+   Professional Affiliations
+   =================================================================== */
+
+.doctor-affiliations {
+  position: relative;
+  overflow: clip;
+  background: linear-gradient(180deg, #f6f8ff 0%, #eef2ff 100%);
+  padding: 64px 24px 72px;
+}
+
+.doctor-affiliations__decor-dots {
+  position: absolute;
+  top: 64px;
+  width: 96px;
+  height: 76px;
+  background-image: radial-gradient(rgba(36, 84, 230, 0.35) 1.6px, transparent 1.6px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+.doctor-affiliations__decor-dots--left {
+  left: 40px;
+}
+
+.doctor-affiliations__decor-dots--right {
+  right: 40px;
+}
+
+@media (max-width: 899.98px) {
+  .doctor-affiliations__decor-dots {
+    display: none;
+  }
+}
+
+.doctor-affiliations__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.doctor-affiliations__head {
+  text-align: center;
+}
+
+.doctor-affiliations__head h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.15;
+}
+
+.doctor-affiliations__underline {
+  display: block;
+  width: 56px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-blue-600);
+  margin: 18px auto 0;
+  position: relative;
+}
+
+.doctor-affiliations__underline::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue-600);
+  background: #ffffff;
+  transform: translateY(-50%);
+}
+
+.doctor-affiliations__grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.doctor-affiliations__card {
+  background: #ffffff;
+  border: 1px solid rgba(18, 27, 111, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(18, 27, 111, 0.08);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.doctor-affiliations__logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(36, 84, 230, 0.1);
+  color: var(--color-blue-600);
+}
+
+.doctor-affiliations__logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.doctor-affiliations__divider {
+  display: block;
+  width: 64px;
+  height: 1.5px;
+  background: rgba(36, 84, 230, 0.3);
+}
+
+.doctor-affiliations__card p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-navy-800);
+  line-height: 1.5;
+}
+
+@media (max-width: 899.98px) {
+  .doctor-affiliations__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599.98px) {
+  .doctor-affiliations {
+    padding: 48px 16px 56px;
+  }
+
+  .doctor-affiliations__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}

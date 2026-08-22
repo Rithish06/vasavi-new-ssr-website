@@ -1,0 +1,281 @@
+<!-- ============ Hero ============ -->
+<section class="doctors-hero">
+  <div class="doctors-hero__bg" aria-hidden="true"></div>
+
+  <div class="doctors-hero__inner">
+    <div class="doctors-hero__content">
+      <h1>
+        Find the Right Doctor,<br />
+        <span>Right When You Need</span>
+      </h1>
+      <p>Connect with expert doctors and book an appointment that fits your convenience.</p>
+
+      <ul class="doctors-hero__stats">
+        <li>
+          <span class="doctors-hero__stat-icon"><app-doctors-icon name="users" /></span>
+          <span class="doctors-hero__stat-text"><strong>120+</strong><small>Expert Doctors</small></span>
+        </li>
+        <li>
+          <span class="doctors-hero__stat-icon"><app-doctors-icon name="grid-badge" /></span>
+          <span class="doctors-hero__stat-text"><strong>20+</strong><small>Specialities</small></span>
+        </li>
+        <li>
+          <span class="doctors-hero__stat-icon"><app-doctors-icon name="smiley" /></span>
+          <span class="doctors-hero__stat-text"><strong>10K+</strong><small>Happy Patients</small></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="doctors-hero__help">
+      <div class="doctors-hero__help-text">
+        <h2>Need Help Finding a Doctor?</h2>
+        <p>Our care team is here to help you find the right specialist for your condition.</p>
+        <a class="doctors-hero__help-cta" href="tel:+918071500500">
+          Get Assistance
+          <app-doctors-icon name="arrow" />
+        </a>
+      </div>
+      <span class="doctors-hero__help-icon">
+        <app-doctors-icon name="headset" />
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Search bar ============ -->
+<div class="doctors-search-wrap">
+  <div class="doctors-search" id="doctors-search-anchor">
+    <label class="doctors-search__field">
+      <app-doctors-icon name="search" />
+      <input
+        type="text"
+        [value]="searchText()"
+        (input)="updateSearch($any($event.target).value)"
+        (keydown.enter)="runSearch()"
+        placeholder="Search by name, specialty, condition..."
+        aria-label="Search doctors by name, specialty, or condition"
+      />
+    </label>
+    <button type="button" class="btn btn--filled doctors-search__btn" (click)="runSearch()">
+      Search Doctors
+      <app-doctors-icon name="arrow" />
+    </button>
+  </div>
+
+  <button type="button" class="doctors-search__advanced" (click)="toggleAdvanced()" [attr.aria-expanded]="advancedOpen()">
+    <app-doctors-icon name="sliders" />
+    Advanced Search
+    <app-doctors-icon [name]="advancedOpen() ? 'chevron-up' : 'chevron-down'" />
+  </button>
+
+  @if (advancedOpen()) {
+    <div class="doctors-advanced">
+      <label class="doctors-advanced__field">
+        <span>Min. Experience</span>
+        <select [value]="minExperience()" (change)="setMinExperience($any($event.target).value)">
+          <option [value]="0">Any</option>
+          <option [value]="5">5+ years</option>
+          <option [value]="10">10+ years</option>
+          <option [value]="15">15+ years</option>
+          <option [value]="20">20+ years</option>
+        </select>
+      </label>
+
+      <button type="button" class="doctors-advanced__reset" (click)="resetAllFilters()">Reset Filters</button>
+    </div>
+  }
+</div>
+
+<!-- ============ Main content ============ -->
+<div class="doctors-main" id="doctors-results-top">
+  <button type="button" class="doctors-filters-toggle" (click)="toggleMobileFilters()">
+    <app-doctors-icon name="filter" />
+    Filter by Department
+    @if (activeFilterCount() > 0) {
+      <span class="doctors-filters-toggle__badge">{{ activeFilterCount() }}</span>
+    }
+  </button>
+
+  <aside class="doctors-sidebar" [class.open]="mobileFiltersOpen()">
+    <div class="doctors-sidebar__header">
+      <h3>Filter by Department</h3>
+      <button type="button" class="doctors-sidebar__close" (click)="closeMobileFilters()" aria-label="Close filters">
+        <app-doctors-icon name="close" />
+      </button>
+    </div>
+
+    <ul class="doctors-checklist">
+      @for (dept of departments; track dept) {
+        <li>
+          <label>
+            <input type="checkbox" [checked]="isDepartmentChecked(dept)" (change)="toggleDepartment(dept)" />
+            <span class="doctors-checklist__box"><app-doctors-icon name="check" /></span>
+            {{ dept }}
+          </label>
+        </li>
+      }
+
+      @if (showMoreDepartments()) {
+        @for (dept of moreDepartments; track dept) {
+          <li>
+            <label>
+              <input type="checkbox" [checked]="isDepartmentChecked(dept)" (change)="toggleDepartment(dept)" />
+              <span class="doctors-checklist__box"><app-doctors-icon name="check" /></span>
+              {{ dept }}
+            </label>
+          </li>
+        }
+      }
+    </ul>
+
+    <button type="button" class="doctors-sidebar__more" (click)="toggleMoreDepartments()">
+      {{ showMoreDepartments() ? 'Show Less' : 'More Departments' }}
+      <app-doctors-icon [name]="showMoreDepartments() ? 'chevron-up' : 'chevron-down'" />
+    </button>
+
+    @if (activeFilterCount() > 0) {
+      <button type="button" class="doctors-sidebar__clear" (click)="resetAllFilters()">Clear All Filters</button>
+    }
+
+    <div class="doctors-sidebar__apply-mobile">
+      <button type="button" class="btn btn--filled" (click)="closeMobileFilters()">
+        Show {{ filteredDoctors().length }} Doctors
+      </button>
+    </div>
+  </aside>
+
+  <button
+    type="button"
+    class="doctors-sidebar-scrim"
+    [class.visible]="mobileFiltersOpen()"
+    (click)="closeMobileFilters()"
+    aria-label="Close filters"
+    tabindex="-1"
+  ></button>
+
+  <section class="doctors-results">
+    <div class="doctors-results__header">
+      <h2>{{ filteredDoctors().length }} Doctor{{ filteredDoctors().length === 1 ? '' : 's' }} Found</h2>
+
+      <div class="doctors-results__controls">
+        <label class="doctors-sort">
+          <span>Sort by:</span>
+          <select [value]="sortBy()" (change)="setSortBy($any($event.target).value)">
+            @for (opt of sortOptions; track opt.value) {
+              <option [value]="opt.value">{{ opt.label }}</option>
+            }
+          </select>
+        </label>
+
+        <div class="doctors-view-toggle">
+          <button type="button" [class.active]="viewMode() === 'grid'" (click)="setViewMode('grid')" aria-label="Grid view">
+            <app-doctors-icon name="grid-badge" />
+          </button>
+          <button type="button" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')" aria-label="List view">
+            <app-doctors-icon name="list" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    @if (pagedDoctors().length === 0) {
+      <div class="doctors-empty">
+        <p>No doctors match your filters right now.</p>
+        <button type="button" class="btn btn--outline" (click)="resetAllFilters()">Reset Filters</button>
+      </div>
+    } @else {
+      <div class="doctors-grid" [class.is-list]="viewMode() === 'list'">
+        @for (doc of pagedDoctors(); track doc.id) {
+          <article class="doctor-card">
+            <div class="doctor-card__top">
+              <button
+                type="button"
+                class="doctor-card__fav"
+                [class.active]="isFavorite(doc.id)"
+                (click)="toggleFavorite(doc.id, $event)"
+                [attr.aria-pressed]="isFavorite(doc.id)"
+                aria-label="Save doctor to favorites"
+              >
+                <app-doctors-icon name="heart" [filled]="isFavorite(doc.id)" />
+              </button>
+            </div>
+
+            <div class="doctor-card__head">
+              <img class="doctor-card__avatar" [src]="doc.img" [alt]="doc.alt || doc.name" width="96" height="96" loading="lazy" />
+              <div class="doctor-card__id">
+                <h3 class="doctor-card__name">{{ doc.name }}</h3>
+                <p class="doctor-card__title">{{ doc.title }}</p>
+              </div>
+            </div>
+
+            <div class="doctor-card__details">
+              <p class="doctor-card__qual" [attr.title]="doc.qualifications">{{ doc.qualifications }}</p>
+              <ul class="doctor-card__meta">
+                <li><app-doctors-icon name="grid-badge" />{{ doc.department }}</li>
+                @if (doc.experienceYears > 0) {
+                  <li><app-doctors-icon name="clock" />{{ doc.experienceYears }}+ Years Experience</li>
+                }
+              </ul>
+            </div>
+
+            <div class="doctor-card__actions">
+              @if (doc.slug) {
+                <a class="btn btn--outline" [routerLink]="doc.slug">View Profile</a>
+              }
+              <a class="btn btn--filled" routerLink="/book-appointment">
+                <app-doctors-icon name="calendar" />
+                Book Appointment
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+
+      @if (totalPages() > 1) {
+        <nav class="doctors-pagination" aria-label="Doctor results pages">
+          <button type="button" (click)="prevPage()" [disabled]="currentPage() === 1" aria-label="Previous page">
+            <app-doctors-icon name="chevron-down" />
+          </button>
+          @for (n of pageNumbers(); track n) {
+            <button type="button" [class.active]="currentPage() === n" (click)="goToPage(n)">{{ n }}</button>
+          }
+          <button type="button" (click)="nextPage()" [disabled]="currentPage() === totalPages()" aria-label="Next page">
+            <app-doctors-icon name="chevron-down" />
+          </button>
+        </nav>
+      }
+    }
+  </section>
+</div>
+
+<!-- ============ Trust strip ============ -->
+<section class="doctors-trust">
+  <div class="doctors-trust__item">
+    <span class="doctors-trust__icon"><app-doctors-icon name="shield" /></span>
+    <div>
+      <strong>Verified Doctors</strong>
+      <p>All doctors are verified healthcare professionals</p>
+    </div>
+  </div>
+  <div class="doctors-trust__item">
+    <span class="doctors-trust__icon"><app-doctors-icon name="users" /></span>
+    <div>
+      <strong>Patient Trusted</strong>
+      <p>10,000+ happy patients and counting</p>
+    </div>
+  </div>
+  <div class="doctors-trust__item">
+    <span class="doctors-trust__icon"><app-doctors-icon name="calendar" /></span>
+    <div>
+      <strong>Easy Appointments</strong>
+      <p>Book in minutes, hassle-free</p>
+    </div>
+  </div>
+  <div class="doctors-trust__item">
+    <span class="doctors-trust__icon"><app-doctors-icon name="heart-hands" /></span>
+    <div>
+      <strong>Compassionate Care</strong>
+      <p>Your health is our top priority</p>
+    </div>
+  </div>
+</section>

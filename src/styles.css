@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  /* Brand palette — approximated from the design reference.
+     Swap these for exact brand hex values once final brand assets arrive. */
+  --color-navy-900: #0c1668;
+  --color-navy-800: #121b6f;
+  --color-navy-700: #1a2a8f;
+  --color-teal-500: #1fb6ce;
+  --color-gold-500: #f0a83c;
+  --color-text-dark: #1a2340;
+  --color-text-gray: #6b7280;
+  --color-white: #ffffff;
+
+  /* Accent blue used for footer icon badges / links on dark surfaces —
+     distinct from the navy/teal pair above, closer to the reference's
+     footer icon-circle color. */
+  --color-blue-600: #2454e6;
+  --color-blue-400: #5b93ff;
+
+  /* Near-black navy used as the footer's page background. */
+  --color-navy-950: #060b22;
+
+  --gradient-cta: linear-gradient(90deg, var(--color-navy-800) 0%, var(--color-teal-500) 100%);
+
+  --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --header-topbar-height: 50px;
+  --header-mainnav-height: 100px;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* No explicit height here on purpose: `height: 100%` traps content as
+     an internal scroll box instead of letting the page grow past the
+     viewport and scroll normally — window.scrollTo()/scrollIntoView()
+     then silently do nothing on any page taller than the viewport.
+     Height is left to size to content. */
+  /* Absolutely-positioned panels (mega-menus, etc.) can be wider than the
+     viewport at some breakpoints even while closed/invisible; this clips
+     that phantom horizontal scrollbar.
+
+     `clip`, not `hidden`, is deliberate: any non-'visible' overflow value
+     on an axis forces the *other* axis to compute as 'auto' too (the CSS
+     overflow axis-pairing rule) — and `auto`/`hidden` both make the
+     element establish its own real scroll container. On `html` that
+     hijacks the special "root scroller" propagation to the viewport that
+     browsers otherwise apply, which is what silently breaks
+     `position: sticky` for every descendant (the sticky element ends up
+     stuck relative to `html`'s own box instead of the visual viewport —
+     which usually renders identically to `position: static`). `clip`
+     suppresses the horizontal overflow the same way `hidden` does, but
+     is explicitly defined not to create a scrollable region, so it
+     doesn't force `overflow-y` to `auto` and doesn't turn `html` into a
+     scroll container — sticky keeps working. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}

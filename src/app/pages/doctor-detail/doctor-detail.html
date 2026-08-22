@@ -1,0 +1,303 @@
+@if (doctor(); as doc) {
+  <!-- `.doctor-page` is a CSS-grid wrapper (see doctor-detail.css, ≥1100px):
+       hero + brief-profile stack in the left column while the booking card
+       sits in a right-hand grid area that spans BOTH their rows, so its own
+       `position: sticky` keeps it pinned in place while that whole left
+       column scrolls underneath it. Below 1100px the grid drops away and
+       these three become plain stacked blocks in DOM order (hero, booking,
+       profile) — same order the page already used before this restructure. -->
+  <div class="doctor-page">
+  <section class="doctor-hero" [class.doctor-hero--framed-photo]="hasFramedPhoto()">
+    <!-- Decorative background layer: dotted grids, blue corner wave and a
+         floating cross, echoing the reference design. Purely cosmetic. Some
+         doctor photos (see hasFramedPhoto()) already bake this same
+         decoration into the artwork, so this layer is skipped for those to
+         avoid doubling up. -->
+    @if (!hasFramedPhoto()) {
+      <div class="doctor-hero__decor" aria-hidden="true">
+        <span class="doctor-hero__decor-dots doctor-hero__decor-dots--tl"></span>
+        <span class="doctor-hero__decor-dots doctor-hero__decor-dots--bl"></span>
+        <span class="doctor-hero__decor-cross doctor-hero__decor-cross--big">+</span>
+        <svg class="doctor-hero__decor-wave" viewBox="0 0 600 700" preserveAspectRatio="xMidYMax meet">
+          <path d="M0,700 L0,260 C120,190 210,330 300,300 C390,270 430,420 600,460 L600,700 Z" fill="#c7d4f8"></path>
+          <path d="M0,700 L0,350 C100,290 190,400 270,375 C350,350 400,460 600,500 L600,700 Z" fill="#5f7fe0"></path>
+          <path d="M0,700 L0,440 C90,400 175,470 250,455 C330,440 380,520 600,560 L600,700 Z" fill="#141d63"></path>
+        </svg>
+      </div>
+    }
+
+    <a routerLink="/doctors" class="doctor-hero__back">
+      <app-doctors-icon name="chevron-left" />
+      Back
+    </a>
+
+    <div class="doctor-hero__grid">
+      <!-- ============ Left: profile ============ -->
+      <div class="doctor-hero__profile">
+        <div class="doctor-hero__photo-wrap" [class.doctor-hero__photo-wrap--full]="hasFramedPhoto()">
+          @if (!hasFramedPhoto()) {
+            <span class="doctor-hero__decor-cross doctor-hero__decor-cross--photo" aria-hidden="true">+</span>
+          }
+          <img class="doctor-hero__photo" [src]="heroImg()" [alt]="doc.alt || doc.name" width="420" height="560" />
+        </div>
+
+        <div class="doctor-hero__info">
+          @if (!hasFramedPhoto()) {
+            <svg class="doctor-hero__decor-arc" viewBox="0 0 140 220" aria-hidden="true">
+              <path d="M8,6 C68,34 106,118 118,186"></path>
+              <circle cx="118" cy="190" r="6"></circle>
+            </svg>
+          }
+          <h1>{{ doc.name }}</h1>
+          <p class="doctor-hero__title">{{ doc.title }}</p>
+
+          <dl class="doctor-hero__facts">
+            <div class="doctor-hero__fact">
+              <span class="doctor-hero__fact-icon"><app-doctors-icon name="graduation-cap" /></span>
+              <div>
+                <dt>Qualification</dt>
+                <dd>{{ doc.qualifications }}</dd>
+              </div>
+            </div>
+
+            @if (doc.experienceYears > 0) {
+              <div class="doctor-hero__fact">
+                <span class="doctor-hero__fact-icon"><app-doctors-icon name="badge" /></span>
+                <div>
+                  <dt>Experience</dt>
+                  <dd>{{ doc.experienceYears }}+ Years of Experience</dd>
+                </div>
+              </div>
+            }
+
+            <div class="doctor-hero__fact">
+              <span class="doctor-hero__fact-icon"><app-doctors-icon name="grid-badge" /></span>
+              <div>
+                <dt>Department</dt>
+                <dd>{{ doc.department }}</dd>
+              </div>
+            </div>
+
+            <div class="doctor-hero__fact">
+              <span class="doctor-hero__fact-icon"><app-doctors-icon name="clock" /></span>
+              <div>
+                <dt>Consultation Time</dt>
+                <dd>09:00 AM – 05:00 PM &bull; Mon – Sat</dd>
+              </div>
+            </div>
+          </dl>
+
+          <div class="doctor-hero__actions">
+            <button type="button" class="btn btn--filled" (click)="scrollToBooking()">
+              <app-doctors-icon name="calendar" />
+              Book Appointment
+            </button>
+            <a class="btn btn--outline" [href]="'tel:' + hospitalPhoneTel">
+              <app-doctors-icon name="phone" />
+              Call Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Booking card (sticky right rail on desktop) ============ -->
+  <div class="doctor-page__aside">
+      <div class="doctor-booking" id="doctor-booking-card">
+        <div class="doctor-booking__head">
+          <span class="doctor-booking__head-icon"><app-doctors-icon name="calendar" /></span>
+          <h2>Book Appointment</h2>
+        </div>
+
+        @switch (step()) {
+          @case ('select') {
+            <div class="doctor-booking__step-label">
+              <span class="doctor-booking__step-num">1</span>
+              <h3>Select Date</h3>
+            </div>
+            <div class="doctor-booking__carousel">
+              <button type="button" class="doctor-booking__nav" (click)="scrollChips(dateScroller, -1)" aria-label="Earlier dates">
+                <app-doctors-icon name="chevron-left" />
+              </button>
+              <div class="doctor-booking__chips" #dateScroller>
+                @for (d of dateOptions(); track d.iso) {
+                  <button
+                    type="button"
+                    class="doctor-booking__chip"
+                    [class.active]="selectedDate()?.iso === d.iso"
+                    (click)="selectDate(d)"
+                  >
+                    <span class="doctor-booking__chip-weekday">{{ d.weekday }}</span>
+                    <span class="doctor-booking__chip-day">{{ d.day }}</span>
+                    <span class="doctor-booking__chip-month">{{ d.month }}</span>
+                  </button>
+                }
+              </div>
+              <button type="button" class="doctor-booking__nav" (click)="scrollChips(dateScroller, 1)" aria-label="Later dates">
+                <app-doctors-icon name="chevron-right" />
+              </button>
+            </div>
+
+            <div class="doctor-booking__step-label">
+              <span class="doctor-booking__step-num">2</span>
+              <h3>Select Time Slot</h3>
+            </div>
+            <div class="doctor-booking__carousel">
+              <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, -1)" aria-label="Earlier times">
+                <app-doctors-icon name="chevron-left" />
+              </button>
+              <div class="doctor-booking__chips doctor-booking__chips--time" #timeScroller>
+                @for (t of timeOptions; track t) {
+                  <button
+                    type="button"
+                    class="doctor-booking__chip doctor-booking__chip--time"
+                    [class.active]="selectedTime() === t"
+                    (click)="selectTime(t)"
+                  >
+                    {{ t }}
+                  </button>
+                }
+              </div>
+              <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, 1)" aria-label="Later times">
+                <app-doctors-icon name="chevron-right" />
+              </button>
+            </div>
+
+            @if (validationError()) {
+              <p class="doctor-booking__error">{{ validationError() }}</p>
+            }
+
+            <button type="button" class="btn btn--filled doctor-booking__cta" (click)="proceedToContact()">
+              <app-doctors-icon name="calendar" />
+              Book Appointment
+            </button>
+            <a class="btn btn--outline doctor-booking__cta" [href]="'tel:' + hospitalPhoneTel">
+              <app-doctors-icon name="phone" />
+              Call Now
+            </a>
+          }
+
+          @case ('contact') {
+            <button type="button" class="doctor-booking__change" (click)="backToDateTime()">
+              <app-doctors-icon name="chevron-left" />
+              Change date &amp; time
+            </button>
+
+            <div class="doctor-booking__summary">
+              <app-doctors-icon name="calendar" />
+              <span>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} &bull; {{ selectedTime() }}</span>
+            </div>
+
+            <label class="doctor-booking__field">
+              <span>Your Name</span>
+              <input
+                type="text"
+                [value]="patientName()"
+                (input)="setPatientName($any($event.target).value)"
+                placeholder="Enter your full name"
+                autocomplete="name"
+              />
+              @if (contactErrors().name) {
+                <small class="doctor-booking__field-error">{{ contactErrors().name }}</small>
+              }
+            </label>
+
+            <label class="doctor-booking__field">
+              <span>Phone Number</span>
+              <input
+                type="tel"
+                [value]="patientPhone()"
+                (input)="setPatientPhone($any($event.target).value)"
+                placeholder="10-digit mobile number"
+                autocomplete="tel"
+              />
+              @if (contactErrors().phone) {
+                <small class="doctor-booking__field-error">{{ contactErrors().phone }}</small>
+              }
+            </label>
+
+            <button type="button" class="btn btn--filled doctor-booking__cta" (click)="submitBooking()">
+              Confirm Booking
+            </button>
+          }
+
+          @case ('success') {
+            <div class="doctor-booking__success">
+              <span class="doctor-booking__success-icon"><app-doctors-icon name="check" /></span>
+              <h3>Request Received!</h3>
+              <p>
+                We've noted your preference for
+                <strong>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} at {{ selectedTime() }}</strong>.
+                Our care team will call <strong>{{ patientPhone() }}</strong> shortly to confirm.
+              </p>
+              <button type="button" class="btn btn--outline doctor-booking__cta" (click)="bookAnother()">
+                Book Another Appointment
+              </button>
+            </div>
+          }
+        }
+
+        <p class="doctor-booking__secure">
+          <app-doctors-icon name="shield" />
+          Your information is secure and confidential.
+        </p>
+      </div>
+  </div>
+
+  <!-- ============ Brief Profile ============ -->
+  <section class="doctor-profile">
+    <div class="doctor-profile__grid">
+      <div class="doctor-profile__bio">
+        <span class="doctor-profile__eyebrow">About the Doctor</span>
+        <h2>Brief Profile</h2>
+        @for (para of profileBio(); track para) {
+          <p>{{ para }}</p>
+        }
+      </div>
+
+      <div class="doctor-profile__expertise">
+        <h3>Areas of Expertise</h3>
+        <ul>
+          @for (item of expertiseHighlights(); track item) {
+            <li>
+              <span class="doctor-profile__expertise-icon"><app-doctors-icon name="check" /></span>
+              {{ item }}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ============ Professional Affiliations ============ -->
+  <section class="doctor-affiliations">
+    <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--left" aria-hidden="true"></span>
+    <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--right" aria-hidden="true"></span>
+
+    <div class="doctor-affiliations__inner">
+      <div class="doctor-affiliations__head">
+        <h2>Professional Affiliations</h2>
+        <span class="doctor-affiliations__underline" aria-hidden="true"></span>
+      </div>
+
+      <div class="doctor-affiliations__grid">
+        @for (item of professionalAffiliations(); track item) {
+          <div class="doctor-affiliations__card">
+            <!-- Generic badge placeholder — swap for the real association's
+                 logo image once one is supplied. -->
+            <span class="doctor-affiliations__logo"><app-doctors-icon name="badge" /></span>
+            <span class="doctor-affiliations__divider"></span>
+            <p>{{ item }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+} @else {
+  <section class="doctor-hero doctor-hero--empty">
+    <p>We couldn't find that doctor's profile.</p>
+    <a routerLink="/doctors" class="btn btn--filled">Back to All Doctors</a>
+  </section>
+}

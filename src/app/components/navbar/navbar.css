@@ -1,0 +1,681 @@
+:host {
+  /* The sticky positioning lives here, on the component's own host
+     element, and NOT on the inner `.site-header` div — this matters.
+
+     A sticky element can only move within the bounds of its *immediate*
+     containing block (its direct parent's box), not relative to some
+     distant scrolling ancestor. `<app-navbar>` wraps nothing but the
+     header, so if `.site-header` itself were sticky, its containing
+     block (`:host`) would be exactly as tall as the header — zero extra
+     room to move into — and it would "run out of room" the instant the
+     page scrolled, rendering as if it were `position: static`.
+
+     `:host`'s own parent is `<app-root>`, whose box spans navbar + main
+     + footer — effectively the whole page — so making `:host` the
+     sticky element gives it the full page's worth of room to stay
+     pinned at the top while scrolling. */
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.site-header {
+  font-family: var(--font-body);
+}
+
+/* ===================================================================
+   Utility top bar
+   =================================================================== */
+
+.topbar {
+  background: linear-gradient(90deg, var(--color-navy-900) 0%, var(--color-navy-700) 100%);
+  color: var(--color-white);
+}
+
+.topbar__inner {
+  max-width: 1600px;
+  margin-inline: auto;
+  height: var(--header-topbar-height);
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar__social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: var(--color-white);
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.topbar__social a:hover,
+.topbar__social a:focus-visible {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.topbar__divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.topbar__badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gold-500);
+  white-space: nowrap;
+}
+
+.topbar__badge svg {
+  color: var(--color-gold-500);
+}
+
+.topbar__phone {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.topbar__phone svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold-500);
+  color: var(--color-gold-500);
+  box-sizing: border-box;
+}
+
+.topbar__phone:hover,
+.topbar__phone:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ===================================================================
+   Main navigation
+   =================================================================== */
+
+.mainnav {
+  background: var(--color-white);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
+
+.site-header.is-scrolled .mainnav {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+.mainnav__inner {
+  max-width: 1600px;
+  margin-inline: auto;
+  min-height: var(--header-mainnav-height);
+  padding-inline: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- Brand / logo --- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand__logo {
+  height: 48px;
+  width: auto;
+}
+
+@media (min-width: 1100px) {
+  .brand__logo {
+    height: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .brand__logo {
+    height: 54px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .brand__logo {
+    height: 58px;
+  }
+}
+
+/* --- Hamburger toggle (mobile / tablet) --- */
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  margin-left: auto;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.menu-toggle:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.menu-toggle__bar {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-navy-900);
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded='true'] .menu-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Nav links + CTA panel --- */
+
+.nav-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* At desktop widths, unwrap .nav-panel so .nav-links and .cta-btn become
+   direct flex children of .mainnav__inner alongside the logo. Combined
+   with justify-content: space-between below, that splits the row's
+   leftover space into two EQUAL gaps — logo-to-nav-links and
+   nav-links-to-CTA — instead of one big gap after the logo and a small
+   one before the button (which is what happened when nav-links + CTA
+   were grouped together and only pushed as a pair via margin-left:auto). */
+@media (min-width: 1100px) {
+  .nav-panel {
+    display: contents;
+  }
+
+  .mainnav__inner {
+    justify-content: space-between;
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+/* Note: dropdown <li> is intentionally NOT position:relative — the
+   mega-menu is positioned against .mainnav__inner instead (see below),
+   so it stays centered under the whole nav bar instead of anchoring to
+   one trigger and risking running off the edge of the viewport. */
+
+.nav-links a,
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 3px;
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Graduated spacing: the 1100–1279px band is the tightest fit (see the
+   hamburger breakpoint below), so it keeps compact padding/gaps close to
+   the base rule above. Every wider tier below gets progressively roomier
+   to move back toward the original, generously-spaced reference design
+   once there's genuinely enough width to afford it. */
+@media (min-width: 1280px) {
+  .nav-links a,
+  .dropdown-toggle {
+    padding: 8px 8px;
+    font-size: 0.88rem;
+    gap: 3px;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-panel {
+    gap: 14px;
+  }
+
+  .mainnav__inner {
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .nav-links a,
+  .dropdown-toggle {
+    padding: 10px 12px;
+    font-size: 0.93rem;
+    gap: 4px;
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-panel {
+    gap: 20px;
+  }
+
+  .mainnav__inner {
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .nav-links a,
+  .dropdown-toggle {
+    padding: 12px 16px;
+    font-size: 1rem;
+    gap: 5px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-panel {
+    gap: 28px;
+  }
+
+  .mainnav__inner {
+    gap: 20px;
+  }
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--color-teal-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-links a:hover,
+.nav-links a.active,
+.dropdown-toggle:hover {
+  color: var(--color-navy-900);
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.has-dropdown.open > .dropdown-toggle .chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Dropdown menus (mega-menu on desktop, accordion on mobile) --- */
+
+/* Positioned against .mainnav__inner (see its position:relative above),
+   not the trigger <li> — centered under the whole nav bar so its width
+   never depends on how far right a given trigger happens to sit. */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  background: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  padding: 20px 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  z-index: 20;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+.dropdown-menu a::after {
+  display: none;
+}
+
+.dropdown-menu a:hover {
+  background: #f2f6ff;
+  color: var(--color-navy-900);
+}
+
+/* Reproduce the approved column layout with a fixed row count + column
+   auto-flow, fed by a flat list that's already ordered column-by-column
+   (see navbar.ts). Column count steps up in tiers as there's more room —
+   the reading order (top-to-bottom, then next column) stays the same at
+   every tier, only how many columns it wraps into changes.
+
+   Note: the menu is anchored to the LEFT edge of its trigger <li> and
+   grows rightward (see .dropdown-menu position:absolute; left:0 above) —
+   it is NOT centered on the viewport. So the space actually available to
+   it is "viewport width minus how far the trigger sits from the left
+   edge", not the full viewport. These tier widths were verified directly
+   (not just computed) against both "Our Services" and "Surgery Packages",
+   the two rightmost dropdown triggers, at their tightest widths. */
+@media (min-width: 1100px) {
+  .dropdown-menu--services,
+  .dropdown-menu--packages {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 26px;
+    width: max-content;
+    max-width: min(760px, calc(100vw - 32px));
+  }
+
+  /* ~3 columns for services, ~2 for packages */
+  .dropdown-menu--services {
+    grid-template-rows: repeat(11, auto);
+  }
+
+  .dropdown-menu--packages {
+    grid-template-rows: repeat(9, auto);
+  }
+}
+
+/* Full column counts once there's genuinely enough width for both
+   dropdowns to grow without running off the right edge of the viewport. */
+@media (min-width: 1600px) {
+  .dropdown-menu--services,
+  .dropdown-menu--packages {
+    max-width: min(1040px, calc(100vw - 32px));
+  }
+
+  .dropdown-menu--services {
+    grid-template-rows: repeat(7, auto);
+    column-gap: 32px;
+  }
+
+  .dropdown-menu--packages {
+    grid-template-rows: repeat(6, auto);
+    column-gap: 32px;
+  }
+}
+
+/* --- CTA button --- */
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--gradient-cta);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(18, 32, 111, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  flex-shrink: 0;
+}
+
+.cta-btn__text-short {
+  display: none;
+}
+
+/* Tight desktop range (1100–1439px): trade the full CTA label for a
+   shorter one so it doesn't force the nav to wrap. */
+@media (min-width: 1100px) and (max-width: 1439.98px) {
+  .cta-btn__text-full {
+    display: none;
+  }
+
+  .cta-btn__text-short {
+    display: inline;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cta-btn {
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cta-btn {
+    padding: 14px 22px;
+    font-size: 0.95rem;
+    gap: 9px;
+  }
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(18, 32, 111, 0.34);
+}
+
+.nav-scrim {
+  display: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ===================================================================
+   Below 1100px — collapse to hamburger + slide-down panel
+   =================================================================== */
+
+@media (max-width: 1099.98px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 950;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--color-white);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 20px 32px rgba(15, 23, 42, 0.14);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.28s ease, opacity 0.2s ease, visibility 0.2s;
+  }
+
+  .nav-panel.open {
+    max-height: calc(100vh - var(--header-topbar-height) - var(--header-mainnav-height));
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 20px 16px;
+  }
+
+  .nav-links > li {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .nav-links a,
+  .dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 4px;
+    font-size: 1rem;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Dropdowns become inline accordions on mobile/tablet */
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    padding: 0 0 8px 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .has-dropdown.open .dropdown-menu {
+    display: block;
+  }
+
+  .cta-btn {
+    margin: 12px 20px 20px;
+    justify-content: center;
+  }
+
+  .nav-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 15, 45, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: -1;
+  }
+
+  .nav-scrim.visible {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 900;
+  }
+}
+
+/* Desktop-only hover affordance for dropdowns (mouse users) */
+@media (min-width: 1100px) {
+  .has-dropdown:hover > .dropdown-menu,
+  .has-dropdown.open > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ===================================================================
+   Fine-tune the top bar on smaller screens
+   =================================================================== */
+
+@media (max-width: 767.98px) {
+  .topbar__social {
+    display: none;
+  }
+
+  .topbar__divider {
+    display: none;
+  }
+
+  .topbar__inner {
+    padding-inline: 16px;
+    justify-content: space-between;
+  }
+
+  .mainnav__inner {
+    padding-inline: 16px;
+    min-height: 76px;
+  }
+
+  .brand__logo {
+    height: 42px;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar__badge span:last-child {
+    display: none;
+  }
+
+  .topbar__phone span {
+    display: none;
+  }
+
+  .topbar__phone svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand__logo {
+    height: 36px;
+  }
+}
