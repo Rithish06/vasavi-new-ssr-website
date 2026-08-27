@@ -25,10 +25,10 @@ const HOSPITAL_PHONE_DISPLAY = '1800 412 4779';
 const HOSPITAL_PHONE_TEL = '+18004124779';
 
 /**
- * Next 12 open calendar days (Mon–Sat — Sunday is skipped, matching the
+ * Next 12 open calendar days (Mon–Sat - Sunday is skipped, matching the
  * generic OPD hours shown on the page). Real per-doctor availability isn't
  * in our data yet, so this is every upcoming working day, not a live
- * schedule — see the note on `submitBooking()`.
+ * schedule - see the note on `submitBooking()`.
  */
 function buildUpcomingDates(count = 12): DateOption[] {
   const weekdayFmt = new Intl.DateTimeFormat('en-US', { weekday: 'short' });
@@ -90,7 +90,7 @@ export class DoctorDetailPage {
    * Every doctor's individual profile page currently uses this same
    * pre-composed hero graphic (dotted grid, arc-and-dot flourish, floating
    * cross and corner wave baked into the artwork itself) rather than each
-   * doctor's own listing-page photo — real per-doctor photos vary too much
+   * doctor's own listing-page photo - real per-doctor photos vary too much
    * in aspect ratio/background to hold a consistent hero height and
    * spacing. The listing page's cards are untouched and still use each
    * doctor's own `img`. `hasFramedPhoto` stays as a flag (rather than being
@@ -101,48 +101,44 @@ export class DoctorDetailPage {
   protected readonly hasFramedPhoto = computed(() => true);
 
   /**
-   * "Brief Profile" section, below the hero. Placeholder copy/highlights for
-   * now — swap `profileBio` and `expertiseHighlights` for real per-doctor
-   * content once it's supplied (e.g. add `bio`/`expertise` fields to
-   * `DOCTORS` and read them here instead of these hardcoded fallbacks).
+   * "Brief Profile" section, below the hero. Real per-doctor bio, wrapped in
+   * a one-element array (the template loops over paragraphs) - empty when
+   * `doc.briefProfile` isn't supplied, which is what makes the whole
+   * section disappear for doctors without one (see doctor-detail.html).
    */
   protected readonly profileBio = computed(() => {
     const doc = this.doctor();
-    if (!doc) return [];
-    return [
-      `${doc.name} is a dedicated ${doc.department} specialist known for a calm, patient-first approach to care. Backed by years of hands-on clinical experience, ${doc.name} blends evidence-based medicine with genuine listening — helping every patient understand their diagnosis and feel confident about the treatment plan ahead.`,
-      `Beyond regular clinical practice, ${doc.name} stays closely engaged with the wider medical community — attending conferences and training programs to keep pace with the latest advances in ${doc.department} care, and mentoring junior colleagues within the department.`,
-    ];
+    return doc?.briefProfile ? [doc.briefProfile] : [];
   });
 
-  protected readonly expertiseHighlights = computed(() => [
-    'Comprehensive diagnosis & treatment planning',
-    'Minimally invasive procedures',
-    'Preventive & personalised care',
-    'Post-treatment follow-up & support',
-    'Collaborative, multi-disciplinary approach',
-    'Patient education & counselling',
-  ]);
+  /** "Areas of Expertise" list within Brief Profile - empty hides that column. */
+  protected readonly expertiseHighlights = computed(() => this.doctor()?.expertiseHighlights ?? []);
 
   /**
-   * "Professional Affiliations" section, below Brief Profile. Placeholder
-   * names for now (no real logo artwork to hand yet, so the card just shows
-   * a generic badge icon) — kept specialty-agnostic via `doc.department` so
-   * it reads sensibly for any doctor. Swap for real per-doctor affiliations
-   * (and add actual logo images) once that's supplied, e.g. by adding an
-   * `affiliations: { name: string; logo: string }[]` field to `DOCTORS` and
-   * reading it here instead of this hardcoded fallback.
+   * "Professional Affiliations" section, below Brief Profile. Real
+   * per-doctor associations (with logo images from public/Images/affiliations
+   * where available) - empty hides the whole section.
    */
-  protected readonly professionalAffiliations = computed(() => {
-    const doc = this.doctor();
-    const department = doc?.department ?? 'Medical';
-    return [
-      'Indian Medical Association',
-      'National Medical Commission',
-      `${department} Society of India`,
-      `International Association of ${department} Specialists`,
-    ];
-  });
+  protected readonly professionalAffiliations = computed(() => this.doctor()?.professionalAffiliations ?? []);
+
+  /**
+   * "Honors & Awards" section. Real per-doctor awards - empty hides the
+   * whole section. `theme` picks the card's accent color (see
+   * doctor-detail.css's `.doctor-honors__card--*` modifiers) and `icon` is
+   * a name understood by `<app-doctors-icon>`.
+   */
+  protected readonly honorsAwards = computed(() => this.doctor()?.honorsAwards ?? []);
+
+  /**
+   * "Publications" section. Real per-doctor publication titles, numbered
+   * for display - empty hides the whole section.
+   */
+  protected readonly publications = computed(() =>
+    (this.doctor()?.publications ?? []).map((title, i) => ({
+      num: String(i + 1).padStart(2, '0'),
+      title,
+    })),
+  );
 
   protected readonly dateOptions = signal<DateOption[]>(buildUpcomingDates());
   protected readonly timeOptions = buildTimeSlots();
@@ -158,11 +154,11 @@ export class DoctorDetailPage {
 
   constructor() {
     // Re-derive the page title, and reset any in-progress booking, whenever
-    // the resolved doctor changes — covers both first load and navigating
+    // the resolved doctor changes - covers both first load and navigating
     // from one doctor's profile straight to another's.
     effect(() => {
       const doc = this.doctor();
-      this.titleService.setTitle(doc ? `${doc.name} — Vasavi Hospitals` : 'Doctor Not Found — Vasavi Hospitals');
+      this.titleService.setTitle(doc ? `${doc.name} - Vasavi Hospitals` : 'Doctor Not Found - Vasavi Hospitals');
       this.step.set('select');
       this.selectedDate.set(null);
       this.selectedTime.set(null);
@@ -183,7 +179,7 @@ export class DoctorDetailPage {
     this.validationError.set('');
   }
 
-  /** Horizontally scrolls a date/time chip strip — used by the ‹ › nav buttons. */
+  /** Horizontally scrolls a date/time chip strip - used by the ‹ › nav buttons. */
   protected scrollChips(container: HTMLElement, direction: 1 | -1): void {
     if (!isPlatformBrowser(this.platformId)) return;
     container.scrollBy({ left: direction * 220, behavior: 'smooth' });
@@ -230,7 +226,7 @@ export class DoctorDetailPage {
     this.contactErrors.set(errors);
     if (Object.keys(errors).length > 0) return;
 
-    // NOTE: there's no booking backend wired up yet — this only simulates a
+    // NOTE: there's no booking backend wired up yet - this only simulates a
     // submission locally. Once a booking API/CRM endpoint exists, POST
     // { doctorId, date: selectedDate().iso, time: selectedTime(), name, phone }
     // here before advancing to the success step.
@@ -247,7 +243,7 @@ export class DoctorDetailPage {
     this.validationError.set('');
   }
 
-  /** Scrolls the booking card under the sticky navbar — mirrors the doctors list page's scroll-to-search. */
+  /** Scrolls the booking card under the sticky navbar - mirrors the doctors list page's scroll-to-search. */
   protected scrollToBooking(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     const target = document.getElementById('doctor-booking-card');

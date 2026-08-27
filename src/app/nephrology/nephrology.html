@@ -1,0 +1,559 @@
+<div class="hero-section">
+    <img src="Images/nephrology/nephrology-banner-desktop.png" class="desktop_banner"
+        alt="Expert nephrology care in Bangalore with precise diagnosis, personalized treatment, and compassionate kidney specialists.">
+    <img src="Images/nephrology/nephrology-banner.png" class="mobile_banner"
+        alt="Expert nephrology care in Bangalore with precise diagnosis, personalized treatment, and compassionate kidney specialists.">
+    <a class="book-btn" (click)="scrollToSection('appointment')">
+        Book an Appointment
+    </a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">Nephrology at Vasavi Hospitals, Banashankari, Bangalore</h1>
+        <p class="para_style">Your kidneys play a vital role in keeping your body healthy and they deserve the best
+            care. At Vasavi Hospitals, Banashankari, Bangalore, our dedicated nephrology department is here to
+            protect and restore your kidney health. With a team of highly skilled and compassionate nephrology
+            doctors, we provide expert diagnosis and personalized treatments for every stage of kidney disease.</p>
+        <p class="para_style">Whether you are looking for a nephrologist near me or trusted renal doctors near me,
+            Vasavi Hospitals is a place where advanced medicine meets genuine care. Here, patients are treated like
+            family - because your health, comfort and peace of mind are always our priority.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/nephrology/nephrology-treatment-at-vasavi-hospitals-bangalore.png"
+            alt="Illustration of human kidney showing internal structure for urology services at Vasavi Hospitals Banashankari Bangalore">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">What We Treat</h2>
+    <p class="para_style text-center treatment_header_des">Our nephrology hospital in Banashankari, Bangalore,
+        specializes in diagnosing and treating a wide range of kidney and renal conditions, including:</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Kidney Disease Diagnosis and Management</h3>
+            <p class="box_para">Complete care for all stages of kidney disease with early detection and long-term
+                management.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Hemodialysis</h3>
+            <p class="box_para">Safe and reliable dialysis treatment to remove waste and extra fluid, improving
+                patient comfort.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Peritoneal Dialysis</h3>
+            <p class="box_para">At-home dialysis option that offers flexibility and independence for patients.</p>
+        </div>
+    </div>
+</div>
+
+<div class="treatment_container_2">
+    <div class="treatment-box">
+        <h3 class="sub_heading">Kidney Transplantation</h3>
+        <p class="box_para">Advanced transplant care with expert surgeons, helping patients live healthier, longer
+            lives.</p>
+    </div>
+    <div class="treatment-box">
+        <h3 class="sub_heading">Hypertension Management</h3>
+        <p class="box_para">Specialized treatment for high blood pressure to protect kidney and heart health.</p>
+    </div>
+    <div class="treatment-box">
+        <h3 class="sub_heading">Diabetic Nephropathy Treatment</h3>
+        <p class="box_para">Focused care for diabetes-related kidney problems to prevent further damage.</p>
+    </div>
+    <div class="treatment-box">
+        <h3 class="sub_heading">Polycystic Kidney Disease Management</h3>
+        <p class="box_para">Personalized treatment plans to slow down progression and maintain kidney function.</p>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Advanced Nephrology Surgery Options</h2>
+    <p class="para_style text-center treatment_header_des">We offer all three major types of nephrology surgeries:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgeries</h3>
+                    <p class="box_para">Used for complex conditions requiring traditional access.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Laparoscopic (Keyhole) Surgeries</h3>
+                    <p class="box_para box_padding">Minimally invasive, quicker recovery, and smaller scars.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Robotic Surgeries</h3>
+                    <p class="box_para box_padding">Advanced precision with less pain and faster return to daily
+                        life.</p>
+
+                    <!-- <a href="/robotic-surgery-in-urology.php" class="box_para"
+                            style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png" alt="">
+            </div>
+        </div>
+
+        <div class="form-container" id="appointment">
+            <h2 class="form-title">Book Appointment</h2>
+            <p class="form-subtitle">Schedule your visit with our Nephrology specialists</p>
+
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+
+                <div class="input-wrapper">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input id="name" formControlName="name" placeholder="Enter your full name" />
+                        <div class="error" *ngIf="submitted && f['name'].errors">
+                            <small *ngIf="f['name'].errors['required']">Name is required</small>
+                            <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                            <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Contact Number *</label>
+                        <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                        <div class="error" *ngIf="submitted && f['phone'].errors">
+                            <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                            <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input id="email" formControlName="email" placeholder="Enter your email" />
+                        <div class="error" *ngIf="submitted && f['email'].errors">
+                            <small *ngIf="f['email'].errors['required']">Email is required</small>
+                            <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" formControlName="date" />
+                        <div class="error" *ngIf="submitted && f['date'].errors">
+                            <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor_name">Select Doctor *</label>
+                    <select id="doctor_name" formControlName="doctor">
+                        <option value="">-- Select Doctor --</option>
+                        <option value="Dr. Sunil R">Dr. Sunil R</option>
+                        <option value="Dr. Sreenidhi H. C">Dr. Sreenidhi H. C</option>
+                        <!-- <option value="Dr. Harsha Kumar">Dr. Harsha Kumar</option> -->
+                    </select>
+                    <div class="error" *ngIf="submitted && f['doctor'].errors">
+                        <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message / Reason for Visit *</label>
+                    <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                    <div class="error" *ngIf="submitted && f['message'].errors">
+                        <small *ngIf="f['message'].errors['required']">Message is required</small>
+                        <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- announcement section -->
+<div class="announcement" style="padding: 0 6%;">
+    <div class="card">
+        <div class="anno_header">
+            <h3>Official Announcement</h3>
+            <p class="subtitle">Approval of Live-Related Renal Transplantation</p>
+        </div>
+
+        <div class="content_1">
+            <div class="approval-notice">
+                <p class="approval-text">
+                    We are pleased to announce that the Competent Authority Committee at Vasavi Hospitals has
+                    officially approved the live-related renal transplantation, in accordance with the guidelines
+                    laid out under the <strong>Transplantation of Human Organs and Tissues Act (THOTA),
+                        1994</strong>.
+                </p>
+            </div>
+
+            <div class="wrapper-grid">
+                <div class="patient-info">
+                    <div style="text-align: center;">
+                        <div class="date-badge">Approved on 12th September 2025</div>
+                    </div>
+                    <h3>Approved Patients</h3>
+                    <div class="patient-list">
+                        <span class="patient-id">UHID: 253472</span>
+                        <span class="patient-id">UHID: 253471</span>
+                        <span class="patient-id">UHID: 249285</span>
+                    </div>
+                </div>
+
+                <div class="patient-info">
+                    <div style="text-align: center;">
+                        <div class="date-badge">Approved on 25th November 2025</div>
+                    </div>
+                    <h3>Approved Patients</h3>
+                    <div class="patient-list">
+                        <span class="patient-id">UHID: 254244</span>
+                    </div>
+                </div>
+
+                <div class="patient-info">
+                    <div style="text-align: center;">
+                        <div class="date-badge">Approved on 30th March 2026</div>
+                    </div>
+                    <h3>Approved Patients</h3>
+                    <div class="patient-list">
+                        <span class="patient-id">UHID: 261695</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compliance-section">
+                <div class="anno_points">
+                    <div class="left_side">
+                        <h3 class="compliance-title">Approval Process Compliance</h3>
+                        <div class="compliance-list">
+                            <div class="compliance-item">
+                                <span>Proper verification of the donor-recipient relationship</span>
+                            </div>
+                            <div class="compliance-item">
+                                <span>Complete documentation and informed consent</span>
+                            </div>
+                            <div class="compliance-item">
+                                <span>Ethical and legal compliance with all regulatory norms</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="anno_right_side">
+                        <img src="Images/urology/da-vinci-robotic-surgery-machine.png" alt="">
+                        <img src="Images/urology/robotic-surgery-console.jpg" alt="">
+                        <img src="Images/urology/robotic-surgical-arms-for-urology.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-section">
+                <p>The transplant procedure will be carried out by our multidisciplinary transplant team with the
+                    highest standards of care and safety.</p>
+                <p>We commend the donor and patient for their strength and courage and extend our full support
+                    throughout this life-saving journey.</p>
+                <p><strong>For any queries related to renal transplantation, please consult our Renal
+                        Transplantation team.</strong></p>
+            </div>
+
+            <div class="footer">
+                <div class="hospital-name">Vasavi Hospitals</div>
+                <div class="contact-info">Excellence in Healthcare & Transplantation Services</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- robotic Surgery section -->
+<div class="container_1">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Surgery in Nephrology with Da Vinci Xi</h2>
+                <p class="cathlab_intro_text">At Vasavi Hospitals, Banashankari, Bangalore, our nephrology department
+                    uses the advanced Da Vinci Xi robotic surgical system to treat complex kidney and urinary tract
+                    conditions. This technology allows our nephrology doctors to perform delicate procedures with
+                    enhanced accuracy, minimal pain and quicker recovery - helping patients return to healthy living
+                    faster.</p>
+
+                <h3 class="cathlab_sub_title">What Makes Our Robotic Nephrology Surgery Special?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Unmatched Surgical Precision</h4>
+                            <p class="cathlab_feature_desc">The Da Vinci system provides magnified 3D vision and
+                                superior control, enabling surgeons to operate on kidney and urinary tract conditions
+                                with extreme accuracy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Procedures</h4>
+                            <p class="cathlab_feature_desc">Kidney surgeries, including tumor removal, ureteric
+                                reconstruction and partial nephrectomy, are performed through small incisions - ensuring
+                                less pain, reduced blood loss and faster recovery.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Quick Return to Daily Life</h4>
+                            <p class="cathlab_feature_desc">Patients experience shorter hospital stays and a quicker
+                                return to normal routines compared to open kidney surgery.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Improved Patient Outcomes</h4>
+                            <p class="cathlab_feature_desc">Robotic-assisted nephrology surgery lowers complications,
+                                improves recovery and preserves kidney function whenever possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="cathlab_image_section">
+                    <div class="cathlab_image_wrapper">
+                        <img src="assets/img/cathlab/advanced-cathlab-vasavi-hospital-banashankari-bangalore.jpg"
+                            alt="Advanced Cardiac Catheterization Laboratory at Vasavi Hospitals Banashankari Bangalore"
+                            class="cathlab_image">
+                        <div class="cathlab_image_overlay">
+                            <div class="cathlab_overlay_content">
+                                <i class="fa-solid fa-heartbeat"></i>
+                                <span>Advanced Heart Care</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Nephrology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified nephrologists brings decades of combined experience
+        in treating complex kidney and renal conditions with compassion and precision.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dummy-male-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Sunil R</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MD DM NEPHROLOGY</p>
+            <p class="doctor-experience">15+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" href="doctors/dr-sunil-r">Book Appointment</a>
+        </div>
+
+        <!-- Doctor 2 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="/Images/new-doctor-image/dr-sreenidhi-h-c-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Sreenidhi H. C</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS MD (GENERAL MEDICINE) DM (NEPHROLOGY)</p>
+            <p class="doctor-experience">3+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" href="doctors/dr-sreenidhi-h-c">Book Appointment</a>
+        </div>
+
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dummy-male-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Harsha Kumar</h3> -->
+        <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+        <!-- <p class="qualification">MBBS, MD, DM, Nephrology(PGI)</p> -->
+        <!-- <p class="doctor-experience">3+ Years Experience</p> -->
+        <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+        <!-- <a class="appointment-btn" href="/doctor-profile.php?slug=dr-sreenidhi-h-c">Book Appointment</a> -->
+        <!-- </div> -->
+
+
+
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Vasavi Hospitals, Bangalore?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Expert Nephrology Doctors</b> -
+                Our team of skilled nephrologists has expertise in treating complex kidney conditions.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Comprehensive Kidney Care</b> -
+                From diagnosis and dialysis to transplant and follow-up, we provide complete kidney care under one
+                roof.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Advanced Technology</b> -
+                Equipped with modern dialysis units, minimally invasive surgery and robotic techniques for precise
+                treatment.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Personalized Approach</b> -
+                Every patient receives a treatment plan personalized to their medical needs and lifestyle.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Trusted Care in Banashankari</b>
+                -
+                Conveniently located in the heart of Bangalore, making it easy for patients and families to
+                access.</span>
+        </div>
+
+
+        <div class="wcu_description" style="margin-bottom: 30px;">
+            At Vasavi Hospitals, you are not just choosing expert kidney care,
+            you are choosing a team that values your health, safety, and trust at every step.
+        </div>
+    </div>
+
+    <img src="Images/nephrology/kidney-treatment-at-vasavi-hospitals-bangalore.jpg" alt="">
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. Who is the best nephrologist in Banashankari, Bangalore?</div>
+            <div class="ans">At Vasavi Hospitals, Banashankari, our team of expert nephrology doctors is highly trusted
+                for kidney care. Patients choose us for advanced treatment, compassionate care and modern facilities.
+            </div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">2. What kidney treatments are available at Vasavi Hospitals?</div>
+            <div class="ans">We offer complete kidney care including hemodialysis, peritoneal dialysis, kidney
+                transplantation, hypertension management, diabetic nephropathy treatment and robotic nephrology surgery.
+            </div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">3. How much does kidney treatment cost in Bangalore?</div>
+            <div class="ans">The cost depends on your specific condition and treatment plan. At Vasavi Hospitals, we
+                provide affordable care with transparent pricing. Call us at 080 71 500 500 to know more.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">4. Why choose Vasavi Hospitals for kidney problems?</div>
+            <div class="ans">Because we combine medical expertise with modern technology and a patient-first approach.
+                Our doctors listen, care and guide you through every step of treatment.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">5. How can I book an appointment with a nephrologist at Vasavi Hospitals?</div>
+            <div class="ans">Call us directly at 080 71 500 500 or use our online form to schedule your consultation
+                today.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">6. Do you offer emergency kidney care in Banashankari, Bangalore?</div>
+            <div class="ans">Yes. At Vasavi Hospitals, our nephrology team provides 24/7 emergency care for acute kidney
+                problems, ensuring immediate medical attention when you need it most.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">7. Is dialysis available at Vasavi Hospitals?</div>
+            <div class="ans">Absolutely. We provide both hemodialysis and peritoneal dialysis with modern equipment,
+                expert monitoring and comfortable facilities for patients.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">8. Can I get a second opinion from your nephrology doctors?</div>
+            <div class="ans">Yes, our specialists are happy to provide second opinions on kidney disease, transplant
+                options or ongoing treatments. Call 080 71 500 500 to book your consultation.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">9. Do you provide robotic kidney surgery in Bangalore?</div>
+            <div class="ans">Yes. At Vasavi Hospitals we use the Da Vinci Xi robotic surgical system for advanced kidney
+                procedures, ensuring precise results, less pain and faster recovery.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">10. How do I reach Vasavi Hospitals from nearby areas like Jayanagar or JP Nagar?</div>
+            <div class="ans">Our hospital is located in Banashankari, South Bangalore, with easy access from Jayanagar,
+                JP Nagar, Basavanagudi, Kumaraswamy Layout and Uttarahalli. Patients across Bangalore trust us for
+                expert kidney care close to home.</div>
+        </div>
+
+    </div>
+</div>
+
+<app-cta></app-cta>

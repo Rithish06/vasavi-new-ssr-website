@@ -1,0 +1,171 @@
+<section class="bg-white" [formGroup]="appointmentForm">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+
+      <!-- Image -->
+      <div class="col-12 col-md-12 col-lg-6 d-flex align-items-center order-md-2 mt-2 mt-lg-0">
+        <img src="Images/contact-us.webp" class="w-100" alt="Book Appointment">
+      </div>
+
+      <!-- Form Section -->
+      <div class="col-12 col-md-12 col-lg-6 d-flex align-items-center">
+        <div class="bg-primary rounded p-3 p-md-3 w-100">
+          <h2 class="mb-4 text-center text-light">Book An Appointment</h2>
+
+          <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+            <div class="row d-flex justify-content-center">
+
+              <!-- Name -->
+              <div class="col-12 col-sm-6 pb-2">
+                <label class="text-light">Your Name</label>
+                <input type="text" formControlName="name" class="form-control bg-light border-0" style="height:55px">
+                <div class="text-warning small mt-1" *ngIf="submitted && f['name'].errors">
+                  <small *ngIf="f['name'].errors['required']">Name is required</small>
+                  <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                  <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="col-12 col-sm-6 pb-2">
+                <label class="text-light">Contact Number</label>
+                <input type="tel" formControlName="phone" class="form-control bg-light border-0" style="height:55px">
+                <div class="text-warning small mt-1" *ngIf="submitted && f['phone'].errors">
+                  <small *ngIf="f['phone'].errors['required']">Phone number is required</small>
+                  <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-12 pb-2">
+                <label class="text-light">Your Email Id</label>
+                <input type="email" formControlName="email" class="form-control bg-light border-0" style="height:55px">
+                <div class="text-warning small mt-1" *ngIf="submitted && f['email'].errors">
+                  <small *ngIf="f['email'].errors['required']">Email is required</small>
+                  <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                </div>
+              </div>
+
+              <!-- Date -->
+              <div class="col-12 col-sm-6 pb-2">
+                <label class="text-light">Appointment Date</label>
+                <input type="date" formControlName="appointment_date" class="form-control bg-light text-dark border-0"
+                  style="height:55px">
+                <div class="text-warning small mt-1" *ngIf="submitted && f['appointment_date'].errors">
+                  <small *ngIf="f['appointment_date'].errors['required']">Date is required</small>
+                </div>
+              </div>
+
+              <!-- Service -->
+              <div class="col-12 col-sm-6 pb-2">
+                <label class="text-light">Service Looking For</label>
+                <input type="text" formControlName="service" class="form-control bg-light border-0" style="height:55px">
+                <div class="text-warning small mt-1" *ngIf="submitted && f['service'].errors">
+                  <small *ngIf="f['service'].errors['required']">Service is required</small>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="col-12 pb-2">
+                <label class="text-light">Leave your message here</label>
+                <textarea formControlName="message" class="form-control bg-light border-0" rows="4"></textarea>
+                <div class="text-warning small mt-1" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+
+              <!-- Submit
+                <div class="col-12 mt-2">
+                  <button class="btn btn-light w-100 py-3" type="submit">Make An Appointment</button>
+                </div>
+                <div class="col-12 text-center mt-2">
+                  <p class="text-success fw-semibold" *ngIf="successMsg">{{ successMsg }}</p>
+                  <p class="text-danger fw-semibold" *ngIf="errorMsg">{{ errorMsg }}</p>
+                </div> -->
+              <div class="col-12 mt-3">
+                <ng-hcaptcha [siteKey]="hsiteKey" (verify)="onCaptchaVerify($event)" (expired)="onCaptchaExpire()"
+                  (error)="onCaptchaError($event)">
+                </ng-hcaptcha>
+
+                <small class="text-danger" *ngIf="!captchaVerified">
+                  Please complete the captcha verification
+                </small>
+              </div>
+
+              <!-- <button type="button" class="btn btn-warning w-100 py-2" (click)="sendEmailOtp()"
+                            [disabled]="emailOtpSent || !captchaVerified">
+                            {{ emailOtpSent ? 'Email OTP Sent' : 'Verify Email' }}
+                        </button> -->
+              <div class="otp-card" *ngIf="emailOtpSent && !emailOtpVerified">
+                <h5 class="otp-title">Verify your Email</h5>
+
+                <div class="otp-row">
+                  <input type="text" maxlength="6" formControlName="emailOtp" class="form-control otp-input"
+                    placeholder="••••••" />
+
+                  <button type="button" class="btn btn-success otp-verify-btn" (click)="verifyEmailOtp()">
+                    Verify
+                  </button>
+                </div>
+
+                <div class="otp-meta">
+                  <span>Expires in {{ formatTime(emailOtpTimer) }}</span>
+
+                  <button type="button" class="btn btn-link resend-btn" (click)="sendEmailOtp()"
+                    [disabled]="!canResendEmailOtp">
+                    Resend OTP
+                  </button>
+                </div>
+              </div>
+
+
+              <!-- <div class="col-12 mt-3" *ngIf="emailOtpVerified && !mobileOtpVerified">
+                            <button type="button" class="btn btn-warning w-100 py-2" (click)="sendMobileOtp()"
+                                [disabled]="mobileOtpSent">
+                                {{ mobileOtpSent ? 'Mobile OTP Sent' : 'Verify Mobile' }}
+                            </button>
+                        </div> -->
+
+              <div class="col-12 mt-3 otp-card" *ngIf="mobileOtpSent && !mobileOtpVerified">
+                <h5 class="otp-title">Verify your Mobile Number</h5>
+
+                <div class="otp-row">
+                  <input type="text" formControlName="mobileOtp" maxlength="6" class="form-control otp-input"
+                    placeholder="••••••" />
+
+                  <button type="button" class="btn btn-success otp-verify-btn" (click)="verifyMobileOtp()"
+                    [disabled]="appointmentForm.value.mobileOtp?.length !== 6">
+                    Verify
+                  </button>
+                </div>
+
+                <div class="otp-meta">
+                  <span>Expires in {{ formatTime(mobileOtpTimer) }}</span>
+
+                  <button type="button" class="btn btn-link resend-btn" (click)="sendMobileOtp()"
+                    [disabled]="!canResendMobileOtp">
+                    Resend OTP
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="statusMessage" class="alert mt-3" [ngClass]="{
+       'alert-info': statusType === 'info',
+       'alert-success': statusType === 'success',
+       'alert-danger': statusType === 'error'
+     }">
+                {{ statusMessage }}
+              </div>
+
+              <button class="btn btn-primary w-100 py-3" type="submit" [disabled]="!mobileOtpVerified">
+                Send Message
+              </button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

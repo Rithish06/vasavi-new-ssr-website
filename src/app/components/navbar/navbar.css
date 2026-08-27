@@ -1,17 +1,17 @@
 :host {
   /* The sticky positioning lives here, on the component's own host
-     element, and NOT on the inner `.site-header` div — this matters.
+     element, and NOT on the inner `.site-header` div - this matters.
 
      A sticky element can only move within the bounds of its *immediate*
      containing block (its direct parent's box), not relative to some
      distant scrolling ancestor. `<app-navbar>` wraps nothing but the
      header, so if `.site-header` itself were sticky, its containing
-     block (`:host`) would be exactly as tall as the header — zero extra
-     room to move into — and it would "run out of room" the instant the
+     block (`:host`) would be exactly as tall as the header - zero extra
+     room to move into - and it would "run out of room" the instant the
      page scrolled, rendering as if it were `position: static`.
 
      `:host`'s own parent is `<app-root>`, whose box spans navbar + main
-     + footer — effectively the whole page — so making `:host` the
+     + footer - effectively the whole page - so making `:host` the
      sticky element gives it the full page's worth of room to stay
      pinned at the top while scrolling. */
   display: block;
@@ -84,6 +84,11 @@
   letter-spacing: 0.02em;
   color: var(--color-gold-500);
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.topbar__badge:hover {
+  text-decoration: underline;
 }
 
 .topbar__badge svg {
@@ -227,8 +232,8 @@
 /* At desktop widths, unwrap .nav-panel so .nav-links and .cta-btn become
    direct flex children of .mainnav__inner alongside the logo. Combined
    with justify-content: space-between below, that splits the row's
-   leftover space into two EQUAL gaps — logo-to-nav-links and
-   nav-links-to-CTA — instead of one big gap after the logo and a small
+   leftover space into two EQUAL gaps - logo-to-nav-links and
+   nav-links-to-CTA - instead of one big gap after the logo and a small
    one before the button (which is what happened when nav-links + CTA
    were grouped together and only pushed as a pair via margin-left:auto). */
 @media (min-width: 1100px) {
@@ -248,7 +253,7 @@
   flex-wrap: wrap;
 }
 
-/* Note: dropdown <li> is intentionally NOT position:relative — the
+/* Note: dropdown <li> is intentionally NOT position:relative - the
    mega-menu is positioned against .mainnav__inner instead (see below),
    so it stays centered under the whole nav bar instead of anchoring to
    one trigger and risking running off the edge of the viewport. */
@@ -268,6 +273,17 @@
   cursor: pointer;
   position: relative;
   white-space: nowrap;
+}
+
+/* The "dropdown-toggle" class name collides with Bootstrap's own dropdown
+   component (bootstrap.min.css is imported globally in styles.css). Bootstrap
+   auto-adds a CSS triangle caret via `.dropdown-toggle::after`, which was
+   rendering alongside our own <svg class="chevron"> arrow - two arrows on
+   "Our Services" / "Surgery Packages". This isn't a real Bootstrap dropdown,
+   so suppress Bootstrap's caret and keep only the custom SVG chevron. */
+.dropdown-toggle::after {
+  display: none !important;
+  content: none !important;
 }
 
 /* Graduated spacing: the 1100–1279px band is the tightest fit (see the
@@ -373,7 +389,7 @@
 /* --- Dropdown menus (mega-menu on desktop, accordion on mobile) --- */
 
 /* Positioned against .mainnav__inner (see its position:relative above),
-   not the trigger <li> — centered under the whole nav bar so its width
+   not the trigger <li> - centered under the whole nav bar so its width
    never depends on how far right a given trigger happens to sit. */
 .dropdown-menu {
   position: absolute;
@@ -409,14 +425,25 @@
   color: var(--color-navy-900);
 }
 
+/* "View All Health Packages" - first entry in the health dropdown, links to
+   the packages hub page rather than one specific package. Set apart with a
+   bottom rule + accent color so it doesn't read as just another package. */
+.dropdown-menu--health li:first-child a {
+  font-weight: 700;
+  color: var(--color-blue-600);
+  border-bottom: 1px solid rgba(18, 27, 111, 0.1);
+  border-radius: 6px 6px 0 0;
+  margin-bottom: 4px;
+}
+
 /* Reproduce the approved column layout with a fixed row count + column
    auto-flow, fed by a flat list that's already ordered column-by-column
-   (see navbar.ts). Column count steps up in tiers as there's more room —
+   (see navbar.ts). Column count steps up in tiers as there's more room -
    the reading order (top-to-bottom, then next column) stays the same at
    every tier, only how many columns it wraps into changes.
 
    Note: the menu is anchored to the LEFT edge of its trigger <li> and
-   grows rightward (see .dropdown-menu position:absolute; left:0 above) —
+   grows rightward (see .dropdown-menu position:absolute; left:0 above) -
    it is NOT centered on the viewport. So the space actually available to
    it is "viewport width minus how far the trigger sits from the left
    edge", not the full viewport. These tier widths were verified directly
@@ -527,7 +554,7 @@
 }
 
 /* ===================================================================
-   Below 1100px — collapse to hamburger + slide-down panel
+   Below 1100px - collapse to hamburger + slide-down panel
    =================================================================== */
 
 @media (max-width: 1099.98px) {

@@ -1,25 +1,55 @@
 /**
- * Shared doctor roster — single source of truth for both the doctors
+ * Shared doctor roster - single source of truth for both the doctors
  * listing page and each doctor's individual profile page.
  */
+export interface AffiliationEntry {
+  /** Short association code/name shown as the card's bold heading, e.g. "IAP". */
+  heading: string;
+  /** Full association name, e.g. "Indian Academy of Pediatrics". */
+  description: string;
+  /** Path to the association's logo under public/Images/affiliations - falls back to a generic badge icon when absent. */
+  image?: string;
+}
+
+export interface AwardEntry {
+  /** Name understood by `<app-doctors-icon>` - see doctors-icon.ts for the full set. */
+  icon: string;
+  /** Picks the card's accent color - see doctor-detail.css's `.doctor-honors__card--*` modifiers. */
+  theme: 'blue' | 'pink' | 'gold' | 'green' | 'purple';
+  title: string;
+  description: string;
+}
+
 export interface Doctor {
   id: string;
   name: string;
-  /** Real 1:1 headshot in public/Images/new-doctor-image — sq variant used where available. */
+  /** Real 1:1 headshot in public/Images/new-doctor-image - sq variant used where available. */
   img: string;
   alt: string;
   /** Consultant designation shown under the name, e.g. "Sr. Consultant Bariatric Surgeon". */
   title: string;
-  /** Filter bucket — matches one of DEPARTMENTS / MORE_DEPARTMENTS. */
+  /** Filter bucket - matches one of DEPARTMENTS / MORE_DEPARTMENTS. */
   department: string;
   qualifications: string;
-  /** 0 means "not specified" — the experience badge is hidden in that case. */
+  /** 0 means "not specified" - the experience badge is hidden in that case. */
   experienceYears: number;
-  /** Empty string means no profile page exists yet — routes/links to it are hidden in that case. */
+  /** Empty string means no profile page exists yet - routes/links to it are hidden in that case. */
   slug: string;
+
+  /**
+   * Real detail-page content below. All optional - a handful of doctors
+   * (no profile page, or no supplied content yet) simply omit some or all
+   * of these, and doctor-detail.ts/html hide each section entirely when
+   * its field is missing/empty rather than showing a blank heading.
+   */
+  briefProfile?: string;
+  expertiseHighlights?: string[];
+  professionalAffiliations?: AffiliationEntry[];
+  honorsAwards?: AwardEntry[];
+  publications?: string[];
 }
 
-/** Primary department checkboxes — the most common ones, shown expanded by default. */
+/** Primary department checkboxes - the most common ones, shown expanded by default. */
 export const DEPARTMENTS = [
   'Anesthesiology',
   'Bariatric Surgery',
@@ -53,6 +83,7 @@ export const MORE_DEPARTMENTS = [
 ];
 
 const IMG = '/Images/new-doctor-image/';
+const AFF = '/Images/affiliations/';
 
 export const DOCTORS: Doctor[] = [
   {
@@ -65,6 +96,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD Pediatrics, Fellowship in Neonatology',
     experienceYears: 15,
     slug: '/dr-ashok-m-v',
+    briefProfile:
+      'I have done my masters in paediatrics from KIMS and my fellowship in nematology in Indira Gandhi Institute of Child and I have worked in abroad for few few years and I continues my work in hospitals like Sagar Hospital and Fortis Hospital, right now, I am working as a Consultant Neonatologist in Vasavi Hospitals. I have more than 15 years of experience in paediatrics, and I have a teaching experience for DNB students. I have presented few papers in international conference. My area of interest is Neonatology. I take care level 3 NICU and able to manage smaller baby as small as 24 week and other complicated babies.',
+    expertiseHighlights: ['Pediatrics and Neonatology'],
+    professionalAffiliations: [
+      { heading: 'IAP', description: 'Indian Academy of Pediatrics', image: AFF + 'IAP.jpg' },
+      { heading: 'NNF', description: 'National Neonatology Forum', image: AFF + 'NNF.png' },
+      { heading: 'BPS', description: 'Bangalore Pediatric Society', image: AFF + 'IAP.jpg' },
+    ],
+    publications: ['Presentation in India and international conferences'],
   },
   {
     id: 'dr-sreenidhi-h-c',
@@ -76,6 +116,36 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD, DM Nephrology',
     experienceYears: 3,
     slug: '/dr-sreenidhi-h-c',
+    expertiseHighlights: ['Nephrology', 'Kidney Transplantation'],
+    professionalAffiliations: [
+      { heading: 'ISN', description: 'International Society of Nephrology', image: AFF + 'ISN.jpg' },
+      { heading: 'Indian Society of Nephrology', description: 'Indian Society of Nephrology', image: AFF + 'ISN.png' },
+      {
+        heading: 'AVATAR',
+        description: 'Association of Vascular Access & Interventional Renal Physician',
+        image: AFF + 'AVATAR.jpeg',
+      },
+      { heading: 'ISPD', description: 'International Society of Peritoneal Dialysis', image: AFF + 'ISPD.jpg' },
+      { heading: 'ISH', description: 'International Society of Hypertension', image: AFF + 'ISH.png' },
+    ],
+    honorsAwards: [
+      {
+        icon: 'badge',
+        theme: 'blue',
+        title: 'Best Poster Award',
+        description:
+          "Directly Acting Antiviral Agents (DAA) In The Treatment Of HCV Infected Haemodialysis Patients- 4 Years' Experience From A Tertiary Care Hospital- Poster presentation in ISNCON 2021",
+      },
+      { icon: 'trophy', theme: 'green', title: 'WCN Grant', description: 'WCN GRANT 2022' },
+      { icon: 'certificate', theme: 'gold', title: 'DM Gold Medal', description: 'DM nephrology gold medal' },
+    ],
+    publications: [
+      "Study of left ventricular systolic dysfunction, left ventricular diastolic dysfunction and pulmonary hypertension in CKD 3b-5ND patients-A single centre cross-sectional study",
+      'Renal outcomes in myeloma associated acute kidney injury; a single centre experience',
+      'Prognostic value of modified National Institute of Health activity and chronicity scoring in determining complete renal response in newly diagnosed lupus nephritis: a retrospective single centre study',
+      'Thyroid function in patients with idiopathic nephrotic syndrome',
+      'Predicting the risk of progression in Indian ADPKD cohort using PROPKD score - A single-centre retrospective study',
+    ],
   },
   {
     id: 'dr-nisha-buchade',
@@ -87,6 +157,55 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS (OBG)',
     experienceYears: 15,
     slug: '/dr-nisha-buchade',
+    briefProfile:
+      "Dedicated gynecologist providing compassionate, ethical, and evidence-based care with a focus on women's health.",
+    expertiseHighlights: [
+      'High risk pregnancy, painless normal deliveries',
+      'Robotic/ laparoscopic surgeries for fibroids, endometriosis, removal of uterus, cancer surgeries, prolapse repairs',
+      'Prevention and treatment of gynaecological cancers',
+      'PCOD, Infertility, menopause, urinary incontinence',
+    ],
+    professionalAffiliations: [
+      { heading: 'IAGE', description: 'Indian association of Gynecological Endoscopists', image: AFF + 'IAGE.png' },
+      { heading: 'BSOG', description: 'Bangalore society of obstetrics and Gynecologist', image: AFF + 'logobsog.png' },
+      { heading: 'AGOI', description: 'Association of Gynaecological Oncologists of India', image: AFF + 'AGOI.png' },
+      {
+        heading: 'UPIA',
+        description: 'Urogynecology Pelvic Floor Dysfunction and Incontinence Association',
+        image: AFF + 'upia.jpg',
+      },
+    ],
+    honorsAwards: [
+      {
+        icon: 'certificate',
+        theme: 'gold',
+        title: 'Excellence in Maternity Care',
+        description: 'Times health excellence award for best maternity and child care',
+      },
+      {
+        icon: 'document',
+        theme: 'blue',
+        title: 'Best Paper Presentation',
+        description: 'Indumati Jhaveri award for best paper presentation in national conference',
+      },
+      { icon: 'badge', theme: 'green', title: 'Robotic Scholar', description: 'Robotic scholar for year 2015' },
+      {
+        icon: 'document',
+        theme: 'purple',
+        title: 'Best Poster Presentation',
+        description: 'Best poster presentation in state conference',
+      },
+      {
+        icon: 'play',
+        theme: 'pink',
+        title: 'Best Video Presentation',
+        description:
+          'Best video presentation of Robotic lymphadenectomy in endometrial cancer in IAGE national conference',
+      },
+    ],
+    publications: [
+      'Study Of Diagnostic Efficacy Of Visual Inspection With Acetic Acid (VIA) In Comparison With PAP Smear In Cervical Cancer Screening In indexed journal',
+    ],
   },
   {
     id: 'dr-venkatesh-rathod-r',
@@ -98,6 +217,18 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, D.Ortho, DNB Ortho',
     experienceYears: 16,
     slug: '/dr-venkatesh-rathod-r',
+    briefProfile:
+      'Dr. Venkatesh Rathod - I am a highly competent and skilled surgeon with more than 11 years of experience in orthopedic surgery. I have expertise in upper limb trauma management, expert in minimally invasive surgery, complicated Periarticular Fractures, complex/multiple tendon injuries, local and free flap surgeries in hand and wrist. Have special interest in MAKO robotic Hip Knee & shoulders replacement and arthroscopic surgeries. I have been a member of the team of doctors for royal challengers Bangalore cricket team attending to sport injuries. I have several publications to my credit. I play pivotal role in execution and streamlining the operative plan of the team to ensure smooth running of the department for excellent patient care and rehabilitation. I have been an integral part of Vasavi institute of advanced orthopedics from the time it started. He has performed and assisted nearly 3000 surgeries till date. I have an accomplished medical professional adept at performing surgeries completing evaluations and developing successful treatment plans. Driven to communicate well and establish strong rapport with all patients.',
+    expertiseHighlights: ['Upper limb trauma', 'MAKO robotic knee and hip arthroplasty', 'Knee and shoulder arthroscopy'],
+    honorsAwards: [
+      {
+        icon: 'badge',
+        theme: 'blue',
+        title: 'Best Paper Award',
+        description: 'Best paper award for proximal humerus fracture with philos plate and screws 2014',
+      },
+    ],
+    publications: ['Proximal humerus fracture treated with philos plate - clinical outcome'],
   },
   {
     id: 'dr-vinay-hosadurga',
@@ -109,6 +240,12 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD (General Medicine)',
     experienceYears: 14,
     slug: '/dr-vinay-hosadurga',
+    briefProfile:
+      'Patient centered evidence based ethical approach to achieve better quality of life to my patients.',
+    expertiseHighlights: ['Metabolic diseases', 'Infectious diseases'],
+    honorsAwards: [
+      { icon: 'badge', theme: 'gold', title: 'Academic Excellence', description: 'M.D 2nd Rank to RGUHS Batch 2012' },
+    ],
   },
   {
     id: 'dr-abhiram-r',
@@ -120,6 +257,17 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD Dermatology',
     experienceYears: 10,
     slug: '/dr-abhiram-r',
+    briefProfile:
+      'Dr. Abhiram Rayapati is an experienced dermatologist with over 10 years of expertise in treating a wide range of skin, hair, and nail problems. He completed his MBBS and MD in Dermatology from PES Institute of Medical Sciences and Research and pursued advanced training in Dermatosurgery and Hair Transplantation at BMCRI, Bengaluru. He is skilled in laser treatments, aesthetic procedures, skin surgeries, and hair restoration, and has successfully treated thousands of patients. Known for his caring approach and clear communication, Dr. Abhiram ensures that every patient feels comfortable and receives the best possible care. He is also a member of the Indian Association of Dermatologists (IADVL).',
+    expertiseHighlights: ['Consultant Dermatologist', 'Dermatosurgeon'],
+    professionalAffiliations: [
+      {
+        heading: 'IADVL',
+        description: 'Indian Association of Dermatologists, Venereologists and Leprologists',
+        image: AFF + 'IADVL.jpg',
+      },
+      { heading: 'BDS', description: 'Bangalore Dermatological Society', image: AFF + 'logo.png' },
+    ],
   },
   {
     id: 'dr-sunil-r',
@@ -131,6 +279,14 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MD, DM Nephrology',
     experienceYears: 15,
     slug: '/dr-sunil-r',
+    briefProfile:
+      'Dr Sunil R is a highly skilled Nephrologist and Transplant Physician with extensive experience in managing complex renal cases. His educational background includes MBBS from Kempegowda Institute of Medical Sciences, MD in General Medicine from JSS Medical College, and DM in Nephrology from Institute of NephroUrology, Victoria Hospital Campus. He has been contributing to the medical field through his clinical expertise and has presented research findings at various national conferences.',
+    expertiseHighlights: ['Renal Transplantation', 'CKD Dialysis'],
+    professionalAffiliations: [
+      { heading: 'ISN', description: 'International Society of Nephrology', image: AFF + 'ISN.jpg' },
+      { heading: 'ISOT', description: 'International Society for Organ Transplantation', image: AFF + 'ISOT.png' },
+    ],
+    publications: ['DREAM D - CJASN', 'DREAM ND - CJASN'],
   },
   {
     id: 'dr-pratham-r-bysani',
@@ -142,6 +298,20 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS, MCh Neurosurgery',
     experienceYears: 10,
     slug: '/dr-pratham-r-bysani',
+    expertiseHighlights: ['Brain Surgery', 'Spine Surgery'],
+    professionalAffiliations: [
+      { heading: 'NSI', description: 'Neurological Society of India', image: AFF + 'NSI.jpg' },
+      { heading: 'CVSI', description: 'Cerebrovascular Society of India', image: AFF + 'CVSI.png' },
+      { heading: 'CNS', description: 'Congress of Neurological Surgeons USA', image: AFF + 'CNS.jpg' },
+      {
+        heading: 'ESMINT',
+        description: 'European Society of Minimally Invasive Neurological Therapy',
+        image: AFF + 'ESMINT.png',
+      },
+      { heading: 'ASSI', description: 'Association of Spine Surgeons India', image: AFF + 'ASSI.jpg' },
+      { heading: 'MISSAB', description: 'Minimally Invasive Spine Surgeons of Bharat', image: AFF + 'MISSAB.jpg' },
+      { heading: 'RCS', description: 'Royal College of Surgeons, Europe', image: AFF + 'RCS.png' },
+    ],
   },
   {
     id: 'dr-karthik-k',
@@ -153,6 +323,14 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DA, DNB Anaesthesiology',
     experienceYears: 21,
     slug: '/dr-karthik-k',
+    briefProfile: 'Efficient, experienced and compassionate doctor with leadership qualities.',
+    expertiseHighlights: ['Thoracic epidurals', 'Labor epidurals'],
+    professionalAffiliations: [
+      { heading: 'ISA', description: 'Indian Society of Anaesthesiology', image: AFF + 'ISA.jpg' },
+      { heading: 'ICA', description: 'Indian College of Anaesthesiology', image: AFF + 'ICA.jpg' },
+      { heading: 'IMA', description: 'Indian Medical Association', image: AFF + 'IMA.png' },
+    ],
+    publications: ['Thoracic epidural anaesthesia for upper abdominal surgeries'],
   },
   {
     id: 'dr-pradeep-a-dongare',
@@ -164,6 +342,25 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'DA, DNB',
     experienceYears: 12,
     slug: '/dr-pradeep-a-dongare',
+    briefProfile:
+      'I completed my undergraduate at VIMS Ballari and specialized in Anaesthesiology from Mysore Medical College; Diploma 2009, DNB Kidwai Institute. Passionate teacher and researcher with 25 publications.',
+    expertiseHighlights: ['Regional Anaesthesia', 'Difficult Airway', 'Research Methodology'],
+    professionalAffiliations: [
+      { heading: 'ISA', description: 'Indian Society of Anaesthesiologists', image: AFF + 'ISA.jpg' },
+      { heading: 'AORA', description: 'Academy of Regional Anaesthesia', image: AFF + 'AORA.png' },
+      { heading: 'AIDAA', description: 'All India Difficult Airway Association', image: AFF + 'AIDAA.png' },
+      { heading: 'AOA', description: 'Association of Obstetric Anaesthetists', image: AFF + 'AOA.png' },
+      { heading: 'APSF', description: 'Anaesthesia Patient Safety Forum', image: AFF + 'APSF.png' },
+    ],
+    honorsAwards: [
+      {
+        icon: 'badge',
+        theme: 'blue',
+        title: "ISA President's Appreciation Award",
+        description: 'ISA Presidents Appreciation Award',
+      },
+    ],
+    publications: ['25 publications in anesthesiology'],
   },
   {
     id: 'dr-abhirami-ravindran',
@@ -175,6 +372,18 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DNB Anaesthesia',
     experienceYears: 13,
     slug: '/dr-abhirami-ravindran',
+    briefProfile:
+      "Well experienced from a high volume centre in oncoanesthesia, liver transplant (350 cases), HIPEC (500 cases), neuro and robotic cases (5000 DaVinci/CMR, 500 MAKO). Faculty for segmental spinal anesthesia with ERAS protocol focus.",
+    expertiseHighlights: ['Oncoanesthesia', 'Transplant anesthesia', 'Robotic anesthesia', 'Neuro anesthesia'],
+    professionalAffiliations: [
+      { heading: 'IMA', description: 'Indian Medical Association', image: AFF + 'IMA.png' },
+      { heading: 'ISA', description: 'Indian Society of Anaesthesiologists', image: AFF + 'ISA.jpg' },
+      { heading: 'ISSP', description: 'Indian Society for Study of Pain', image: AFF + 'ISSP.png' },
+    ],
+    publications: [
+      'Segmental spinal anesthesia in morbidly obese patient with lung disorder',
+      "Segmental spinal in Whipple's patient with enhanced recovery",
+    ],
   },
   {
     id: 'dr-raveendra-reddy',
@@ -186,6 +395,19 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, FCCS',
     experienceYears: 16,
     slug: '/dr-raveendra-reddy',
+    briefProfile:
+      'Work as a team, enthusiastic and motivated, good communication skills, confident and competent doctor aware of limitations and safe practice.',
+    expertiseHighlights: ['Sepsis', 'ARDS', 'Critical care illnesses'],
+    professionalAffiliations: [
+      { heading: 'KMC', description: 'Karnataka Medical Council', image: AFF + 'KMC.jpg' },
+      { heading: 'GMC', description: 'General Medical Council', image: AFF + 'GMC.png' },
+      { heading: 'ISCCM', description: 'Indian Society of Critical Care Medicine', image: AFF + 'ISCCM.png' },
+    ],
+    publications: [
+      'Acknowledgement by Cancyte team in Immunologic Research',
+      'Correspondence published in Anaesthesia journal (UK)',
+      'Poster presentation at 15th Annual Scientific Meeting of British Society of Orthopaedic Anaesthetists',
+    ],
   },
   {
     id: 'dr-ramesh-hanumegowda',
@@ -197,6 +419,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS, MCh Urology',
     experienceYears: 15,
     slug: '/dr-ramesh-hanumegowda',
+    briefProfile:
+      'Dr Ramesh Hanumegowda is an eminent urologist with over 15 years of surgical experience. MBBS, MS (Gen Surgery), MCH Urology from Institute of Nephrourology Bengaluru. Special interest in urethral reconstruction and certified Da Vinci robotic surgeon.',
+    expertiseHighlights: ['Endourology', 'Robotic urology', 'Uro oncology', 'Kidney transplant', 'Reconstructive urology'],
+    professionalAffiliations: [
+      { heading: 'USI', description: 'Urology Society of India', image: AFF + 'USI.png' },
+      { heading: 'KUA', description: 'Karnataka Urology Association', image: AFF + 'KUA.png' },
+      { heading: 'ASU', description: 'Association of Southern Urology', image: AFF + 'ASU.webp' },
+      { heading: 'BUS', description: 'Bangalore Urology Society', image: AFF + 'BUS.png' },
+    ],
   },
   {
     id: 'dr-sudeep-putta-manohar',
@@ -208,6 +439,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MRCP (UK)',
     experienceYears: 15,
     slug: '/dr-sudeep-putta-manohar',
+    expertiseHighlights: [
+      'Diabetes',
+      'Thyroid disorders',
+      'PCOS',
+      'Osteoporosis',
+      'Adrenal diseases',
+      'Pituitary disorders',
+      'Gonadal disorders',
+    ],
   },
   {
     id: 'dr-mutharaju-k-r',
@@ -219,6 +459,17 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS, FMBS',
     experienceYears: 23,
     slug: '/dr-mutharaju-k-r',
+    briefProfile:
+      'Highly skilled GI, Bariatric, Metabolic and Advanced Laparoscopic Surgeon trained at BMCRI and AFMC Pune; Fellow in Bariatric & Metabolic Surgery (Ahmedabad). Expert in laparoscopic and robotic bypass and revisional surgery for obesity and metabolic disorders.',
+    expertiseHighlights: [
+      'Robotic Bariatric surgery',
+      'Advanced Robotic surgeries',
+      'Laparoscopic Bariatric surgery',
+      'Colorectal surgeries',
+      'Hiatus Hernia surgery',
+      'Hernia surgeries',
+      'Appendix surgery',
+    ],
   },
   {
     id: 'dr-sphoorthy-g-itigi',
@@ -230,6 +481,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DLO, DNB ENT',
     experienceYears: 8,
     slug: '/dr-sphoorthy-g-itigi',
+    expertiseHighlights: [
+      'Micro Ear surgeries',
+      'Endoscopic Sinus Surgery',
+      'Vertigo management',
+      'Vocal cord surgery',
+      'Thyroid surgery',
+      'Tonsillectomy and Adenoidectomy',
+      'Snoring and Sleep Apnea Management',
+    ],
   },
   {
     id: 'dr-ramesh-t-s',
@@ -241,6 +501,18 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DNB, MRCS (UK)',
     experienceYears: 30,
     slug: '/dr-ramesh-t-s',
+    briefProfile:
+      'Dr. Ramesh T. S is a highly skilled and experienced Consultant in Minimal Access Surgery at Vasavi Hospitals. With a strong academic background and extensive surgical experience, he is recognized for his expertise in laparoscopic procedures involving the abdomen and non-cardiac thoracic region, with a special focus on laser anorectal surgeries. Dr. Ramesh completed his MBBS from Jagadguru Jayadeva Murugarajendra Medical College (JJMMC) in 1996, followed by DNB in General Surgery from the National Board of Examinations, New Delhi, in 2005. In the same year, he earned his MRCS (UK) from the University of Edinburgh. To further strengthen his proficiency in minimally invasive techniques, he has also obtained FMAS (Fellowship in Minimal Access Surgery) and FICS (Fellowship of the International College of Surgeons).',
+    expertiseHighlights: [
+      'Robotic & Minimally Invasive Surgery',
+      'General & Laparoscopic Surgery',
+      'Advanced Laparoscopic Procedures',
+      'Laparoscopic Gynecology Surgeries',
+      'Endoscopy (Upper GI & related procedures)',
+      'Gastrointestinal & Colorectal Surgeries',
+      'Hernia Repairs, Gallbladder & Appendectomy',
+      'Trauma and Emergency Surgeries',
+    ],
   },
   {
     id: 'dr-yashaswi-srikakula',
@@ -252,6 +524,19 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DLO',
     experienceYears: 15,
     slug: '/dr-yashaswi-srikakula',
+    briefProfile:
+      'Dr. Yashaswi Srikakula is a highly experienced ENT specialist with over 15 years of expertise in treating complex ear, nose, and throat conditions. She completed her MBBS at JSS Medical College, Mysore, and her post-graduate training at KIMS, Bangalore. Dr. Yashaswi specializes in microscopic ear surgery, functional endoscopic sinus surgery (FESS) and allergy treatments. She has received advanced training in anterior skull base surgery at MCV ENT Trust Hospital, Coimbatore and in allergy and immunology at the Bangalore Allergy Centre. With a focus on personalized care, Dr. Yashaswi provides comprehensive treatment for a wide range of ENT and allergy-related conditions.',
+    expertiseHighlights: [
+      'Chronic Rhinosinusitis & Sinus Surgery (FESS)',
+      'Nasal Obstruction & Deviated Septum',
+      'Allergic Rhinitis & Seasonal Allergies',
+      'Immunotherapy for Allergies',
+      'Nasal Polyps Treatment',
+      'Autoimmune & Inflammatory Disorders (affecting ENT)',
+      'Allergy Testing & Management',
+      'Pediatric Rhinology & Allergy Care',
+    ],
+    publications: ['All India journal publications'],
   },
   {
     id: 'dr-krishna-kumar-b-r',
@@ -263,6 +548,14 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, Diploma Clinical Cardiology',
     experienceYears: 17,
     slug: '/dr-krishna-kumar-b-r',
+    briefProfile:
+      'Dr. Krishna Kumar B. R. is a well-known cardiologist with 17 years of experience in the field of cardiology. He has worked as a specialist in different cities across India and has been associated with many reputed hospitals. Dr. Krishna Kumar B. R. has contributed to the management of numerous complex medical cases in several hospitals. He is widely recognized for his accurate diagnosis and empathetic approach to patient care. His areas of special interest include clinical cardiology, heart failure management, echocardiography (ECHO), treadmill test (TMT), CT coronary angiography (CT-CAG), cardiac MRI (C-MRI), and cardiac stress studies. He is a graduate and has also completed a diploma in Clinical Cardiology. In addition, he has actively participated in research work and various workshops under the cardiology department.',
+    expertiseHighlights: [
+      'Clinical Cardiology',
+      'Heart Failure Management',
+      'ECG, Echocardiography, TMT, C-MRI (Cardiac MRI), CT-CAG (CT Coronary Angiography)',
+      'Cardiac Stress Studies',
+    ],
   },
   {
     id: 'dr-sruthi-bhaskaran',
@@ -274,6 +567,19 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DNB Emergency Medicine',
     experienceYears: 10,
     slug: '/dr-sruthi-bhaskaran',
+    briefProfile:
+      'Dr. Sruthi Bhaskaran is an experienced Emergency Medicine specialist and the Head of Department – Emergency Medicine at Vasavi Hospitals. With over a decade of clinical and leadership experience, she has played a pivotal role in enhancing emergency department efficiency, improving trauma survival rates, and strengthening critical care systems. She has successfully led large multidisciplinary teams, expanded HDU capacity by 200% during the COVID-19 pandemic, reduced ER wait times, and implemented data-driven clinical protocols. Dr. Sruthi is deeply committed to patient-centered care, clinical excellence, and training the next generation of emergency care professionals.',
+    expertiseHighlights: [
+      'Emergency & Trauma Care',
+      'Acute Critical Care Management',
+      'Triage Optimization & ER Operations',
+      'Trauma Protocol Development',
+      'Prehospital & Point-of-Care Testing',
+      'Neurological and Cardiac Emergencies',
+      'Pediatric Emergency Care',
+      'Crisis & Disaster Management (COVID-19 response)',
+      'Medical Education & Clinical Training',
+    ],
   },
   {
     id: 'dr-manjunath-p-h',
@@ -285,6 +591,19 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, DTCD, DNB',
     experienceYears: 17,
     slug: '/dr-manjunath-p-h',
+    briefProfile:
+      'Dr. Manjunath P H graduated from BMC & RI bengaluru and NH Bengaluru. He is practising in the field of pulmonology for the past 8 years. His areas of interest are Intervention Pulmonology and Interstitial lung diseases. He has performed numerous procedures in his career including bronchoscopy, pleuroscopy, EBUS and Lung biopsies. He has multiple publications in national and international journals. He has given talks on various topics in his field on various forums.',
+    expertiseHighlights: [
+      'Smoking Cessation Program',
+      'Sleep Disorder Management',
+      'Pulmonary Rehabilitation',
+      'Allergy and Immunology Services',
+      'Interventional Procedures',
+      'Bronchoscopy',
+      'Pleuroscopy',
+      'EBUS',
+      'Lung Biopsies',
+    ],
   },
   {
     id: 'dr-akshay-masur',
@@ -296,6 +615,30 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD, DNB',
     experienceYears: 14,
     slug: '/dr-akshay-masur',
+    briefProfile:
+      'Dr. Akshay Masur is an internal medicine specialist with over nine years of experience in different aspects of internal medicine. Dr. Akshay Masur has graduated from the Sri Siddhartha Medical College and pursued his specialization in Internal Medicine (MD) at Dr.S N Medical College, Jodhpur, Rajasthan. Later on he has worked in multiple reputed institutions and acquired "Fellowship in Therapeutic Gastrointestinal Endoscopy" (affiliated by RGUHS) in 2017, and acquired DNB in internal medicine in 2019. He has worked as a senior resident cum fellow in BGS Global Hospital Bangalore in the Department of Gastroenterology. Currently, along with treating the illnesses in the preview of internal medicine, he also specializes in Upper GI Endoscopy and Colonoscopy (both diagnostic and therapeutic procedures) and practices at Vasavi Hospitals Bangalore as a lead consultant.',
+    expertiseHighlights: [
+      'Infectious Disease Treatment',
+      'Men And Women Wellness Screening',
+      'Emergency Medicine',
+      'Medical Gastroenterology',
+      'Upper GI Endoscopy (Both Diagnostic & Therapeutic)',
+      'Colonoscopy',
+      'Holistic Care',
+      'Outpatient Department (OPD)',
+      'Anemia Workup',
+      'UGI Endoscopy',
+      'Infections - GERD (acid reflux) and dysphagia',
+      'UGI Bleed Management',
+      'Esophageal Variceal Banding',
+      'Liver Care - Jaundice, Hepatitis, Cirrhosis, HCC',
+      'Gallbladder Stones',
+      'Cholecystitis - DILI',
+      'Pancreatitis - Acute & Chronic',
+      'Chronic Diarrhea',
+      'Bleeding Per Rectum',
+      'Sigmoidoscopy',
+    ],
   },
   {
     id: 'dr-revathi-natesan',
@@ -307,6 +650,23 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MDS Conservative Dentistry & Endodontics',
     experienceYears: 15,
     slug: '/dr-revathi-natesan',
+    briefProfile:
+      'An Endodontist that believes in the preventive, minimally invasive and integrated approaches for treating conditions of the oral cavity. Dedicated to providing comprehensive dental care with a focus on patient comfort and long-term oral health.',
+    expertiseHighlights: [
+      'Preventive Dentistry',
+      'Caries Management',
+      'Dental Fillings',
+      'Inlays',
+      'Pulpectomy',
+      'Pulpotomy',
+      'Root Canal Treatment',
+      'Esthetic Dentistry',
+      'Dental Crowns',
+      'Bridges',
+      'Post & Core',
+      'Minimally Invasive Dentistry',
+      'General Dentistry',
+    ],
   },
   {
     id: 'dr-mohan-ram-p',
@@ -318,6 +678,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS (General Surgery), FIAGES, FALS',
     experienceYears: 15,
     slug: '/dr-mohan-ram-p',
+    briefProfile:
+      'Dr. Mohan Ram is a General Surgeon, Laparoscopic Surgeon, Vascular Surgeon, Proctologist and Laser Specialist practicing at Vasavi Hospitals, Bangalore. He completed his MBBS from Raja Rajeshwari Medical College & Hospital, Bangalore in 2011 and MS (General Surgery) from PES Institute of Medical Sciences and Research, Kuppam in 2017. With over 14 years of experience, he ensures patients receive quality, timely treatment, focusing on patient comfort, quick recovery and state-of-the-art surgical practices. He has also earned prestigious fellowships, including FIAGES (2019) - Fellowship of the Indian Association of Gastrointestinal Endo Surgeons and FALS (2024) - Fellowship in Advanced Laparoscopic Surgery, reflecting his expertise in advanced surgical care.',
+    expertiseHighlights: [
+      'Hernia Repairs & GI Endoscopies',
+      'Laparoscopic & Open General Surgeries',
+      'Varicose Vein & Colorectal Surgeries',
+      'Laser Proctology (Piles, Fissures, Fistula)',
+      'Emergency Trauma & Critical Care Surgeries',
+    ],
   },
   {
     id: 'dr-sridhar-srinivasan-g',
@@ -341,6 +710,15 @@ export const DOCTORS: Doctor[] = [
       'MBBS, MRCP (UK) & MRCP (Medical Oncology) with CCT - Royal Colleges of Physicians, UK; ICH-GCP Certified.',
     experienceYears: 18,
     slug: '/dr-sivacharan-p-v',
+    expertiseHighlights: [
+      'Clinical Oncology',
+      'Immunotherapy & Targeted Therapy',
+      'Lung Cancer Treatment',
+      'Breast Cancer Treatment',
+      'Ovarian Cancer Management',
+      'Lymphoma Management',
+      'Cancer Screening & Preventive Oncology',
+    ],
   },
   {
     id: 'dr-hamsa-b-t',
@@ -352,6 +730,23 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD (General Medicine), DM (Neurology)',
     experienceYears: 7,
     slug: '/dr-hamsa-b-t',
+    expertiseHighlights: [
+      'Neurology (Adult Neurological Disorders)',
+      'Stroke management',
+      'Epilepsy & seizure disorders',
+      'Neurocritical care',
+      'Headache & migraine management',
+      'Movement disorders',
+      'Neuromuscular disorders',
+      'General medicine & emergency care',
+      'ICU & critical care procedures',
+      'Lumbar puncture, intubation',
+      'Dementia and sleep disorders Management',
+      'Multiple Sclerosis and other immune mediated diseases',
+      'Ataxia',
+      'Low backache and neck pain',
+      'Botulinum toxin injection for blepharospasm and hemifacial spasm',
+    ],
   },
   {
     id: 'dr-rashmi-ag',
@@ -363,6 +758,15 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS (Obstetrics & Gynaecology), FIGE (Fellowship in Gynaec Endoscopy)',
     experienceYears: 19,
     slug: '/dr-rashmi-ag',
+    expertiseHighlights: [
+      'High-Risk Pregnancy Management',
+      'Infertility Evaluation & Treatment',
+      'Laparoscopic & Hysteroscopic Surgeries',
+      'Vaginal & Open Gynaecological Surgeries',
+      'Endometriosis Management',
+      'Ultrasound & Foetal Monitoring',
+      "Women's Health & Preventive Gynaecology",
+    ],
   },
   {
     id: 'dr-rohini-s',
@@ -374,6 +778,17 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS (General Surgery), M.Ch (Urology)',
     experienceYears: 8,
     slug: '/dr-rohini-s',
+    expertiseHighlights: [
+      'Endourology',
+      'Laparoscopic Urology',
+      'Reconstructive Urology',
+      'Uro-oncology (basic exposure)',
+      'Renal Transplant Care',
+      'Management of Kidney Stones (RIRS, ureteric stones)',
+      'Minimally Invasive Urological Procedures',
+      'Urogynecology and Female urology',
+      'Management of urinary incontinence & pelvic floor disorders.',
+    ],
   },
   {
     id: 'dr-sarvajith-s-s',
@@ -383,9 +798,18 @@ export const DOCTORS: Doctor[] = [
     title: 'Consultant Orthopaedics',
     department: 'Orthopedics',
     qualifications:
-      'MBBS | MS (Orthopaedics), FRGUHS (Sanjay Gandhi Institute of Trauma), Fellowship in Arthroscopy & Sports Medicine, Fellowship in Advanced Trauma — First team doctor, Bangaluru FC',
+      'MBBS | MS (Orthopaedics), FRGUHS (Sanjay Gandhi Institute of Trauma), Fellowship in Arthroscopy & Sports Medicine, Fellowship in Advanced Trauma - First team doctor, Bangaluru FC',
     experienceYears: 10,
     slug: '/dr-sarvajith-s-s',
+    expertiseHighlights: [
+      'Sports Injury Management',
+      'Arthroscopy & Ligament Reconstruction',
+      'Knee & Shoulder Arthroscopy',
+      'Advanced Trauma & Fracture Care',
+      'Cartilage Restoration & PRP Therapy',
+      'Hip, Ankle & Elbow Arthroscopy',
+      'Polytrauma & Sports Rehabilitation',
+    ],
   },
   {
     id: 'dr-vivek-kumar-n-savsani',
@@ -397,6 +821,18 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MS (Orthopaedics), Fellowship in Joint Replacement',
     experienceYears: 15,
     slug: '/dr-vivek-kumar-n-savsani',
+    expertiseHighlights: [
+      'Joint Replacement Surgery',
+      'Total Knee Replacement',
+      'Robotic Knee Replacement',
+      'Hip Replacement Surgery',
+      'Trauma & Fracture Management',
+      'Arthroscopy',
+      'Sports Injury Management',
+      'Foot & Ankle Disorders',
+      'Shoulder Disorders & Arthroplasty',
+      'Complex Orthopaedic Trauma Care',
+    ],
   },
   {
     id: 'dr-balakrishna-g-t',
@@ -408,6 +844,21 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS | MD General Medicine, DM Cardiology',
     experienceYears: 7,
     slug: '/dr-balakrishna-g-t',
+    expertiseHighlights: [
+      'Coronary Angiography',
+      'Coronary Angioplasty (PCI)',
+      'Acute Coronary Syndrome Management',
+      'Heart Failure Management',
+      'Arrhythmia Management',
+      'Valvular Heart Disease',
+      '2D Echocardiography',
+      'Treadmill Test (TMT)',
+      'Holter Monitoring Interpretation',
+      'Temporary Pacemaker Insertion',
+      'Pericardiocentesis',
+      'Cardiac ICU & CCU Care',
+      'Structural Heart Interventions',
+    ],
   },
   {
     id: 'dt-rashmi',
@@ -430,5 +881,24 @@ export const DOCTORS: Doctor[] = [
     qualifications: 'MBBS, MD, DM (Clinical Hematology), Chairman - International Hematology Consortium',
     experienceYears: 20,
     slug: '/dr-sachin-jadhav',
+    briefProfile:
+      'Dr. Sachin Jadhav is now practicing at Vasavi Hospitals, as well as the Director of Hematology and Bone Marrow Transplantation (BMT) at Trustwell Hospitals Pvt Ltd. With extensive experience in founding and managing BMT centers, he has successfully established 14 such centers since 2013. Additionally, Dr. Jadhav serves as the CEO of Chiron Cancer, where he focuses on creating accessible cancer and BMT facilities across multiple countries. He plays an active role in several prestigious professional organizations, including ASTCT, ASH, and AAAS, and holds various leadership positions such as International Ambassador for the CGC.',
+    expertiseHighlights: [
+      'Bone Marrow Transplantation (Autologous & Allogeneic)',
+      'Treatment of Leukemia',
+      'Lymphoma Management',
+      'Multiple Myeloma Treatment',
+      'Aplastic Anaemia Management',
+      'Myelodysplastic Syndromes (MDS)',
+      'Hematologic Malignancies',
+      'Stem Cell Transplantation',
+      'Management of Complex Blood Disorders',
+      'Development and Leadership of Hematology & BMT Centres',
+      'Cancer Genomics',
+      'Graft-versus-Host Disease (GVHD)',
+      'Infections in Hematologic Malignancies',
+      'Febrile Neutropenia Management',
+      'Clinical Research in Hematology and Transplant Medicine',
+    ],
   },
 ];

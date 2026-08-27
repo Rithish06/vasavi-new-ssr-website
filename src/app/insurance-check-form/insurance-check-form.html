@@ -1,0 +1,143 @@
+<div class="popup-overlay" [class.active]="isOpen" (click)="closePopup()"></div>
+
+<div class="popup-modal insurance-modal" [class.active]="isOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closePopup()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="popup-header-strip">
+    <div class="popup-hospital-name">🏥 Vasavi Hospitals, Bangalore</div>
+    <h3 class="popup-headline">Check Your Insurance Coverage</h3>
+    <p class="popup-subhead">Share your details - our team will confirm your coverage and callback within 30 minutes.</p>
+  </div>
+
+  <div class="popup-body">
+
+    <!-- Loader -->
+    <div *ngIf="isSending || isVerifying" class="loading-overlay">
+      <div class="spinner"></div>
+      <p class="loading-text">{{ isVerifying ? (otpEnabled ? 'Verifying OTP...' : 'Submitting...') : 'Sending OTP...' }}</p>
+    </div>
+
+    <!-- Step 1: contact + insurance details -->
+    <form [formGroup]="detailsForm" (ngSubmit)="submitDetailsForm()" *ngIf="!showOtpSection && !successMessage">
+
+      <div class="popup-field" *ngIf="surgeryName">
+        <label>Surgery</label>
+        <input type="text" [value]="surgeryName" readonly class="readonly-field" />
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-name">Full Name</label>
+        <input
+          type="text"
+          id="ic-name"
+          formControlName="name"
+          placeholder="Enter your full name"
+          [class.input-error]="f['name'].invalid && f['name'].touched"
+        />
+        <span class="error-text" *ngIf="f['name'].invalid && f['name'].touched">{{ nameError }}</span>
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-phone">Mobile Number</label>
+        <input
+          type="tel"
+          id="ic-phone"
+          formControlName="phoneNumber"
+          placeholder="+91 XXXXX XXXXX"
+          maxlength="10"
+          inputmode="numeric"
+          [class.input-error]="f['phoneNumber'].invalid && f['phoneNumber'].touched"
+        />
+        <span class="error-text" *ngIf="f['phoneNumber'].invalid && f['phoneNumber'].touched">{{ phoneError }}</span>
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-provider">Insurance Provider</label>
+        <input
+          type="text"
+          id="ic-provider"
+          formControlName="insuranceProvider"
+          placeholder="e.g. Star Health, HDFC Ergo"
+          list="insurer-suggestions"
+          [class.input-error]="f['insuranceProvider'].invalid && f['insuranceProvider'].touched"
+        />
+        <datalist id="insurer-suggestions">
+          <option *ngFor="let name of insurerSuggestions" [value]="name"></option>
+        </datalist>
+        <span class="error-text" *ngIf="f['insuranceProvider'].invalid && f['insuranceProvider'].touched">{{ insuranceProviderError }}</span>
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-policy">Policy / Member ID Number</label>
+        <input
+          type="text"
+          id="ic-policy"
+          formControlName="policyNumber"
+          placeholder="Enter your policy or member ID"
+          [class.input-error]="f['policyNumber'].invalid && f['policyNumber'].touched"
+        />
+        <span class="error-text" *ngIf="f['policyNumber'].invalid && f['policyNumber'].touched">{{ policyNumberError }}</span>
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-employer">Employer / Corporate Group Insurance <span class="optional-tag">(if applicable)</span></label>
+        <input type="text" id="ic-employer" formControlName="employerGroupName" placeholder="Company or group policy name" />
+      </div>
+
+      <div class="popup-field">
+        <label for="ic-tpa">TPA Name <span class="optional-tag">(if known)</span></label>
+        <input type="text" id="ic-tpa" formControlName="tpaName" placeholder="Third party administrator name" />
+      </div>
+
+      <button type="submit" class="popup-submit" [disabled]="detailsForm.invalid || isSending || isVerifying">
+        <i class="fa-solid fa-shield-halved"></i> {{ (isSending || isVerifying) ? (otpEnabled ? 'Sending OTP...' : 'Submitting...') : (otpEnabled ? 'Send OTP' : 'Submit Request') }}
+      </button>
+    </form>
+
+    <!-- Step 2: OTP verification -->
+    <div class="otp-section" *ngIf="showOtpSection && !successMessage">
+      <p class="otp-message">OTP sent to <strong>{{ detailsForm.get('phoneNumber')?.value }}</strong>. It expires in 2 minutes.</p>
+
+      <div class="popup-field">
+        <label for="ic-otp">Enter OTP</label>
+        <input
+          type="text"
+          id="ic-otp"
+          [(ngModel)]="otp"
+          [ngModelOptions]="{standalone: true}"
+          placeholder="000000"
+          maxlength="6"
+          inputmode="numeric"
+          class="otp-input"
+        />
+      </div>
+
+      <div class="otp-actions">
+        <button type="button" class="popup-submit" [disabled]="isVerifying" (click)="submitOtp()">
+          <i class="fa-solid fa-circle-check"></i> {{ isVerifying ? 'Verifying...' : 'Verify & Submit' }}
+        </button>
+        <button type="button" class="back-btn" [disabled]="resendTimer > 0" (click)="resendOtp()">
+          Resend OTP <span *ngIf="resendTimer > 0">({{ formattedResendTime }})</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: success -->
+    <div class="success-message" *ngIf="successMessage">
+      <p>{{ successMessage }}</p>
+    </div>
+
+    <p class="popup-privacy">
+      <i class="fa-solid fa-lock"></i>
+      100% confidential · No spam · We never share your data
+    </p>
+
+    <div class="popup-trust-row">
+      <span class="popup-trust-item"><i class="fa-solid fa-user-doctor"></i> 30+ Yr Surgeons</span>
+      <span class="popup-trust-item"><i class="fa-solid fa-shield-halved"></i> Insurance Accepted</span>
+      <span class="popup-trust-item"><i class="fa-solid fa-robot"></i> Robotic Surgery</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="popup-overlay" [class.active]="isOpen" (click)="closePopup()"></div>
+
+<div class="popup-modal popup-so-modal" [class.active]="isOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closePopup()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <img
+    *ngIf="imageSrc"
+    [src]="imageSrc"
+    [alt]="imageAlt"
+    class="popup-so-img"
+    loading="lazy"
+    decoding="async"
+    (click)="onImageClick()"
+  />
+
+  <div class="popup-so-footer">
+    <button class="btn-so-book" (click)="onBookClick()">
+      <i class="fa-solid fa-calendar-check"></i> Book an Appointment
+    </button>
+  </div>
+</div>

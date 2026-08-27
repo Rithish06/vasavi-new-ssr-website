@@ -1,0 +1,429 @@
+<div class="hero-section">
+    <img src="Images/ent/ent-banner-vasavi-hospitals.webp" class="desktop_banner"
+        alt="Advanced ENT care at Vasavi Hospitals Bangalore offering diagnostics, treatment and rehabilitation.">
+    <img src="Images/ent/ent-banner.webp" class="mobile_banner"
+        alt="Expert ENT care in Bangalore with accurate diagnosis, customized treatment plans, and compassionate ENT specialists committed to your well-being.">
+    <a  class="book-btn" (click)="scrollToSection('appointment')">
+        Book an Appointment
+    </a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item"
+            [class.active]="activeSection === section.id" (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">ENT (Ear, Nose & Throat) Care at Vasavi Hospitals, Banashankari</h1>
+        <p class="para_style">Your health deserves the best care, and at Vasavi Hospitals, Banashankari, we make it our
+            mission to help you feel better, faster. Our expert ENT specialists treat everything - from a blocked nose,
+            severe sore throat, ear pain, tinnitus or earwax build-up to complex sinus and voice problems - with skill
+            and compassion.</p>
+        <p class="para_style">With cutting-edge technology and a patient-first approach, we ensure you and your loved
+            ones can breathe easier, hear clearly and live without discomfort.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/ent/ent-anatomy-illustration-vasavi-hospitals.webp"
+            alt="Detailed ENT anatomy illustration used at Vasavi Hospitals Bangalore for accurate diagnosis and treatment.">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">Our ENT Treatments</h2>
+    <p class="para_style text-center treatment_header_des">We provide complete care for your ear, nose and throat
+        concerns:</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Ear Examination and Treatment</h3>
+            <p class="box_para">Safe removal of earwax, ear cleaning, treatment for ear infections and clogged ears.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Nasal and Sinus Surgeries</h3>
+            <p class="box_para">Solutions for blocked nose, nasal polyps, deviated septum and chronic sinusitis.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Throat and Voice Disorder Management</h3>
+            <p class="box_para">Treatment for sore throat, laryngitis, voice changes and swallowing problems.</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Head and Neck Surgery</h3>
+            <p class="box_para"> Advanced care for head & neck conditions, including tumors and thyroid issues.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Sleep Apnea and Snoring Solutions</h3>
+            <p class="box_para">Effective treatments to improve sleep quality and reduce snoring.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Allergy and Immunotherapy</h3>
+            <p class="box_para"> Relief for nasal allergies, rhinitis and breathing issues with latest immunotherapy
+                methods.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Skin Prick Test & SLIT Test</h3>
+            <p class="box_para">Quick allergy testing to find triggers and provide personalized allergy solutions.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Surgery Options We Offer</h2>
+    <p class="para_style text-center treatment_header_des">At Vasavi Hospitals, we offer all major ENT surgery options,
+        so you can choose what is best for you:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Tonsillectomy</h3>
+                    <p class="box_para">Gentle, modern coblation tonsillectomy for children &amp; adults - less pain, faster healing.</p>
+                    <a routerLink="/tonsillectomy-surgery-in-bangalore" class="sur_learn_more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="sur_card_icon"><i class="fa-solid fa-head-side-cough"></i></div>
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Adenoidectomy</h3>
+                    <p class="box_para">Safe, painless adenoid removal for children - no external cuts, quick recovery.</p>
+                    <a routerLink="/adenoid-removal-in-bangalore" class="sur_learn_more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="sur_card_icon"><i class="fa-solid fa-child"></i></div>
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Sinus Surgery</h3>
+                    <p class="box_para">Balloon Sinuplasty &amp; FESS for lasting relief from chronic sinusitis - minimally invasive.</p>
+                    <a routerLink="/sinus-surgery-in-bangalore" class="sur_learn_more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="sur_card_icon"><i class="fa-solid fa-wind"></i></div>
+            </div>
+        </div>
+
+
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our ENT specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <option value="Dr. Yashaswi Srikakula">Dr. Yashaswi Srikakula</option>
+                  <option value="Dr. Sphoorthy G Itigi">Dr. Sphoorthy G Itigi</option>
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+          </div>
+
+    </div>
+</div>
+
+<!-- robotic Surgery section -->
+<!-- <div class="container_1">
+        <div class="cathlab_section">
+            <div class="cathlab_container">
+                <div class="cathlab_content">
+                    <h2 class="cathlab_main_title">Robotic Surgery in Urology with Da Vinci Xi</h2>
+                    <p class="cathlab_intro_text">At Vasavi Hospitals, we bring the latest in urology care with the Da Vinci Xi robotic surgical system. This advanced technology allows our surgeons to perform highly precise and minimally invasive procedures, ensuring faster recovery, reduced pain, and better long-term outcomes for patients. With robotic-assisted urology, complex surgeries are now safer and more effective than ever.</p>
+
+                    <h3 class="cathlab_sub_title">What Makes Our Robotic Urology Surgery Special?</h3>
+
+                    <div class="cathlab_features">
+                        <div class="cathlab_feature_item">
+                            <div class="cathlab_icon">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <div class="cathlab_feature_content">
+                                <h4 class="cathlab_feature_title">High Precision & Accuracy</h4>
+                                <p class="cathlab_feature_desc">Robotic arms provide greater control and flexibility, enabling surgeons to perform delicate urological surgeries with unmatched accuracy..</p>
+                            </div>
+                        </div>
+
+                        <div class="cathlab_feature_item">
+                            <div class="cathlab_icon">
+                                <i class="fa-solid fa-hand-holding-medical"></i>
+                            </div>
+                            <div class="cathlab_feature_content">
+                                <h4 class="cathlab_feature_title">Minimally Invasive Approach</h4>
+                                <p class="cathlab_feature_desc">Most procedures are done through tiny incisions, leading to less pain, minimal scarring, and quicker healing.</p>
+                            </div>
+                        </div>
+
+                        <div class="cathlab_feature_item">
+                            <div class="cathlab_icon">
+                                <i class="fa-solid fa-person-running"></i>
+                            </div>
+                            <div class="cathlab_feature_content">
+                                <h4 class="cathlab_feature_title">Faster Recovery</h4>
+                                <p class="cathlab_feature_desc">Patients return to normal life sooner with shorter hospital stays and faster rehabilitation compared to traditional surgery.</p>
+                            </div>
+                        </div>
+
+                        <div class="cathlab_feature_item">
+                            <div class="cathlab_icon">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="cathlab_feature_content">
+                                <h4 class="cathlab_feature_title">Better Outcomes</h4>
+                                <p class="cathlab_feature_desc">Robotic-assisted procedures result in improved surgical success, reduced complications, and better preservation of urinary and sexual functions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cathlab_image_section">
+                    <div class="cathlab_image_wrapper">
+                        <img src="assets/img/cathlab/advanced-cathlab-vasavi-hospital-banashankari-bangalore.jpg"
+                            alt="Advanced Cardiac Catheterization Laboratory at Vasavi Hospitals Banashankari Bangalore"
+                            class="cathlab_image">
+                        <div class="cathlab_image_overlay">
+                            <div class="cathlab_overlay_content">
+                                <i class="fa-solid fa-heartbeat"></i>
+                                <span>Advanced Heart Care</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Urology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified urologists brings decades of combined experience
+        in treating complex urological conditions with compassion and precision.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+          <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-kumaresh-Kkrishnamoorthy-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Kumaresh Krishnamoorthy</h3>
+            <p class="doctor-title">Consultant - ENT, Head & Neck Surgeon</p>
+            <p class="qualification">MS(ENT), Fellow, Head & Neck Surgery (USA), Fellow, Otology & Neurotology (USA)</p>
+            <p class="doctor-experience">25+ Years Experience</p>
+            <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p>
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-kumaresh-krishnamoorthy'">Book Appointment</a>
+        </div> -->
+        <div class="doctor-card" >
+            <div class="doctor-image">
+                <img src="/Images/new-doctor-image/dr-yashasvi-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Yashaswi Srikakula</h3>
+            <p class="doctor-title">Consultant - ENT</p>
+            <p class="qualification">MBBS, DLO, Fellowship in Rhinology and Anterior Skull Base</p>
+            <p class="doctor-experience">15+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-yashaswi-srikakula'">Book Appointment</a>
+        </div>
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/Doctor-img/ENT/dr-spoorthi.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Sphoorthy G Itigi</h3>
+            <p class="doctor-title">Consultant - ENT </p>
+            <p class="qualification">MBBS, DLO, DNB (ENT)</p>
+            <p class="doctor-experience">8+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-sphoorthy-g-itigi'">Book Appointment</a>
+        </div>
+       
+
+
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Choose Vasavi Hospitals for ENT Care</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Experienced ENT Specialists</b> -
+                Skilled doctors with years of experience in treating ear, nose and throat problems.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Latest Technology</b> - Advanced
+                endoscopy, tympanometry and robotic surgery for accurate diagnosis & treatment.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Personalized Care</b> - Every patient
+                gets a treatment plan personalized to their needs.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Compassionate Team</b> - We treat you
+                with care, respect and understanding at every step.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Convenient Location</b> - Easily
+                accessible for patients across Banashankari and Bangalore.</span>
+        </div>
+
+
+    </div>
+
+    <img src="/Images/ent/ent-specialist-checkup-vasavi-hospitals.webp"
+        alt=" Experienced ENT specialist at Vasavi Hospitals Bangalore performing ear and throat examination for patients">
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+<div style="padding:3% 6%">
+    <div class="heading">Your Health, Our Priority</div>
+    <div class="wcu_description">At Vasavi Hospitals, we believe your health comes first. Our goal is to help you
+        breathe freely, hear clearly and live a healthier, happier life.</div>
+    <div class="wcu_description" style="margin-bottom: 30px;">Book your appointment today - call us at <a
+            href="tel:08071500500">080 71 500 500</a> and take the first step towards better ENT health.</div>
+</div>
+
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. What ENT treatments are available at Vasavi Hospitals?</div>
+            <div class="ans">We offer complete ENT care including ear examination & cleaning, sinus surgery, throat and
+                voice disorder management, allergy treatments, sleep apnea solutions and head & neck surgeries.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2. How much does ENT treatment cost in Bangalore?</div>
+            <div class="ans">The cost depends on the condition and treatment required. We provide affordable ENT care
+                with transparent pricing. Call 080 71 500 500 to get a cost estimate for your treatment.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3. Why choose Vasavi Hospitals for ENT problems?</div>
+            <div class="ans">Because we combine expert ENT doctors, modern technology and patient-focused care. Our team
+                listens to your concerns, explains treatment options and ensures your comfort at every step.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4. How can I book an appointment with an ENT specialist at Vasavi Hospitals?</div>
+            <div class="ans">Call us directly at 080 71 500 500 or fill out our online appointment form to schedule your
+                consultation today.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5. Do you offer emergency ENT care in Banashankari, Bangalore?</div>
+            <div class="ans">Yes. Our ENT department provides 24/7 emergency care for severe ear pain, nosebleeds,
+                throat swelling and other urgent ENT problems.
+            </div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6. Can I get treatment for allergies and rhinitis at Vasavi Hospitals?</div>
+            <div class="ans">Absolutely. We provide allergy testing (Skin Prick & SLIT Test) and personalized
+                immunotherapy to help you breathe freely and stay symptom-free.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">7. Do you treat children’s ENT problems?</div>
+            <div class="ans">Yes. Our ENT specialists are trained in pediatric ENT care including ear infections,
+                tonsillitis, adenoid problems and speech or hearing issues.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">8. How do I reach Vasavi Hospitals from nearby areas like Jayanagar or JP Nagar?</div>
+            <div class="ans">Our hospital is located in Banashankari, South Bangalore and is easily accessible from
+                Jayanagar, JP Nagar, Basavanagudi, Kumaraswamy Layout and Uttarahalli. Patients across Bangalore visit
+                us for trusted ENT care close to home.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>

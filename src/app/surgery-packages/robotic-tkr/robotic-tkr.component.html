@@ -1,0 +1,696 @@
+<div class="hernia-page">
+
+  <!-- ════════════════════════════════
+       SECTION 1 - HERO
+       Hero banner set (mobile/tablet/1024/desktop) live in
+       public/Images/packages/tkr/, WebP format, clean (no baked-in
+       text/price).
+  ════════════════════════════════ -->
+  <section class="hero">
+    <picture>
+      <source media="(max-width: 480px)" [srcset]="heroAsset('tkr-hero-banner-mobile.webp')" />
+      <source media="(max-width: 768px)" [srcset]="heroAsset('tkr-hero-banner-tablet.webp')" />
+      <source media="(max-width: 1024px)" [srcset]="heroAsset('tkr-hero-banner-1024.webp')" />
+      <img [src]="heroAsset('tkr-hero-banner-desktop.webp')" alt="Total Knee Replacement Surgery in Bangalore - Vasavi Hospitals" class="hero-img" fetchpriority="high" loading="eager" decoding="sync" />
+    </picture>
+
+    <div class="hero-content">
+      <span class="hero-tag">🏥 Vasavi Hospitals, Bangalore</span>
+      <h1 class="hero-h1">Total Knee Replacement Surgery<br />in <span>Bangalore</span></h1>
+      <p class="hero-sub">Mako Robotic-Assisted &amp; Conventional Knee Replacement - walk with support in 24 hours, and get back to a pain-free life you control.</p>
+
+      <div class="trust-badges">
+        <div class="badge"><div class="badge-icon">✓</div><span>Mako Robotic-Assisted &amp; Conventional Options</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>Walk With Support Within 24 Hours</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>In-House Physiotherapy &amp; Rehab</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>All Insurance Accepted</span></div>
+      </div>
+
+      <div class="hero-ctas">
+        <a [href]="phoneHref" class="btn-primary"><i class="fa-solid fa-phone"></i> Call Now for Consultation</a>
+        <a href="javascript:void(0)" class="btn-secondary" (click)="openInsuranceCheck()"><i class="fa-solid fa-shield-halved"></i> Check for Insurance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       DESKTOP STICKY CALL/BOOK BAR
+  ════════════════════════════════════════════ -->
+  <div class="desktop-sticky-bar">
+    <span class="dsb-text"><i class="fa-solid fa-house-medical"></i> Vasavi Hospitals, Bangalore</span>
+    <div class="dsb-ctas">
+      <a [href]="phoneHref" class="dsb-btn dsb-call"><i class="fa-solid fa-phone"></i> {{ phoneNumber }}</a>
+      <button type="button" class="dsb-btn dsb-book" (click)="openBooking()"><i class="fa-solid fa-calendar-check"></i> Book Appointment</button>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.2 - QUICK TRUST STRIP
+  ════════════════════════════════════════════ -->
+  <section class="quick-trust-section">
+    <div class="qt-inner">
+      <div class="qt-stat">
+        <img src="Images/trust-icons/surgeries-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">10,000+</span>
+        <span class="qt-label">Successful Surgeries</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/patients-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">3,00,000+</span>
+        <span class="qt-label">Patients Treated</span>
+      </div>
+      <div class="qt-stat">
+        <img [src]="nabhLogoPath" alt="NABH Accredited Hospital" width="36" height="36" loading="lazy" decoding="async" class="qt-nabh-logo" />
+        <span class="qt-label qt-nabh-label">NABH Accredited</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/facility-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">World-Class</span>
+        <span class="qt-label">Facilities</span>
+      </div>
+      <a href="#patient-reviews" class="qt-stat qt-stat-link" (click)="scrollToPatientReviews($event)">
+        <img src="Images/trust-icons/google-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Google</span>
+        <span class="qt-label">Reviews</span>
+      </a>
+      <a href="#instagram-posts" class="qt-stat qt-stat-link" (click)="scrollToInstagram($event)">
+        <img src="Images/trust-icons/instagram-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Follow Us</span>
+        <span class="qt-label">Instagram</span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.3 - OUR EXPERIENCED SURGEONS (compact)
+  ════════════════════════════════════════════ -->
+  <section class="mini-doctors-section">
+    <h2 class="mds-heading">Meet Our Orthopaedic Specialist</h2>
+    <div class="mds-grid">
+      <div class="mds-card" *ngFor="let doctor of doctors">
+        <div class="mds-top">
+          <img [src]="doctor.img" [alt]="doctor.alt" width="84" height="84" loading="lazy" decoding="async" class="mds-photo" />
+          <div class="mds-info">
+            <p class="mds-name">{{ doctor.name }}</p>
+            <p class="mds-specialty">{{ doctor.specialty }}</p>
+            <span class="mds-exp">{{ doctor.experience }}</span>
+          </div>
+        </div>
+        <button type="button" class="mds-book-btn" (click)="openBookingForDoctor(doctor)">
+          <i class="fa-solid fa-calendar-check"></i> Book Appointment
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.5 - COST & INSURANCE ESTIMATOR QUIZ
+       Same 3-tap mechanic as ACL/Appendectomy/Hernia/Gallstone. Step 1 uses
+       plain, symptom-based language, not clinical terms. Step 2 offers the
+       real Mako Robotic-Assisted vs Conventional choice. No price number
+       shown (schema-only, per pre-rebuild page's own convention) - the
+       payoff is the personalised callback itself.
+  ════════════════════════════════════════════ -->
+  <section class="symptom-checker-section quiz-section">
+    <div class="sc-inner">
+
+      <div class="sc-header">
+        <span class="wih-label"><i class="fa-solid fa-calculator"></i> 30-Second Estimate</span>
+        <h2>Get Your Personalised Cost &amp; Insurance Estimate</h2>
+        <p>Answer 3 quick questions - our team will call you back within 30 minutes with a clear cost and insurance breakdown.</p>
+      </div>
+
+      <!-- Answered-so-far breadcrumb, each chip editable -->
+      <div class="quiz-breadcrumb" *ngIf="quizStep > 1">
+        <button type="button" class="quiz-crumb" (click)="editQuizStep(1)">{{ quizConditionType }} <i class="fa-solid fa-pen"></i></button>
+        <ng-container *ngIf="quizStep > 2">
+          <i class="fa-solid fa-chevron-right quiz-crumb-sep"></i>
+          <button type="button" class="quiz-crumb" (click)="editQuizStep(2)">{{ quizTechnique }} <i class="fa-solid fa-pen"></i></button>
+        </ng-container>
+      </div>
+
+      <!-- Step 1: condition, plain-language -->
+      <div class="quiz-step" *ngIf="quizStep === 1">
+        <p class="quiz-step-label">Step 1 of 3 - Which best describes your knee pain?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let option of quizConditionOptions" (click)="selectQuizConditionType(option)">{{ option }}</button>
+          <button type="button" class="lc-chip" (click)="selectQuizConditionType('Not Sure Yet')">Not Sure Yet</button>
+        </div>
+      </div>
+
+      <!-- Step 2: technique -->
+      <div class="quiz-step" *ngIf="quizStep === 2">
+        <p class="quiz-step-label">Step 2 of 3 - Which treatment approach are you considering?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let technique of quizTechniqueOptions" (click)="selectQuizTechnique(technique)">{{ technique }}</button>
+        </div>
+      </div>
+
+      <!-- Step 3: insurance -->
+      <div class="quiz-step" *ngIf="quizStep === 3">
+        <p class="quiz-step-label">Step 3 of 3 - Do you have health insurance?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let insurance of quizInsuranceOptions" (click)="selectQuizInsurance(insurance)">{{ insurance }}</button>
+        </div>
+      </div>
+
+      <!-- Step 4: result - inline lead form -->
+      <div class="quiz-result" *ngIf="quizStep === 4">
+        <p class="quiz-result-summary"><i class="fa-solid fa-circle-check"></i> {{ quizConditionType }} · {{ quizTechnique }} · {{ quizInsurance }}</p>
+        <p class="quiz-result-heading">Almost done - where should we send your estimate?</p>
+        <app-callback-form [pageName]="quizPageName"></app-callback-form>
+      </div>
+
+      <button type="button" class="sc-reset-btn" *ngIf="quizStep > 1" (click)="resetQuiz()">Start Over</button>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 2 - WHY CHOOSE VASAVI
+  ════════════════════════════════ -->
+  <section class="why-vasavi-section" id="why-vasavi">
+
+    <h2 class="section-heading">Why Choose Vasavi Hospitals?</h2>
+    <p class="section-subheading">From Mako robotic precision to structured rehabilitation - here's why patients across Bangalore trust us to get them walking pain-free again.</p>
+
+    <div class="why-vasavi-inner">
+
+      <!-- Feature Cards -->
+      <div class="why-features">
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3>Benefits of Modern Knee Replacement</h3>
+          <p>Precise implant alignment, minimal blood loss, and a 2-3 day hospital stay. Walk with support within 24 hours and rebuild a stable, pain-free knee with guided rehab.</p>
+        </div>
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-hospital"></i></div>
+          <h3>World-Class Facilities</h3>
+          <ul class="facility-list">
+            <li><i class="fa-solid fa-circle-dot"></i> Mako Robotic Joint Replacement OT</li>
+            <li><i class="fa-solid fa-circle-dot"></i> In-House Physiotherapy &amp; Rehab Unit</li>
+            <li><i class="fa-solid fa-circle-dot"></i> Advanced Diagnostic &amp; Imaging Center</li>
+            <li><i class="fa-solid fa-circle-dot"></i> 24/7 Emergency &amp; Trauma Care</li>
+          </ul>
+        </div>
+
+        <div class="feature-card-v insurance">
+          <div class="card-icon-v"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Hassle-Free Insurance Approval</h3>
+          <p>Cashless treatment with all major insurers for medically indicated Total Knee Replacement. Our dedicated team handles the entire claim process - zero paperwork stress for you.</p>
+        </div>
+
+        <div class="feature-card-v location">
+          <div class="card-icon-v"><i class="fa-solid fa-location-dot"></i></div>
+          <h3>Easily Accessible Location</h3>
+          <p>Located at <strong>Kumaraswamy Layout, Bangalore</strong> - minutes from the nearest Metro Station and BMTC Bus Stand. Nearby hotels available for outstation patients.</p>
+        </div>
+
+        <div class="feature-card-v support full-width">
+          <div class="card-icon-v"><i class="fa-solid fa-headset"></i></div>
+          <h3>Your Personal Support Guide</h3>
+          <p>A dedicated care coordinator stays with you from first consultation through surgery and every physiotherapy milestone - answering every question along the way.</p>
+        </div>
+
+      </div>
+
+      <!-- Lead Form -->
+      <div class="why-form-card">
+        <span class="form-badge-v"><i class="fa-solid fa-circle-check"></i> Callback in 30 Minutes</span>
+        <h3>Book Your Appointment</h3>
+        <p class="form-note">Our team will call you back within 30 minutes.</p>
+
+        <!-- Step 1: one-tap concern selector -->
+        <div class="lc-step" *ngIf="!showLeadForm">
+          <p class="lc-prompt">What's bothering you the most?</p>
+          <div class="lc-options">
+            <button type="button" class="lc-chip" *ngFor="let concern of leadConcerns" (click)="selectLeadConcern(concern)">
+              {{ concern }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: revealed only after a concern is picked -->
+        <div class="lc-form-wrap" *ngIf="showLeadForm">
+          <p class="lc-selected">
+            <i class="fa-solid fa-circle-check"></i> {{ leadConcern }}
+            <button type="button" class="lc-change" (click)="changeLeadConcern()">change</button>
+          </p>
+          <app-callback-form [pageName]="leadFormPageName"></app-callback-form>
+        </div>
+
+        <div class="form-or-divider">or</div>
+
+        <button type="button" class="btn-check-insurance" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+        <p class="form-privacy-note"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+        <div class="form-trust-strip">
+          <div class="trust-item-v"><i class="fa-solid fa-user-doctor"></i><span>Experienced<br />Ortho Team</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-robot"></i><span>Mako Robotic<br />Precision</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-file-invoice"></i><span>All Insurance<br />Accepted</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 3 - WHAT IS TOTAL KNEE REPLACEMENT?
+  ════════════════════════════════ -->
+  <section class="what-is-hernia-section">
+    <div class="wih-inner">
+
+      <!-- Left: Text -->
+      <div class="wih-content">
+
+        <span class="wih-label"><i class="fa-solid fa-circle-info"></i> Knee Joint Treatment Guide</span>
+
+        <h2>What is Total Knee Replacement?</h2>
+
+        <p>Total Knee Replacement (TKR) is a surgical procedure to replace the worn or damaged surfaces of the knee joint with artificial implants, relieving pain and restoring movement. It is most commonly recommended when arthritis or long-standing injury has worn down the joint enough that walking, climbing stairs, or even resting has become painful.</p>
+
+        <p>At Vasavi Hospitals, our orthopaedic surgeons offer both <strong>Mako Robotic-Assisted Total Knee Replacement</strong> - using 3D CT-based planning and a robotic arm for precise implant alignment - and <strong>Conventional Total Knee Replacement</strong>, a proven, time-tested technique, so every patient gets the approach best suited to their knee.</p>
+
+        <!-- Symptom Chips -->
+        <div class="wih-symptoms">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> &nbsp;Watch out for these signs</p>
+          <div class="symptom-chips">
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Persistent Pain on Walking or Stairs</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Stiffness or Swelling, Even at Rest</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Knee Deformity or Bowing</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Reduced Range of Motion</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Pain That Disturbs Sleep</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Video -->
+      <div class="wih-video-wrap">
+        <video
+          #tkrVideo
+          src="Images/packages/total-knee-replacement-2025-10-16-07-35-12-utc.mp4"
+          [muted]="true"
+          [loop]="true"
+          loop
+          muted
+          playsinline
+          preload="none"
+          [poster]="heroAsset('tkr-hero-banner-desktop.webp')"
+        ></video>
+        <div class="wih-video-badge">
+          <i class="fa-solid fa-play"></i> TKR Surgery Explained
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 3.5 - WHY IGNORING KNEE ARTHRITIS IS RISKY
+       Honest framing: worn-out knee arthritis is not an hours-level
+       emergency like appendicitis - the real risk is cumulative joint
+       damage, deformity and lost mobility from delaying treatment over
+       months and years.
+  ════════════════════════════════════════════ -->
+  <section class="risk-section">
+    <div class="risk-header">
+      <span class="wih-label risk-label"><i class="fa-solid fa-triangle-exclamation"></i> Worth Knowing</span>
+      <h2>Why Ignoring Knee Arthritis Is Risky</h2>
+      <p>A worn-out knee won't fail overnight like an appendix - but every year of delay lets the damage progress further. Here's what tends to happen when advanced knee arthritis is left untreated.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-bone"></i></div>
+        <h3>Further Bone &amp; Cartilage Loss</h3>
+        <p>Once cartilage wears down to bone-on-bone contact, the joint keeps degrading - making the eventual surgery more complex and recovery slower.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-shoe-prints"></i></div>
+        <h3>Knee Deformity</h3>
+        <p>Untreated arthritis often causes the knee to bow inward or outward over time, which can require more extensive correction during surgery.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-person-falling"></i></div>
+        <h3>Loss of Mobility &amp; Fall Risk</h3>
+        <p>A stiff, painful knee makes stairs, uneven ground and standing up from a chair increasingly difficult - raising fall risk and shrinking independence.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-dumbbell"></i></div>
+        <h3>Muscle Weakness &amp; Harder Rehab</h3>
+        <p>The longer the knee is guarded and underused, the more the surrounding muscles waste - making eventual surgery and rehabilitation slower and tougher.</p>
+      </div>
+    </div>
+    <div class="risk-cta">
+      <p>A single evaluation with an X-ray can tell you clearly how worn your knee joint is and what to do next.</p>
+      <button type="button" class="btn-risk-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i> Book an Evaluation
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 5 - COST & INSURANCE
+  ════════════════════════════════ -->
+  <section class="cost-insurance-section" id="insurance">
+    <div class="ci-inner">
+
+      <!-- Left: Conversion copy -->
+      <div class="ci-copy">
+
+        <span class="ci-badge"><i class="fa-solid fa-tag"></i> 100% Free - No Obligation</span>
+
+        <h2>Know Your Knee Replacement Cost Before You Decide</h2>
+
+        <p>Every knee is different - implant type and surgical approach change the picture. Get a personalised cost breakdown and instant insurance check - our team will call you back within 30 minutes with full clarity.</p>
+
+        <div class="ci-benefits">
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-rupee-sign"></i></div>
+            <span>Personalised surgery cost estimate - no guesswork</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <span>Instant check for your insurance eligibility &amp; coverage</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-file-invoice"></i></div>
+            <span>Cashless admission guidance - zero paperwork stress</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-phone-volume"></i></div>
+            <span>Callback within 30 minutes by our care coordinator</span>
+          </div>
+        </div>
+
+        <!-- Real insurance partner logos, auto-scrolling marquee. -->
+        <div class="ci-insurance-partners">
+          <p class="ci-ip-label"><i class="fa-solid fa-check-double"></i> Trusted by all major insurance providers</p>
+          <div class="ci-ip-marquee">
+            <div class="ci-ip-track">
+              <div class="ci-ip-chip" *ngFor="let partner of insurancePartnersLoop">
+                <img [src]="partner.logo" [alt]="partner.name" width="72" height="32" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-free-estimate ci-copy-insurance-btn" style="margin-top: 50px;" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div class="ci-form-card">
+
+        <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Get Free Cost Estimation</span>
+
+        <h3>Book Your Appointment</h3>
+        <p class="ci-form-sub">Fill in your details - we'll handle the rest.</p>
+
+        <app-callback-form [pageName]="'Total Knee Replacement Surgery - Insurance Check'"></app-callback-form>
+
+        <p class="ci-privacy"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 6 - RECOGNIZING WHEN YOU NEED A KNEE REPLACEMENT
+  ════════════════════════════════ -->
+  <section class="hernia-types-section">
+
+    <div class="ht-header">
+      <h2>Recognizing When You Need a Knee Replacement</h2>
+      <p>From the classic wear-and-tear presentation to signs that something more urgent is going on - here's what to watch for.</p>
+    </div>
+
+    <div class="hernia-types-grid">
+
+      <div class="ht-card" [ngClass]="type.cssClass" *ngFor="let type of conditionTypes">
+        <div class="ht-card-top">
+          <div class="ht-icon-circle"><i class="fa-solid" [ngClass]="type.icon"></i></div>
+          <span class="ht-badge">{{ type.badgeText }}</span>
+        </div>
+        <h3>{{ type.title }}</h3>
+        <p>{{ type.description }}</p>
+        <div class="ht-chips">
+          <span class="ht-chip">📍 {{ type.location }}</span>
+          <span class="ht-chip">⚠️ {{ type.recoveryTime }}</span>
+          <span class="ht-chip">🏥 {{ type.hospitalStay }}</span>
+        </div>
+        <a href="javascript:void(0)" class="ht-consult-link" (click)="openBooking()">Consult now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 7 - TREATMENT OPTIONS: MAKO ROBOTIC vs CONVENTIONAL
+  ════════════════════════════════════════════════════════════ -->
+  <section class="treatment-section">
+
+    <div class="tr-header">
+      <h2>Treatment Options at Vasavi Hospitals</h2>
+      <p>We offer <strong>Mako Robotic-Assisted Total Knee Replacement</strong> and <strong>Conventional Total Knee Replacement</strong> - both deliver lasting relief, and the right choice depends on your knee, your goals and your surgeon's recommendation. Here's what sets each approach apart.</p>
+    </div>
+
+    <!-- Two option cards -->
+    <div class="treatment-options">
+
+      <div class="treatment-card robotic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-star"></i> Enhanced Precision
+        </div>
+        <h3>Mako Robotic-Assisted Surgery</h3>
+        <p class="tr-desc">
+          A 3D CT scan maps your knee before surgery for personalised implant planning. A robotic arm then assists the surgeon in achieving precise bone cuts and joint alignment beyond what manual instruments alone can guarantee.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Personalised 3D CT-based surgical plan</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Unmatched precision in bone cuts &amp; alignment</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Minimal tissue trauma, less pain</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Faster early rehabilitation</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Balanced joint motion for greater implant longevity</div>
+        </div>
+        <i class="fa-solid fa-robot tr-bg-icon"></i>
+      </div>
+
+      <div class="treatment-card laparoscopic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-shield-halved"></i> Proven &amp; Trusted
+        </div>
+        <h3>Conventional Knee Replacement</h3>
+        <p class="tr-desc">
+          A time-tested surgical technique used worldwide for decades, performed by our experienced orthopaedic surgeons using precise manual alignment - a reliable, effective option for lasting pain relief.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Proven technique with high success rates</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Experienced surgeons, accurate manual alignment</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Significantly improves function &amp; quality of life</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> A trusted, budget-friendly option</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Suitable for the vast majority of patients</div>
+        </div>
+        <i class="fa-solid fa-bone tr-bg-icon"></i>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="treatment-cta">
+      <p>Not sure which option is right for your knee? Our specialists will guide you.</p>
+      <a href="javascript:void(0)" class="btn-treatment-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book a Surgical Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 8 - WHAT TO EXPECT (PATIENT JOURNEY)
+  ════════════════════════════════════════════ -->
+  <section class="journey-section">
+
+    <div class="journey-header">
+      <h2>What to Expect During Total Knee Replacement Surgery</h2>
+      <p>Your Step-by-Step Care Journey</p>
+    </div>
+
+    <!-- 4-step horizontal timeline -->
+    <div class="journey-timeline">
+
+      <div class="journey-step">
+        <div class="js-circle">1</div>
+        <div class="js-title">Consultation &amp; Pre-Surgery Planning</div>
+        <p class="js-desc">Our experts evaluate your X-rays, symptoms and medical history. For Mako robotic surgery, a 3D CT scan maps your knee to build a customised surgical plan before anything is decided.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">2</div>
+        <div class="js-title">Surgery Day</div>
+        <p class="js-desc">Under anaesthesia, the surgeon performs either Conventional or Mako Robotic-Assisted knee replacement, ensuring precision, alignment and comfort. It usually takes 1-2 hours.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">3</div>
+        <div class="js-title">Hospital Stay</div>
+        <p class="js-desc">Most patients walk with support within 24 hours. A short 2-3 day stay includes structured physiotherapy and pain management for a smooth start to recovery.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">4</div>
+        <div class="js-title">Recovery &amp; Rehabilitation</div>
+        <p class="js-desc">Gradual physiotherapy improves flexibility and strength over the following weeks. Most patients return to daily activities within 4-6 weeks, with continued improvement over 2-3 months.</p>
+      </div>
+
+    </div>
+
+    <div class="journey-cta">
+      <p>Have questions about your surgery day or rehab plan? We're here to walk you through every step.</p>
+      <a href="javascript:void(0)" class="btn-journey-cta" (click)="openBooking()">
+        <i class="fa-solid fa-phone"></i>
+        Talk to Our Care Team
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ═════════════════════════════
+       SECTION 9 - FAQs
+  ═════════════════════════════ -->
+  <section class="faq-section">
+
+    <div class="faq-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about total knee replacement surgery in Bangalore - answered by our specialists.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item" [class.awareness]="faq.awareness" [class.open]="faq.open" *ngFor="let faq of faqs">
+        <button class="faq-q" (click)="toggleFaq(faq)">
+          <span class="faq-q-left">
+            <span class="faq-icon"><i class="fa-solid" [ngClass]="faq.icon"></i></span>
+            {{ faq.question }}
+          </span>
+          <i class="fa-solid fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <span class="awareness-tag" *ngIf="faq.awarenessTag"><i class="fa-solid fa-circle-exclamation"></i> {{ faq.awarenessTag }}</span>
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <p>Still have questions? Our specialists are here to help you decide the right next step.</p>
+      <a href="javascript:void(0)" class="btn-faq-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book a Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 10 - PATIENT REVIEWS
+  ════════════════════════════════════════════ -->
+  <section class="reviews-section" id="patient-reviews" #patientReviewsSection>
+    <div class="reviews-header">
+      <span class="wih-label"><i class="fa-brands fa-google"></i> Google Reviews</span>
+      <h2>What Our Patients Say</h2>
+      <p>Real reviews from real patients across Vasavi Hospitals.</p>
+    </div>
+    <!-- Elfsight Google Reviews | Vasavi Hospitals -->
+    <div class="elfsight-app-bf9f3d4c-c949-49aa-b1bc-a714aa863544" data-elfsight-app-lazy></div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 11 - FOLLOW US ON INSTAGRAM
+  ════════════════════════════════════════════ -->
+  <section class="insta-section" id="instagram-posts" #instagramSection>
+    <div class="insta-header">
+      <span class="wih-label"><i class="fa-brands fa-instagram"></i> Instagram</span>
+      <h2>@vasavi_hospitals</h2>
+      <p>Follow us for recovery stories, doctor Q&amp;As, and health tips.</p>
+    </div>
+    <!-- Elfsight Instagram Feed | Vasavi Hospitals -->
+    <div class="elfsight-app-d4c691e5-e33f-4c07-9c12-70c12b0d6383" data-elfsight-app-lazy></div>
+  </section>
+
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SHARED POPUPS
+══════════════════════════════════════ -->
+
+<div class="popup-overlay" [class.active]="isBookingOpen" (click)="closeBooking()"></div>
+<div class="popup-modal callback-popup-modal" [class.active]="isBookingOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeBooking()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <app-callback-form [pageName]="selectedPageName"></app-callback-form>
+</div>
+
+<app-second-opinion-popup
+  [isOpen]="isSecondOpinionOpen"
+  [imageSrc]="'Images/packages/hernia/second-opinion-pop-up.jpg'"
+  imageAlt="Get Free Second Surgical Opinion at Vasavi Hospitals"
+  (close)="closeSecondOpinion()"
+  (bookAppointment)="onSecondOpinionBook()"
+></app-second-opinion-popup>
+
+<app-insurance-check-form
+  [isOpen]="isInsuranceOpen"
+  [surgeryName]="'Total Knee Replacement Surgery'"
+  (onClose)="closeInsuranceCheck()"
+  (onSubmit)="onInsuranceSubmit()"
+></app-insurance-check-form>
+
+<!-- ══════════════════════════════════════
+     EXIT-INTENT POPUP (desktop only)
+══════════════════════════════════════ -->
+<div class="popup-overlay" [class.active]="isExitIntentOpen" (click)="closeExitIntent()"></div>
+<div class="popup-modal" [class.active]="isExitIntentOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeExitIntent()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <div class="exit-intent-content">
+    <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Before You Go</span>
+    <h3>Get Your Free Knee Replacement Cost Estimate</h3>
+    <p class="ci-form-sub">Takes 30 seconds. No obligation - our team calls you back with a clear cost and insurance breakdown.</p>
+    <app-callback-form [pageName]="'Total Knee Replacement Surgery - Exit Intent'"></app-callback-form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     STICKY MOBILE CALL/WHATSAPP BAR
+══════════════════════════════════════ -->
+<div class="mobile-sticky-bar">
+  <a [href]="phoneHref" class="msb-btn msb-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+  <a [href]="whatsappHref" target="_blank" rel="noopener" class="msb-btn msb-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+</div>

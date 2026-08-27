@@ -1,0 +1,33 @@
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">{{headers?.title}}</h2>
+    <p class="para_style doc_sec_para">
+        {{headers.wcu_description}}
+    </p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+
+        <div class="doctor-card" *ngFor="let doctor of doctorDetails">
+            <div class="doctor-image">
+                <img [src]="doctor?.img" [alt]="doctor?.alt">
+            </div>
+            <h3 class="doctor-name" *ngIf="doctor?.name">{{doctor?.name}}</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification" *ngIf="doctor?.qualification">{{doctor?.qualification}}</p>
+            <p class="qualification" *ngIf="doctor?.department">{{doctor?.department}}</p>
+            <p class="doctor-experience" *ngIf="doctor?.experience">{{doctor?.experience}} Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <div class="btns">
+                <button *ngIf="doctor?.slug" class="view-btn" [routerLink]="['/doctors'+ doctor?.slug]">
+                    View Profile
+                </button>
+                <button class="appointment-btn" (click)="onBookClick(doctor)">
+                    Book Appointment
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

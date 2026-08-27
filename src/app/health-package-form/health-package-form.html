@@ -1,0 +1,99 @@
+<div class="form" id="appointmentFormSection">
+  <div class="form-heading">Book Your Appointment</div>
+
+  <form [formGroup]="appointmentForm" class="form-content">
+
+    <!-- STEP 1: INITIAL FORM -->
+    <ng-container *ngIf="showInitialForm">
+
+      <div class="flex2">
+        <label>Select Date</label>
+        <input type="date" formControlName="date" [min]="minDate">
+        <small class="error"
+          *ngIf="appointmentForm.get('date')?.touched && appointmentForm.get('date')?.invalid">
+          Date is required
+        </small>
+      </div>
+
+      <div class="flex2">
+        <label>Full Name:</label>
+        <input type="text" formControlName="name">
+        <small class="error"
+          *ngIf="appointmentForm.get('name')?.touched && appointmentForm.get('name')?.invalid">
+          Name is required
+        </small>
+      </div>
+
+      <div class="flex2">
+        <label>Mobile Number:</label>
+        <input type="number" formControlName="mobile">
+        <small class="error"
+          *ngIf="appointmentForm.get('mobile')?.touched && appointmentForm.get('mobile')?.invalid">
+          Enter valid 10-digit mobile number
+        </small>
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        [disabled]="!appointmentForm.valid"
+        (click)="onInitialSubmit()">
+        Submit
+      </button>
+
+    </ng-container>
+
+    <!-- STEP 2: hCAPTCHA -->
+<!-- STEP 2: hCAPTCHA -->
+<ng-container *ngIf="showCaptcha">
+
+  <div class="captcha-container">
+    <ng-hcaptcha    
+      [siteKey]="siteKey"  
+      (verify)="onCaptchaVerify($event)"
+      (expired)="onCaptchaExpire()"
+      (error)="onCaptchaError($event)">
+    </ng-hcaptcha>
+  </div>
+
+  <small class="error" *ngIf="showCaptcha && !captchaVerified">
+    Please complete the captcha verification
+  </small>
+
+  <button
+    class="btn"
+    type="button"
+    [disabled]="!captchaVerified"
+    (click)="onCaptchaSubmit()">
+    {{ captchaVerified ? 'Continue' : 'Verify Captcha First' }}
+  </button>
+
+</ng-container>
+
+    <!-- STEP 3: OTP -->
+    <ng-container *ngIf="otpSent">
+
+      <div class="flex2">
+        <label>Enter OTP:</label>
+        <input type="number" formControlName="otp">
+        <small class="error" *ngIf="otpInvalid">Incorrect OTP</small>
+        <small class="error" *ngIf="otpExpired">OTP expired</small>
+      </div>
+
+      <div class="otp-timer">
+        <span *ngIf="timeLeft > 0">Resend OTP in {{ timeLeft }}s</span>
+        <button type="button" *ngIf="timeLeft === 0" (click)="resendOtp()">Resend OTP</button>
+      </div>
+
+      <button
+        class="btn"
+        type="button"
+        (click)="verifyOtp()"
+        [disabled]="!appointmentForm.get('otp')?.value">
+        Verify OTP
+      </button>
+
+    </ng-container>
+
+  </form>
+</div>

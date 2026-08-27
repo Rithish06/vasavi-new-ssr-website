@@ -1,0 +1,469 @@
+<div class="hero-section">
+    <img src="Images/urology/vasavi-hospitals-bangalore-urology-care-banner.png" class="desktop_banner"
+        alt="Expert urology care with precision diagnosis and advanced treatment at Vasavi Hospitals Bangalore.">
+    <img src="Images/urology/urology-banner.png" class="mobile_banner"
+        alt="Expert urology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <a (click)="scrollToSection('appointment')" class="book-btn">Book an Appointment</a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">Best Urology Hospital in Banashankari, Bangalore</h1>
+        <p class="para_style">When it comes to urology care, experience, technology, and trust matter. That’s why
+            we’re recognized as one of the best urology hospitals in Banashankari, Bangalore providing world-class
+            treatment for everything from common urinary problems to advanced urologic cancers.</p>
+        <p class="para_style">Our urology department in Banashankari, Bangalore, is led by some of the most
+            respected names in the field, offering expert diagnosis, compassionate care, and cutting-edge surgical
+            options all under one roof.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/urology/vasavi-hospitals-bangalore-kidney-anatomy.png"
+            alt="3D kidney anatomy illustration for urology and renal care at Vasavi Hospitals Bangalore.">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">What We Treat</h2>
+    <p class="para_style text-center treatment_header_des">Our leading urology hospital in Banashankari, Bangalore,
+        we specialize in the diagnosis and treatment of a wide range of urological conditions, including:</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Kidney Stones</h3>
+            <p class="box_para">Painful but treatable, we offer non-invasive and surgical options for fast relief.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Prostate Disorders</h3>
+            <p class="box_para">From benign enlargement to prostate cancer, we provide accurate diagnosis and
+                advanced treatment.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Urinary Tract Infections (UTIs)</h3>
+            <p class="box_para">Recurrent UTIs in men and women are managed with modern diagnostic tools and
+                effective medication.</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Bladder Disorders</h3>
+            <p class="box_para">Incontinence, overactive bladder, or bladder stones our team handles it all.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Male Infertility and Sexual Dysfunction</h3>
+            <p class="box_para">Discreet and science-backed treatments that actually work.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Urologic Cancers</h3>
+            <p class="box_para">Kidney, bladder, testicular, and prostate cancers we use precision technology for
+                early detection and treatment.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Pediatric Urology</h3>
+            <p class="box_para">Compassionate care for congenital and developmental urological issues in children.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Advanced Urology Surgery Options</h2>
+    <p class="para_style text-center treatment_header_des">Not every urology condition requires surgery, but when it
+        does,
+        our specialists ensure safe and effective outcomes with three proven approaches:</p>
+    <p class="para_style text-center treatment_header_des">We offer all three major types of urology surgeries:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgery</h3>
+                    <p class="box_para">Used for complex conditions requiring traditional access.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Laparoscopic surgery (Keyhole surgery)</h3>
+                    <p class="box_para box_padding">Minimally invasive, quicker recovery, and smaller scars.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Robotic - Assisted Surgery</h3>
+                    <p class="box_para box_padding">Advanced precision with less pain and faster return to daily
+                        life.</p>
+
+                    <!-- <a href="/robotic-surgery-in-urology.php" class="box_para"
+                            style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png" alt="">
+            </div>
+        </div>
+
+        <div class="service-card">
+            <div class="service-badge">Specialized Service</div>
+
+            <div class="service-icon">🔬</div>
+
+            <h2 class="service-title">Urodynamics Testing</h2>
+            <div class="service-subtitle">Advanced Bladder Function Assessment</div>
+
+            <p class="service-description">
+                Comprehensive diagnostic testing to evaluate bladder and urinary tract function, helping identify the
+                root cause of urinary symptoms and guide personalized treatment plans.
+            </p>
+
+            <div class="features-list">
+                <h4>We Diagnose & Treat:</h4>
+                <div class="feature-item">Urinary incontinence & leakage</div>
+                <div class="feature-item">Frequent or urgent urination</div>
+                <div class="feature-item">Difficulty emptying bladder</div>
+                <div class="feature-item">Overactive bladder syndrome</div>
+                <div class="feature-item">Neurogenic bladder disorders</div>
+            </div>
+
+            <a routerLink="/urology-hospital-in-bangalore/urodynamic-test-bangalore" class="cta-button">
+                Learn More About Urodynamics
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- robotic Surgery section -->
+<div class="container_1">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Surgery in Urology with Da Vinci Xi</h2>
+                <p class="cathlab_intro_text">At Vasavi Hospitals, we bring the latest in urology care with the Da Vinci
+                    Xi robotic surgical system. This advanced technology allows our surgeons to perform highly precise
+                    and minimally invasive procedures, ensuring faster recovery, reduced pain, and better long-term
+                    outcomes for patients. With robotic-assisted urology, complex surgeries are now safer and more
+                    effective than ever.</p>
+
+                <h3 class="cathlab_sub_title">What Makes Our Robotic Urology Surgery Special?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">High Precision & Accuracy</h4>
+                            <p class="cathlab_feature_desc">Robotic arms provide greater control and flexibility,
+                                enabling surgeons to perform delicate urological surgeries with unmatched accuracy..</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Approach</h4>
+                            <p class="cathlab_feature_desc">Most procedures are done through tiny incisions, leading to
+                                less pain, minimal scarring, and quicker healing.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Faster Recovery Time</h4>
+                            <p class="cathlab_feature_desc">Patients return to normal life sooner with shorter hospital
+                                stays and faster rehabilitation compared to traditional surgery.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Better Surgical Outcomes</h4>
+                            <p class="cathlab_feature_desc">Robotic-assisted procedures result in improved surgical
+                                success, reduced complications, and better preservation of urinary and sexual functions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="cathlab_image_section">
+                    <div class="cathlab_image_wrapper">
+                        <img src="assets/img/cathlab/advanced-cathlab-vasavi-hospital-banashankari-bangalore.jpg"
+                            alt="Advanced Cardiac Catheterization Laboratory at Vasavi Hospitals Banashankari Bangalore"
+                            class="cathlab_image">
+                        <div class="cathlab_image_overlay">
+                            <div class="cathlab_overlay_content">
+                                <i class="fa-solid fa-heartbeat"></i>
+                                <span>Advanced Heart Care</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Urology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified urologists brings decades of combined experience
+        in treating complex urological conditions with compassion and precision.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-ramesh-hanumegowda-urologist-transparent.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Ramesh Hanumegowda</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS, MS, MCh</p>
+            <p class="doctor-experience">15+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-ramesh-hanumegowda'">Book Appointment</a>
+        </div>
+
+        <!-- Doctor 2 -->
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dummy-male-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Supreeth Nagaraju</h3>
+            <p class="doctor-title">Senior Consultant Urologist</p>
+            <p class="qualification">MBBS, MS in General Surgery</p>
+            <p class="doctor-experience">15+ Years Experience</p>
+            <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p>
+            <a class="appointment-btn" href="/doctor-profile.php?slug=dr-ramesh-hanumegowda">Book Appointment</a>
+        </div> -->
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-rohini-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Rohini S</h3>
+            <p class="doctor-title">Jr. Consultant - Urologist</p>
+            <p class="qualification">MBBS, MS (General Surgery), M.Ch (Urology)</p>
+            <p class="doctor-experience">8+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+             <a class="appointment-btn" [routerLink]="'/doctors/dr-rohini-s'">Book Appointment</a>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Vasavi Hospitals, Bangalore?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Expert Robotic Urologists</b> -
+                Our doctors are highly trained in robotic-assisted procedures, performing surgeries with precision
+                and care.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>World - Class Technology</b> - We use
+                the Da Vinci Xi system, trusted worldwide for complex urology surgeries.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Patient-Centered Approach</b> - Every
+                treatment plan is designed for comfort, safety, and quick recovery.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Proven Clinical Outcomes</b> -
+                Consistently
+                high success rates with faster return to normal life.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Trusted by Patients Across
+                    Bangalore</b> - Hundreds of patients have chosen Vasavi for robotic surgery and their positive
+                outcomes reflect our commitment.</span>
+        </div>
+
+        <div class="wcu_description" style="margin-bottom: 30px;">At Vasavi Hospitals, you are not just choosing
+            advanced technology, you are
+            choosing a team that values your health, safety and confidence at every step.</div>
+    </div>
+
+    <div class="form-container" id="appointment">
+        <h3 class="form-title">Book Appointment</h3>
+        <p class="form-subtitle">Schedule your visit with our Urology specialists</p>
+
+        <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+        <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+
+        <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+        <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+
+            <div class="input-wrapper">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input id="name" formControlName="name" placeholder="Enter your full name" />
+                    <div class="error" *ngIf="submitted && f['name'].errors">
+                        <small *ngIf="f['name'].errors['required']">Name is required</small>
+                        <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                        <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Contact Number *</label>
+                    <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                    <div class="error" *ngIf="submitted && f['phone'].errors">
+                        <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                        <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input id="email" formControlName="email" placeholder="Enter your email" />
+                    <div class="error" *ngIf="submitted && f['email'].errors">
+                        <small *ngIf="f['email'].errors['required']">Email is required</small>
+                        <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Preferred Date *</label>
+                    <input type="date" id="date" formControlName="date" />
+                    <div class="error" *ngIf="submitted && f['date'].errors">
+                        <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                    <option value="">-- Select Doctor --</option>
+                    <option value="Dr. Ramesh Hanumegowda">Dr. Ramesh Hanumegowda</option>
+                    <option value=">Dr. Supreeth Nagaraju">Dr. Supreeth Nagaraju</option>
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                    <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                    <small *ngIf="f['message'].errors['required']">Message is required</small>
+                    <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Book Appointment</button>
+        </form>
+    </div>
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. How do I book an appointment with a urologist at Vasavi Hospitals?</div>
+            <div class="ans">You can easily schedule an appointment by visiting our Book an Appointment page or calling
+                our 24x7 helpline at <a href="tel:08071500500">080 71 500 500</a>. Our support team will connect you
+                with the right urology specialist.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2. What conditions are treated by the urology department at Vasavi Hospitals?</div>
+            <div class="ans"> Our urology team provides expert care for kidney stones, prostate disorders, urinary tract
+                infections (UTIs), bladder problems, male infertility, erectile dysfunction, cancers of the urinary
+                system, and congenital urological conditions.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3. What should I expect during my first consultation with a urologist at Vasavi Hospitals?
+            </div>
+            <div class="ans">During your first consultation, the urologist will take a detailed medical history, perform
+                a physical examination, and may recommend diagnostic tests such as ultrasound, urine tests, or
+                cystoscopy. Based on the findings, you will receive a personalized treatment plan.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4. Does Vasavi Hospitals provide robotic-assisted urology surgeries?</div>
+            <div class="ans"> Yes. Vasavi Hospitals is equipped with the Da Vinci Xi robotic system, one of the most
+                advanced technologies for urological procedures. Robotic surgery ensures greater precision, smaller
+                incisions, less pain, minimal blood loss, and faster recovery for patients undergoing complex urological
+                treatments.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5. What surgical and non-surgical treatments are available in urology at Vasavi Hospitals?
+            </div>
+            <div class="ans">Our hospital offers a full range of treatments including :
+                <ul style="margin-top:10px">
+                    <li>Minimally invasive procedures for kidney stones (LASER, PCNL, URS, RIRS)</li>
+                    <li>Prostate surgeries (TURP, HoLEP, Robotic Prostatectomy)</li>
+                    <li>Bladder and urethral surgeries</li>
+                    <li>Urological cancer surgeries</li>
+                    <li>Male infertility and andrology services</li>
+                </ul>
+            </div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6. What rehabilitation or follow-up care is provided after urology surgery?</div>
+            <div class="ans"> Vasavi Hospitals provides personalized post-surgery care, including pain management,
+                physiotherapy if required, lifestyle guidance, and long-term follow-ups to ensure complete recovery and
+                prevention of recurrence.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>
+
+
+<router-outlet></router-outlet>

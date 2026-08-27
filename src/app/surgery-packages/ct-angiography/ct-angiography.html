@@ -1,0 +1,368 @@
+<div class="hero-section">
+    <img src="Images/packages/ct_angiography_desktop.png" class="desktop_banner"
+        alt="Cancer patient with headscarf smiling at Vasavi Hospital oncology care">
+    <img src="Images/packages/ct_angiography_mob.png" class="mobile_banner"
+        alt="Comprehensive oncology care in Bangalore with advanced cancer treatments and expert oncologists">
+    <button class="book-btn" (click)="openPopup()">Book an Appointment</button>
+</div>
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+<!-- stat section -->
+
+<section class="stats-section">
+    <p class="stats-subtitle">
+        Years of Expertise in Advanced Diagnostic Imaging
+    </p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="icon-box yellow">
+                <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <div class="stat-content">
+                <h3>20,000+</h3>
+                <p>Successful CT Angiography Completed</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon-box pink">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="stat-content">
+                <h3>80-97%</h3>
+                <p>Success Rate</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon-box blue">
+                <i class="fa-solid fa-bed"></i>
+            </div>
+            <div class="stat-content">
+                <h3>10+</h3>
+                <p>Experienced Doctors</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- stat section -->
+<!-- 
+    <section class="stats-section stat-mobile">
+        <p class="stats-subtitle">
+            Years of Expertise in <strong>Advanced Hysterectomy Care.</strong>
+        </p>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="icon-box yellow">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>12,000+</h3>
+                    <p>Successful Hysterectomy Surgeries Completed</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon-box pink">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>98%</h3>
+                    <p>Patient Satisfaction & Comfort Rate</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon-box blue">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>25+</h3>
+                    <p>Years of Surgical Experience</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+<!-- What is hernia -->
+<section class="what-is-hernia" id="overview">
+    <div class="what_content_Section">
+        <h1>Affordable CT Angiography in Bangalore</h1>
+        <h2>What is CT Angiography?</h2>
+        <p><b>CT Angiography (CTA)</b> is an advanced, non-invasive imaging test that uses <b>CT scanning and contrast
+                dye</b> to visualize blood vessels and detect blockages, clots or narrowing in arteries and veins. It
+            helps diagnose conditions affecting the <b>heart, brain, kidneys, lungs and limbs</b> with high precision.
+        </p>
+        <p>At <b>Vasavi Hospitals</b>, our radiology department uses <b>state-of-the-art multi-slice CT scanners</b>
+            that provide detailed 3D images of blood vessels, allowing accurate diagnosis and early detection of
+            cardiovascular diseases.</p>
+        <p>If you experience chest pain, leg pain or symptoms of poor blood circulation, talk to our specialists to
+            determine if CT Angiography is right for you.</p>
+    </div>
+    <div class="video">
+        <video autoplay loop muted playsinline>
+            <source src="/Images/packages/ct-angiography-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</section>
+
+
+<!--  -->
+<div class="hernia-section-a" id="symptoms">
+
+    <div class="feature-wrapper">
+
+        <div class="features-grid-content">
+
+            <div class="header-container">
+                <h2>Know the Signs. Choose the Right Test.</h2>
+                <p>Vascular diseases often progress silently until they become serious. At Vasavi Hospitals, we help
+                    identify underlying issues early through accurate CT Angiography scans, enabling timely and
+                    effective treatment.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>When is CT Angiography Recommended?</h3>
+                    <ul>
+                        <li class="s_para" style="margin-top: 10px;">Chest pain or suspected coronary artery disease
+                        </li>
+                        <li class="s_para" style="margin-top: 10px;">Stroke or transient ischemic attack (TIA) symptoms
+                        </li>
+                        <li class="s_para" style="margin-top: 10px;">Pain or numbness in legs due to peripheral artery
+                            disease</li>
+                        <li class="s_para" style="margin-top: 10px;">Aneurysm detection in brain or abdomen</li>
+                        <li class="s_para" style="margin-top: 10px;">Evaluation before or after vascular surgery</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Test Options</h3>
+                    <p>At Vasavi Hospitals, CT Angiography can be performed for:</p>
+                    <ul>
+                        <li class="s_para" style="margin-top: 10px;"><b>Coronary CT Angiography</b> - Evaluates heart
+                            and coronary arteries</li>
+                        <li class="s_para" style="margin-top: 10px;"><b>Cerebral CT Angiography</b> - Checks blood flow
+                            in brain vessels</li>
+                        <li class="s_para" style="margin-top: 10px;"><b>Peripheral CT Angiography</b> - Examines
+                            arteries in arms or legs</li>
+                        <li class="s_para" style="margin-top: 10px;"><b>Pulmonary CT Angiography</b> - Detects blockages
+                            in lungs</li>
+                    </ul>
+                    <p>Each test is quick, safe and provides high-resolution images for precise diagnosis.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Affordable & Insurance-Covered Packages</h3>
+                    <p>Transparent, all-inclusive packages starting at affordable cost with cashless insurance and
+                        doctor-reviewed reports for complete clarity and confidence in your results.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form" id="appointment">
+            <app-callback-form [pageName]="selectedPageName" />
+        </div>
+
+    </div>
+
+    <!-- <p class="note-text">
+            <strong><i class="fa-solid fa-info"></i> Note:</strong> Robotic surgery refers to robotic-assisted surgery.
+            It is not performed by robots. All procedures are performed by our skilled surgeons.
+        </p> -->
+
+    <button class="cta-button" (click)="openPopup()">Check Availability & Book Now</button>
+</div>
+
+<app-doctors-card [doctorDetails]="doctors" [headers]="doctorHeader"
+    (bookAppointment)="handleBookAppointment($event)" />
+
+<!-- <div class="comparison-section" style="margin-top: 30px;">
+        <div class="comparison-header">
+            <h2>Robotic vs. Laparoscopic Surgery: What's the Difference?</h2>
+            <p>While both are minimally invasive, the Da Vinci Xi Robotic System offers superior precision,
+                leading to faster recovery and better patient outcomes compared to traditional laparoscopy.</p>
+        </div>
+
+        <div class="comparison-table">
+            <div class="comparison-column robotic-column">
+                <img src="Images/packages/intuitive-davinci-xi-system-lineup-lowres.jpg" alt="Da Vinci Xi Robotic Surgery System" class="comparison-image">
+                <h2>Robotic Surgery (Da Vinci Xi)</h2>
+                <ul>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>3D HD Vision:</strong> Surgeon sees the surgical field in high-definition,
+                            three-dimensional view for unparalleled depth perception.</p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Enhanced Dexterity:</strong> Robotic instruments have seven degrees of motion,
+                            mimicking the human wrist, which allows for finer and more precise suturing (stitching).
+                        </p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Superior Precision:</strong> Filters out natural hand tremors and allows for more
+                            complex, delicate repairs.</p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Reduced Pain & Scarring:</strong> The high precision results in less trauma to
+                            surrounding tissue.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="comparison-column robotic-column">
+                <img src="Images/packages/laproscopic.jpg" alt="Laparoscopic Hysterectomy Surgery" class="comparison-image">
+                <h2>Laparoscopic Surgery</h2>
+                <ul>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>2D Vision:</strong> Surgeons view a flat, two-dimensional image, which can limit
+                            depth perception.</p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Limited Movement:</strong> Instruments have restricted movement (4 degrees of
+                            motion), making complex suturing more challenging.</p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Good Precision:</strong> Excellent compared to open surgery, but lacks the
+                            micro-movements of a robotic system.</p>
+                    </li>
+                    <li class="plus">
+                        <span class="icon-indicator"><i class="fa-solid fa-angles-right"></i></span>
+                        <p><strong>Minimal Scarring:</strong> Also offers small incisions, but robotic methods often
+                            allow for even smaller, strategically placed cuts.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a (click)="openPopup()" class="cta-button-comparison">Speak with our specialists today</a>
+    </div> -->
+
+
+
+<div class="surgery-timeline-h" id="procedures">
+    <div class="timeline-header-h">
+        <h2>What to Expect During CT Angiography</h2>
+        <p>Your Step-by-Step Care Journey</p>
+    </div>
+
+    <div class="timeline-container-h">
+        <div class="timeline-step-h">
+            <div class="step-marker-h">1</div>
+            <h3>Consultation & Preparation</h3>
+            <p>Our radiologist or referring doctor will explain the procedure and review your medical history. You may
+                be asked to fast for a few hours and remove any metal objects before the scan.</p>
+        </div>
+
+        <div class="timeline-step-h">
+            <div class="step-marker-h">2</div>
+            <h3>During the Scan</h3>
+            <p>A contrast dye is injected into a vein to highlight blood vessels. You’ll lie on the CT table and the
+                scanner will take detailed images in a few minutes. The test is painless and you can communicate with
+                the technician throughout.</p>
+        </div>
+
+        <div class="timeline-step-h">
+            <div class="step-marker-h">3</div>
+            <h3>Post-Test Observation</h3>
+            <p>You’ll be monitored briefly after the scan to ensure there are no allergic reactions to the dye. You can
+                usually resume normal activities immediately after.</p>
+        </div>
+
+        <div class="timeline-step-h">
+            <div class="step-marker-h">4</div>
+            <h3>Results & Follow-Up</h3>
+            <p>Our expert radiologists analyze the images and prepare a detailed report for your doctor. Based on the
+                findings, your care team will recommend the next steps or treatment if needed.</p>
+        </div>
+    </div>
+
+
+    <!-- <div class="benefits-section-short">
+            <h2>Why Choose Our Laparoscopic Mesh Repair?</h2>
+
+            <div class="benefits-bar">
+                <div class="benefit-item-short">
+                    <span class="icon-short">🔪</span>
+                    <p>Minimally Invasive</p>
+                </div>
+                <div class="benefit-item-short">
+                    <span class="icon-short">⏱️</span>
+                    <p>Faster Recovery</p>
+                </div>
+                <div class="benefit-item-short">
+                    <span class="icon-short">🛡️</span>
+                    <p>Long-Term Relief</p>
+                </div>
+                <div class="benefit-item-short">
+                    <span class="icon-short">✅</span>
+                    <p>Insurance-Friendly</p>
+                </div>
+            </div>
+
+            <a href="#" class="cta-button-short">Book Your Specialist Consultation Now</a>
+        </div> -->
+
+    <!-- <app-pop-up-form-ads [isOpen]="isPopupOpen" (onClose)="closePopup()" (onSubmit)="handleFormSubmit($event)">
+        </app-pop-up-form-ads> -->
+
+
+    <!-- <div class="container_2">
+            <div class="we_cure_with_care_section">
+                <h2 class="heading">We Cure With Care</h2>
+                <p class="para">Digest comfortably. Move freely. Live confidently. At Vasavi Hospitals, our Robotic
+                    Cholecystectomy ensures safer surgery, faster recovery and lasting relief - so you can enjoy every
+                    meal
+                    and moment without pain.</p>
+                <div class="cta_flex">
+                    <button class="cta_2" (click)="openPopup()">Book an Appointment</button>
+                    <a href="tel:8884545086" class="cta_call_2">Call Now</a>
+                </div>
+            </div>
+        </div> -->
+
+
+
+</div>
+<div class="popup-overlay" *ngIf="isPopupOpen">
+    <div class="popup-container" (click)="$event.stopPropagation()">
+        <button class="popup-close" (click)="closePopup()">✖</button>
+        <app-callback-form [pageName]="selectedPageName"></app-callback-form>
+    </div>
+</div>
+<div class="popup-overlay image-pop-up" *ngIf="isPopupImageOpen">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeImagePopup()">✖</button>
+        <img src="Images/packages/surgery-pop-ups.jpg" class="popup-image" />
+    </div>
+</div>

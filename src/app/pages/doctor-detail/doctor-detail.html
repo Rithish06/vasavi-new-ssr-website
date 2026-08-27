@@ -1,12 +1,4 @@
 @if (doctor(); as doc) {
-  <!-- `.doctor-page` is a CSS-grid wrapper (see doctor-detail.css, ≥1100px):
-       hero + brief-profile stack in the left column while the booking card
-       sits in a right-hand grid area that spans BOTH their rows, so its own
-       `position: sticky` keeps it pinned in place while that whole left
-       column scrolls underneath it. Below 1100px the grid drops away and
-       these three become plain stacked blocks in DOM order (hero, booking,
-       profile) — same order the page already used before this restructure. -->
-  <div class="doctor-page">
   <section class="doctor-hero" [class.doctor-hero--framed-photo]="hasFramedPhoto()">
     <!-- Decorative background layer: dotted grids, blue corner wave and a
          floating cross, echoing the reference design. Purely cosmetic. Some
@@ -31,6 +23,28 @@
       Back
     </a>
 
+    <!-- Floating WhatsApp shortcut, echoing the reference design. Uses the
+         same published hospital phone number as "Call Now" for now - swap
+         `href` for a `https://wa.me/<number>` link once a real WhatsApp
+         Business number exists, since the current number is a toll-free
+         line and can't actually receive WhatsApp chats. -->
+    <a
+      class="doctor-hero__whatsapp"
+      [href]="'tel:' + hospitalPhoneTel"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <app-doctors-icon name="whatsapp" />
+    </a>
+
+    <!-- `.doctor-hero__grid` is a 2-column grid at ≥1100px (see
+         doctor-detail.css): the photo/info profile block in column 1, and
+         the booking card in column 2, with `align-items: stretch` making
+         both columns - and, via its own inner grid, the photo and info
+         sub-columns too - equal height. Below 1100px it's a single stacked
+         column (photo, info, booking) in this same DOM order. Putting the
+         booking card here, inside the hero row itself, is what keeps the
+         hero section's own height no taller than this row needs - no more
+         sticky sidebar spanning down into Brief Profile below. -->
     <div class="doctor-hero__grid">
       <!-- ============ Left: profile ============ -->
       <div class="doctor-hero__profile">
@@ -49,7 +63,12 @@
             </svg>
           }
           <h1>{{ doc.name }}</h1>
+          <span class="doctor-hero__name-underline" aria-hidden="true"></span>
           <p class="doctor-hero__title">{{ doc.title }}</p>
+
+          <span class="doctor-hero__facts-decor-cross" aria-hidden="true">
+            <app-doctors-icon name="plus-outline" />
+          </span>
 
           <dl class="doctor-hero__facts">
             <div class="doctor-hero__fact">
@@ -91,6 +110,7 @@
             <button type="button" class="btn btn--filled" (click)="scrollToBooking()">
               <app-doctors-icon name="calendar" />
               Book Appointment
+              <app-doctors-icon name="arrow-up-right" />
             </button>
             <a class="btn btn--outline" [href]="'tel:' + hospitalPhoneTel">
               <app-doctors-icon name="phone" />
@@ -99,11 +119,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ============ Booking card (sticky right rail on desktop) ============ -->
-  <div class="doctor-page__aside">
+      <!-- ============ Right: booking card ============ -->
       <div class="doctor-booking" id="doctor-booking-card">
         <div class="doctor-booking__head">
           <span class="doctor-booking__head-icon"><app-doctors-icon name="calendar" /></span>
@@ -171,6 +188,7 @@
             <button type="button" class="btn btn--filled doctor-booking__cta" (click)="proceedToContact()">
               <app-doctors-icon name="calendar" />
               Book Appointment
+              <app-doctors-icon name="arrow-up-right" />
             </button>
             <a class="btn btn--outline doctor-booking__cta" [href]="'tel:' + hospitalPhoneTel">
               <app-doctors-icon name="phone" />
@@ -243,58 +261,138 @@
           Your information is secure and confidential.
         </p>
       </div>
-  </div>
-
-  <!-- ============ Brief Profile ============ -->
-  <section class="doctor-profile">
-    <div class="doctor-profile__grid">
-      <div class="doctor-profile__bio">
-        <span class="doctor-profile__eyebrow">About the Doctor</span>
-        <h2>Brief Profile</h2>
-        @for (para of profileBio(); track para) {
-          <p>{{ para }}</p>
-        }
-      </div>
-
-      <div class="doctor-profile__expertise">
-        <h3>Areas of Expertise</h3>
-        <ul>
-          @for (item of expertiseHighlights(); track item) {
-            <li>
-              <span class="doctor-profile__expertise-icon"><app-doctors-icon name="check" /></span>
-              {{ item }}
-            </li>
-          }
-        </ul>
-      </div>
     </div>
   </section>
-  </div>
 
-  <!-- ============ Professional Affiliations ============ -->
-  <section class="doctor-affiliations">
-    <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--left" aria-hidden="true"></span>
-    <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--right" aria-hidden="true"></span>
+  <!-- ============ Brief Profile ============ -->
+  <!-- Bio and expertise are independently optional per doctor (real data
+       isn't supplied for every profile yet) - the whole section is skipped
+       when neither is present, and the grid drops to a single column when
+       only one of the two is, via `--single` (see doctor-detail.css). -->
+  @if (profileBio().length > 0 || expertiseHighlights().length > 0) {
+    <section class="doctor-profile">
+      <div
+        class="doctor-profile__grid"
+        [class.doctor-profile__grid--single]="profileBio().length === 0 || expertiseHighlights().length === 0"
+      >
+        @if (profileBio().length > 0) {
+          <div class="doctor-profile__bio">
+            <span class="doctor-profile__eyebrow">About the Doctor</span>
+            <h2>Brief Profile</h2>
+            @for (para of profileBio(); track para) {
+              <p>{{ para }}</p>
+            }
+          </div>
+        }
 
-    <div class="doctor-affiliations__inner">
-      <div class="doctor-affiliations__head">
-        <h2>Professional Affiliations</h2>
-        <span class="doctor-affiliations__underline" aria-hidden="true"></span>
-      </div>
-
-      <div class="doctor-affiliations__grid">
-        @for (item of professionalAffiliations(); track item) {
-          <div class="doctor-affiliations__card">
-            <!-- Generic badge placeholder — swap for the real association's
-                 logo image once one is supplied. -->
-            <span class="doctor-affiliations__logo"><app-doctors-icon name="badge" /></span>
-            <span class="doctor-affiliations__divider"></span>
-            <p>{{ item }}</p>
+        @if (expertiseHighlights().length > 0) {
+          <div class="doctor-profile__expertise">
+            <h3>Areas of Expertise</h3>
+            <ul>
+              @for (item of expertiseHighlights(); track item) {
+                <li>
+                  <span class="doctor-profile__expertise-icon"><app-doctors-icon name="check" /></span>
+                  {{ item }}
+                </li>
+              }
+            </ul>
           </div>
         }
       </div>
-    </div>
-  </section>
+    </section>
+  }
+
+  <!-- ============ Professional Affiliations ============ -->
+  @if (professionalAffiliations().length > 0) {
+    <section class="doctor-affiliations">
+      <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--left" aria-hidden="true"></span>
+      <span class="doctor-affiliations__decor-dots doctor-affiliations__decor-dots--right" aria-hidden="true"></span>
+
+      <div class="doctor-affiliations__inner">
+        <div class="doctor-affiliations__head">
+          <h2>Professional Affiliations</h2>
+          <span class="doctor-affiliations__underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="doctor-affiliations__grid">
+          @for (item of professionalAffiliations(); track item.heading) {
+            <div class="doctor-affiliations__card">
+              @if (item.image) {
+                <span class="doctor-affiliations__logo doctor-affiliations__logo--img">
+                  <img [src]="item.image" [alt]="item.heading" loading="lazy" />
+                </span>
+              } @else {
+                <span class="doctor-affiliations__logo"><app-doctors-icon name="badge" /></span>
+              }
+              <span class="doctor-affiliations__divider"></span>
+              <p class="doctor-affiliations__heading">{{ item.heading }}</p>
+              <p class="doctor-affiliations__desc">{{ item.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ============ Honors & Awards ============ -->
+  @if (honorsAwards().length > 0) {
+    <section class="doctor-honors">
+      <span class="doctor-honors__decor-dots doctor-honors__decor-dots--left" aria-hidden="true"></span>
+      <span class="doctor-honors__decor-dots doctor-honors__decor-dots--right" aria-hidden="true"></span>
+
+      <div class="doctor-honors__inner">
+        <div class="doctor-honors__head">
+          <h2>Honors &amp; Awards</h2>
+          <span class="doctor-honors__underline" aria-hidden="true"></span>
+          <p>Recognition for excellence in {{ doc.department }} care and medical innovation</p>
+        </div>
+
+        <div class="doctor-honors__grid">
+          @for (item of honorsAwards(); track item.title) {
+            <div class="doctor-honors__card doctor-honors__card--{{ item.theme }}">
+              <span class="doctor-honors__icon"><app-doctors-icon [name]="item.icon" /></span>
+              <h3>{{ item.title }}</h3>
+              <span class="doctor-honors__divider"></span>
+              <p>{{ item.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ============ Publications ============ -->
+  <!-- Publications are supplied as plain title strings (no journal/year
+       breakdown) - the item body just shows the numbered title, and the
+       whole section is skipped for doctors with none. -->
+  @if (publications().length > 0) {
+    <section class="doctor-publications">
+      <div class="doctor-publications__inner">
+        <div class="doctor-publications__head">
+          <h2>Publications</h2>
+          <div class="doctor-publications__decor" aria-hidden="true">
+            <span class="doctor-publications__decor-line"></span>
+            <span class="doctor-publications__decor-dot"></span>
+            <span class="doctor-publications__decor-dot"></span>
+            <span class="doctor-publications__decor-dot"></span>
+          </div>
+          <p>Research, studies &amp; contributions to medical literature</p>
+        </div>
+
+        <ol class="doctor-publications__list">
+          @for (pub of publications(); track pub.title) {
+            <li class="doctor-publications__item">
+              <span class="doctor-publications__num">{{ pub.num }}</span>
+              <span class="doctor-publications__item-divider" aria-hidden="true"></span>
+              <div class="doctor-publications__item-body">
+                <h3>{{ pub.title }}</h3>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </section>
+  }
 } @else {
   <section class="doctor-hero doctor-hero--empty">
     <p>We couldn't find that doctor's profile.</p>

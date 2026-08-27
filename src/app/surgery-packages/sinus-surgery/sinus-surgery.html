@@ -1,0 +1,705 @@
+<div class="hernia-page">
+
+  <!-- ════════════════════════════════
+       SECTION 1 - HERO
+  ════════════════════════════════ -->
+  <section class="hero">
+    <!-- 4-tier responsive hero, matching this page's existing 480/768/1024
+         breakpoints: mobile portrait crop, tablet-portrait crop, tablet-
+         landscape/small-desktop crop, and the wide desktop illustration. -->
+    <picture>
+      <source media="(max-width: 480px)" [srcset]="heroAsset('sinus-surgery-mobile-banner.webp')" />
+      <source media="(max-width: 768px)" [srcset]="heroAsset('sinus-surgery-banner-tablet.webp')" />
+      <source media="(max-width: 1024px)" [srcset]="heroAsset('sinus-surgery-1024-banner.webp')" />
+      <img [src]="heroAsset('sinus-surgery-banner-desktop-v2.webp')" alt="Advanced Sinus Surgery in Bangalore - Vasavi Hospitals" class="hero-img" fetchpriority="high" loading="eager" decoding="sync" />
+    </picture>
+
+    <div class="hero-content">
+      <span class="hero-tag">🏥 Vasavi Hospitals, Bangalore</span>
+      <h1 class="hero-h1">Advanced Sinus Surgery<br />in <span>Bangalore</span></h1>
+      <p class="hero-sub">Stop living around a blocked nose. Balloon Sinuplasty &amp; FESS for lasting relief from chronic sinusitis - minimally invasive, faster healing.</p>
+
+      <div class="trust-badges">
+        <div class="badge"><div class="badge-icon">✓</div><span>Balloon Sinuplasty &amp; FESS Available</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>Minimally Invasive - No External Cuts</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>25+ Yrs ENT Surgeon Experience</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>All Major Insurance Accepted</span></div>
+      </div>
+
+      <div class="hero-ctas">
+        <a [href]="phoneHref" class="btn-primary"><i class="fa-solid fa-phone"></i> Call Now for Consultation</a>
+        <a href="javascript:void(0)" class="btn-secondary" (click)="openInsuranceCheck()"><i class="fa-solid fa-shield-halved"></i> Check for Insurance</a>
+      </div>
+
+      <!-- <span class="opd-open-badge" *ngIf="isDuringOpdHours"><i class="fa-solid fa-circle" style="font-size:6px;"></i> Lines open now</span> -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       DESKTOP STICKY CALL/BOOK BAR
+       Sticks to the top of the viewport once scrolled past the hero
+       (position: sticky, no scroll-listener needed). Desktop-only -
+       mobile gets the fixed bottom bar instead.
+  ════════════════════════════════════════════ -->
+  <div class="desktop-sticky-bar">
+    <span class="dsb-text"><i class="fa-solid fa-head-side-cough"></i> Vasavi Hospitals, Bangalore</span>
+    <div class="dsb-ctas">
+      <a [href]="phoneHref" class="dsb-btn dsb-call"><i class="fa-solid fa-phone"></i> {{ phoneNumber }}</a>
+      <button type="button" class="dsb-btn dsb-book" (click)="openBooking()"><i class="fa-solid fa-calendar-check"></i> Book Appointment</button>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.2 - QUICK TRUST STRIP
+       Real, already-published Vasavi Hospitals stats (same numbers used on
+       the homepage's "Key Statistics" section) - placed here deliberately
+       so mobile visitors see hard proof within the first 1-2 scrolls,
+       instead of only in the Doctors section much further down the page.
+  ════════════════════════════════════════════ -->
+  <section class="quick-trust-section">
+    <div class="qt-inner">
+      <div class="qt-stat">
+        <img src="Images/trust-icons/surgeries-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">10,000+</span>
+        <span class="qt-label">Successful Surgeries</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/patients-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">3,00,000+</span>
+        <span class="qt-label">Patients Treated</span>
+      </div>
+      <div class="qt-stat">
+        <img [src]="nabhLogoPath" alt="NABH Accredited Hospital" width="36" height="36" loading="lazy" decoding="async" class="qt-nabh-logo" />
+        <span class="qt-label qt-nabh-label">NABH Accredited</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/facility-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">World-Class</span>
+        <span class="qt-label">Facilities</span>
+      </div>
+      <!-- Clickable tiles - jump to the reviews/Instagram section further
+           down the page instead of opening anything new, so the trust bar
+           itself stays exactly as compact as the 4 stat tiles above. -->
+      <a href="#patient-reviews" class="qt-stat qt-stat-link" (click)="scrollToPatientReviews($event)">
+        <img src="Images/trust-icons/google-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Google</span>
+        <span class="qt-label">Reviews</span>
+      </a>
+      <a href="#instagram-posts" class="qt-stat qt-stat-link" (click)="scrollToInstagram($event)">
+        <img src="Images/trust-icons/instagram-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Follow Us</span>
+        <span class="qt-label">Instagram</span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.3 - OUR EXPERIENCED SURGEONS (compact)
+       Moved up from deep in the page (was scroll 7-8) to right after the
+       trust strip - a real face + credentials within the first couple of
+       scrolls does more for trust than a generic badge. This is now the
+       only doctors section on the page (the old full-size one further
+       down was removed rather than duplicated).
+  ════════════════════════════════════════════ -->
+  <section class="mini-doctors-section">
+    <h2 class="mds-heading">Our Experienced ENT Surgeons</h2>
+    <div class="mds-grid">
+      <div class="mds-card" *ngFor="let doctor of doctors">
+        <!-- mds-top stays display:contents on tablet/desktop (no layout
+             change there) but becomes a real row wrapper on small mobile
+             so the Book button always drops to its own line underneath. -->
+        <div class="mds-top">
+          <img [src]="doctor.img" [alt]="doctor.alt" width="84" height="84" loading="lazy" decoding="async" class="mds-photo" />
+          <div class="mds-info">
+            <p class="mds-name">{{ doctor.name }}</p>
+            <p class="mds-specialty">{{ doctor.specialty }}</p>
+            <span class="mds-exp">{{ doctor.experience }}</span>
+          </div>
+        </div>
+        <button type="button" class="mds-book-btn" (click)="openBookingForDoctor(doctor)">
+          <i class="fa-solid fa-calendar-check"></i> Book Appointment
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.5 - INTERACTIVE SYMPTOM SELF-CHECK
+  ════════════════════════════════════════════ -->
+  <section class="symptom-checker-section">
+    <div class="sc-inner">
+
+      <div class="sc-header">
+        <span class="wih-label"><i class="fa-solid fa-clipboard-check"></i> 10-Second Self-Check</span>
+        <h2>Could Your Symptoms Be Chronic Sinusitis?</h2>
+        <p>Select what you're experiencing - this isn't a diagnosis, just a quick way to see if it's worth talking to a specialist.</p>
+      </div>
+
+      <div class="sc-checklist">
+        <label class="sc-item" *ngFor="let symptom of symptomChecklist">
+          <input type="checkbox" [(ngModel)]="symptom.checked" />
+          <span class="sc-checkbox"><i class="fa-solid fa-check"></i></span>
+          <span class="sc-label">{{ symptom.label }}</span>
+        </label>
+      </div>
+
+      <div class="sc-result" [class.sc-result-strong]="checkedSymptomCount >= 3" *ngIf="checkedSymptomCount > 0">
+        <ng-container *ngIf="checkedSymptomCount < 3">
+          <p><i class="fa-solid fa-circle-info"></i> You've selected {{ checkedSymptomCount }} symptom{{ checkedSymptomCount === 1 ? '' : 's' }}. Worth keeping an eye on - if these persist for a few weeks, a quick ENT check can rule out anything more serious.</p>
+          <a [href]="phoneHref" class="sc-soft-link"><i class="fa-solid fa-phone"></i> Not sure? Call and talk to our team</a>
+        </ng-container>
+        <ng-container *ngIf="checkedSymptomCount >= 3">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> You've selected {{ checkedSymptomCount }} symptoms - this combination is a classic pattern for chronic sinusitis. A specialist evaluation can tell you clearly what's going on and what will actually help.</p>
+          <button type="button" class="btn-free-estimate sc-cta-btn" (click)="openBookingFromSymptomChecker()">
+            <i class="fa-solid fa-calendar-check"></i> Book an ENT Consultation
+          </button>
+        </ng-container>
+        <button type="button" class="sc-reset-btn" (click)="resetSymptomChecker()">Reset</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 2 - WHY CHOOSE VASAVI
+  ════════════════════════════════ -->
+  <section class="why-vasavi-section" id="why-vasavi">
+
+    <h2 class="section-heading">Why Choose Vasavi Hospitals?</h2>
+    <p class="section-subheading">From minimally invasive technique to real relief from years of blocked-nose fatigue - here's why patients across Bangalore trust us for sinus care.</p>
+
+    <div class="why-vasavi-inner">
+
+      <!-- Feature Cards -->
+      <div class="why-features">
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3>Benefits of Modern Sinus Surgery</h3>
+          <p>Balloon Sinuplasty offers a 1–2 day recovery for uncomplicated cases; FESS gives thorough relief for complex or recurrent sinusitis in 7–10 days. Both are done through the nostrils - no external cuts.</p>
+        </div>
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-hospital"></i></div>
+          <h3>World-Class Facilities</h3>
+          <ul class="facility-list">
+            <li><i class="fa-solid fa-circle-dot"></i> Dedicated ENT Operation Theatre</li>
+            <li><i class="fa-solid fa-circle-dot"></i> Advanced Nasal Endoscopy &amp; Imaging</li>
+            <li><i class="fa-solid fa-circle-dot"></i> Advanced Diagnostic Center</li>
+            <li><i class="fa-solid fa-circle-dot"></i> 25+ Years Experienced Surgeons</li>
+          </ul>
+        </div>
+
+        <div class="feature-card-v insurance">
+          <div class="card-icon-v"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Hassle-Free Insurance Approval</h3>
+          <p>Cashless treatment with all major insurers. Our dedicated team handles the entire claim process - zero paperwork stress for you.</p>
+        </div>
+
+        <div class="feature-card-v location">
+          <div class="card-icon-v"><i class="fa-solid fa-location-dot"></i></div>
+          <h3>Easily Accessible Location</h3>
+          <p>Located at <strong>Kumaraswamy Layout, Bangalore</strong> - minutes from the nearest Metro Station and BMTC Bus Stand. Nearby hotels available for outstation patients.</p>
+        </div>
+
+        <div class="feature-card-v support full-width">
+          <div class="card-icon-v"><i class="fa-solid fa-headset"></i></div>
+          <h3>Your Personal Support Guide</h3>
+          <p>A dedicated care coordinator stays with you from first consultation to discharge - answering every question, so you're never guessing what comes next.</p>
+        </div>
+
+      </div>
+
+      <!-- Lead Form -->
+      <div class="why-form-card">
+        <span class="form-badge-v"><i class="fa-solid fa-circle-check"></i> Callback in 30 Minutes</span>
+        <h3>Book Your Appointment</h3>
+        <p class="form-note">Our team will call you back within 30 minutes.</p>
+
+        <!-- Step 1: one-tap concern selector - lowers the barrier before
+             asking for a phone number, and tags the lead with the reason
+             for free. -->
+        <div class="lc-step" *ngIf="!showLeadForm">
+          <p class="lc-prompt">What's bothering you the most?</p>
+          <div class="lc-options">
+            <button type="button" class="lc-chip" *ngFor="let concern of leadConcerns" (click)="selectLeadConcern(concern)">
+              {{ concern }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: revealed only after a concern is picked -->
+        <div class="lc-form-wrap" *ngIf="showLeadForm">
+          <p class="lc-selected">
+            <i class="fa-solid fa-circle-check"></i> {{ leadConcern }}
+            <button type="button" class="lc-change" (click)="changeLeadConcern()">change</button>
+          </p>
+          <app-callback-form [pageName]="leadFormPageName"></app-callback-form>
+        </div>
+
+        <div class="form-or-divider">or</div>
+
+        <button type="button" class="btn-check-insurance" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+        <p class="form-privacy-note"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+        <div class="form-trust-strip">
+          <div class="trust-item-v"><i class="fa-solid fa-user-doctor"></i><span>25+ Years<br />Experience</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-wind"></i><span>Balloon<br />Sinuplasty</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-file-invoice"></i><span>All Insurance<br />Accepted</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 3 - WHAT IS SINUS SURGERY?
+  ════════════════════════════════ -->
+  <section class="what-is-hernia-section">
+    <div class="wih-inner">
+
+      <!-- Left: Text -->
+      <div class="wih-content">
+
+        <span class="wih-label"><i class="fa-solid fa-circle-info"></i> Sinus &amp; ENT Care Guide</span>
+
+        <h2>What is Sinus Surgery?</h2>
+
+        <p>Sinus surgery clears blocked sinus passages so mucus can drain and air can flow normally again - relieving the congestion, pressure, and headaches of chronic sinusitis. It's typically done entirely through the nostrils, with no external incisions.</p>
+
+        <p>Chronic sinusitis doesn't just mean a stuffy nose - most people with it report disrupted sleep, and the resulting fatigue and brain fog can affect work and daily life for years if left untreated. Vasavi Hospitals offers <strong>Balloon Sinuplasty and FESS in Bangalore</strong> to give you lasting relief, not just temporary symptom control.</p>
+
+        <!-- Symptom Chips -->
+        <div class="wih-symptoms">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> &nbsp;Watch out for these signs</p>
+          <div class="symptom-chips">
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Blocked Nose</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Facial Pain / Pressure</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Frequent Headaches</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Reduced Sense of Smell</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Recurrent Infections</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Video -->
+      <div class="wih-video-wrap">
+        <video
+          #sinusVideo
+          [src]="asset('sinus-video.mp4')"
+          [muted]="true"
+          [loop]="true"
+          loop
+          muted
+          playsinline
+          preload="none"
+          [poster]="heroAsset('sinus-surgery-banner-desktop-v2.webp')"
+        ></video>
+        <div class="wih-video-badge">
+          <i class="fa-solid fa-play"></i> Sinus Surgery Explained
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 3.5 - COST OF INACTION
+       Reframes surgery from "scary" to "the thing that ends the cycle" -
+       every point here is already backed by the FAQ content above, just
+       pulled forward and made visually distinct.
+  ════════════════════════════════════════════ -->
+  <section class="risk-section">
+    <div class="risk-header">
+      <span class="wih-label risk-label"><i class="fa-solid fa-triangle-exclamation"></i> Worth Knowing</span>
+      <h2>What Happens If Chronic Sinusitis Is Left Untreated?</h2>
+      <p>Most patients don't realise how much a blocked sinus is quietly costing them - here's what tends to happen when it's managed with medication alone, year after year.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-pills"></i></div>
+        <h3>Recurring Infections &amp; Antibiotic Overuse</h3>
+        <p>4+ infections a year, each treated with another round of antibiotics - without fixing the underlying blockage causing them.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-bed"></i></div>
+        <h3>Disrupted Sleep &amp; Chronic Fatigue</h3>
+        <p>Most chronic sinusitis patients report poor sleep - the resulting fatigue and brain fog can quietly affect work and daily life for years.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-lungs"></i></div>
+        <h3>Worsening Nasal Polyps</h3>
+        <p>Left untreated, polyps tend to grow larger over time - making the eventual procedure more involved than if addressed earlier.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-face-tired"></i></div>
+        <h3>Reduced Quality of Life</h3>
+        <p>Constant congestion, reduced sense of smell, and low energy add up - many patients only realise how much once it's gone.</p>
+      </div>
+    </div>
+    <div class="risk-cta">
+      <p>A single evaluation can tell you clearly whether surgery is actually needed for your case.</p>
+      <button type="button" class="btn-risk-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i> Book an Evaluation
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 5 - COST & INSURANCE
+  ════════════════════════════════ -->
+  <section class="cost-insurance-section" id="insurance">
+    <div class="ci-inner">
+
+      <!-- Left: Conversion copy -->
+      <div class="ci-copy">
+
+        <span class="ci-badge"><i class="fa-solid fa-tag"></i> 100% Free - No Obligation</span>
+
+        <h2>Know Your Sinus Surgery Cost Before You Decide</h2>
+
+        <p>Cost depends on the technique (Balloon Sinuplasty vs. FESS) and whether polyps or a deviated septum need correcting too. Get a personalised cost breakdown and instant insurance check - our team will call you back within 30 minutes with full clarity.</p>
+
+        <div class="ci-benefits">
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-rupee-sign"></i></div>
+            <span>Personalised surgery cost estimate - no guesswork</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <span>Instant check for your insurance eligibility &amp; coverage</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-file-invoice"></i></div>
+            <span>Cashless admission guidance - zero paperwork stress</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-phone-volume"></i></div>
+            <span>Callback within 30 minutes by our care coordinator</span>
+          </div>
+        </div>
+
+        <!-- Real insurance partner logos, surfaced right where the
+             insurance CTA actually lives. Auto-scrolling marquee instead of
+             a static grid - reads as more premium/dynamic, and a seamless
+             looping strip has no awkward layout gaps the way a wrapped
+             grid can. Explicit width/height on each logo avoids the
+             intrinsic-sizing collapse that made a couple of logos render
+             blank in the static-grid version. -->
+        <div class="ci-insurance-partners">
+          <p class="ci-ip-label"><i class="fa-solid fa-check-double"></i> Trusted by all major insurance providers</p>
+          <div class="ci-ip-marquee">
+            <div class="ci-ip-track">
+              <div class="ci-ip-chip" *ngFor="let partner of insurancePartnersLoop">
+                <img [src]="partner.logo" [alt]="partner.name" width="72" height="32" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-free-estimate ci-copy-insurance-btn" style="margin-top: 50px;" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div class="ci-form-card">
+
+        <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Get Free Cost Estimation</span>
+
+        <h3>Book Your Appointment</h3>
+        <p class="ci-form-sub">Fill in your details - we'll handle the rest.</p>
+
+        <app-callback-form [pageName]="'Sinus Surgery - Insurance Check'"></app-callback-form>
+
+        <p class="ci-privacy"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 6 - WHEN IS IT RECOMMENDED
+  ════════════════════════════════ -->
+  <section class="hernia-types-section">
+
+    <div class="ht-header">
+      <h2>When is Sinus Surgery Recommended?</h2>
+      <p>Not every blocked nose needs surgery. Our ENT specialists evaluate each case carefully - here are the most common reasons sinus surgery is recommended.</p>
+    </div>
+
+    <div class="hernia-types-grid">
+
+      <div class="ht-card" [ngClass]="item.cssClass" *ngFor="let item of indications">
+        <div class="ht-card-top">
+          <div class="ht-icon-circle"><i class="fa-solid" [ngClass]="item.icon"></i></div>
+          <span class="ht-badge">{{ item.badgeText }}</span>
+        </div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+        <div class="ht-chips">
+          <span class="ht-chip">👤 {{ item.location }}</span>
+          <span class="ht-chip">⏱ {{ item.recoveryTime }}</span>
+          <span class="ht-chip">🏥 {{ item.hospitalStay }}</span>
+        </div>
+        <a href="javascript:void(0)" class="ht-consult-link" (click)="openBooking()">Consult for this <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 7 - TREATMENT OPTIONS: BALLOON SINUPLASTY vs FESS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="treatment-section">
+
+    <div class="tr-header">
+      <h2>Treatment Options at Vasavi Hospitals</h2>
+      <p>We offer both <strong>Balloon Sinuplasty</strong> and <strong>FESS</strong>, performed by 25+ year experienced ENT surgeons. Here's what sets each approach apart.</p>
+    </div>
+
+    <div class="treatment-options">
+
+      <div class="treatment-card robotic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-star"></i> Minimally Invasive
+        </div>
+        <h3>Balloon Sinuplasty</h3>
+        <p class="tr-desc">
+          A small balloon catheter gently widens blocked sinus passages - no tissue removal, minimal trauma. Best suited for less severe, uncomplicated chronic sinusitis.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Minimal tissue trauma</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Recovery in just 1–2 days</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Can often be done under local anaesthesia</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Ideal for uncomplicated cases</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Minimal post-op discomfort</div>
+        </div>
+        <i class="fa-solid fa-wind tr-bg-icon"></i>
+      </div>
+
+      <div class="treatment-card laparoscopic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-shield-halved"></i> Thorough Standard
+        </div>
+        <h3>FESS (Functional Endoscopic Sinus Surgery)</h3>
+        <p class="tr-desc">
+          A proven, more comprehensive technique that removes diseased tissue, polyps, and blockages using an endoscope - ideal for complex, recurrent, or polyp-related sinusitis.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Handles nasal polyps &amp; complex cases</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> More thorough, longer-lasting relief</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Recovery in 7–10 days</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Suitable after failed prior treatment</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Covered under most insurance plans</div>
+        </div>
+        <i class="fa-solid fa-notes-medical tr-bg-icon"></i>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="treatment-cta">
+      <p>Not sure which option is right for you? Our specialists will guide you based on your scan.</p>
+      <a href="javascript:void(0)" class="btn-treatment-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book an ENT Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 8 - WHAT TO EXPECT (PATIENT JOURNEY)
+  ════════════════════════════════════════════ -->
+  <section class="journey-section">
+
+    <div class="journey-header">
+      <h2>What to Expect During Sinus Surgery</h2>
+      <p>Your Step-by-Step Care Journey</p>
+    </div>
+
+    <div class="journey-timeline">
+
+      <div class="journey-step">
+        <div class="js-circle">1</div>
+        <div class="js-title">Consultation &amp; Evaluation</div>
+        <p class="js-desc">Meet our ENT team to review your symptoms and imaging, and understand whether Balloon Sinuplasty or FESS is right for you.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">2</div>
+        <div class="js-title">Surgery Day</div>
+        <p class="js-desc">A minimally invasive procedure performed through the nostrils - no external cuts. Duration depends on the technique chosen.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">3</div>
+        <div class="js-title">Same-Day / Next-Morning Discharge</div>
+        <p class="js-desc">Most patients go home the same day, with clear post-op care instructions including saline rinses to support healing.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">4</div>
+        <div class="js-title">Breathing Easier Again</div>
+        <p class="js-desc">Recovery ranges from 1–2 days (Balloon) to 7–10 days (FESS). Follow-up visits confirm healing and track improvement in sleep and energy.</p>
+      </div>
+
+    </div>
+
+    <div class="journey-cta">
+      <p>Have questions about surgery day or recovery? We're here to walk you through every step.</p>
+      <a href="javascript:void(0)" class="btn-journey-cta" (click)="openBooking()">
+        <i class="fa-solid fa-phone"></i>
+        Talk to Our Care Team
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ═════════════════════════════
+       SECTION 9 - FAQs
+  ═════════════════════════════ -->
+  <section class="faq-section">
+
+    <div class="faq-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about sinus surgery in Bangalore - answered by our ENT specialists.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item" [class.awareness]="faq.awareness" [class.open]="faq.open" *ngFor="let faq of faqs">
+        <button class="faq-q" (click)="toggleFaq(faq)">
+          <span class="faq-q-left">
+            <span class="faq-icon"><i class="fa-solid" [ngClass]="faq.icon"></i></span>
+            {{ faq.question }}
+          </span>
+          <i class="fa-solid fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <span class="awareness-tag" *ngIf="faq.awarenessTag"><i class="fa-solid fa-circle-exclamation"></i> {{ faq.awarenessTag }}</span>
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <p>Still have questions? Our ENT specialists are here to help you decide the right next step.</p>
+      <a href="javascript:void(0)" class="btn-faq-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book a Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 10 - PATIENT REVIEWS
+       Live Elfsight Google Reviews widget (real reviews, pulled straight
+       from the Vasavi Hospitals Google Business listing).
+  ════════════════════════════════════════════ -->
+  <section class="reviews-section" id="patient-reviews" #patientReviewsSection>
+    <div class="reviews-header">
+      <span class="wih-label"><i class="fa-brands fa-google"></i> Google Reviews</span>
+      <h2>What Our Patients Say</h2>
+      <p>Real reviews from real patients across Vasavi Hospitals.</p>
+    </div>
+    <!-- Elfsight Google Reviews | Vasavi Hospitals -->
+    <div class="elfsight-app-bf9f3d4c-c949-49aa-b1bc-a714aa863544" data-elfsight-app-lazy></div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 11 - FOLLOW US ON INSTAGRAM
+       Live Elfsight Instagram Feed widget, pulling real posts from
+       @vasavi_hospitals.
+  ════════════════════════════════════════════ -->
+  <section class="insta-section" id="instagram-posts" #instagramSection>
+    <div class="insta-header">
+      <span class="wih-label"><i class="fa-brands fa-instagram"></i> Instagram</span>
+      <h2>@vasavi_hospitals</h2>
+      <p>Follow us for recovery stories, doctor Q&amp;As, and health tips.</p>
+    </div>
+    <!-- Elfsight Instagram Feed | Vasavi Hospitals -->
+    <div class="elfsight-app-d4c691e5-e33f-4c07-9c12-70c12b0d6383" data-elfsight-app-lazy></div>
+  </section>
+
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SHARED POPUPS
+══════════════════════════════════════ -->
+
+<div class="popup-overlay" [class.active]="isBookingOpen" (click)="closeBooking()"></div>
+<div class="popup-modal callback-popup-modal" [class.active]="isBookingOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeBooking()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <app-callback-form [pageName]="selectedPageName"></app-callback-form>
+</div>
+
+<app-second-opinion-popup
+  [isOpen]="isSecondOpinionOpen"
+  [imageSrc]="'Images/packages/hernia/second-opinion-pop-up.jpg'"
+  imageAlt="Get Free Second ENT Opinion at Vasavi Hospitals"
+  (close)="closeSecondOpinion()"
+  (bookAppointment)="onSecondOpinionBook()"
+></app-second-opinion-popup>
+
+<app-insurance-check-form
+  [isOpen]="isInsuranceOpen"
+  [surgeryName]="'Sinus Surgery'"
+  (onClose)="closeInsuranceCheck()"
+  (onSubmit)="onInsuranceSubmit()"
+></app-insurance-check-form>
+
+<!-- ══════════════════════════════════════
+     EXIT-INTENT POPUP (desktop only)
+     Distinct from the 15s-timed second-opinion popup - this one fires only
+     when the cursor is about to leave the page, catching visitors who would
+     otherwise leave with zero engagement.
+══════════════════════════════════════ -->
+<div class="popup-overlay" [class.active]="isExitIntentOpen" (click)="closeExitIntent()"></div>
+<div class="popup-modal" [class.active]="isExitIntentOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeExitIntent()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <div class="exit-intent-content">
+    <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Before You Go</span>
+    <h3>Get Your Free Sinus Surgery Cost Estimate</h3>
+    <p class="ci-form-sub">Takes 30 seconds. No obligation - our team calls you back with a clear cost and insurance breakdown.</p>
+    <app-callback-form [pageName]="'Sinus Surgery - Exit Intent'"></app-callback-form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     STICKY MOBILE CALL/WHATSAPP BAR
+     Mobile-only (hidden on desktop via CSS). Zero-friction fallback
+     for the majority-mobile PPC traffic - always one tap away, even
+     if the user has scrolled past every other CTA on the page.
+══════════════════════════════════════ -->
+<div class="mobile-sticky-bar">
+  <a [href]="phoneHref" class="msb-btn msb-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+  <a [href]="whatsappHref" target="_blank" rel="noopener" class="msb-btn msb-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+</div>

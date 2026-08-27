@@ -1,0 +1,391 @@
+<!-- ══════════════════════════════════════════════════════════════
+     CGHS SERVICES - v3 "logo theme" rebuild.
+     Palette and geometry come from the Vasavi mark: #2E3192 indigo,
+     #0095DA azure, and the swoosh (hence the arc/curve motifs).
+     Deliberately NOT the ENT page (flat shadow boxes + arrow carousel)
+     and NOT the surgery PPC pages (#0056B3 / #FF8C00, pill eyebrows,
+     insurance CTAs). Copy is unchanged from v2 - visual layer only.
+══════════════════════════════════════════════════════════════ -->
+<div class="cg">
+
+  <!-- ════════════════════════════════════════════
+       HERO - existing banner set + live overlay copy.
+       Banner artwork is clean (no baked-in text); safe
+       zone is the left ~50% on desktop, top ~60% stacked
+       on tablet/mobile. See public/Images/cghs/README.md.
+  ════════════════════════════════════════════ -->
+  <section class="cg-hero">
+    <picture>
+      <source media="(max-width: 480px)" [srcset]="heroAsset('cghs-hero-banner-mobile.webp')" />
+      <source media="(max-width: 768px)" [srcset]="heroAsset('cghs-hero-banner-tablet.webp')" />
+      <source media="(max-width: 1024px)" [srcset]="heroAsset('cghs-hero-banner-1024.webp')" />
+      <img [src]="heroAsset('cghs-hero-banner-desktop.webp')"
+           alt="CGHS services at Vasavi Hospital, Bangalore"
+           class="cg-hero-img" fetchpriority="high" loading="eager" decoding="sync" />
+    </picture>
+
+    <div class="cg-hero-body">
+      <div class="cg-hero-inner">
+        <nav class="cg-crumb" aria-label="Breadcrumb">
+          <a routerLink="/">Home</a><span aria-hidden="true">›</span><span>CGHS</span>
+        </nav>
+
+        <span class="cg-eyebrow">Central Government Health Scheme</span>
+
+        <h1 class="cg-h1">CGHS services at<br /><span>Vasavi Hospital</span></h1>
+
+        <p class="cg-hero-sub">
+          Vasavi Hospital provides medical and surgical care to CGHS beneficiaries across
+          multiple specialties, following the scheme's applicable guidelines and procedures.
+        </p>
+
+        <div class="cg-hero-ctas">
+          <a [href]="phoneHref" class="cg-btn cg-btn-grad">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i> Call the CGHS Helpdesk
+          </a>
+          <a href="#helpdesk" class="cg-btn cg-btn-ghost" (click)="scrollToHelpdesk($event)">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i> Request a callback
+          </a>
+        </div>
+
+        <div class="cg-hero-tel">
+          <span>CGHS Helpdesk</span>
+          <a [href]="phoneHref">{{ phoneNumber }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       TRUST BAND - gradient, logo colours.
+  ════════════════════════════════════════════ -->
+  <section class="cg-trust">
+    <div class="cg-wrap cg-trust-inner">
+      <div class="cg-trust-item">
+        <img [src]="nabhLogoPath" alt="NABH Accredited" width="34" height="34" loading="lazy" decoding="async" />
+        <div><strong>NABH</strong><span>Accredited hospital</span></div>
+      </div>
+      <div class="cg-trust-item">
+        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+        <div><strong>3,00,000+</strong><span>Patients treated</span></div>
+      </div>
+      <div class="cg-trust-item">
+        <i class="fa-solid fa-truck-medical" aria-hidden="true"></i>
+        <div><strong>24x7</strong><span>Emergency department</span></div>
+      </div>
+      <div class="cg-trust-item">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <div><strong>Kumaraswamy Layout</strong><span>Bangalore</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       STICKY DOCK NAV - floating glass pill.
+       Different device from the ENT page's arrow carousel:
+       centred, rounded, blurred, with a sliding active state.
+  ════════════════════════════════════════════ -->
+  <nav class="cg-dock" aria-label="On this page">
+    <div class="cg-dock-scroll">
+      <button *ngFor="let s of sections"
+              type="button"
+              class="cg-dock-link"
+              [class.active]="activeSection === s.id"
+              (click)="scrollToId(s.id)">
+        {{ s.name }}
+      </button>
+    </div>
+  </nav>
+
+
+  <main class="cg-main">
+
+    <!-- ══ 01 · WHAT CGHS IS ══════════════════════ -->
+    <section class="cg-sec" id="about">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">01</span>
+          <h2>What CGHS is</h2>
+        </div>
+
+        <div class="cg-split">
+          <div class="cg-split-copy">
+            <p class="cg-lead">
+              The Central Government Health Scheme is run by the Ministry of Health &amp; Family Welfare,
+              Government of India. It provides healthcare to serving central government employees,
+              pensioners and their eligible dependants.
+            </p>
+            <p>
+              Beneficiaries hold a CGHS card and receive primary care at CGHS Wellness Centres. For
+              specialist consultations, diagnostics and surgical treatment they are referred to
+              empanelled hospitals, where care is provided in line with the scheme's notified
+              guidelines and procedures.
+            </p>
+
+            <div class="cg-callout">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              <p>
+                Eligibility and card status are confirmed by your CGHS Wellness Centre, which remains the
+                correct authority for those questions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Was a plain <table> in v2. Same four facts, now a stacked
+               card with gradient rails so it reads as a UI, not a document. -->
+          <ul class="cg-facts">
+            <li>
+              <span class="cg-facts-k">Who it covers</span>
+              <span class="cg-facts-v">Serving central government employees, pensioners, family pensioners and their eligible dependants.</span>
+            </li>
+            <li>
+              <span class="cg-facts-k">How access works</span>
+              <span class="cg-facts-v">A valid CGHS card, plus a referral from your Wellness Centre for planned specialist care.</span>
+            </li>
+            <li>
+              <span class="cg-facts-k">What it covers</span>
+              <span class="cg-facts-v">Specialist consultations, diagnostics, day-care procedures, surgery and inpatient care.</span>
+            </li>
+            <li>
+              <span class="cg-facts-k">Who sets the rules</span>
+              <span class="cg-facts-v">CGHS, not the hospital - including eligibility, referrals and scheme rates.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ 02 · SERVICES ══════════════════════════ -->
+    <section class="cg-sec cg-sec-wash" id="services">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">02</span>
+          <h2>Services available</h2>
+        </div>
+
+        <p class="cg-lead cg-lead-wide">
+          Vasavi Hospital offers medical and surgical services across the specialties below. Our
+          doctors, nurses and healthcare professionals provide safe, compassionate and
+          patient-centric care for CGHS beneficiaries.
+        </p>
+
+        <div class="cg-cards">
+          <article class="cg-card" *ngFor="let service of services">
+            <span class="cg-card-icon"><i class="fa-solid {{ service.icon }}" aria-hidden="true"></i></span>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+            <a *ngIf="service.link" [routerLink]="service.link" class="cg-card-link">
+              View department <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <span *ngIf="!service.link" class="cg-card-note">Available at the hospital</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ 03 · SURGICAL PROCEDURES ═══════════════ -->
+    <section class="cg-sec" id="surgical">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">03</span>
+          <h2>Surgical procedures</h2>
+        </div>
+
+        <p class="cg-lead cg-lead-wide">
+          Beyond routine care, specialised surgical treatment is available in the following areas,
+          performed by experienced surgical teams.
+        </p>
+
+        <ul class="cg-chips">
+          <li *ngFor="let surgery of advancedSurgeries">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>{{ surgery }}
+          </li>
+        </ul>
+
+        <div class="cg-callout">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          <p>
+            Availability for a specific procedure can be confirmed by the CGHS Helpdesk before you
+            travel to the hospital.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ 04 · USING THE SCHEME HERE ═════════════ -->
+    <section class="cg-sec cg-sec-wash" id="process">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">04</span>
+          <h2>Using the scheme here</h2>
+        </div>
+
+        <!-- Connected timeline: gradient rail behind numbered nodes. -->
+        <ol class="cg-timeline">
+          <li *ngFor="let step of processSteps; let i = index">
+            <span class="cg-tl-node">{{ i + 1 }}</span>
+            <div class="cg-tl-body">
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.description }}</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ══ 05 · WHAT TO BRING ═════════════════════ -->
+    <section class="cg-sec" id="documents">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">05</span>
+          <h2>What to bring</h2>
+        </div>
+
+        <ul class="cg-checklist">
+          <li *ngFor="let doc of documents">
+            <span class="cg-check"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            <span>{{ doc }}</span>
+          </li>
+        </ul>
+
+        <div class="cg-callout">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          <p>
+            Not sure what applies to your case? The helpdesk will confirm exactly what to bring
+            before you travel - call <a [href]="phoneHref">{{ phoneNumber }}</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ EMERGENCY ══════════════════════════════ -->
+    <section class="cg-sec cg-sec-tight">
+      <div class="cg-wrap">
+        <aside class="cg-emergency">
+          <span class="cg-em-icon"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i></span>
+          <div>
+            <h3>In an emergency, do not wait for paperwork</h3>
+            <p>
+              Come directly to our 24x7 Emergency Department or call
+              <a [href]="phoneHref">{{ phoneNumber }}</a>. Treatment begins first; our CGHS desk helps
+              your family complete the documentation afterwards.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+
+    <!-- ══ 06 · HELPDESK ══════════════════════════ -->
+    <section class="cg-sec cg-sec-dark" id="helpdesk">
+      <div class="cg-wrap">
+        <div class="cg-sec-head cg-sec-head-inv">
+          <span class="cg-step">06</span>
+          <h2>CGHS Helpdesk</h2>
+        </div>
+
+        <div class="cg-help">
+          <div class="cg-help-copy">
+            <p class="cg-lead">
+              We are committed to making healthcare more accessible and convenient for CGHS
+              beneficiaries. Our dedicated team can help you with:
+            </p>
+
+            <ul class="cg-help-list">
+              <li *ngFor="let item of helpdeskItems">
+                <i class="fa-solid {{ item.icon }}" aria-hidden="true"></i>{{ item.text }}
+              </li>
+            </ul>
+
+            <div class="cg-hero-ctas">
+              <a [href]="phoneHref" class="cg-btn cg-btn-light">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i> Call {{ phoneNumber }}
+              </a>
+              <a [href]="whatsappHref" target="_blank" rel="noopener" class="cg-btn cg-btn-outline">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
+              </a>
+            </div>
+
+            <p class="cg-addr" style="margin-top: 20px;">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              Vasavi Hospital, Kumaraswamy Layout, Bangalore - near the Metro station and BMTC bus stand.
+            </p>
+          </div>
+
+          <!-- No wrapper card and no heading here on purpose: <app-callback-form>
+               already renders its own titled panel ("Get a Callback"), so the
+               white box around it was a second card and a second heading. The
+               .cg-form div stays only as a scoping hook for the ::ng-deep
+               overrides in cghs.css that pull that panel into this page's
+               palette and tighten its spacing. -->
+          <div class="cg-form">
+            <app-callback-form [pageName]="'CGHS Helpdesk'"></app-callback-form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ 07 · QUESTIONS ═════════════════════════ -->
+    <section class="cg-sec" id="faq">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step">07</span>
+          <h2>Questions</h2>
+        </div>
+
+        <div class="cg-faq">
+          <div class="cg-faq-item" [class.open]="faq.open" *ngFor="let faq of faqs">
+            <button type="button" class="cg-faq-q" (click)="toggleFaq(faq)" [attr.aria-expanded]="faq.open">
+              <span class="cg-faq-ico"><i class="fa-solid {{ faq.icon }}" aria-hidden="true"></i></span>
+              <span class="cg-faq-txt">{{ faq.question }}</span>
+              <span class="cg-faq-sign" aria-hidden="true"></span>
+            </button>
+            <div class="cg-faq-a"><p>{{ faq.answer }}</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══ REVIEWS ════════════════════════════════ -->
+    <section class="cg-sec cg-sec-wash" id="reviews">
+      <div class="cg-wrap">
+        <div class="cg-sec-head">
+          <span class="cg-step"><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+          <h2>What our patients say</h2>
+        </div>
+        <div class="elfsight-app-bf9f3d4c-c949-49aa-b1bc-a714aa863544" data-elfsight-app-lazy></div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ══ CLOSING CTA ══════════════════════════════ -->
+  <section class="cg-endcta">
+    <div class="cg-wrap cg-endcta-inner">
+      <div>
+        <h2>Questions about CGHS treatment, availability or documentation?</h2>
+        <p>Our helpdesk answers scheme, appointment and documentation queries.</p>
+      </div>
+      <a [href]="phoneHref" class="cg-btn cg-btn-light">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i> {{ phoneNumber }}
+      </a>
+    </div>
+  </section>
+</div>
+
+
+<!-- Mobile call bar -->
+<div class="cg-mobile-bar">
+  <a [href]="phoneHref" class="cgm-call"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call Helpdesk</a>
+  <a [href]="whatsappHref" target="_blank" rel="noopener" class="cgm-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+</div>

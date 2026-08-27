@@ -1,0 +1,465 @@
+<div class="hero-section">
+    <img src="Images/oncology/oncology-banner-vasavi-hospital.webp" class="desktop_banner"
+        alt="Cancer patient with headscarf smiling at Vasavi Hospital oncology care">
+    <img src="Images/oncology/oncology- banner.webp" class="mobile_banner"
+        alt="Comprehensive oncology care in Bangalore with advanced cancer treatments and expert oncologists">
+    <a (click)="scrollToSection('appointment')" class="book-btn">Book an Appointment</a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">Oncology at Vasavi Hospitals - Banashankari, Bangalore</h1>
+        <p class="para_style">Are you looking for the best cancer treatment center in Bangalore? At Vasavi Hospitals,
+            Banashankari, we provide advanced, Comprehensive and personalized care for every cancer patient. Our expert
+            team of oncologists and cancer specialists use modern technology and proven treatments to fight cancer
+            effectively. </p>
+        <p class="para_style">Whether you are searching for the best hospital for leukemia, breast cancer, prostate
+            cancer or gynecological cancers, Vasavi Hospitals is committed to giving you the right diagnosis, treatment
+            and support - all under one roof.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/oncology/cancer-awareness-ribbon-vasavi.webp"
+            alt="Pink and purple cancer awareness ribbon symbolizing hope and support">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">Cancer Treatments We Offer</h2>
+    <p class="para_style text-center treatment_header_des">We treat a wide range of cancers with precision. Here are the
+        most common ones we manage:</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Breast Cancer</h3>
+            <p class="box_para"> Early detection and treatment for breast tumors with best outcomes and lasting
+                recovery.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Cervical Cancer</h3>
+            <p class="box_para">Expert gynec-oncologists offering advanced screening, therapies, and long-term follow-up
+                care.</p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Ovarian Cancer</h3>
+            <p class="box_para"> Comprehensive care with minimally invasive surgery, targeted therapy and expert
+                post-treatment support.</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Prostate Cancer</h3>
+            <p class="box_para"> Early diagnosis, robotic-assisted surgery, hormone therapy options, and advanced
+                imaging guidance.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Bladder Cancer</h3>
+            <p class="box_para">Personalized treatment for bladder tumors, from surgery to chemotherapy with precise
+                monitoring.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Kidney Cancer</h3>
+            <p class="box_para">Advanced care for kidney tumors using the latest surgical techniques and innovative
+                treatment plans.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Uterine Cancer</h3>
+            <p class="box_para">Specialized treatment plans for endometrial and uterine cancers with personalized
+                recovery programs.</p>
+        </div>
+    </div>
+    <div class="treatment_container_2">
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Leukemia</h3>
+            <p class="box_para">Expert hematology-oncology care for blood cancers, from chemotherapy to bone marrow
+                transplant procedures.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Lung Cancer</h3>
+            <p class="box_para">Cutting-edge imaging, targeted treatment, rehabilitation programs and comprehensive
+                follow-up guidance.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Colorectal Cancer</h3>
+            <p class="box_para">Complete treatment from screening to surgery, recovery support, and regular health
+                monitoring.</p>
+        </div>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Surgery Options Available</h2>
+    <p class="para_style text-center treatment_header_des">At Vasavi Hospitals, we provide world-class surgical
+        facilities for cancer patients:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgery</h3>
+                    <p class="box_para">Traditional, safe approach for complete tumor removal with proven effective
+                        outcomes.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Laparoscopic Surgery</h3>
+                    <p class="box_para box_padding">Small incisions, faster recovery, less pain, and minimal hospital
+                        stay.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Robotic Surgery</h3>
+                    <p class="box_para box_padding"> High precision, minimal blood loss, quicker return to normal life
+                        with confidence.</p>
+
+                    <!-- <a href="/robotic-surgery-in-urology.php" class="box_para"
+                            style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png"
+                    alt="Happy female patient undergoing breast cancer treatment, lying in hospital bed with flowers, Vasavi Hospitals">
+            </div>
+        </div>
+
+        <div class="form-container" id="appointment">
+            <h2 class="form-title">Book Appointment</h2>
+            <p class="form-subtitle">Schedule your visit with our Oncology specialists</p>
+
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+
+                <div class="input-wrapper">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input id="name" formControlName="name" placeholder="Enter your full name" />
+                        <div class="error" *ngIf="submitted && f['name'].errors">
+                            <small *ngIf="f['name'].errors['required']">Name is required</small>
+                            <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                            <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Contact Number *</label>
+                        <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                        <div class="error" *ngIf="submitted && f['phone'].errors">
+                            <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                            <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input id="email" formControlName="email" placeholder="Enter your email" />
+                        <div class="error" *ngIf="submitted && f['email'].errors">
+                            <small *ngIf="f['email'].errors['required']">Email is required</small>
+                            <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" formControlName="date" />
+                        <div class="error" *ngIf="submitted && f['date'].errors">
+                            <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor_name">Select Doctor *</label>
+                    <select id="doctor_name" formControlName="doctor">
+                        <option value="">-- Select Doctor --</option>
+                        <!-- <option value="Dr. Mutharaju K. R">Dr. Mutharaju K. R</option>
+                  <option value="Dr. Sowmya Sangamesh">Dr. Sowmya Sangamesh</option> -->
+                    </select>
+                    <div class="error" *ngIf="submitted && f['doctor'].errors">
+                        <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message / Reason for Visit *</label>
+                    <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                    <div class="error" *ngIf="submitted && f['message'].errors">
+                        <small *ngIf="f['message'].errors['required']">Message is required</small>
+                        <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Robotic Oncology Surgery Section -->
+<div class="container_1">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Surgery in Oncology with Da Vinci Xi</h2>
+                <p class="cathlab_intro_text">
+                    At Vasavi Hospitals, we bring the latest in cancer care with the Da Vinci Xi robotic surgical
+                    system. This advanced technology enables our oncology surgeons to perform complex cancer surgeries
+                    with high precision and minimal invasiveness. Patients benefit from faster recovery, reduced pain,
+                    and better treatment outcomes, making robotic-assisted oncology surgery a preferred choice for many
+                    cancer treatments.
+                </p>
+
+                <h3 class="cathlab_sub_title">Why Choose Robotic Surgery for Cancer Treatment?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Precision Tumor Removal</h4>
+                            <p class="cathlab_feature_desc">
+                                The robotic system allows surgeons to remove tumors with extreme accuracy, preserving
+                                surrounding healthy tissues and improving overall outcomes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Cancer Surgery</h4>
+                            <p class="cathlab_feature_desc">
+                                Most robotic oncology procedures are performed through small incisions, resulting in
+                                minimal blood loss, less pain, and faster wound healing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Faster Recovery</h4>
+                            <p class="cathlab_feature_desc">
+                                Patients experience shorter hospital stays and can resume further cancer treatments,
+                                such as chemotherapy or radiation, sooner.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Better Long-Term Outcomes</h4>
+                            <p class="cathlab_feature_desc">
+                                Robotic-assisted oncology surgeries improve surgical success rates, reduce
+                                complications, and enhance overall survival and quality of life.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional Image Section -->
+            <!-- <div class="cathlab_image_section">
+                <div class="cathlab_image_wrapper">
+                    <img src="assets/Images/oncology/robotic-oncology-surgery-vasavi-hospital-banashankari-bangalore.jpg"
+                        alt="Advanced Robotic Cancer Surgery at Vasavi Hospitals Banashankari Bangalore"
+                        class="cathlab_image">
+                    <div class="cathlab_image_overlay">
+                        <div class="cathlab_overlay_content">
+                            <i class="fa-solid fa-ribbon"></i>
+                            <span>Advanced Cancer Care</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Oncology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified Oncology surgeons brings decades of combined
+        experience in treating complex bone, joint, and musculoskeletal conditions with care and precision.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/Doctor-img/ORTHOPEDICS/dr-rupendu-t-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Rupendu T</h3>
+            <p class="doctor-title">Senior Consultant  Orthopedics</p>
+            <p class="qualification">MBBS, D.Ortho, MS(Ortho), Fellowship in Joint Replacement Surgery (Australia, Germany)</p>
+            <p class="doctor-experience">45+ Years of Experience</p>
+            <p class="doctor-specialties">Sr. Consultant Orthopaedic Surgeon</p>
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-rupendu-t'">Book Appointment</a>
+        </div> -->
+
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-srivatsa-subramanya-spec.png" alt="Dr. Srivatsa Subramanya | Orthopedic Surgeon | Vasavi Hospitals Bangalore">
+            </div>
+            <h3 class="doctor-name">Dr. Srivatsa Subramanya</h3>
+            <p class="doctor-title">Consultant - Orthopedics</p>
+            <p class="qualification">MBBS, MS (Ortho), DNB (Ortho), Fellowship in Knee (Australia), Fellowship in Shoulder (Australia, Italy), Fellowship in Trauma (S. Korea)</p>
+            <p class="doctor-experience">17+ Years of Experience</p>
+            <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p>
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-srivatsa-subramanya'">Book Appointment</a>
+        </div> -->
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-shivacharan-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Sivacharan P. V</h3>
+            <p class="doctor-title">Consultant Medical Oncology</p>
+            <p class="qualification">MBBS, MRCP (UK) & MRCP (Medical Oncology) with CCT - Royal Colleges of Physicians, UK; ICH-GCP Certified.</p>
+            <p class="doctor-experience">18+ Years of Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-sivacharan-p-v'">Book Appointment</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Choose Vasavi Hospitals for Cancer Care?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Experienced Oncology Team</b> -
+                Top-rated oncologists in Banashankari, Bangalore with decades of experience.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Advanced Medical Facilities</b> -
+                Modern operation theatres, diagnostic labs and state-of-the-art equipment.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Comprehensive Care</b> - From
+                screening and diagnosis to surgery, chemotherapy and recovery.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Patient-Centric Approach</b> -
+                Compassionate care that focuses on physical and emotional well-being.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Convenient Location</b> - Easily
+                accessible cancer hospital near you in Banashankari, Bangalore.</span>
+        </div>
+        <div class="wcu_description" style="margin-bottom: 30px;">Take the first step towards better health - Book Your
+            Appointment Today and consult our expert oncologists in Banashankari, Bangalore.</div>
+    </div>
+
+    <img src="Images/oncology/oncology-patient-care-vasavi.webp"
+        alt="Cancer patient in pink dress receiving treatment and smiling with hope">
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+<div class="" style="padding: 2% 6%">
+    <div class="heading">Your Health, Our Priority</div>
+    <div class="box_para">At Vasavi Hospitals, we understand that a cancer diagnosis can be overwhelming. That’s why our
+        team works closely with you and your family, ensuring clear communication, personalized treatment plans, and
+        constant support throughout your journey. Our goal is not just to treat cancer but to restore hope, trust and
+        confidence in your future.</div>
+</div>
+
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. Why choose Vasavi Hospitals for cancer treatment?</div>
+            <div class="ans">We combine top oncologists, advanced diagnostics, robotic surgeries and personalized care
+                to deliver the best cancer treatment outcomes.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2. How does robotic cancer surgery benefit me?</div>
+            <div class="ans">Robotic surgery ensures smaller cuts, less pain, minimal blood loss and quicker recovery,
+                helping you get back to normal life faster.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3. Is robotic surgery safer than traditional open surgery?</div>
+            <div class="ans">Yes. Robotic-assisted surgery offers greater precision, fewer complications, and a faster
+                hospital discharge compared to traditional methods.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4. Do you offer robotic surgery for gynecologic and urologic cancers?</div>
+            <div class="ans">Absolutely! We use robotic technology for bladder, kidney, cervical and uterine cancers
+                with excellent results.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5. Do you treat all types of cancer?</div>
+            <div class="ans">Yes! We provide treatment for breast cancer, cervical cancer, prostate cancer, bladder
+                cancer, kidney cancer, leukemia, lung cancer, and many others under one roof.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6. How do I book a consultation with an oncologist?</div>
+            <div class="ans">You can book online, call our hospital at 080 71 500 500 or walk in to schedule a same-day
+                consultation with our experts.</div>
+        </div>
+    </div>
+</div>
+<app-cta></app-cta>

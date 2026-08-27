@@ -10,7 +10,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 /** Which flyout (if any) is currently open. Only one at a time. */
-type DropdownKey = 'services' | 'packages' | null;
+type DropdownKey = 'services' | 'packages' | 'health' | null;
 
 interface MenuItem {
   label: string;
@@ -18,88 +18,93 @@ interface MenuItem {
 }
 
 /**
- * "Our Services" — listed in the same column-major reading order as the
- * approved design (top-to-bottom within a column, then on to the next
- * column). Grid layout in navbar.css relies on this order to reproduce
- * the same columns without hard-coding them separately.
+ * "Our Services" - one entry per ported clinical specialty page (Family A +
+ * Family B, 33 pages total). Listed in the same column-major reading order
+ * as the approved design (top-to-bottom within a column, then on to the
+ * next column) - navbar.css's grid layout relies on this order to
+ * reproduce the same columns without hard-coding them separately. Paths
+ * are the real SEO slugs registered in app.routes.ts, not generated ones.
  */
-const SERVICE_LABELS = [
+const SERVICES_MENU: MenuItem[] = [
   // Column 1
-  'Anesthesiology',
-  'Bariatric Surgery',
-  'Cardiology',
-  'Dentistry',
-  'Dermatology',
-  'Diabetes & Endocrinology',
-  'Emergency & Critical Care',
+  { label: 'Anesthesiology', path: '/anesthesiology-hospital-in-bangalore' },
+  { label: 'Bariatric Surgery', path: '/bariatric-surgery-in-bangalore' },
+  { label: 'Cardiology', path: '/cardiology-hospital-in-bangalore' },
+  { label: 'Dentistry', path: '/dental-clinic-in-bangalore' },
+  { label: 'Dermatology', path: '/dermatology-skin-clinic-in-bangalore' },
+  { label: 'Diabetes & Endocrinology', path: '/diabetes-and-endocrinology-center-in-bangalore' },
+  { label: 'Emergency & Critical Care', path: '/emergency-and-critical-care-in-bangalore' },
   // Column 2
-  'ENT',
-  'Internal Medicine',
-  'Liver & HPB Care',
-  'Medical Gastroenterology',
-  'Medical Oncology',
-  'General Surgery (MIS)',
-  'Neonatology (Level-3 NICU)',
+  { label: 'ENT', path: '/ent-hospital-in-bangalore' },
+  { label: 'Internal Medicine', path: '/internal-medicine-hospital-in-bangalore' },
+  { label: 'Liver & HPB Care', path: '/liver-hpb-care-center-in-bangalore' },
+  { label: 'Medical Gastroenterology', path: '/gastroenterology-hospital-in-bangalore' },
+  { label: 'Medical Oncology', path: '/medical-oncology-cancer-treatment-in-bangalore' },
+  { label: 'General Surgery (MIS)', path: '/minimally-invasive-surgery-in-bangalore' },
+  { label: 'Neonatology (Level-3 NICU)', path: '/neonatology-and-nicu-care-in-bangalore' },
   // Column 3
-  'Nephrology',
-  'Neurology',
-  'Neurosurgery',
-  'Nutrition & Dietetics',
-  'Obstetrics & Gynaecology',
-  'Oncology',
-  'Ophthalmology',
+  { label: 'Nephrology', path: '/nephrology-hospital-in-bangalore' },
+  { label: 'Neurology', path: '/neurology-hospital-in-bangalore' },
+  { label: 'Neurosurgery', path: '/neurosurgery-specialist-in-bangalore' },
+  { label: 'Nutrition & Dietetics', path: '/nutrition-and-dietetics-consultation-in-bangalore' },
+  { label: 'Obstetrics & Gynaecology', path: '/obstetrics-and-gynaecology-hospital-in-bangalore' },
+  { label: 'Oncology', path: '/oncology-hospital-in-bangalore' },
+  { label: 'Ophthalmology', path: '/eye-hospital-in-bangalore' },
   // Column 4
-  'Oral & Maxillofacial Surgery',
-  'Orthopedics',
-  'Pediatrics',
-  'Physiotherapy',
-  'Plastic Surgery',
-  'Psychiatry',
-  'Pulmonology',
+  { label: 'Oral & Maxillofacial Surgery', path: '/oral-and-maxillofacial-surgery-in-bangalore' },
+  { label: 'Orthopedics', path: '/orthopedic-hospital-in-bangalore' },
+  { label: 'Pediatrics', path: '/pediatric-hospital-in-bangalore' },
+  { label: 'Physiotherapy', path: '/physiotherapy-center-in-bangalore' },
+  { label: 'Plastic Surgery', path: '/plastic-and-reconstructive-surgery-in-bangalore' },
+  { label: 'Psychiatry', path: '/psychiatry-and-mental-health-in-bangalore' },
+  { label: 'Pulmonology', path: '/lung-specialist-in-bangalore' },
   // Column 5
-  'Radiology',
-  'Surgical Gastroenterology',
-  'Surgical Oncology',
-  'Urology',
-  'Vascular Sciences',
+  { label: 'Radiology', path: '/radiology-and-imaging-services-in-bangalore' },
+  { label: 'Surgical Gastroenterology', path: '/surgical-gastroenterology-in-bangalore' },
+  { label: 'Surgical Oncology', path: '/surgical-oncology-cancer-hospital-in-bangalore' },
+  { label: 'Urology', path: '/urology-hospital-in-bangalore' },
+  { label: 'Vascular Sciences', path: '/vascular-surgery-in-bangalore' },
 ];
 
-/** "Surgery Packages" — same column-major ordering approach as above. */
-const PACKAGE_LABELS = [
+/** "Surgery Packages" - one entry per ported PPC package page (17 pages
+ * total), same column-major ordering approach as above. */
+const PACKAGES_MENU: MenuItem[] = [
   // Column 1
-  'Hernia Surgery',
-  'Total Knee Replacement',
-  'Total Hip Replacement',
-  'Gallbladder Removal',
-  'Appendectomy',
-  'Hysterectomy',
+  { label: 'Hernia Surgery', path: '/hernia-surgery-in-bangalore' },
+  { label: 'Total Knee Replacement', path: '/total-knee-replacement-in-bangalore' },
+  { label: 'Total Hip Replacement', path: '/total-hip-replacement-in-bangalore' },
+  { label: 'Gallbladder Removal', path: '/gallbladder-removal-surgery-in-bangalore' },
+  { label: 'Appendectomy', path: '/appendectomy-surgery-in-bangalore' },
+  { label: 'Hysterectomy', path: '/hysterectomy-surgery-in-bangalore' },
   // Column 2
-  'Tonsillectomy',
-  'Adenoid Removal',
-  'Sinus Surgery',
-  'Piles Surgery',
-  'Fistula Surgery',
-  'ACL Reconstruction',
+  { label: 'Tonsillectomy', path: '/tonsillectomy-surgery-in-bangalore' },
+  { label: 'Adenoid Removal', path: '/adenoid-removal-in-bangalore' },
+  { label: 'Sinus Surgery', path: '/sinus-surgery-in-bangalore' },
+  { label: 'Piles Surgery', path: '/piles-surgery-in-bangalore' },
+  { label: 'Fistula Surgery', path: '/fistula-surgery-in-bangalore' },
+  { label: 'ACL Reconstruction', path: '/acl-reconstruction-in-bangalore' },
   // Column 3
-  'Prostate Removal (TURP)',
-  'Ovarian Cystectomy',
-  'Fibroid Removal',
-  'CT Angiography',
-  'Coronary Angiography',
+  { label: 'Prostate Removal (TURP)', path: '/turp-surgery-in-bangalore' },
+  { label: 'Ovarian Cystectomy', path: '/ovarian-cystectomy-in-bangalore' },
+  { label: 'Fibroid Removal', path: '/fibroid-removal-in-bangalore' },
+  { label: 'CT Angiography', path: '/ct-angiography-in-bangalore' },
+  { label: 'Coronary Angiography', path: '/coronary-angiography-in-bangalore' },
 ];
 
-function slugify(label: string): string {
-  return label
-    .toLowerCase()
-    .replace(/&/g, 'and')
-    .replace(/[()]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
-
-function toMenuItems(labels: string[], basePath: string): MenuItem[] {
-  return labels.map((label) => ({ label, path: `${basePath}/${slugify(label)}` }));
-}
+/** "Health Package" - one entry per preventive health check-up package
+ * (health-package/:slug is a single param-driven page; labels/slugs come
+ * straight from the `packages` array in health-check.ts). */
+const HEALTH_PACKAGES_MENU: MenuItem[] = [
+  { label: 'View All Health Packages', path: '/health-package' },
+  { label: 'Diabetes Health Check', path: '/health-package/diabetes-health-check' },
+  { label: 'Cardiac Health Package', path: '/health-package/cardiac-wellness-package' },
+  { label: 'Comprehensive Annual Heart Care Package', path: '/health-package/comprehensive-annual-heart-care-package' },
+  { label: 'Comprehensive Annual Diabetes Care Package', path: '/health-package/comprehensive-annual-diabetes-care-package' },
+  { label: 'Basic Health Check Package', path: '/health-package/basic-health-check-package' },
+  { label: 'Well Women Health Check-Up', path: '/health-package/well-women-health-check-up' },
+  { label: 'Master Health Check – Men', path: '/health-package/vasavi-master-health-check-men' },
+  { label: 'Master Health Check – Women', path: '/health-package/vasavi-master-health-check-women' },
+];
 
 @Component({
   selector: 'app-navbar',
@@ -111,11 +116,14 @@ function toMenuItems(labels: string[], basePath: string): MenuItem[] {
 export class Navbar {
   private readonly platformId = inject(PLATFORM_ID);
 
-  /** Full "Our Services" mega-menu, in column-major reading order (see SERVICE_LABELS). */
-  protected readonly servicesMenu: MenuItem[] = toMenuItems(SERVICE_LABELS, '/services');
+  /** Full "Our Services" mega-menu, in column-major reading order (see SERVICES_MENU). */
+  protected readonly servicesMenu: MenuItem[] = SERVICES_MENU;
 
-  /** Full "Surgery Packages" mega-menu, in column-major reading order (see PACKAGE_LABELS). */
-  protected readonly packagesMenu: MenuItem[] = toMenuItems(PACKAGE_LABELS, '/surgery-packages');
+  /** Full "Surgery Packages" mega-menu, in column-major reading order (see PACKAGES_MENU). */
+  protected readonly packagesMenu: MenuItem[] = PACKAGES_MENU;
+
+  /** "Health Package" menu - the preventive check-up packages. */
+  protected readonly healthPackagesMenu: MenuItem[] = HEALTH_PACKAGES_MENU;
 
   /** Adds a subtle shadow once the page has scrolled past the top bar. */
   protected readonly isScrolled = signal(false);
@@ -123,7 +131,7 @@ export class Navbar {
   /** Mobile / tablet slide-down panel open state. */
   protected readonly mobileMenuOpen = signal(false);
 
-  /** Which dropdown is expanded — shared by desktop hover-lock and mobile accordion. */
+  /** Which dropdown is expanded - shared by desktop hover-lock and mobile accordion. */
   protected readonly openDropdown = signal<DropdownKey>(null);
 
   constructor() {

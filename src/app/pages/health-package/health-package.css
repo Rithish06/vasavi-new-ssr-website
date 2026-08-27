@@ -1,0 +1,889 @@
+/* ===========================================================================
+   Health Check Packages - hero section
+   The hero's background is one of three pre-composed photo/graphic banners
+   (desktop/tablet/mobile) supplied as assets; each already bakes in the
+   family+doctor photo, the floating icon badges and the decorative "+"
+   crosses. On desktop the hero is a fixed 700px tall band with
+   `background-size: cover` cropping the banner to fit; below the 1024px
+   breakpoint (where the portrait tablet/mobile crops take over) it switches
+   back to `aspect-ratio`, matched to each banner exactly, so those never get
+   cropped. Only the text column and the three additional overlay cards
+   (location pill, checklist card, trust card) - which are NOT part of the
+   banner art - are added here.
+   ========================================================================= */
+
+.hc-hero {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background-image: url('/Images/Healthcheck-new/health-check-banner-desktop.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.hc-hero__inner {
+  position: relative;
+  height: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+}
+
+/* ---------- Left text column ---------- */
+
+.hc-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 47%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding-block: clamp(16px, 3vw, 32px);
+}
+
+.hc-hero__eyebrow {
+  position: relative;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-navy-800);
+  padding-bottom: 12px;
+}
+
+.hc-hero__eyebrow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-gold-500);
+}
+
+.hc-hero__title {
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.18;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.hc-hero__title-blue {
+  color: var(--color-blue-600);
+}
+
+.hc-hero__desc {
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.6;
+  color: var(--color-text-gray);
+  max-width: 46ch;
+  margin: 0;
+}
+
+.hc-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.hc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.hc-btn--filled {
+  color: var(--color-white);
+  background: var(--gradient-cta);
+  box-shadow: 0 10px 24px rgba(36, 84, 230, 0.26);
+}
+
+.hc-btn--filled:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(36, 84, 230, 0.32);
+}
+
+.hc-btn--outline {
+  color: var(--color-blue-600);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-blue-600);
+}
+
+.hc-btn--outline:hover {
+  background: rgba(36, 84, 230, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ---------- Mini-feature strip ---------- */
+
+.hc-hero__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(18, 27, 111, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(2px);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hc-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-right: 1px solid rgba(18, 27, 111, 0.1);
+}
+
+.hc-feature:last-child {
+  border-right: none;
+}
+
+.hc-feature__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--color-blue-600);
+  background: rgba(36, 84, 230, 0.1);
+  flex-shrink: 0;
+}
+
+.hc-feature__icon app-doctors-icon {
+  display: flex;
+  width: 14px;
+  height: 14px;
+}
+
+.hc-feature__label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+/* ---------- Right-side overlay cards (float on top of the baked-in
+   photo/badges from the background banner) ---------- */
+
+.hc-hero__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hc-visual-pill,
+.hc-visual-card {
+  position: absolute;
+  pointer-events: auto;
+  background: var(--color-white);
+  border-radius: 999px;
+  box-shadow: 0 16px 32px rgba(18, 27, 111, 0.16);
+}
+
+.hc-visual-pill {
+  top: 6%;
+  right: 3%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-navy-800);
+  max-width: 260px;
+}
+
+.hc-visual-pill app-doctors-icon {
+  flex-shrink: 0;
+  color: var(--color-gold-500);
+}
+
+.hc-visual-card {
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.hc-visual-card--checklist {
+  top: 30%;
+  left: 42%;
+  width: 200px;
+}
+
+.hc-visual-card--checklist h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0 0 10px;
+}
+
+.hc-visual-card--checklist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hc-visual-card--checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.hc-visual-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--color-white);
+  background: var(--color-blue-600);
+}
+
+.hc-visual-check app-doctors-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.hc-visual-card--trust {
+  bottom: 5%;
+  left: 57%;
+  right: 4%;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+}
+
+.hc-visual-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--color-blue-600);
+  background: rgba(36, 84, 230, 0.1);
+}
+
+.hc-visual-card--trust h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0 0 3px;
+}
+
+.hc-visual-card--trust p {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+/* ===========================================================================
+   Breakpoints - swap the banner asset and drop to a stacked layout once the
+   photo moves below the text in the portrait banners.
+   ========================================================================= */
+
+@media (max-width: 1099.98px) {
+  .hc-hero {
+    height: auto;
+    aspect-ratio: 1086 / 1448;
+    background-image: url('/Images/Healthcheck-new/health-check-banner-tablet.png');
+    background-position: center top;
+  }
+
+  .hc-hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hc-hero__content {
+    max-width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    padding-top: clamp(24px, 5vw, 48px);
+    text-align: left;
+  }
+
+  /* The tablet/mobile banners don't reserve dedicated space for these
+     floating cards the way the desktop crop does - keep the hero focused
+     on the headline, CTAs and mini-features here instead of crowding the
+     photo below. */
+  .hc-hero__visual {
+    display: none;
+  }
+}
+
+/* From here down (≤1024px) the hero is much taller than its text content,
+   so the mini feature strip is pushed all the way to the bottom edge -
+   stretch the content column back out to the hero's full height (it was
+   capped to `height: auto` just above) and let `margin-top: auto` on the
+   last flex child do the pushing, instead of the strip sitting mid-flow
+   over the family photo. */
+@media (max-width: 1024px) {
+  .hc-hero__content {
+    height: 100%;
+    padding-bottom: clamp(16px, 4vw, 28px);
+  }
+
+  .hc-hero__features {
+    margin-top: auto;
+  }
+}
+
+@media (max-width: 699.98px) {
+  .hc-hero {
+    aspect-ratio: 864 / 1821;
+    background-image: url('/Images/Healthcheck-new/health-check-banner-mobile.png');
+  }
+
+  .hc-hero__content {
+    gap: 14px;
+    padding-top: clamp(20px, 6vw, 36px);
+  }
+
+  .hc-hero__ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hc-btn {
+    justify-content: center;
+  }
+
+  .hc-hero__features {
+    gap: 0;
+  }
+
+  .hc-feature {
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hc-hero__title {
+    font-size: 22px;
+  }
+
+  .hc-feature__label {
+    font-size: 11px;
+  }
+}
+
+/* ===========================================================================
+   "Our Health Check Packages" - package grid
+   Three featured (annual/comprehensive) packages with a supplied cut-out
+   photo each, then five compact packages without a photo. Copy comes from
+   HealthPackagePage's featuredPackages/standardPackages (health-package.ts),
+   itself sourced from health-check.ts's `packages` array so it stays in
+   sync with each package's own "/health-package/:slug" detail page.
+   ========================================================================= */
+
+.pkg-section {
+  padding: 72px 0 88px;
+  background: linear-gradient(180deg, #f3f6ff 0%, #ffffff 60%);
+}
+
+.pkg-section__inner {
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+}
+
+.pkg-heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.pkg-heading__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--color-white);
+  background: var(--gradient-cta);
+  margin-bottom: 10px;
+}
+
+.pkg-heading__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(26px, 3.4vw, 42px);
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
+
+.pkg-heading__dash {
+  width: clamp(28px, 5vw, 60px);
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-gold-500);
+  flex-shrink: 0;
+}
+
+/* ---------- Card grids ---------- */
+
+.pkg-grid {
+  display: grid;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.pkg-grid--featured {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.pkg-grid--standard {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.pkg-subheading {
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+.pkg-card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid rgba(18, 27, 111, 0.07);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(18, 27, 111, 0.07);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pkg-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 48px rgba(18, 27, 111, 0.12);
+}
+
+/* Standard (photo-less) cards carry their padding/flex directly. */
+.pkg-card:not(.pkg-card--featured) {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 22px;
+}
+
+.pkg-card--featured {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.pkg-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+}
+
+/* ---------- Icon avatar + accent colors ---------- */
+
+.pkg-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.pkg-card--pink .pkg-card__icon {
+  color: var(--pkg-pink);
+  background: var(--pkg-pink-soft);
+}
+
+.pkg-card--blue .pkg-card__icon {
+  color: var(--color-blue-600);
+  background: rgba(36, 84, 230, 0.1);
+}
+
+.pkg-card--red .pkg-card__icon {
+  color: var(--pkg-red);
+  background: var(--pkg-red-soft);
+}
+
+.pkg-card {
+  --pkg-pink: #d81b60;
+  --pkg-pink-soft: rgba(216, 27, 96, 0.11);
+  --pkg-red: #dc2626;
+  --pkg-red-soft: rgba(220, 38, 38, 0.1);
+}
+
+.pkg-card__title {
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--color-navy-900);
+  margin: 0 0 8px;
+}
+
+.pkg-card--featured .pkg-card__title {
+  font-size: clamp(19px, 1.6vw, 22px);
+}
+
+.pkg-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-text-gray);
+  margin: 0 0 18px;
+}
+
+/* ---------- Mini feature list ---------- */
+
+.pkg-card__features {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+.pkg-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+.pkg-card__feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pkg-card--pink .pkg-card__feature-icon {
+  color: var(--pkg-pink);
+}
+
+.pkg-card--blue .pkg-card__feature-icon {
+  color: var(--color-blue-600);
+}
+
+.pkg-card--red .pkg-card__feature-icon {
+  color: var(--pkg-red);
+}
+
+/* Featured cards (3 headline packages): icon-left, label-right rows laid
+   out in three evenly spaced columns, matching the reference mockup
+   exactly - labels wrap onto a second line (left-aligned under the first
+   line, not centered under the icon) rather than truncating. */
+.pkg-card--featured .pkg-card__features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 14px;
+  row-gap: 0;
+}
+
+.pkg-card--featured .pkg-card__features li {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+  font-size: 11.5px;
+  line-height: 1.35;
+  min-width: 0;
+}
+
+.pkg-card--featured .pkg-card__feature-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 1px;
+}
+
+.pkg-card--featured.pkg-card--pink .pkg-card__feature-icon {
+  background: var(--pkg-pink-soft);
+}
+
+.pkg-card--featured.pkg-card--blue .pkg-card__feature-icon {
+  background: rgba(36, 84, 230, 0.1);
+}
+
+.pkg-card--featured.pkg-card--red .pkg-card__feature-icon {
+  background: var(--pkg-red-soft);
+}
+
+/* ---------- Price + CTA ---------- */
+
+.pkg-card__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pkg-card:not(.pkg-card--featured) .pkg-card__price {
+  margin-top: auto;
+}
+
+.pkg-card__price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pkg-card__price-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-gray);
+}
+
+.pkg-card__price-value {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.pkg-card--pink .pkg-card__price-value {
+  color: var(--pkg-pink);
+}
+
+.pkg-card--blue .pkg-card__price-value {
+  color: var(--color-blue-600);
+}
+
+.pkg-card--red .pkg-card__price-value {
+  color: var(--pkg-red);
+}
+
+.pkg-card:not(.pkg-card--featured) .pkg-card__price-value {
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.pkg-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 9px;
+  border: 1.5px solid;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.pkg-card__cta--block {
+  width: 100%;
+}
+
+.pkg-card--pink .pkg-card__cta {
+  color: var(--pkg-pink);
+  border-color: var(--pkg-pink);
+}
+
+.pkg-card--blue .pkg-card__cta {
+  color: var(--color-blue-600);
+  border-color: var(--color-blue-600);
+}
+
+.pkg-card--red .pkg-card__cta {
+  color: var(--pkg-red);
+  border-color: var(--pkg-red);
+}
+
+.pkg-card__cta:hover {
+  transform: translateY(-2px);
+}
+
+.pkg-card--pink .pkg-card__cta:hover {
+  background: var(--pkg-pink);
+  color: var(--color-white);
+}
+
+.pkg-card--blue .pkg-card__cta:hover {
+  background: var(--color-blue-600);
+  color: var(--color-white);
+}
+
+.pkg-card--red .pkg-card__cta:hover {
+  background: var(--pkg-red);
+  color: var(--color-white);
+}
+
+/* ---------- Featured card photo ---------- */
+
+.pkg-card__photo {
+  position: relative;
+  flex: 0 0 32%;
+  overflow: hidden;
+}
+
+.pkg-card__photo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pkg-card--pink .pkg-card__photo::before {
+  background: radial-gradient(circle, var(--pkg-pink-soft), rgba(216, 27, 96, 0) 70%);
+}
+
+.pkg-card--blue .pkg-card__photo::before {
+  background: radial-gradient(circle, rgba(36, 84, 230, 0.14), rgba(36, 84, 230, 0) 70%);
+}
+
+.pkg-card--red .pkg-card__photo::before {
+  background: radial-gradient(circle, var(--pkg-red-soft), rgba(220, 38, 38, 0) 70%);
+}
+
+.pkg-card__photo img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 102%;
+  width: auto;
+  max-width: none;
+}
+
+/* ---------- Trust strip ---------- */
+
+.pkg-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-radius: 18px;
+  padding: 28px clamp(20px, 4vw, 48px);
+  background: linear-gradient(90deg, #eaf1ff, #eef4ff);
+}
+
+.pkg-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 200px;
+}
+
+.pkg-trust__item:not(:first-child) {
+  border-left: 1px solid rgba(18, 27, 111, 0.1);
+  padding-left: 24px;
+}
+
+.pkg-trust__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--color-blue-600);
+  background: var(--color-white);
+  box-shadow: 0 8px 16px rgba(18, 27, 111, 0.08);
+}
+
+.pkg-trust__item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pkg-trust__item strong {
+  font-size: 14px;
+  color: var(--color-navy-900);
+}
+
+.pkg-trust__item span {
+  font-size: 12px;
+  color: var(--color-text-gray);
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 899.98px) {
+  .pkg-card--featured {
+    flex-direction: column;
+  }
+
+  .pkg-card--featured .pkg-card__photo {
+    flex: 0 0 220px;
+    order: -1;
+  }
+
+  .pkg-trust__item:not(:first-child) {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .pkg-section {
+    padding: 48px 0 56px;
+  }
+
+  .pkg-heading {
+    margin-bottom: 32px;
+  }
+
+  .pkg-heading__dash {
+    display: none;
+  }
+
+  .pkg-card:not(.pkg-card--featured) .pkg-card__features {
+    flex-direction: column;
+  }
+}

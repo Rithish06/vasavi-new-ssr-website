@@ -1,0 +1,518 @@
+<div class="hero-section">
+    <img src="Images/orthopedic/Ortho - Banner.png" class="desktop_banner"
+        alt="Expert cardiology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <img src="Images/orthopedic/Ortho - mobile size.png" class="mobile_banner"
+        alt="Expert cardiology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <a (click)="scrollToSection('appointment')" class="book-btn">Book an Appointment</a>
+</div>
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading text-left" style="padding: 0; margin: 0">Best Orthopedic Hospital in Banashankari, Bangalore
+        </h1>
+        <p class="para_style">When it comes to bone and joint health, choosing the right care makes all the difference.
+            Vasavi Hospitals is widely recognized as one of the best orthopedic hospitals in Banashankari, Bangalore,
+            trusted by patients for advanced treatments and compassionate care. Our expert team of orthopedic doctors in
+            Banashankari, Bangalore (commonly known as bone doctors) are committed to restoring mobility, reducing pain,
+            and helping you live life to the fullest.</p>
+        <p class="para_style">From everyday bone injuries to complex procedures like total knee replacement (TKR) in
+            Banashankari, Bangalore, Vasavi Hospitals has built a reputation for excellence, modern technology, and
+            patient-first care. If you are searching for a reliable place for orthopedic care or the best hospital for
+            TKR in Banashankari, Bangalore, Vasavi Hospitals is here for you.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/orthopedic/vasavi-hospitals-bangalore-comprehensive-orthopedic-care.png"
+            alt="Comprehensive orthopedic care at Vasavi Hospitals Bangalore">
+    </div>
+</div>
+
+
+
+
+<!-- section 3 -->
+
+
+<div class="treatments" id="services">
+    <h2 class="heading text-center">Our Orthopedic Services</h2>
+
+    <div class="treatment_container_3">
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Consultation with Expert Orthopedic Doctors</h3>
+            <p class="box_para">Personalized assessment and treatment plans for bone and joint conditions.</p>
+        </div>
+
+        <!-- card-2 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-running"></i>
+            </div>
+            <h3 class="sub_heading">Sports Injury Care</h3>
+            <p class="box_para">Quick diagnosis and effective solutions to help athletes return to action faster.</p>
+        </div>
+
+        <!-- card-3 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M6.283 19.233c-.164.496-.47.9-.852 1.176m0 0a2.11 2.11 0 0 1-1.954.293c-1.149-.407-1.754-1.724-1.353-2.942c.308-.935 1.12-1.54 2.001-1.586c.449-.023.92-.233 1.06-.66L6.674 11L8 13l2-1l-1.508 4.732c-.131.411.103.843.433 1.122c.696.591.999 1.605.685 2.557c-.401 1.218-1.658 1.875-2.806 1.469c-.68-.241-1.17-.801-1.373-1.471M18.544 5.324c.454-.25.958-.342 1.438-.291m0 0c.698.074 1.346.447 1.718 1.064c.63 1.042.236 2.386-.878 3.001c-.87.48-1.922.375-2.641-.19c-.342-.269-.817-.41-1.195-.193L13 11V9l-2-1.02l4.115-2.272c.397-.22.513-.73.449-1.18c-.124-.86.307-1.754 1.157-2.223c1.114-.616 2.528-.27 3.157.773c.372.617.386 1.34.104 1.955M7 8H5m4-2V4m4 12v2m2-4h2" />
+                </svg>
+            </div>
+            <h3 class="sub_heading">Fracture & Trauma Management</h3>
+            <p class="box_para">24/7 care for emergency fractures and bone injuries.</p>
+        </div>
+
+        <!-- card-4 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentcolor" fill-rule="evenodd"
+                        d="M11.2 2v5.21l-.667.235a.8.8 0 1 0 .8 1.352L12 8.2l.667.597a.8.8 0 1 0 .8-1.351L12.8 7.21V2h2v1.444a9.003 9.003 0 0 1 .012 17.108l-.012-.038V22h-2v-5.21l.667-.235a.8.8 0 1 0-.8-1.351L12 15.8l-.667-.597a.8.8 0 1 0-.8 1.351l.667.236V22h-2v-1.444a9.003 9.003 0 0 1 0-17.112V2zm-2 16.418v-.32A2.8 2.8 0 0 1 12 13.27a2.8 2.8 0 0 1 2.8 4.828v.32a7.002 7.002 0 0 0 0-12.836v.32A2.8 2.8 0 0 1 12 10.73a2.8 2.8 0 0 1-2.8-4.828v-.32a7.003 7.003 0 0 0 0 12.836"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h3 class="sub_heading">Joint Pain Treatment</h3>
+            <p class="box_para">Advanced therapies to relieve chronic knee, hip and shoulder pain.</p>
+        </div>
+
+        <!-- card-5 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-hand-holding-medical"></i>
+            </div>
+            <h3 class="sub_heading">Arthroscopy & Minimally Invasive Treatments</h3>
+            <p class="box_para"> Faster recovery and less pain with modern techniques.</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgeries">
+    <h2 class="heading text-centxer">Specialized Orthopedic Procedures We Offer</h2>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <!-- card-1 -->
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Total Knee Replacement (TKR)</h3>
+                    <p class="box_para">Advanced surgical procedures for long-lasting relief from chronic knee pain</p>
+                </div>
+                <img src="Images/orthopedic/knee-pain-treatment-vasavi-hospitals-bangalore.png"
+                    alt="Knee pain treatment at Vasavi Hospitals, Bangalore">
+            </div>
+
+            <!-- card-2 -->
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Hip Replacement Surgery</h3>
+                    <p class="box_para">Restore mobility and comfort with safe and effective hip replacement.</p>
+                    <!-- <a href="" class="box_para" style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/orthopedic/hip-and-pelvis-treatment-vasavi-hospitals-bangalore.png"
+                    alt="Hip and pelvis treatment at Vasavi Hospitals, Bangalore">
+            </div>
+
+            <!-- card-3 -->
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Spinal Surgeries & Spine Care</h3>
+                    <p class="box_para">Comprehensive solutions for spine injuries, disc problems, and chronic back
+                        pain.</p>
+                    <!-- <a href="" class="box_para" style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/orthopedic/spine-treatment-vasavi-hospitals-bangalore.png"
+                    alt="Spine treatment and care at Vasavi Hospitals, Bangalore">
+            </div>
+
+            <!-- card-4 -->
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Arthroscopic (Keyhole) Surgery</h3>
+                    <p class="box_para">Minimally invasive joint surgeries for faster healing and less downtime</p>
+                    <!-- <a href="" class="box_para" style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/orthopedic/orthopedic-surgery-doctor-vasavi-hospitals-bangalore.png"
+                    alt="Orthopedic surgeon performing surgery at Vasavi Hospitals, Bangalore">
+            </div>
+
+            <!-- card-5 -->
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Trauma & Accident Surgeries</h3>
+                    <p class="box_para">24/7 emergency care for fractures, dislocations, and complex orthopedic injuries
+                    </p>
+                    <!-- <a href="" class="box_para" style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/orthopedic/back-pain-relief-vasavi-hospitals-bangalore.png"
+                    alt="Back pain and spinal care at Vasavi Hospitals, Bangalore">
+            </div>
+        </div>
+       
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our Orthopedic specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <!-- <option value="Dr. Srivatsa Subramanya">Dr. Srivatsa Subramanya</option> -->
+                  <option value="Dr. Venkatesh Rathod R">Dr. Venkatesh Rathod R</option>
+                  <option value="Dr. Sarvajith S S">Dr. Sarvajith S S</option>
+                  <option value="Dr. Vivek Kumar N Savsani">Dr. Vivek Kumar N Savsani</option>
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- cathlab section -->
+<div class="container_1" id="cathlab">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Surgery with Mako Technology</h2>
+                <p class="cathlab_intro_text">Vasavi Hospitals is among the few centers in Banashankari, Bangalore to
+                    use the Mako robotic system for orthopedic surgeries. This cutting-edge technology takes knee and
+                    hip replacement to the next level by combining the skill of our orthopedic surgeons with the
+                    unmatched precision of robotics.</p>
+
+                <h3 class="cathlab_sub_title">Why Choose Mako Robotic Surgery at Vasavi Hospitals, Banashankari,
+                    Bangalore?</h3>
+
+                <div class="cathlab_features">
+                    <!-- card-1 -->
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Unmatched Surgical Accuracy</h4>
+                            <p class="cathlab_feature_desc"> Mako ensures perfect implant positioning during total knee
+                                replacement.</p>
+                        </div>
+                    </div>
+
+                    <!-- card-2 -->
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Personalized, Patient-Specific Surgery</h4>
+                            <p class="cathlab_feature_desc">Every surgery is planned using a 3D model tailored to your
+                                bone structure.</p>
+                        </div>
+                    </div>
+
+                    <!-- card-3 -->
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fas fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Less Pain, Smaller Incisions, and Faster Healing</h4>
+                            <p class="cathlab_feature_desc">Smaller incisions and better precision mean reduced recovery
+                                time.</p>
+                        </div>
+                    </div>
+
+                    <!-- card-4 -->
+                    <div class="cathlab_feature_item">
+
+                        <div class="cathlab_icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Long-Term Success</h4>
+                            <p class="cathlab_feature_desc">Patients experience better mobility, natural joint movement,
+                                and longer-lasting results.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt">
+                    <p class="cathlab_intro_text">With Mako robotic-assisted TKR in Banashankari, Bangalore, Vasavi
+                        Hospitals offers world-class orthopedic care right here in your neighborhood.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Orthopedic Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified orthopedic surgeons brings decades of combined
+        experience in treating complex bone, joint, and musculoskeletal conditions with care and precision.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="img/Doctor-img/ORTHOPEDICS/dr-rupendu-t-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Rupendu T</h3>
+            <p class="doctor-title">Senior Consultant  Orthopedics</p>
+            <p class="qualification">MBBS, D.Ortho, MS(Ortho), Fellowship in Joint Replacement Surgery (Australia, Germany)</p>
+            <p class="doctor-experience">45+ Years of Experience</p>
+            <p class="doctor-specialties">Sr. Consultant Orthopaedic Surgeon</p>
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-rupendu-t'">Book Appointment</a>
+        </div> -->
+
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-srivatsa-subramanya-spec.png" alt="Dr. Srivatsa Subramanya | Orthopedic Surgeon | Vasavi Hospitals Bangalore">
+            </div>
+            <h3 class="doctor-name">Dr. Srivatsa Subramanya</h3>
+            <p class="doctor-title">Consultant - Orthopedics</p>
+            <p class="qualification">MBBS, MS (Ortho), DNB (Ortho), Fellowship in Knee (Australia), Fellowship in Shoulder (Australia, Italy), Fellowship in Trauma (S. Korea)</p>
+            <p class="doctor-experience">17+ Years of Experience</p>
+            <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p>
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-srivatsa-subramanya'">Book Appointment</a>
+        </div> -->
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-venkatesh-rathod-spec.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Venkatesh Rathod R</h3>
+            <p class="doctor-title">Consultant - Orthopedics</p>
+            <p class="qualification">MBBS, Dortho, DNB ortho</p>
+            <p class="doctor-experience">11+ Years of Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-venkatesh-rathod-r'">Book Appointment</a>
+        </div>
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-sarvajith-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Sarvajith S S</h3>
+            <p class="doctor-title">Consultant Orthopaedics</p>
+            <p class="qualification">MBBS | MS (Orthopaedics FRGUHS (Sanjay Gandhi Institute of Trauma) Fellowship in Arthroscopy & Sports Medicine, Fellowship in Advanced Trauma First team doctor Bangaluru FC)</p>
+            <p class="doctor-experience">10+ Years of Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-sarvajith-s-s'">Book Appointment</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-vivek-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Vivek Kumar N Savsani</h3>
+            <p class="doctor-title">Consultant Orthopaedic Surgeon & Joint Replacement Specialist</p>
+            <p class="qualification">MBBS, MS (Orthopaedics), Fellowship in Joint Replacement</p>
+            <p class="doctor-experience">15+ Years of Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-vivek-kumar-n-savsani'">Book Appointment</a>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!-- section 5 -->
+
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Choose Vasavi Hospitals, Banashankari, Bangalore for Orthopedic Care?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Expert Orthopedic Surgeons</b> –
+                Highly experienced doctors skilled in advanced orthopedic and robotic-assisted surgeries.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Cutting-Edge Technology</b> -
+                Equipped with Mako Robotic System and modern surgical facilities.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Patient-Centered Care</b> - Every
+                treatment plan is designed for your safety, comfort, and quick recovery.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Proven Success</b> - High success
+                rates in joint replacements and orthopedic surgeries with long-lasting results.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Trusted by Patients Across
+                    Banashankari, Bangalore</b> - Hundreds of patients have chosen Vasavi for orthopedic care, and their
+                positive outcomes reflect our commitment.</span>
+        </div>
+
+
+        <div class="wcu_description" style="margin-bottom: 30px;">At Vasavi Hospitals, you are not just choosing
+            advanced technology, you are choosing a team that values your mobility, safety, and confidence at every
+            step.</div>
+    </div>
+
+    <img src="Images/orthopedic/orthopedic-specialist-doctor-vasavi-hospitals-bangalore.png"
+        alt=" Orthopedic specialist doctor at Vasavi Hospitals Bangalore">
+</div>
+
+
+
+
+<div class="container_1" style="margin : 50px 0">
+    <div class="consclusion">
+        <h2 class="heading">Take the First Step Towards Pain-Free Living</h2>
+        <p class="para_style">Don’t let bone or joint pain hold you back. Whether you need expert consultation, advanced
+            treatment, or Mako robotic-assisted total knee replacement in Banashankari, Bangalore, Vasavi Hospitals is
+            here to help you regain mobility and confidence.</p>
+
+    </div>
+</div>
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. Which is the best hospital for orthopedic treatment in Banashankari, Bangalore?</div>
+            <div class="ans">Vasavi Hospitals is among the best orthopedic hospitals in Banashankari, Bangalore,
+                offering advanced treatments, robotic-assisted surgeries, and 24/7 trauma care.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2. Does Vasavi Hospitals offer robotic-assisted orthopaedic surgery?</div>
+            <div class="ans">Yes, Vasavi Hospitals uses the Mako robotic system for knee and hip replacements, ensuring
+                more precision, less pain, and faster recovery.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3. Do you treat sports injuries?</div>
+            <div class="ans">Yes, our sports injury clinic offers advanced treatments, including arthroscopy, ligament
+                repair, and rehabilitation to help athletes recover quickly.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4. Why should I choose Vasavi Hospitals for orthopedic treatment?</div>
+            <div class="ans">Because Vasavi combines expert orthopedic doctors, advanced robotic technology,
+                personalized care, and proven success rate - all under one roof.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5. When should I visit an orthopedic doctor?</div>
+            <div class="ans"><b>Visit an orthopedic doctor if you have :</b>
+                <ul style="margin-top:10px">
+                    <li>Persistent joint or back pain</li>
+                    <li>Difficulty walking or moving</li>
+                    <li>Sports injuries or fractures</li>
+                    <li>Swelling, stiffness, or loss of mobility</li>
+                </ul>
+            </div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6. How long does recovery take after robotic surgery?</div>
+            <div class="ans">Most patients can start walking within a few days. Thanks to precision and less tissue
+                damage, recovery is usually faster compared to traditional surgery.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">7. Why should I choose Vasavi Hospitals hospital for orthopedic care?</div>
+            <div class="ans">Our hospital combines expert orthopedic surgeons, advanced robotic technology, personalized
+                care, and proven results, making us a trusted choice for patients.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">8. What are the common conditions treated by Vasavi’s orthopaedic department?</div>
+            <div class="ans">Our orthopaedic department treats a wide range of conditions including fractures,
+                arthritis, joint pain, ligament injuries, sports injuries, congenital deformities, spinal disorders,
+                bone infections, and tumours of the bones and joints.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>

@@ -1,0 +1,488 @@
+<div class="hero-section">
+    <img src="Images/go/vasavi-gynecology-banner.png" class="desktop_banner"
+        alt="Pregnant woman with gynecology care concept – Vasavi Hospitals">
+    <img src="Images/go/gynecology-banner.png" class="mobile_banner"
+        alt="Expert gynecology care in Bangalore with advanced treatments, compassionate doctors, and personalized women's health solutions">
+    <a class="book-btn" (click)="scrollToSection('appointment')">Book an Appointment</a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">Obstetrics & Gynecology Care at Vasavi Hospitals, Banashankari</h1>
+        <p class="para_style">At Vasavi Hospitals, Banashankari, we provide complete obstetrics and gynecology care
+            for women of all ages. Our team of expert gynecology doctors and pregnancy specialists are here to guide
+            you through every stage of your life - from pregnancy care and childbirth to managing women’s health
+            issues like PCOS, fibroids and menopause.</p>
+        <p class="para_style">We focus on safe deliveries, advanced treatments, and compassionate care so that you
+            and your family feel confident and supported at every step.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/go/female-reproductive-system-illustration.png"
+            alt="3D illustration of female reproductive system showing uterus and ovaries">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">What We Treat</h2>
+    <p class="para_style text-center treatment_header_des">At Vasavi Hospitals, Banashankari, we offer a wide range of
+        women’s health services-all under one roof.Our key services include:</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Prenatal Care</h3>
+            <p class="box_para">Regular check-ups and support for a healthy pregnancy and safe delivery journey.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">High-Risk Pregnancy Management</h3>
+            <p class="box_para">Expert care for pregnancy complications, special needs and maternal health safety.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <h3 class="sub_heading">Childbirth Services</h3>
+            <p class="box_para">Safe and comfortable normal delivery with expert guidance.</p>
+            <a routerLink="/maternity-hospital-in-bangalore" class="box_para"
+                            style="cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Gynecological Check-Ups</h3>
+            <p class="box_para">Routine check-ups, pap smears and preventive screenings for early problem detection.
+            </p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Minimally Invasive Gynecologic Surgery</h3>
+            <p class="box_para">Laparoscopic and robotic surgery for faster recovery and minimal pain.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Fertility-Enhancing Surgeries</h3>
+            <p class="box_para">Advanced treatments to help you conceive naturally and boost pregnancy chances</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Menopause Management</h3>
+            <p class="box_para">Relief from symptoms like hot flashes, mood changes and sleep disturbances.</p>
+        </div>
+    </div>
+    <div class="treatment_container_2">
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Family Planning & Contraception</h3>
+            <p class="box_para"> Personalized advice and solutions for birth control and family wellness.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">PCOD, Fibroids & Endometriosis</h3>
+            <p class="box_para">Diagnosis and treatment for common gynecology problems with lasting relief.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Urinary Incontinence & Prolapse</h3>
+            <p class="box_para">Effective solutions to improve quality of life and restore confidence.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Urogynecological Surgery</h3>
+            <p class="box_para">Specialized surgery for bladder and pelvic floor issues with expert precision.</p>
+        </div>
+    </div>
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Gynecologic Oncological Surgeries</h3>
+            <p class="box_para">Treatment for cervical cancer and other gynecologic cancers using latest techniques.
+            </p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Cosmetic Gynecology</h3>
+            <p class="box_para"> Procedures to restore confidence, improve comfort and enhance personal wellness.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Surgery Options</h2>
+    <p class="para_style text-center treatment_header_des">We provide the latest surgical options for better results
+        and quicker recovery:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgery</h3>
+                    <p class="box_para">Traditional approach for complex gynecological conditions with safe and
+                        reliable outcomes under expert care.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png"
+                    alt="Gynecology open surgery performed by doctors at Vasavi Hospitals">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Laparoscopic Surgery (Minimally Invasive)</h3>
+                    <p class="box_para box_padding"> minimal scarring, Small cuts, faster healing, less pain and shorter
+                        hospital
+                        stay.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png"
+                    alt="Laparoscopic gynecology surgery with minimally invasive technique">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Robotic-Assisted Surgery</h3>
+                    <p class="box_para box_padding">High precision surgery with minimal scarring, faster recovery,
+                        reduced blood loss
+                        and excellent outcomes.</p>
+
+                    <!-- <a href="/robotic-surgery-in-urology.php" class="box_para"
+                            style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png"
+                    alt="Robotic-assisted gynecology surgery with advanced precision tools">
+            </div>
+        </div>
+
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our Gynecology specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <option value="Dr.Nisha Buchade">Dr.Nisha Buchade</option>
+                  <option value="Dr. Sowmya Sangamesh">Dr. Sowmya Sangamesh</option>
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div> -->
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+          </div>
+
+
+    </div>
+</div>
+
+<!-- Robotic Gynecology Surgery Section -->
+<div class="container_1">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Surgery in Gynecology with Da Vinci Xi</h2>
+                <p class="cathlab_intro_text">
+                    At Vasavi Hospitals, we offer cutting-edge gynecological care using the advanced Da Vinci Xi
+                    robotic surgical system. This technology enables our specialists to perform complex
+                    gynecological procedures with enhanced precision, minimal pain, and faster recovery times. Our
+                    goal is to provide safe, effective, and patient-friendly treatment options for women of all
+                    ages.
+                </p>
+
+                <h3 class="cathlab_sub_title">Why Choose Robotic Gynecology Surgery?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Unmatched Surgical Precision</h4>
+                            <p class="cathlab_feature_desc">
+                                The Da Vinci system provides magnified 3D vision and superior instrument control,
+                                allowing surgeons to perform delicate gynecological surgeries with extreme accuracy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Procedures</h4>
+                            <p class="cathlab_feature_desc">
+                                Most procedures, including hysterectomy, myomectomy, and endometriosis surgery, are
+                                done through small incisions-resulting in less pain, minimal blood loss, and faster
+                                recovery.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Quick Return to Daily Life</h4>
+                            <p class="cathlab_feature_desc">
+                                Patients experience shorter hospital stays, less downtime, and a quicker return to
+                                normal routines compared to open surgery.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Improved Patient Outcomes</h4>
+                            <p class="cathlab_feature_desc">
+                                Robotic-assisted gynecological surgery reduces complications, improves recovery, and
+                                enhances reproductive organ preservation where possible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional Image Section -->
+            <!-- <div class="cathlab_image_section">
+                <div class="cathlab_image_wrapper">
+                    <img src="assets/img/gynecology/robotic-gynecology-surgery-vasavi-hospital-banashankari-bangalore.jpg"
+                        alt="Advanced Robotic Gynecology Surgery at Vasavi Hospitals Banashankari Bangalore"
+                        class="cathlab_image">
+                    <div class="cathlab_image_overlay">
+                        <div class="cathlab_overlay_content">
+                            <i class="fa-solid fa-female"></i>
+                            <span>Advanced Women's Care</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Gynecology Specialists</h2>
+    <p class="para_style doc_sec_para">
+        Our team of highly skilled gynecologists brings years of expertise in women's health, offering compassionate
+        care and advanced treatments for a wide range of gynecological conditions.
+    </p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/go/dr-nisha-buchade-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr.Nisha Buchade</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS, MS Fellowship in gynec-oncology, Fellowship in Advanced infertility</p>
+            <p class="doctor-experience">15+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-nisha-buchade'">Book Appointment</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-rashmi-a-g-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Rashmi A.G.</h3>
+            <p class="doctor-title">Consultant Obstetrician and Gynaecologist</p>
+            <p class="qualification">MBBS, MS (Obstetrics & Gynaecology), FIGE (Fellowship in Gynaec Endoscopy)</p>
+            <p class="doctor-experience">19+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-rashmi-ag'">Book Appointment</a>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Choose Vasavi Hospitals, Banashankari</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Experienced Doctors</b> -
+                Our obstetricians and gynecologists have years of expertise.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Advanced Technology</b> - We use
+                modern tools for safe and effective treatments.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Patient-Centered Care</b> - Every
+                treatment plan is made to suit your needs.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Comprehensive Services</b> - From
+                pregnancy to gynecological surgeries, all under one roof.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Trusted by Families</b> -
+                Thousands of women choose us for their care every year.</span>
+        </div>
+        <div class="wcu_description" style="margin-bottom: 30px;">Take the first step towards better health - Book
+            Your Appointment Today and consult our experienced gynecologists in Banashankari, Bangalore.</div>
+    </div>
+
+    <img src="Images/go/gynecology-doctor-patient-consultation.jpg"
+        alt="Gynecologist consulting and examining a pregnant woman">
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+<div class="" style="padding: 2% 6%">
+    <div class="heading">Your Health, Our Priority</div>
+    <div class="box_para">At Vasavi Hospitals, we understand that women’s health needs care, attention and
+        compassion at every stage of life. Our team of expert gynecologists works closely with you, ensuring clear
+        communication, personalized treatment plans and complete support for all your health concerns - from
+        adolescence to menopause and beyond. Our goal is not just to treat conditions but to help you live a
+        healthier, happier life.</div>
+</div>
+
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. Which is the best gynecology hospital in Banashankari, Bangalore?</div>
+            <div class="ans">Vasavi Hospitals is one of the best gynecology hospitals in Banashankari, offering
+                expert care, modern facilities and experienced gynecologists for all women’s health needs.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2. When should I visit a gynecologist?</div>
+            <div class="ans">You should visit a gynecologist for routine check-ups, irregular periods, pregnancy
+                care, pelvic pain, menopause symptoms, or any reproductive health concerns.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3. Do you offer treatment for PCOD and infertility?</div>
+            <div class="ans">Yes! We offer advanced PCOD treatment, fertility-enhancing surgeries, and personalized
+                guidance to help you conceive naturally.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4. Are gynecological surgeries available at Vasavi Hospitals?</div>
+            <div class="ans">Yes. We provide laparoscopic, open, and robotic gynecological surgeries for fibroids,
+                endometriosis, prolapse and other complex conditions.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5. Do you provide pregnancy care and delivery services?</div>
+            <div class="ans">Absolutely! We offer prenatal check-ups, high-risk pregnancy management and normal
+                delivery with round-the-clock obstetric care.
+            </div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6. Can I get a second opinion at Vasavi Hospitals?</div>
+            <div class="ans">Yes. Our experienced gynecologists are happy to review your reports and provide a
+                second opinion on diagnosis or treatment options.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">7. How can I book an appointment with a gynecologist?</div>
+            <div class="ans">You can easily book your appointment online through our website or call us at 080 71
+                500 500 to schedule an appointment.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">8. Do you provide fertility treatments and support?</div>
+            <div class="ans">Yes! Our team offers fertility-enhancing surgeries, PCOD treatment, and personalized
+                guidance to improve chances of conception naturally.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>

@@ -1,0 +1,343 @@
+<div class="hero-section">
+    <img src="Images/pulmonology/pulmonology-banner-desktop.png" class="desktop_banner"
+        alt="Expert pulmonology care in Bangalore with accurate diagnosis, personalized treatment plans, and compassionate respiratory specialists.">
+    <img src="Images/pulmonology/pulmonology-banner.png" class="mobile_banner"
+        alt="Expert pulmonology care in Bangalore with accurate diagnosis, personalized treatment plans, and compassionate respiratory specialists.">
+    <a (click)="scrollToSection('appointment')" class="book-btn">Book an Appointment</a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item" [class.active]="activeSection === section.id"
+            (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading">Pulmonology at Vasavi Hospitals, Banashankari</h1>
+        <p class="para_style">Breathing is life and when your lungs are not healthy, every moment feels heavy. At Vasavi
+            Hospitals, Banashankari, our best pulmonologists are here to care for all types of lung problems. Whether
+            you are looking for an experienced pulmonology doctor near me, a trusted pulmonology clinic or the best
+            pulmonology hospital you will find everything under one roof with us.</p>
+        <p class="para_style">Our pulmonary doctors specialize in treating breathing problems, chest infections and
+            long-term lung diseases. With compassion, advanced care and the latest medical facilities, we ensure you get
+            the right treatment at the right time.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/pulmonology/lungs-treatment-at-vasavi-hospitals-bangalore.png"
+            alt="Pulmonology treatment at Vasavi Hospitals Banashankari Bangalore">
+    </div>
+
+
+</div>
+
+
+<!-- section 3 -->
+
+<div class="treatments" id="treatments">
+    <h2 class="heading text-center">What We Treat</h2>
+    <p class="para_style text-center treatment_header_des">We provide complete care for all your lung and breathing
+        concerns.</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <h3 class="sub_heading">Pulmonary Function Testing</h3>
+            <p class="box_para">Advanced lung tests to measure breathing strength, airflow and capacity for accurate
+                diagnosis.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Bronchoscopy</h3>
+            <p class="box_para">A safe procedure using a thin tube to look inside the lungs and detect infections or
+                blockages.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Asthma Management</h3>
+            <p class="box_para">Complete care with medicines and lifestyle support to control asthma attacks and improve
+                breathing.</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <h3 class="sub_heading">COPD Treatment</h3>
+            <p class="box_para">Specialized plans to manage long-term lung damage, reduce symptoms and improve daily
+                life quality.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Sleep Apnea Diagnosis and Management</h3>
+            <p class="box_para">Testing and treatment for disturbed sleep caused by breathing pauses and snoring.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Lung Cancer Screening</h3>
+            <p class="box_para">Early detection tests for spotting signs of lung cancer when treatment can be most
+                effective.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Allergy Testing and Treatment</h3>
+            <p class="box_para">Identifying triggers like dust or pollen and providing personalized treatment to prevent
+                flare-ups.</p>
+        </div>
+
+        <!-- <div class="treatment-box">
+            <h3 class="sub_heading">Bronchoscopy</h3>
+            <p class="box_para">A safe procedure using a thin tube to look inside the lungs and detect infections or
+                blockages.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">Asthma Management</h3>
+            <p class="box_para">Complete care with medicines and lifestyle support to control asthma attacks and improve
+                breathing.</p>
+        </div>
+
+        <div class="treatment-box">
+            <h3 class="sub_heading">COPD Treatment</h3>
+            <p class="box_para">Specialized plans to manage long-term lung damage, reduce symptoms and improve daily
+                life quality.</p>
+        </div> -->
+    </div>
+
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgery">
+    <h2 class="heading text-center">Advanced Pulmonology Surgery Options</h2>
+    <p class="para_style text-center treatment_header_des">At Vasavi Hospitals, we provide advanced surgical solutions
+        for complex lung conditions:</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgeries</h3>
+                    <p class="box_para">Standard procedures for severe lung problems when necessary.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+        </div>
+
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our Pulmonology specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <option value="Dr. Mutharaju K. R">Dr. Manjunath P. H</option>
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Pulmonology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified pulmonologists brings decades of combined experience
+        in treating complex respiratory conditions with compassion and precision. </p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-manjunath-p-h-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Manjunath P. H</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS, DTCD, DNB</p>
+            <p class="doctor-experience">17+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-manjunath-p-h'">Book Appointment</a>
+        </div>
+    </div>
+</div>
+
+<!-- section 5 -->
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Vasavi Hospitals, Bangalore?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Experienced Pulmonologists</b> -
+                Skilled doctors with years of experience in treating lung and breathing problems.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Latest Technology</b> - Advanced
+                pulmonary function tests, bronchoscopy and robotic surgery for accurate diagnosis & treatment.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Personalized Care</b> - Every patient
+                receives a treatment plan designed for their specific lung condition and health needs.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Compassionate Team</b> - We support
+                you with care, respect and understanding throughout your treatment journey.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Convenient Location</b> - Easily
+                accessible for patients across Banashankari and Bangalore.</span>
+        </div>
+
+        <div class="wcu_description" style="margin-bottom: 30px;">When you search for a pulmonologist for breathing
+            problems or a lung specialist doctor appointment, Vasavi Hospitals is the trusted name you can rely on.
+        </div>
+    </div>
+
+    <img src="Images/pulmonology/pulmonology-treatment-at-vasavi-hospitals-bangalore.jpg" alt="">
+</div>
+<!-- <img src="assets/Images/urology/vasavi-hospital-urology-kidney-care-banashankari-bangalore.png" alt=""> -->
+
+
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. Do you treat children’s lung and breathing problems?</div>
+            <div class="ans">Yes. Our pulmonologists are trained in pediatric care, managing conditions like asthma,
+                chest infections and sleep-related breathing disorders.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">2. How can I book an appointment with a pulmonologist at Vasavi Hospitals?</div>
+            <div class="ans">Call us directly at <a href="tel:08071500500">080 71 500 500</a> or fill out our online
+                appointment form to schedule your consultation today.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">3. Who should consult a pulmonologist?</div>
+            <div class="ans">If you have frequent coughing, breathing difficulty, chest tightness or chronic lung
+                conditions, it’s time to consult a pulmonologist.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">4. How long does recovery take after lung treatment or surgery?</div>
+            <div class="ans">Recovery time depends on the type of treatment. With minimally invasive and robotic
+                options, most patients recover faster.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">5. Are smoking-related lung problems treated at Vasavi Hospitals?</div>
+            <div class="ans">Yes. We provide complete care for smoker’s lungs, COPD, emphysema and chronic bronchitis,
+                with ongoing support to improve health.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">6. Do you provide advanced lung testing at Vasavi Hospitals?</div>
+            <div class="ans">Yes, at Vasavi Hospitals we offer pulmonary function tests, chest imaging, bronchoscopy and
+                lung cancer screening for accurate diagnosis.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">7. Do you provide sleep apnea testing and care?</div>
+            <div class="ans">Yes, at Vasavi Hospitals we conduct sleep studies and provide treatment plans to help you
+                sleep and breathe better.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">8. Do you have senior pulmonologists for complex cases?</div>
+            <div class="ans">Yes. Our team includes experienced pulmonology doctors who manage advanced cases like
+                interstitial lung disease and pulmonary hypertension.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>

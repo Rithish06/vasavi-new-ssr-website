@@ -26,7 +26,7 @@ interface ActionCard {
 }
 
 /** Icon keys resolved to inline SVG paths in footer.html via the [ngSwitch]-free
- *  approach below — kept as a flat lookup so the template can just do
+ *  approach below - kept as a flat lookup so the template can just do
  *  `<svg><use ...>` style repetition without a giant inline switch. */
 export const FOOTER_ICONS = {
   emergency: 'emergency',
@@ -62,6 +62,7 @@ export class Footer {
   protected readonly quickLinks: LinkItem[] = [
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about-us' },
+    { label: 'CGHS', path: '/cghs-hospital-in-bangalore' },
     { label: 'Awards', path: '/awards' },
     { label: 'Gallery', path: '/gallery' },
     { label: 'Blog', path: '/blog' },
@@ -69,15 +70,18 @@ export class Footer {
     { label: 'Careers', path: '/careers' },
   ];
 
+  /** Curated highlight of 8 (of the 33 ported) clinical specialty pages -
+   * real routes from app.routes.ts, not a generated/guessed slug. The full
+   * 33-page list lives in the navbar's "Our Services" mega-menu. */
   protected readonly services: ServiceItem[] = [
-    { icon: FOOTER_ICONS.emergency, label: 'Emergency Care', path: '/services/emergency-care' },
-    { icon: FOOTER_ICONS.robotic, label: 'Robotic Surgery', path: '/services/robotic-surgery' },
-    { icon: FOOTER_ICONS.orthopaedics, label: 'Orthopaedics', path: '/services/orthopaedics' },
-    { icon: FOOTER_ICONS.cardiology, label: 'Cardiology', path: '/services/cardiology' },
-    { icon: FOOTER_ICONS.nephrology, label: 'Nephrology', path: '/services/nephrology' },
-    { icon: FOOTER_ICONS.gastro, label: 'Gastroenterology', path: '/services/gastroenterology' },
-    { icon: FOOTER_ICONS.women, label: 'Women & Child Care', path: '/services/women-and-child-care' },
-    { icon: FOOTER_ICONS.diagnostics, label: 'Diagnostics', path: '/services/diagnostics' },
+    { icon: FOOTER_ICONS.emergency, label: 'Emergency & Critical Care', path: '/emergency-and-critical-care-in-bangalore' },
+    { icon: FOOTER_ICONS.robotic, label: 'Minimally Invasive Surgery', path: '/minimally-invasive-surgery-in-bangalore' },
+    { icon: FOOTER_ICONS.orthopaedics, label: 'Orthopedics', path: '/orthopedic-hospital-in-bangalore' },
+    { icon: FOOTER_ICONS.cardiology, label: 'Cardiology', path: '/cardiology-hospital-in-bangalore' },
+    { icon: FOOTER_ICONS.nephrology, label: 'Nephrology', path: '/nephrology-hospital-in-bangalore' },
+    { icon: FOOTER_ICONS.gastro, label: 'Gastroenterology', path: '/gastroenterology-hospital-in-bangalore' },
+    { icon: FOOTER_ICONS.women, label: 'Obstetrics & Gynaecology', path: '/obstetrics-and-gynaecology-hospital-in-bangalore' },
+    { icon: FOOTER_ICONS.diagnostics, label: 'Radiology & Imaging', path: '/radiology-and-imaging-services-in-bangalore' },
   ];
 
   protected readonly contactItems: ContactItem[] = [
@@ -128,7 +132,9 @@ export class Footer {
       title: 'Health Packages',
       description: 'Explore our preventive health check-up packages.',
       ctaLabel: 'Explore Now',
-      path: '/health-package',
+      // health-package/:slug is param-driven (no bare index route) - land on
+      // the Basic Health Check Package as the entry point into that range.
+      path: '/health-package/basic-health-check-package',
     },
   ];
 

@@ -1,0 +1,996 @@
+.health-package {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 50px 0; */
+    padding-bottom: 50px;
+    gap: 50px;
+
+}
+
+.health-packages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    /* align-items: center; */
+}
+
+.banner-bg {
+    background: #F2FCFF;
+    width: 100%;
+    height: 623px;
+    position: absolute;
+}
+
+.banner-sub-heading {
+    color: #091D3E;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.banner-headeing {
+    color: #303394;
+    font-family: Poppins;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* .banner-package-price {
+    width: 370px;
+    height: 200px;
+    border-radius: 20px;
+    background: #D9D9D9;
+} */
+
+.banner-para {
+    color: #000;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    /* width: 537px; */
+    width: 637px;
+}
+
+.banner-card {
+    width: 230px;
+    height: 120px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 3px 4px 20px 0 rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.blue {
+    width: 194px;
+    height: 227px;
+    border-radius: 0 0 0 303.5px;
+    border: 40px solid rgba(48, 51, 148, 0.20);
+    background: #303394;
+    transform: rotate(180deg);
+    position: relative;
+    top: 396px;
+}
+
+.gray {
+    width: 229px;
+    height: 259px;
+    border-radius: 0 0 0 289.5px;
+    border: 40px solid rgba(48, 51, 148, 0.20);
+    transform: rotate(360deg);
+    position: relative;
+    top: -40px;
+    left: -73px;
+}
+
+.gray-1 {
+    width: 586px;
+    height: 629px;
+    border-radius: 0 0 0 334.5px;
+    border: 40px solid rgba(48, 51, 148, 0.20);
+    position: relative;
+    top: -50px;
+    right: 75px;
+}
+
+.blue-1 {
+    width: 550px;
+    height: 583px;
+    border-radius: 0 0 0 303.5px;
+    border: 40px solid rgba(48, 51, 148, 0.20);
+    background: #303394;
+    position: relative;
+    top: -230px;
+    right: -970px;
+}
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    margin: 20px 101px 50px;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+}
+
+/* .banner-card {
+    width: 230px;
+    height: 80px;
+    border-radius: 20px;
+    background: #D9D9D9;
+} */
+
+.banner-package-price {
+    width: 370px;
+    height: auto;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 3px 4px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 10px;
+}
+
+.amount {
+    color: black;
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 1.7px;
+}
+
+.amount span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.cote {
+    color: black;
+    /* text-align: center; */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.3px;
+}
+
+
+
+.package-heading {
+    color: black;
+    font-family: Inter;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.7px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+    margin-top: 10px;
+}
+
+.flex1 button {
+    display: inline-flex;
+    height: 52px;
+    padding: 18px 26px 18px 30px;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 30px;
+    background: #1B8FCD;
+    box-shadow: 3px 4px 15px 0 rgba(63, 176, 206, 0.65);
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border: none;
+}
+
+.flex2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    width: 450px;
+    height: auto;
+    border-radius: 30px;
+    background: #FFF;
+    box-shadow: 3px 4px 45px 0 rgba(0, 0, 0, 0.25);
+    padding: 40px;
+
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* align-items: start; */
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-heading {
+    text-align: center;
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+}
+
+.otp {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.otp input {
+    width: 290px;
+}
+
+.otp button {
+    display: inline-flex;
+    height: 46px;
+    width: 42%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: transparent;
+    /* box-shadow: 3px 4px 15px 0 rgba(63, 176, 206, 0.65); */
+    color: black;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border: 1px solid #1B8FCD;
+
+}
+
+.otp button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+input {
+    width: 390px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+    border: none;
+    padding: 10px;
+}
+
+.form .btn {
+    display: inline-flex;
+    height: 52px;
+    padding: 18px 26px 18px 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #1B8FCD;
+    box-shadow: 3px 4px 15px 0 rgba(63, 176, 206, 0.65);
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border: none;
+
+}
+
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px;
+    width: 1190px;
+    height: 417px;
+    border-radius: 20px;
+    background: linear-gradient(94deg, #3B41AF 0%, #1B8FCD 100%);
+    box-shadow: 3px 4px 45px 0 rgba(0, 0, 0, 0.25);
+    padding: 30px;
+}
+
+.box {
+    width: 397px;
+    height: 337px;
+    background: transparent;
+    margin-right: 50px;
+    border-radius: 20px;
+}
+
+.about-heading {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    /* width: 523px; */
+}
+
+.about-para {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 20px;
+}
+
+.about span {
+    color: #FBCA51;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.heading {
+    color: #000;
+    font-family: Poppins;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.para {
+    color: #000;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+label {
+    color: #000;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.package-header {
+    text-align: center;
+}
+
+.packages {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card {
+    display: flex;
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    justify-content: start;
+    align-items: start;
+    border-radius: 30px;
+    background: #FFF;
+    box-shadow: 3px 4px 24px 0 rgba(0, 0, 0, 0.25);
+}
+
+.package-cards {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+}
+
+.card-header {
+    width: 380px;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+    background: #D3F7FB;
+    color: #003F87;
+    /* text-align: center; */
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.24px;
+    padding: 14px 9px;
+}
+
+.card-list {
+    padding-top: 10px;
+    color: #000;
+    /* text-align: center; */
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 35px;
+    letter-spacing: 0.18px;
+}
+
+
+
+.why-choose,
+.care-with-us {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.choose-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.choose-cards {
+    width: 300px;
+    height: auto;
+    border-radius: 14px;
+    background: #FFF;
+    box-shadow: 3px 4px 12px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: start;
+    gap: 15px;
+    padding: 20px;
+}
+
+
+
+.doctors {
+    /* background: #D9D9D9; */
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.title {
+    color: #000;
+    /* text-align: center; */
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.content {
+    color: #000;
+    /* text-align: center; */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.para1 {
+    color: #000;
+    /* text-align: center; */
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.care-cards {
+    width: 230px;
+    height: 240px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 3px 4px 12px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.care-cards img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+
+.care-content {
+    color: #000;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.accordion-wrapper {
+    width: 100%;
+    max-width: 840px;
+    margin: auto;
+}
+
+.accordion-item {
+    background: #fff;
+    border-bottom: 3px solid #000;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 23.8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 34.8px;
+    letter-spacing: -0.24px;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    font-size: 20px;
+}
+
+.arrow.open {
+    transform: rotate(90deg);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+}
+
+.accordion-body.open {
+    max-height: 500px;
+}
+
+.accordion-content {
+    padding: 15px 20px;
+    color: #000;
+    font-family: Inter;
+    font-size: 15.6px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px;
+}
+
+.header {
+    text-align: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 36.4px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 43.2px;
+    letter-spacing: -0.72px;
+}
+
+.book-appointment {
+    background: linear-gradient(94deg, #3B41AF 0%, #1B8FCD 100%);
+    height: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.book-appointment button {
+    display: inline-flex;
+    height: 52px;
+    padding: 18px 26px 18px 30px;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 30px;
+    background: white;
+    box-shadow: 3px 4px 15px 0 rgba(63, 176, 206, 0.65);
+    color: black;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border: none;
+}
+
+.book-appointment .heading,
+.book-appointment .para {
+    color: white;
+}
+
+.book-appointment .para {
+    padding: 0 6px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.otp-timer {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #1B8FCD;
+}
+
+.otp-timer button {
+    background: transparent;
+    border: 1px solid #1B8FCD;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.faq-heading {
+    color: #000;
+    font-family: Inter;
+    font-size: 23.8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 34.8px;
+    /* 146.218% */
+    letter-spacing: -0.24px;
+}
+
+.card-icon {
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    background-color: #D3F7FB;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+
+}
+
+
+@media(max-width: 1024px) {
+    .banner {
+        margin: 20px;
+        gap: 10px;
+    }
+
+    .blue-1 {
+        width: 383px;
+        right: -640px;
+    }
+
+    .flex {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+
+    .banner-bg {
+        height: auto;
+    }
+
+    .blue {
+        top: 583px;
+    }
+
+    .card {
+        width: 300px;
+    }
+
+    .card-header {
+        width: 280px;
+        font-size: 20px;
+    }
+
+    .about {
+        width: 980px;
+        margin-top: 80px;
+    }
+
+    .book-appointment button {
+        width: 30%;
+        justify-content: center;
+    }
+
+    .book-appointment {
+        padding: 20px;
+    }
+
+    .faq-heading {
+        font-size: 20px;
+    }
+
+    .banner-para {
+        width: 100%;
+    }
+
+    .gray-1 {
+        width: 419px;
+    }
+}
+
+@media(max-width:1023px) {
+    .about {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    .package-cards {
+        grid-template-columns: 1fr 1fr;
+        margin: auto;
+    }
+
+    .banner {
+        flex-wrap: wrap;
+        gap: 30px;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .banner-bg {
+        width: 100%;
+        height: 180%;
+    }
+
+    .flex {
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .banner-content {
+        padding-left: 0;
+        align-items: center;
+    }
+
+    .flex1 {
+        align-items: center;
+    }
+
+    .blue-1 {
+        display: none;
+    }
+
+    .blue {
+        top: 1020px;
+
+    }
+
+    .banner-para {
+        width: 100%;
+    }
+
+    .card {
+        width: 350px;
+    }
+
+    .card-header {
+        width: 325px;
+    }
+
+    .book-appointment {
+        padding: 20px;
+        height: auto;
+    }
+
+    .book-appointment button {
+        width: 46%;
+    }
+
+    .heading {
+        font-size: 28px;
+    }
+
+    .para {
+        font-size: 16px;
+    }
+
+    .accordion-wrapper {
+        padding: 30px;
+    }
+
+    .about {
+        width: 95%;
+        margin-top: 235px;
+    }
+}
+
+@media(max-width: 767px) {
+    .banner {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
+
+    .about {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        margin-top: 0;
+    }
+
+    .banner-para {
+        width: 100%;
+    }
+
+
+
+    .card {
+        width: 300px;
+    }
+
+    .card-header {
+        width: 280px;
+    }
+
+    .box {
+        width: 250px;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .book-appointment {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .package-cards {
+        grid-template-columns: 1fr;
+        margin: auto;
+    }
+
+    .banner-headeing {
+        font-size: 30px;
+    }
+
+    .amount {
+        font-size: 30px;
+    }
+
+    .blue {
+        display: none;
+    }
+
+    .banner-package-price {
+        width: 284px;
+        height: 146px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .form {
+        width: 270px;
+        padding: 20px;
+    }
+
+    .form-heading {
+        font-size: 14px;
+    }
+
+    .otp {
+        flex-direction: column;
+    }
+
+    .otp input {
+        width: 100%;
+    }
+
+    .otp button {
+        width: 100%;
+    }
+
+    .health-packages {
+        gap: 20px;
+    }
+
+    .package-heading {
+        font-size: 16px;
+    }
+
+    .cote {
+        font-size: 16px;
+    }
+
+    .heading {
+        font-size: 18px;
+    }
+
+    .para {
+        font-size: 14px;
+    }
+
+    .book-appointment button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .faq-heading {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .about-heading {
+        font-size: 22px;
+    }
+
+    .about-para span {
+        font-size: 16px;
+    }
+
+    .banner-card {
+        align-items: center;
+    }
+}

@@ -107,13 +107,13 @@ export class DoctorsPage {
           this.favorites.set(new Set(JSON.parse(raw)));
         }
       } catch {
-        /* localStorage unavailable (private mode, etc.) — favorites just won't persist. */
+        /* localStorage unavailable (private mode, etc.) - favorites just won't persist. */
       }
     });
   }
 
   /**
-   * Scrolls so the search bar sits right under the sticky navbar — used
+   * Scrolls so the search bar sits right under the sticky navbar - used
    * after any filter/search interaction so the person immediately sees
    * the results header instead of having to scroll up manually.
    * Reads the navbar's live height rather than a hard-coded number since

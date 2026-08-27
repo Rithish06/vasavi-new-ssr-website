@@ -1,0 +1,696 @@
+<div class="hernia-page">
+
+  <!-- ════════════════════════════════
+       SECTION 1 - HERO
+  ════════════════════════════════ -->
+  <section class="hero">
+    <picture>
+      <source media="(max-width: 480px)" [srcset]="asset('hernia-hero-banner-mobile.webp')" />
+      <source media="(max-width: 768px)" [srcset]="asset('hernia-hero-banner-tab.webp')" />
+      <source media="(max-width: 1024px)" [srcset]="asset('hero-banner-1024px.webp')" />
+      <img [src]="asset('hero-section-bg.webp')" alt="Advanced Hernia Surgery in Bangalore - Vasavi Hospitals" class="hero-img" fetchpriority="high" loading="eager" decoding="sync" />
+    </picture>
+
+    <div class="hero-content">
+      <span class="hero-tag">🏥 Vasavi Hospitals, Bangalore</span>
+      <h1 class="hero-h1">Advanced Hernia Surgery<br />in <span>Bangalore</span></h1>
+      <p class="hero-sub">Minimally invasive treatment using Robotic &amp; Laparoscopic techniques - smaller cuts, faster recovery, less pain.</p>
+
+      <div class="trust-badges">
+        <div class="badge"><div class="badge-icon">✓</div><span>30+ Years Experienced Surgeon</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>Robotic Surgery Available</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>Advanced Laparoscopic Surgery</span></div>
+        <div class="badge"><div class="badge-icon">✓</div><span>All Insurance Accepted</span></div>
+      </div>
+
+      <div class="hero-ctas">
+        <a [href]="phoneHref" class="btn-primary"><i class="fa-solid fa-phone"></i> Call Now for Consultation</a>
+        <a href="javascript:void(0)" class="btn-secondary" (click)="openInsuranceCheck()"><i class="fa-solid fa-shield-halved"></i> Check for Insurance</a>
+      </div>
+
+      <!-- <span class="opd-open-badge" *ngIf="isDuringOpdHours"><i class="fa-solid fa-circle" style="font-size:6px;"></i> Lines open now</span> -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       DESKTOP STICKY CALL/BOOK BAR
+  ════════════════════════════════════════════ -->
+  <div class="desktop-sticky-bar">
+    <span class="dsb-text"><i class="fa-solid fa-house-medical"></i> Vasavi Hospitals, Bangalore</span>
+    <div class="dsb-ctas">
+      <a [href]="phoneHref" class="dsb-btn dsb-call"><i class="fa-solid fa-phone"></i> {{ phoneNumber }}</a>
+      <button type="button" class="dsb-btn dsb-book" (click)="openBooking()"><i class="fa-solid fa-calendar-check"></i> Book Appointment</button>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.2 - QUICK TRUST STRIP
+  ════════════════════════════════════════════ -->
+  <section class="quick-trust-section">
+    <div class="qt-inner">
+      <div class="qt-stat">
+        <img src="Images/trust-icons/surgeries-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">10,000+</span>
+        <span class="qt-label">Successful Surgeries</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/patients-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">3,00,000+</span>
+        <span class="qt-label">Patients Treated</span>
+      </div>
+      <div class="qt-stat">
+        <img [src]="nabhLogoPath" alt="NABH Accredited Hospital" width="36" height="36" loading="lazy" decoding="async" class="qt-nabh-logo" />
+        <span class="qt-label qt-nabh-label">NABH Accredited</span>
+      </div>
+      <div class="qt-stat">
+        <img src="Images/trust-icons/facility-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">World-Class</span>
+        <span class="qt-label">Facilities</span>
+      </div>
+      <a href="#patient-reviews" class="qt-stat qt-stat-link" (click)="scrollToPatientReviews($event)">
+        <img src="Images/trust-icons/google-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Google</span>
+        <span class="qt-label">Reviews</span>
+      </a>
+      <a href="#instagram-posts" class="qt-stat qt-stat-link" (click)="scrollToInstagram($event)">
+        <img src="Images/trust-icons/instagram-icon.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="qt-icon-img" />
+        <span class="qt-num">Follow Us</span>
+        <span class="qt-label">Instagram</span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.3 - OUR EXPERIENCED SURGEONS (compact)
+  ════════════════════════════════════════════ -->
+  <section class="mini-doctors-section">
+    <h2 class="mds-heading">Meet Our Surgery Specialists</h2>
+    <div class="mds-grid">
+      <div class="mds-card" *ngFor="let doctor of doctors">
+        <div class="mds-top">
+          <img [src]="doctor.img" [alt]="doctor.alt" width="84" height="84" loading="lazy" decoding="async" class="mds-photo" />
+          <div class="mds-info">
+            <p class="mds-name">{{ doctor.name }}</p>
+            <p class="mds-specialty">{{ doctor.specialty }}</p>
+            <span class="mds-exp">{{ doctor.experience }}</span>
+          </div>
+        </div>
+        <button type="button" class="mds-book-btn" (click)="openBookingForDoctor(doctor)">
+          <i class="fa-solid fa-calendar-check"></i> Book Appointment
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1.5 - COST & INSURANCE ESTIMATOR QUIZ
+       Most hernia-page visitors already know they have a bulge - that's
+       usually why they searched - so this leans into the recurring real
+       objection (cost) instead of restating symptoms. 3 taps, then the
+       inline lead form. No price number shown (schema-only, per product
+       decision) - the payoff is the personalised callback itself.
+  ════════════════════════════════════════════ -->
+  <section class="symptom-checker-section quiz-section">
+    <div class="sc-inner">
+
+      <div class="sc-header">
+        <span class="wih-label"><i class="fa-solid fa-calculator"></i> 30-Second Estimate</span>
+        <h2>Get Your Personalised Cost &amp; Insurance Estimate</h2>
+        <p>Answer 3 quick questions - our team will call you back within 30 minutes with a clear cost and insurance breakdown.</p>
+      </div>
+
+      <!-- Answered-so-far breadcrumb, each chip editable -->
+      <div class="quiz-breadcrumb" *ngIf="quizStep > 1">
+        <button type="button" class="quiz-crumb" (click)="editQuizStep(1)">{{ quizHerniaType }} <i class="fa-solid fa-pen"></i></button>
+        <ng-container *ngIf="quizStep > 2">
+          <i class="fa-solid fa-chevron-right quiz-crumb-sep"></i>
+          <button type="button" class="quiz-crumb" (click)="editQuizStep(2)">{{ quizTechnique }} <i class="fa-solid fa-pen"></i></button>
+        </ng-container>
+      </div>
+
+      <!-- Step 1: hernia type -->
+      <div class="quiz-step" *ngIf="quizStep === 1">
+        <p class="quiz-step-label">Step 1 of 3 - What type of hernia do you have?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let type of herniaTypes" (click)="selectQuizHerniaType(type.title)">{{ type.title }}</button>
+          <button type="button" class="lc-chip" (click)="selectQuizHerniaType('Not Sure Yet')">Not Sure Yet</button>
+        </div>
+      </div>
+
+      <!-- Step 2: technique -->
+      <div class="quiz-step" *ngIf="quizStep === 2">
+        <p class="quiz-step-label">Step 2 of 3 - Which technique are you considering?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let technique of quizTechniqueOptions" (click)="selectQuizTechnique(technique)">{{ technique }}</button>
+        </div>
+      </div>
+
+      <!-- Step 3: insurance -->
+      <div class="quiz-step" *ngIf="quizStep === 3">
+        <p class="quiz-step-label">Step 3 of 3 - Do you have health insurance?</p>
+        <div class="lc-options quiz-options">
+          <button type="button" class="lc-chip" *ngFor="let insurance of quizInsuranceOptions" (click)="selectQuizInsurance(insurance)">{{ insurance }}</button>
+        </div>
+      </div>
+
+      <!-- Step 4: result - inline lead form -->
+      <div class="quiz-result" *ngIf="quizStep === 4">
+        <p class="quiz-result-summary"><i class="fa-solid fa-circle-check"></i> {{ quizHerniaType }} · {{ quizTechnique }} · {{ quizInsurance }}</p>
+        <p class="quiz-result-heading">Almost done - where should we send your estimate?</p>
+        <app-callback-form [pageName]="quizPageName"></app-callback-form>
+      </div>
+
+      <button type="button" class="sc-reset-btn" *ngIf="quizStep > 1" (click)="resetQuiz()">Start Over</button>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 2 - WHY CHOOSE VASAVI
+  ════════════════════════════════ -->
+  <section class="why-vasavi-section" id="why-vasavi">
+
+    <h2 class="section-heading">Why Choose Vasavi Hospitals?</h2>
+    <p class="section-subheading">From advanced surgical technology to personalised patient care - here's why thousands of patients trust us for hernia treatment in Bangalore.</p>
+
+    <div class="why-vasavi-inner">
+
+      <!-- Feature Cards -->
+      <div class="why-features">
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3>Benefits of Hernia Surgery</h3>
+          <p>Tiny incisions, minimal blood loss, and a recovery of just 3–5 days. Most patients return home the same day with significantly less pain.</p>
+        </div>
+
+        <div class="feature-card-v">
+          <div class="card-icon-v"><i class="fa-solid fa-hospital"></i></div>
+          <h3>World-Class Facilities</h3>
+          <ul class="facility-list">
+            <li><i class="fa-solid fa-circle-dot"></i> Robotic &amp; Laparoscopic OT</li>
+            <li><i class="fa-solid fa-circle-dot"></i> Specialty Hernia Wards</li>
+            <li><i class="fa-solid fa-circle-dot"></i> Advanced Diagnostic Center</li>
+            <li><i class="fa-solid fa-circle-dot"></i> 30+ Years Experienced Surgeon</li>
+          </ul>
+        </div>
+
+        <div class="feature-card-v insurance">
+          <div class="card-icon-v"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Hassle-Free Insurance Approval</h3>
+          <p>Cashless treatment with all major insurers. Our dedicated team handles the entire claim process - zero paperwork stress for you.</p>
+        </div>
+
+        <div class="feature-card-v location">
+          <div class="card-icon-v"><i class="fa-solid fa-location-dot"></i></div>
+          <h3>Easily Accessible Location</h3>
+          <p>Located at <strong>Kumaraswamy Layout, Bangalore</strong> - minutes from the nearest Metro Station and BMTC Bus Stand. Nearby hotels available for outstation patients.</p>
+        </div>
+
+        <div class="feature-card-v support full-width">
+          <div class="card-icon-v"><i class="fa-solid fa-headset"></i></div>
+          <h3>Your Personal Support Guide</h3>
+          <p>A dedicated care coordinator stays with you from first consultation to discharge - answering every question and making sure every step is smooth and stress-free.</p>
+        </div>
+
+      </div>
+
+      <!-- Lead Form -->
+      <div class="why-form-card">
+        <span class="form-badge-v"><i class="fa-solid fa-circle-check"></i> Callback in 30 Minutes</span>
+        <h3>Book Your Appointment</h3>
+        <p class="form-note">Our team will call you back within 30 minutes.</p>
+
+        <!-- Step 1: one-tap concern selector -->
+        <div class="lc-step" *ngIf="!showLeadForm">
+          <p class="lc-prompt">What's bothering you the most?</p>
+          <div class="lc-options">
+            <button type="button" class="lc-chip" *ngFor="let concern of leadConcerns" (click)="selectLeadConcern(concern)">
+              {{ concern }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: revealed only after a concern is picked -->
+        <div class="lc-form-wrap" *ngIf="showLeadForm">
+          <p class="lc-selected">
+            <i class="fa-solid fa-circle-check"></i> {{ leadConcern }}
+            <button type="button" class="lc-change" (click)="changeLeadConcern()">change</button>
+          </p>
+          <app-callback-form [pageName]="leadFormPageName"></app-callback-form>
+        </div>
+
+        <div class="form-or-divider">or</div>
+
+        <button type="button" class="btn-check-insurance" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+        <p class="form-privacy-note"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+        <div class="form-trust-strip">
+          <div class="trust-item-v"><i class="fa-solid fa-user-doctor"></i><span>30+ Years<br />Experience</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-robot"></i><span>Robotic<br />Surgery</span></div>
+          <div class="trust-item-v"><i class="fa-solid fa-file-invoice"></i><span>All Insurance<br />Accepted</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 3 - WHAT IS HERNIA?
+  ════════════════════════════════ -->
+  <section class="what-is-hernia-section">
+    <div class="wih-inner">
+
+      <!-- Left: Text -->
+      <div class="wih-content">
+
+        <span class="wih-label"><i class="fa-solid fa-circle-info"></i> Hernia Treatment Guide</span>
+
+        <h2>What is Hernia?</h2>
+
+        <p>A hernia occurs when an internal organ or tissue pushes through a weak spot in the abdominal wall, often causing a small lump or discomfort. It develops due to strain, heavy lifting, or long-term pressure on the abdomen.</p>
+
+        <p>If you notice a bulge near your abdomen or groin, or feel pain while coughing or lifting, don't ignore the signs. Vasavi Hospitals offers <strong>affordable hernia surgery in Bangalore</strong> - with expert diagnosis, advanced robotic treatment, and a care team that guides you every step of the way.</p>
+
+        <!-- Symptom Chips -->
+        <div class="wih-symptoms">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> &nbsp;Watch out for these signs</p>
+          <div class="symptom-chips">
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Visible Bulge</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Groin or Abdominal Pain</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Pain While Lifting</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Burning Sensation</span>
+            <span class="symptom-chip"><i class="fa-solid fa-circle-dot"></i> Heaviness After Standing</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Video -->
+      <div class="wih-video-wrap">
+        <video
+          #herniaVideo
+          [src]="asset('hernia-video.mp4')"
+          [muted]="true"
+          [loop]="true"
+          loop
+          muted
+          playsinline
+          preload="none"
+          [poster]="asset('hero-section-bg.webp')"
+        ></video>
+        <div class="wih-video-badge">
+          <i class="fa-solid fa-play"></i> Hernia Explained
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 3.5 - WHY DELAYING SURGERY IS RISKY
+       Directly grounded in the "strangulation" risk already covered in the
+       FAQ - not a generic "quality of life" framing like the ENT pages,
+       since hernia carries a genuine acute medical risk if left untreated.
+  ════════════════════════════════════════════ -->
+  <section class="risk-section">
+    <div class="risk-header">
+      <span class="wih-label risk-label"><i class="fa-solid fa-triangle-exclamation"></i> Worth Knowing</span>
+      <h2>Why Delaying Hernia Surgery Is Risky</h2>
+      <p>A hernia does not heal on its own - it only gets larger with time. Here's what tends to happen the longer it's left untreated.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h3>Risk of Strangulation</h3>
+        <p>If trapped tissue loses its blood supply, it becomes a life-threatening emergency requiring urgent surgery - the single biggest reason not to delay.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+        <h3>The Hernia Only Grows Larger</h3>
+        <p>Without surgery, the weak spot keeps widening over time - what starts as a small, easily-repaired bulge can become a larger, more complex one.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-rupee-sign"></i></div>
+        <h3>A More Complex, Costlier Repair Later</h3>
+        <p>Larger, longstanding hernias are technically harder to repair and typically mean a longer surgery and recovery than treating it early.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+        <h3>Ongoing Pain Limiting Daily Life</h3>
+        <p>Discomfort while lifting, standing, or exercising tends to persist and worsen - many patients quietly restrict their activity for years rather than treat it.</p>
+      </div>
+    </div>
+    <div class="risk-cta">
+      <p>A single evaluation can tell you clearly how urgent your case is and what to do next.</p>
+      <button type="button" class="btn-risk-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i> Book an Evaluation
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 5 - COST & INSURANCE
+  ════════════════════════════════ -->
+  <section class="cost-insurance-section" id="insurance">
+    <div class="ci-inner">
+
+      <!-- Left: Conversion copy -->
+      <div class="ci-copy">
+
+        <span class="ci-badge"><i class="fa-solid fa-tag"></i> 100% Free - No Obligation</span>
+
+        <h2>Know Your Hernia Surgery Cost Before You Decide</h2>
+
+        <p>Every patient's case is unique. Get a personalised cost breakdown and instant insurance check - our team will call you back within 30 minutes with full clarity.</p>
+
+        <div class="ci-benefits">
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-rupee-sign"></i></div>
+            <span>Personalised surgery cost estimate - no guesswork</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <span>Instant check for your insurance eligibility &amp; coverage</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-file-invoice"></i></div>
+            <span>Cashless admission guidance - zero paperwork stress</span>
+          </div>
+          <div class="ci-benefit">
+            <div class="ci-benefit-icon"><i class="fa-solid fa-phone-volume"></i></div>
+            <span>Callback within 30 minutes by our care coordinator</span>
+          </div>
+        </div>
+
+        <!-- Real insurance partner logos, auto-scrolling marquee. -->
+        <div class="ci-insurance-partners">
+          <p class="ci-ip-label"><i class="fa-solid fa-check-double"></i> Trusted by all major insurance providers</p>
+          <div class="ci-ip-marquee">
+            <div class="ci-ip-track">
+              <div class="ci-ip-chip" *ngFor="let partner of insurancePartnersLoop">
+                <img [src]="partner.logo" [alt]="partner.name" width="72" height="32" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-free-estimate ci-copy-insurance-btn" style="margin-top: 50px;" (click)="openInsuranceCheck()">
+          <i class="fa-solid fa-shield-halved"></i> Check for Insurance
+        </button>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div class="ci-form-card">
+
+        <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Get Free Cost Estimation</span>
+
+        <h3>Book Your Appointment</h3>
+        <p class="ci-form-sub">Fill in your details - we'll handle the rest.</p>
+
+        <app-callback-form [pageName]="'Hernia Surgery - Insurance Check'"></app-callback-form>
+
+        <p class="ci-privacy"><i class="fa-solid fa-lock"></i> Your details are 100% safe &amp; confidential</p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SECTION 6 - TYPES OF HERNIA
+       Kept as an anatomical taxonomy (not rewritten into an ENT-style
+       "reasons for surgery" list) - people search hernia content by type.
+  ════════════════════════════════ -->
+  <section class="hernia-types-section">
+
+    <div class="ht-header">
+      <h2>Types of Hernia We Treat</h2>
+      <p>Each hernia type differs in location, cause, and recovery time. Our specialists are trained to treat all types with minimally invasive precision.</p>
+    </div>
+
+    <div class="hernia-types-grid">
+
+      <div class="ht-card" [ngClass]="type.cssClass" *ngFor="let type of herniaTypes">
+        <div class="ht-card-top">
+          <div class="ht-icon-circle"><i class="fa-solid" [ngClass]="type.icon"></i></div>
+          <span class="ht-badge">{{ type.badgeText }}</span>
+        </div>
+        <h3>{{ type.title }}</h3>
+        <p>{{ type.description }}</p>
+        <div class="ht-chips">
+          <span class="ht-chip">📍 Location: {{ type.location }}</span>
+          <span class="ht-chip">⏱ Recovery: {{ type.recoveryTime }}</span>
+          <span class="ht-chip">🏥 Stay: {{ type.hospitalStay }}</span>
+        </div>
+        <a href="javascript:void(0)" class="ht-consult-link" (click)="openBooking()">Consult for this type <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       SECTION 7 - TREATMENT OPTIONS + ROBOTIC vs LAPAROSCOPIC
+  ════════════════════════════════════════════════════════════ -->
+  <section class="treatment-section">
+
+    <div class="tr-header">
+      <h2>Treatment Options at Vasavi Hospitals</h2>
+      <p>We offer <strong>Robotic</strong> and <strong>Laparoscopic</strong> hernia repair - both minimally invasive, both performed by 30+ year experienced surgeons. Here's what sets each approach apart.</p>
+    </div>
+
+    <!-- Two option cards -->
+    <div class="treatment-options">
+
+      <div class="treatment-card robotic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-star"></i> Recommended · Premium
+        </div>
+        <h3>Robotic Surgery <span style="font-size:0.75em;opacity:0.75;">(Da Vinci Xi)</span></h3>
+        <p class="tr-desc">
+          The Da Vinci Xi robotic system gives surgeons 3D, high-definition vision and wristed instruments that bend and rotate far beyond the human hand - allowing unmatched precision inside the body.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> 3D HD vision with 10× magnification</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Tremor-filtered, sub-millimetre precision</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Faster recovery - discharge in 1 day</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Ideal for complex &amp; recurrent hernias</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Minimal post-op pain &amp; scarring</div>
+        </div>
+        <i class="fa-solid fa-robot tr-bg-icon"></i>
+      </div>
+
+      <div class="treatment-card laparoscopic">
+        <div class="tr-card-badge">
+          <i class="fa-solid fa-shield-halved"></i> Trusted Standard
+        </div>
+        <h3>Laparoscopic Surgery</h3>
+        <p class="tr-desc">
+          A proven, widely used minimally invasive technique. Small incisions, a camera, and thin instruments allow the surgeon to repair the hernia without open surgery - resulting in less pain and quicker recovery than traditional methods.
+        </p>
+        <div class="tr-highlights">
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Small incisions (0.5–1 cm)</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Lower cost than robotic surgery</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Discharge within 1–2 days</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Suitable for most hernia types</div>
+          <div class="tr-highlight"><i class="fa-solid fa-check-circle"></i> Covered under most insurance plans</div>
+        </div>
+        <i class="fa-solid fa-video tr-bg-icon"></i>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="treatment-cta">
+      <p>Not sure which option is right for you? Our specialists will guide you.</p>
+      <a href="javascript:void(0)" class="btn-treatment-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book a Surgical Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 8 - WHAT TO EXPECT (PATIENT JOURNEY)
+  ════════════════════════════════════════════ -->
+  <section class="journey-section">
+
+    <div class="journey-header">
+      <h2>What to Expect During Hernia Surgery</h2>
+      <p>Your Step-by-Step Care Journey</p>
+    </div>
+
+    <!-- 4-step horizontal timeline -->
+    <div class="journey-timeline">
+
+      <div class="journey-step">
+        <div class="js-circle">1</div>
+        <div class="js-title">Consultation &amp; Evaluation</div>
+        <p class="js-desc">Meet our hernia care team to review reports, understand your condition and plan the best treatment. We ensure clear guidance, full cost transparency and personalised care from day one.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">2</div>
+        <div class="js-title">Surgery Day</div>
+        <p class="js-desc">Undergo a safe, minimally invasive laparoscopic or robotic hernia repair under general anaesthesia. The procedure usually takes about 1–2 hours, ensuring precision and comfort.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">3</div>
+        <div class="js-title">Post-Surgery Stay</div>
+        <p class="js-desc">Stay in observation for 1–2 days while our experts monitor your healing. You'll receive personalised care, dietary advice and recovery instructions for a smooth transition home.</p>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-circle">4</div>
+        <div class="js-title">Recovery &amp; Follow-Up</div>
+        <p class="js-desc">Resume light activities within 3–5 days. Our follow-up visits help track healing progress, prevent recurrence and support your long-term well-being.</p>
+      </div>
+
+    </div>
+
+    <div class="journey-cta">
+      <p>Have questions about your surgery day? We're here to walk you through every step.</p>
+      <a href="javascript:void(0)" class="btn-journey-cta" (click)="openBooking()">
+        <i class="fa-solid fa-phone"></i>
+        Talk to Our Care Team
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ═════════════════════════════
+       SECTION 9 - FAQs
+  ═════════════════════════════ -->
+  <section class="faq-section">
+
+    <div class="faq-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about hernia surgery in Bangalore - answered by our specialists.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item" [class.awareness]="faq.awareness" [class.open]="faq.open" *ngFor="let faq of faqs">
+        <button class="faq-q" (click)="toggleFaq(faq)">
+          <span class="faq-q-left">
+            <span class="faq-icon"><i class="fa-solid" [ngClass]="faq.icon"></i></span>
+            {{ faq.question }}
+          </span>
+          <i class="fa-solid fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <span class="awareness-tag" *ngIf="faq.awarenessTag"><i class="fa-solid fa-circle-exclamation"></i> {{ faq.awarenessTag }}</span>
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <p>Still have questions? Our hernia specialists are here to help you decide the right next step.</p>
+      <a href="javascript:void(0)" class="btn-faq-cta" (click)="openBooking()">
+        <i class="fa-solid fa-calendar-check"></i>
+        Book a Consultation
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 10 - PATIENT REVIEWS
+  ════════════════════════════════════════════ -->
+  <section class="reviews-section" id="patient-reviews" #patientReviewsSection>
+    <div class="reviews-header">
+      <span class="wih-label"><i class="fa-brands fa-google"></i> Google Reviews</span>
+      <h2>What Our Patients Say</h2>
+      <p>Real reviews from real patients across Vasavi Hospitals.</p>
+    </div>
+    <!-- Elfsight Google Reviews | Vasavi Hospitals -->
+    <div class="elfsight-app-bf9f3d4c-c949-49aa-b1bc-a714aa863544" data-elfsight-app-lazy></div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       SECTION 11 - FOLLOW US ON INSTAGRAM
+  ════════════════════════════════════════════ -->
+  <section class="insta-section" id="instagram-posts" #instagramSection>
+    <div class="insta-header">
+      <span class="wih-label"><i class="fa-brands fa-instagram"></i> Instagram</span>
+      <h2>@vasavi_hospitals</h2>
+      <p>Follow us for recovery stories, doctor Q&amp;As, and health tips.</p>
+    </div>
+    <!-- Elfsight Instagram Feed | Vasavi Hospitals -->
+    <div class="elfsight-app-d4c691e5-e33f-4c07-9c12-70c12b0d6383" data-elfsight-app-lazy></div>
+  </section>
+
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SHARED POPUPS
+══════════════════════════════════════ -->
+
+<div class="popup-overlay" [class.active]="isBookingOpen" (click)="closeBooking()"></div>
+<div class="popup-modal callback-popup-modal" [class.active]="isBookingOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeBooking()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <app-callback-form [pageName]="selectedPageName"></app-callback-form>
+</div>
+
+<app-second-opinion-popup
+  [isOpen]="isSecondOpinionOpen"
+  [imageSrc]="asset('second-opinion-pop-up.jpg')"
+  imageAlt="Get Free Second Surgical Opinion at Vasavi Hospitals"
+  (close)="closeSecondOpinion()"
+  (bookAppointment)="onSecondOpinionBook()"
+></app-second-opinion-popup>
+
+<app-insurance-check-form
+  [isOpen]="isInsuranceOpen"
+  [surgeryName]="'Hernia Surgery'"
+  (onClose)="closeInsuranceCheck()"
+  (onSubmit)="onInsuranceSubmit()"
+></app-insurance-check-form>
+
+<!-- ══════════════════════════════════════
+     EXIT-INTENT POPUP (desktop only)
+══════════════════════════════════════ -->
+<div class="popup-overlay" [class.active]="isExitIntentOpen" (click)="closeExitIntent()"></div>
+<div class="popup-modal" [class.active]="isExitIntentOpen" role="dialog" aria-modal="true">
+  <button class="popup-close" (click)="closeExitIntent()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <div class="exit-intent-content">
+    <span class="ci-form-free-tag"><i class="fa-solid fa-star"></i> Before You Go</span>
+    <h3>Get Your Free Hernia Surgery Cost Estimate</h3>
+    <p class="ci-form-sub">Takes 30 seconds. No obligation - our team calls you back with a clear cost and insurance breakdown.</p>
+    <app-callback-form [pageName]="'Hernia Surgery - Exit Intent'"></app-callback-form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     STICKY MOBILE CALL/WHATSAPP BAR
+══════════════════════════════════════ -->
+<div class="mobile-sticky-bar">
+  <a [href]="phoneHref" class="msb-btn msb-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+  <a [href]="whatsappHref" target="_blank" rel="noopener" class="msb-btn msb-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+</div>

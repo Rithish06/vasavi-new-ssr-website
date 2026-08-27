@@ -1,0 +1,222 @@
+section {
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.bg-primary {
+    background-color: #0095da !important;
+}
+.otp-box {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.otp-input {
+  font-size: 22px;
+  letter-spacing: 6px;
+  height: 55px;
+}
+/* ===== Verification Status Message ===== */
+.alert {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.alert-info {
+  background-color: #e9f3ff;
+  color: #084298;
+  border: 1px solid #b6d4fe;
+}
+
+.alert-success {
+  background-color: #e6f7ee;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.alert-danger {
+  background-color: #fdecea;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+/* ===== OTP Box ===== */
+.otp-box {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid #e3e6ea;
+}
+
+/* OTP Input */
+.otp-input {
+  font-size: 22px;
+  letter-spacing: 6px;
+  height: 56px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+.otp-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+/* OTP Timer */
+.otp-box small {
+  font-size: 13px;
+}
+
+/* Resend Button */
+.otp-box .btn-link {
+  font-size: 13px;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.otp-box .btn-link:disabled {
+  color: #adb5bd;
+  pointer-events: none;
+}
+
+/* Verify Buttons */
+.otp-box .btn-success {
+  font-weight: 500;
+  height: 45px;
+  border-radius: 6px;
+}
+
+/* ===== hCaptcha Styling ===== */
+ng-hcaptcha {
+  display: flex;
+  justify-content: center;
+}
+
+small.text-danger {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+/* ===== Submit Button ===== */
+button[type="submit"] {
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Disabled Buttons */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* OTP Card */
+.otp-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Title */
+.otp-title {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* Row: Input + Button */
+.otp-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* OTP Input */
+.otp-input {
+  flex: 1;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 6px;
+  height: 52px;
+  border-radius: 8px;
+}
+
+/* Verify Button */
+.otp-verify-btn {
+  min-width: 120px;
+  height: 52px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+/* Timer + Resend */
+.otp-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* Resend */
+.resend-btn {
+  font-size: 13px;
+  padding: 0;
+  text-decoration: none;
+}
+
+/* Disabled resend */
+.resend-btn:disabled {
+  color: #adb5bd;
+  pointer-events: none;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .otp-row {
+    flex-direction: column;
+  }
+
+  .otp-verify-btn {
+    width: 100%;
+  }
+    .otp-input {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  .alert {
+    font-size: 13px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 480px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}

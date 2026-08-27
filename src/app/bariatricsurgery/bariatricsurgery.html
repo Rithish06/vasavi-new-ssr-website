@@ -1,0 +1,546 @@
+<div class="hero-section">
+    <img src="Images/bariatric_surgery/vasavi-hospitals-bariatric-surgery-banner.png" class="desktop_banner"
+        alt="Expert cardiology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <img src="Images/bariatric_surgery/bariatric-surgery-banner.png" class="mobile_banner"
+        alt="Expert cardiology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <a  class="book-btn" (click)="scrollToSection('appointment')">
+        Book an Appointment
+    </a>
+
+</div>
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item"
+            [class.active]="activeSection === section.id" (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+
+
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading text-left" style="padding: 0; margin: 0">Bariatric Surgery at Vasavi Hospitals,
+            Banashankari</h1>
+        <p class="para_style">At Vasavi Hospitals, we understand that weight loss is about more than just
+            appearance-it's about reclaiming your health, improving your quality of life, and building long-term
+            confidence.If you're struggling with obesity or related health conditions despite trying diet, exercise, or
+            other non-surgical methods, bariatric surgery could be the right solution for you.</p>
+        <p class="para_style">Our team of highly skilled bariatric surgeons uses the latest techniques - including
+            gastric sleeve, gastric bypass and sleeve gastrectomy - to help you achieve safe, long-lasting results.
+        </p>
+        <p class="para_style">Whether your goal is sustainable weight loss, reversing obesity related diabetes, or
+            simply being able to enjoy life without limitations, we’re here for you. From your very first
+            consultation to your complete recovery, we offer personalized, compassionate care that makes your
+            journey smooth and stress-free.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/bariatric_surgery/vasavi-hospitals-bariatric-surgery-illustration.png"
+            alt="Medical illustration of bariatric surgery showing stomach reduction for weight loss treatment at Vasavi Hospitals Bangalore">
+    </div>
+</div>
+
+
+
+
+<!-- section 3 -->
+
+
+<div class="treatments" id="services">
+    <h2 class="heading text-center">Our Bariatric & Metabolic Treatments</h2>
+
+    <div class="treatment_container_3">
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Gastric Bypass Surgery</h3>
+            <p class="box_para">A well-established weight loss surgery that reduces stomach size and reroutes part of
+                the digestive tract. This helps limit food intake, reduce calorie absorption, and manage conditions like
+                type 2 diabetes and hypertension</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Sleeve Gastrectomy</h3>
+            <p class="box_para">Involves removing approximately 70–80% of the stomach, leaving a smaller, sleeve-shaped
+                stomach. This reduces hunger hormones and helps you feel full sooner.</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Adjustable Gastric Banding</h3>
+            <p class="box_para">A silicone band is placed around the upper portion of the stomach, creating a smaller
+                pouch to restrict food intake.</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Bariatric Consultations</h3>
+            <p class="box_para">One-on-one consultation with our specialists to understand the best treatment for
+                you.</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Revisional Bariatric Surgery</h3>
+            <p class="box_para">For patients who have had previous bariatric surgery but are experiencing complications
+                or insufficient weight loss. We offer safe, personalized revision options based on your current health
+                status.</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Metabolic Surgery</h3>
+            <p class="box_para">Specially designed to treat metabolic disorders such as type 2 diabetes, high
+                cholesterol, and insulin resistance-even in patients who are not severely obese.</p>
+        </div>
+
+        <!-- card-1 -->
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="sub_heading">Weight Management Programs</h3>
+            <p class="box_para">Comprehensive lifestyle-based programs focused on nutrition, exercise, behavioral
+                therapy, and medical management to support sustainable weight loss-before or after surgery.
+            </p>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- section 4 -->
+<div class="surgeriers" id="surgeries">
+    <h2 class="heading text-center">Our Surgical Options</h2>
+    <p class="para_style text-center treatment_header_des">We offer a range of advanced surgical approaches tailored to
+        each patient's condition, ensuring safe procedures, minimal discomfort, and faster recovery. Our commitment to
+        precision and patient care is reflected in every technique we use.</p>
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgery</h3>
+                    <p class="box_para">A traditional approach used for complex cases, ensuring safe and effective
+                        treatment with proven results.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png"
+                    alt="Open Surgery for Complex Cases at Vasavi Hospitals Banashankari Bangalore">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Laparoscopic Surgery</h3>
+                    <p class="box_para box_padding">Performed through tiny incisions, offering faster recovery, minimal
+                        pain, and reduced hospital stay.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png"
+                    alt="Laparoscopic Surgery with Faster Recovery at Vasavi Hospitals Banashankari Bangalore">
+            </div>
+
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Robotic Surgery </h3>
+                    <p class="box_para box_padding">High-precision, minimally invasive surgery for faster recovery,
+                        minimal scarring, and excellent outcomes.</p>
+
+                    <!-- <a href="/robotic-surgery-in-urology.php" class="box_para"
+                            style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a> -->
+                </div>
+                <img src="Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png"
+                    alt="Robotic Surgery for Precision and Faster Healing at Vasavi Hospitals Banashankari Bangalore">
+            </div>
+        </div>
+
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our bariatric surgery specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <option value="Dr. Mutharaju K. R">Dr. Mutharaju K. R</option>
+                  <!-- <option value="Dr. Sowmya Sangamesh">Dr. Sowmya Sangamesh</option> -->
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+          
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Robotic Bariatric Surgery Section -->
+<div class="container_1" id="roboticSurgery">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Robotic Bariatric Surgery with Da Vinci Xi</h2>
+                <p class="cathlab_intro_text">
+                    At Vasavi Hospitals, we offer advanced <strong>Robotic Bariatric Surgery</strong> using the
+                    <strong>Da Vinci Xi surgical system</strong>. This cutting-edge technology allows our
+                    surgeons to
+                    perform weight-loss procedures with enhanced precision, minimal pain, and faster recovery.
+                    Robotic-assisted bariatric surgery makes complex procedures safer and more effective,
+                    helping
+                    patients
+                    achieve long-term weight loss and improved overall health.
+                </p>
+
+                <h3 class="cathlab_sub_title">Why Choose Robotic Bariatric Surgery at Vasavi?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Unmatched Precision & Control</h4>
+                            <p class="cathlab_feature_desc">
+                                Robotic technology gives surgeons enhanced vision and dexterity, ensuring more
+                                accurate
+                                gastric bypass or sleeve gastrectomy procedures with minimal risk.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Weight Loss Surgery</h4>
+                            <p class="cathlab_feature_desc">
+                                The Da Vinci Xi system enables surgeons to operate through tiny incisions,
+                                resulting in
+                                less pain, reduced blood loss, and minimal scarring for patients.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Faster Recovery & Early Mobility</h4>
+                            <p class="cathlab_feature_desc">
+                                Patients experience shorter hospital stays and quicker recovery times, allowing
+                                them
+                                to return to normal activities and adopt a healthier lifestyle sooner.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Better Long-Term Outcomes</h4>
+                            <p class="cathlab_feature_desc">
+                                Robotic-assisted bariatric surgery is associated with higher success rates,
+                                sustained
+                                weight loss, and improvement of obesity-related conditions like diabetes and
+                                hypertension.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional Image Section -->
+            <!-- <div class="cathlab_image_section">
+                <div class="cathlab_image_wrapper">
+                    <img src="assets/Images/bariatric/robotic-bariatric-surgery-davinci-xi-vasavi-hospital-banashankari-bangalore.jpg"
+                        alt="Robotic Bariatric Surgery with Da Vinci Xi at Vasavi Hospitals Banashankari Bangalore"
+                        class="cathlab_image">
+                    <div class="cathlab_image_overlay">
+                        <div class="cathlab_overlay_content">
+                            <i class="fa-solid fa-robot"></i>
+                            <span>Advanced Robotic Bariatric Surgery</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Bariatric Surgeons</h2>
+    <p class="para_style doc_sec_para">Our team of highly skilled bariatric surgeons brings decades of combined
+        experience
+        in performing weight-loss surgeries with precision, safety, and compassionate care to help patients
+        achieve a
+        healthier life.</p>
+
+
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-mutharaju-k-r-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Mutharaju K. R</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS, MS, FMBS (Fellow in Bariatric & Metabolic Surgery)</p>
+            <p class="doctor-experience">23+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn" [routerLink]="'/doctors/dr-mutharaju-k-r'">Book Appointment</a>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!-- section 5 -->
+
+<div class="why_choose_us mt" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Vasavi Hospitals, Banashankari, Bangalore?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Expert Bariatric Surgeons</b>
+                –
+                Our team has years of experience in weight loss and metabolic surgery.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Comprehensive Care</b> – From
+                diagnosis to follow-up, we guide you throughout your weight loss journey.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Modern Technology</b> – We
+                use
+                laparoscopic and robotic techniques for safe and effective results.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Personalized Treatment</b> –
+                We
+                tailor procedures and programs to suit your health needs and goals.</span>
+        </div>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Convenient Location</b> –
+                Located in
+                the heart of Banashankari, Bangalore, making access easy for nearby patients.</span>
+        </div>
+
+
+        <div class="wcu_description" style="margin-bottom: 30px;">
+            At Vasavi Hospitals, you are not just choosing weight-loss surgery, you are choosing a dedicated
+            team
+            that values your health, safety, and long-term well-being at every step of your journey.
+        </div>
+    </div>
+
+    <img src="Images/bariatric_surgery/vasavi-hospitals-bariatric-surgery-results.jpg"
+        alt="Woman measuring waist after bariatric surgery at Vasavi Hospitals Bangalore showing successful weight loss results">
+</div>
+
+<app-insurance-section id="insurance"> </app-insurance-section>
+
+
+<div class="container_1" style="margin : 50px 0">
+    <div class="consclusion">
+        <h2 class="heading">Your Health, Our Priority</h2>
+        <p class="para_style">Take the first step toward a healthier future. Book your consultation with our
+            bariatric
+            specialists today. Call Vasavi Hospitals, Banashankari at <b><a href="tel:08071500500">080 71 500
+                    500</a></b> or fill out our online form to schedule your appointment..</p>
+    </div>
+</div>
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1. What is Bariatric Surgery?</div>
+            <div class="ans">Bariatric surgery is a medical procedure that helps people lose weight by changing
+                the
+                stomach’s size or the way food is digested. It’s recommended for those who are unable to lose
+                weight
+                through diet and exercise alone.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">2. Who is a good candidate for Bariatric Surgery?</div>
+            <div class="ans">A good candidate for bariatric surgery is someone with a BMI of 35 or more, or a
+                BMI of 30+
+                along with health conditions such as diabetes, high blood pressure, or sleep apnea. Doctors
+                carefully
+                evaluate each individual’s health to determine if surgery is the right option.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">3. What are the common types of Bariatric Surgery?</div>
+            <div class="ans">The most common types include Gastric Sleeve, Gastric Bypass, Duodenal Switch and
+                Gastric
+                Balloon. Each has different benefits, and our team will help you choose the best option.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">4. Is Bariatric Surgery Safe?</div>
+            <div class="ans">Yes, when performed by experienced surgeons like ours, bariatric surgery is
+                considered
+                safe. We use advanced laparoscopic and robotic techniques for minimal pain and faster recovery.
+            </div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">5. How much weight can I expect to lose?</div>
+            <div class="ans">Most patients lose 50-70% of excess body weight within the first 12-18 months after
+                surgery, depending on the procedure and lifestyle changes.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">6. Will I need to follow a special diet after surgery?</div>
+            <div class="ans">Yes, our nutritionists will guide you through a step-by-step diet plan after
+                surgery to
+                ensure proper healing and healthy weight loss.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">7. How long will it take to recover?</div>
+            <div class="ans">Recovery usually takes about 2-4 weeks, depending on the type of surgery. Minimally
+                invasive procedures like laparoscopic and robotic surgery allow for a quicker return to normal
+                activities.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">8. Can Bariatric Surgery help with diabetes?</div>
+            <div class="ans">Yes! Bariatric surgery is also called metabolic surgery because it helps improve or
+                even
+                resolve Type 2 Diabetes in many patients.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">9. What if I regain weight after surgery?</div>
+            <div class="ans">Our weight management programs and follow-up care are designed to keep you on
+                track. In
+                some cases, revisional bariatric surgery can help restore weight loss results.</div>
+        </div>
+
+        <div class="faq_container">
+            <div class="ques">10. How do I book an appointment at Vasavi Hospitals?</div>
+            <div class="ans">Simply call us at 080 71 500 500 or fill out our online appointment form, and our
+                team will
+                schedule your consultation at your convenience.</div>
+        </div>
+
+    </div>
+</div>
+
+<app-cta></app-cta>

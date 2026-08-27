@@ -1,0 +1,27 @@
+<owl-carousel-o [options]="carouselOptions">
+    <ng-container *ngFor="let doctor of doctorSlide" class="card">
+
+        <ng-template carouselSlide>
+            <div class="slide">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img [src]="doctor?.img" [alt]="doctor?.alt" />
+                    </div>
+                    <h3 class="doctor-name" *ngIf="doctor?.name">
+                        {{ doctor?.name }}
+                    </h3>
+                    <p class="qualification" *ngIf="doctor?.department">
+                        {{ doctor?.department }}
+                    </p>
+                    <p class="doctor-experience" *ngIf="doctor?.experience">
+                        {{ doctor?.experience }} Years Experience
+                    </p>
+                    <button *ngIf="doctor?.slug" class="appointment-btn" [routerLink]="['/doctors' + doctor?.slug]">
+                        Book Appointment
+                    </button>
+
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+</owl-carousel-o>

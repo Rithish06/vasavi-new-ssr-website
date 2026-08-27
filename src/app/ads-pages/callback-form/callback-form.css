@@ -1,0 +1,193 @@
+.callback-container {
+  background-color: #dceeff;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 86, 179, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+header h2 {
+  color: #0056b3;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  color: #003f88;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #aac7ff;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.3);
+}
+
+.error small {
+  color: red;
+  font-size: 13px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #004494;
+}
+
+.submit-btn:disabled {
+  background-color: #a8c9ff;
+  cursor: not-allowed;
+}
+
+/* ✅ OTP Section Styling */
+.otp-section {
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.otp-section h3 {
+  color: #0056b3;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.otp-section p {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.otp-input {
+  letter-spacing: 6px;
+  font-size: 24px;
+  text-align: center;
+  width: 200px;
+  padding: 10px;
+  border: 2px solid #aac7ff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.otp-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 8px rgba(0, 86, 179, 0.3);
+  outline: none;
+}
+
+.otp-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.otp-actions button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.otp-actions button:hover:not(:disabled) {
+  background-color: #004494;
+}
+
+.otp-actions button:disabled {
+  background-color: #a8c9ff;
+  cursor: not-allowed;
+}
+
+.success-message {
+  background-color: #c8f7c5;
+  color: #1b5e20;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(0, 86, 179, 0.15);
+}
+/* ✅ Loading Overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.spinner {
+  border: 5px solid #d0e2ff;
+  border-top: 5px solid #0056b3;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  color: #0056b3;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .callback-container {
+    padding: 30px 20px;
+    /* margin: 20px; */
+  }
+  .otp-input {
+    width: 150px;
+    font-size: 20px;
+  }
+}

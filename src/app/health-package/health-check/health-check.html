@@ -1,0 +1,200 @@
+<!-- banner -->
+<div class="banner-part">
+    <div class="banner-bg">
+        <div class="blue">
+            <div class="gray"></div>
+        </div>
+
+        <div class="blue-1">
+            <div class="gray-1"></div>
+        </div>
+    </div>
+</div>
+
+<div class="health-packages">
+    <div class="banner">
+        <div class="banner-content">
+            <div class="banner-headeing">{{ currentPackage?.pageTitle }}</div>
+
+            <div class="flex1">
+                <div class="banner-package-price">
+                    <div class="price">
+                        <div class="package-heading">Package Price</div>
+                        <div class="amount">₹{{ currentPackage?.pagePrice }}/-</div>
+                        <div class="cote">{{ currentPackage?.pageSubtitle }}</div>
+                    </div>
+                </div>
+
+                <div class="banner-para">
+                    {{ currentPackage?.pageDescription }}
+                </div>
+
+
+                <div class="flex">
+                    <div class="banner-card" *ngFor="let card of currentPackage?.bannerCards">
+                        <div class="title">{{ card.title }}</div>
+                        <div class="para1">{{ card.subtitle }}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Form section -->
+        <!-- <div class="form" id="appointmentFormSection">
+            <div class="form-heading">Book Your Appointment</div>
+            <form [formGroup]="appointmentForm" class="form-content">
+                <div class="flex2"> <label>Select Date</label> <input type="date" formControlName="date"
+                        [min]="minDate"> <small class="error"
+                        *ngIf="appointmentForm.get('date')?.touched && appointmentForm.get('date')?.invalid"> Date is
+                        required </small> </div>
+                <div class="flex2"> <label>Full Name:</label> <input type="text" formControlName="name"> <small
+                        class="error"
+                        *ngIf="appointmentForm.get('name')?.touched && appointmentForm.get('name')?.invalid"> Name is
+                        required </small> </div>
+                <div class="flex2"> <label>Mobile Number:</label>
+                    <div class="otp"> <input type="number" formControlName="mobile"> <button type="button"
+                            (click)="sendOtp()" [disabled]="!canSendOtp">Send OTP</button> </div> <small class="error"
+                        *ngIf="appointmentForm.get('mobile')?.touched && appointmentForm.get('mobile')?.invalid"> Enter
+                        a valid 10-digit mobile number </small>
+                </div> 
+                <div class="flex2" *ngIf="otpSent"> <label>Enter OTP:</label> <input type="number"
+                        formControlName="otp"> <small class="error" *ngIf="otpInvalid">Incorrect OTP</small> <small
+                        class="error" *ngIf="otpExpired">OTP expired. Please resend.</small>
+                    <div class="otp-timer"> <span *ngIf="timeLeft > 0">Resend OTP in {{ timeLeft }}s</span> <button
+                            type="button" *ngIf="timeLeft === 0" (click)="resendOtp()">Resend OTP</button> </div>
+                </div> <button class="btn" type="submit" *ngIf="otpSent" (click)="verifyOtp()"
+                    [disabled]="otpSent && appointmentForm.invalid"> Verify OTP </button>
+            </form>
+        </div> -->
+        <div class="">
+            <app-health-package-form id="appointmentFormSection" [page]="currentPackage.pageTitle"></app-health-package-form>
+        </div>
+    </div>
+
+
+    <div class="health-package">
+
+        <!-- ABOUT SECTION  -->
+        <div class="about" *ngIf="currentPackage?.about?.length > 0">
+            <div>
+
+                <div *ngFor="let ab of currentPackage?.about">
+                    <div class="about-heading">{{ ab.title }}</div>
+
+                    <div class="about-para">
+                        <div [innerHTML]="ab.subtitle"></div>
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+            <div>
+                <img [src]="currentPackage?.aboutImage" class="box" />
+            </div>
+        </div>
+
+
+        <!-- INCLUDES SECTION -->
+        <div class="packages" *ngIf="currentPackage?.includes?.length > 0">
+            <div class="package-header">
+                <div class="heading">{{ currentPackage?.includesTitle }}</div>
+                <div class="para">{{ currentPackage?.includesSubtitle }}</div>
+
+            </div>
+
+            <div class="package-cards">
+                <div class="card" *ngFor="let item of currentPackage?.includes">
+
+                    <div class="card-header">{{ item.title }}</div>
+
+                    <ul class="card-list">
+                        <li *ngFor="let point of item.content">
+                            {{ point }}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- WHY CHOOSE -->
+        <div class="why-choose" *ngIf="currentPackage?.whyChoose?.length > 0">
+            <div class="package-header">
+                <div class="heading">{{ currentPackage?.whyChooseTitle }}</div>
+                <div class="para">{{ currentPackage?.whyChooseSubtitle }}</div>
+
+            </div>
+
+            <div class="choose-wrapper">
+                <div class="choose-cards" *ngFor="let item of currentPackage?.whyChoose">
+                    <i [class]="item.icon" class="card-icon"></i>
+                    <div class="content">{{ item.content }}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DOCTORS SLIDE -->
+        <div class="doctors" *ngIf="currentPackage?.doctorSlide?.length > 0">
+            <app-doctors-slide [doctorSlide]="currentPackage?.doctorSlide"></app-doctors-slide>
+        </div>
+
+
+        <!-- CARE WITH US -->
+        <div class="care-with-us" *ngIf="currentPackage?.careWith?.length > 0">
+            <div class="package-header">
+                <div class="heading">{{ currentPackage?.careTitle }}</div>
+                <div class="para">{{ currentPackage?.careSubtitle }}</div>
+            </div>
+
+            <div class="choose-wrapper">
+                <div class="care-cards" *ngFor="let item of currentPackage?.careWith">
+                    <img [src]="item.img" />
+                    <div class="care-content">{{ item.content }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="book-appointment">
+            <div class="package-header">
+                <div class="heading">{{ currentPackage?.ctaTitle }}</div>
+                <div class="para" style="white-space: pre-line">{{ currentPackage?.ctaSubtitle }}</div>
+            </div>
+
+            <button (click)="scrollToForm()">Book Appointment</button>
+        </div>
+
+        <!-- FAQ -->
+        <div class="accordion-wrapper" *ngIf="currentPackage?.faqs?.length > 0">
+            <div class="header">FAQs</div>
+
+            <div class="accordion-item" *ngFor="let item of currentPackage?.faqs; let i = index">
+
+                <div class="accordion-header" (click)="toggle(i)">
+                    <span class="arrow" [class.open]="openedIndex === i">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16">
+                            <path d="M7.3 8L0 2.3L1.8 0L12 8L1.8 16L0 13.7L7.3 8Z" fill="black" />
+                        </svg>
+                    </span>
+
+                    <div class="faq-heading">{{ item.title }}</div>
+
+                </div>
+
+                <div class="accordion-body" [class.open]="openedIndex === i">
+                    <div class="accordion-content">
+                        {{ item.content }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -43,12 +43,12 @@
 
       <span class="topbar__divider" aria-hidden="true"></span>
 
-      <div class="topbar__badge">
+      <a class="topbar__badge" routerLink="/cghs-hospital-in-bangalore">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
           <path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 10.5 4.6-1.2 8-5.5 8-10.5V5l-8-3Zm-1.2 13.4-3.4-3.4 1.3-1.3 2.1 2.1 4.5-4.5 1.3 1.3-5.8 5.8Z"/>
         </svg>
         <span>CGHS</span>
-      </div>
+      </a>
 
       <a class="topbar__phone" href="tel:+18004124779">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
@@ -67,7 +67,7 @@
         <img
           class="brand__logo"
           src="/Images/vasavi-logo.png"
-          alt="Vasavi Hospitals — We Cure With Care"
+          alt="Vasavi Hospitals - We Cure With Care"
           width="522"
           height="203"
         />
@@ -135,7 +135,25 @@
             </ul>
           </li>
 
-          <li><a routerLink="/health-package" routerLinkActive="active" (click)="closeMobileMenu()">Health Package</a></li>
+          <li class="has-dropdown" [class.open]="openDropdown() === 'health'">
+            <button
+              type="button"
+              class="dropdown-toggle"
+              (click)="toggleDropdown('health')"
+              aria-haspopup="true"
+              [attr.aria-expanded]="openDropdown() === 'health'"
+            >
+              Health Package
+              <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <ul class="dropdown-menu dropdown-menu--health">
+              @for (item of healthPackagesMenu; track item.path) {
+                <li><a [routerLink]="item.path" (click)="closeMobileMenu()">{{ item.label }}</a></li>
+              }
+            </ul>
+          </li>
           <li><a routerLink="/doctors" routerLinkActive="active" (click)="closeMobileMenu()">Doctors</a></li>
           <li><a routerLink="/awards" routerLinkActive="active" (click)="closeMobileMenu()">Awards</a></li>
           <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMobileMenu()">Gallery</a></li>

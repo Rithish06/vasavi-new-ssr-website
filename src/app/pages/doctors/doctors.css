@@ -220,7 +220,7 @@
 @media (max-width: 767.98px) {
   .doctors-hero__bg {
     /* The photo crop gets too tight to stay legible under the heading at
-       narrow widths — drop it in favor of a plain soft background instead
+       narrow widths - drop it in favor of a plain soft background instead
        of fighting the crop with an ever-larger white overlay. */
     background-image: none;
     background-color: #eef1fb;
@@ -817,7 +817,7 @@
   color: var(--color-text-gray);
   line-height: 1.4;
   /* Some qualification strings are long single sentences (fellowships,
-     certifications, etc.) — clamp to 3 lines so cards in the same row
+     certifications, etc.) - clamp to 3 lines so cards in the same row
      stay roughly the same height; full text is still available via the
      `title` attribute on hover/long-press. */
   display: -webkit-box;

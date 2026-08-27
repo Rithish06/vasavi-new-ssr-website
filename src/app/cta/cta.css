@@ -1,0 +1,41 @@
+section {
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.bg-primary {
+    background-color: #0095da !important;
+}
+a{
+    text-decoration: none;
+}
+
+.btn-light:hover {
+    color: #000;
+    background-color: #f1faff;
+    border-color: #f0faff;
+}
+
+@media only screen and (max-width: 480px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    section {
+        padding: 20px 0;
+        overflow: hidden;
+    }
+}
+a{
+    text-decoration: none;
+}

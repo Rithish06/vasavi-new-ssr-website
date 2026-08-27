@@ -1,0 +1,180 @@
+<section class="hc-hero">
+  <div class="hc-hero__inner">
+    <div class="hc-hero__content">
+      <span class="hc-hero__eyebrow">VASAVI HOSPITALS</span>
+
+      <h1 class="hc-hero__title">
+        Comprehensive <span class="hc-hero__title-blue">Health Check Packages</span> for the Ones You Care About
+      </h1>
+
+      <p class="hc-hero__desc">
+        Stay a step ahead of illness with preventive health screenings designed around you and your family -
+        covering heart, diabetes, thyroid, liver, kidney and overall wellness, all under one roof.
+      </p>
+
+      <div class="hc-hero__ctas">
+        <a routerLink="/health-package" class="hc-btn hc-btn--filled">
+          <app-doctors-icon name="shield" />
+          Explore Packages
+        </a>
+        <a routerLink="/book-appointment" class="hc-btn hc-btn--outline">
+          <app-doctors-icon name="calendar" />
+          Book a Health Check
+        </a>
+      </div>
+
+      <div class="hc-hero__features">
+        @for (feature of miniFeatures; track feature.label) {
+          <div class="hc-feature">
+            <span class="hc-feature__icon">
+              <app-doctors-icon [name]="feature.icon" />
+            </span>
+            <span class="hc-feature__label">{{ feature.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Right-side visual is carried by the responsive background photo
+         (hc-hero__bg - see health-package.css); these overlay cards float
+         on top of it and are only meaningful once that photo has room to
+         show, so they're hidden below the tablet breakpoint. -->
+    <div class="hc-hero__visual" aria-hidden="false">
+      <div class="hc-visual-pill">
+        <app-doctors-icon name="pin" />
+        <span>2nd Raghavaiah &bull; Prasanthinagar &bull; Boduppal, Hyderabad</span>
+      </div>
+
+      <!-- <div class="hc-visual-card hc-visual-card--checklist">
+        <h3>Your Health at a Glance</h3>
+        <ul>
+          @for (item of checklist; track item.label) {
+            <li>
+              <span class="hc-visual-check">
+                <app-doctors-icon name="check" />
+              </span>
+              {{ item.label }}
+            </li>
+          }
+        </ul>
+      </div> -->
+
+      <div class="hc-visual-card hc-visual-card--trust">
+        <span class="hc-visual-card__icon">
+          <app-doctors-icon name="users" />
+        </span>
+        <div>
+          <h3>Trusted Care. Lifelong Wellness.</h3>
+          <p>Accurate Diagnosis &bull; Expert Doctors &bull; Advanced Results</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pkg-section">
+  <div class="pkg-section__inner">
+    <div class="pkg-heading">
+      <span class="pkg-heading__icon">
+        <app-doctors-icon name="heart-pulse" />
+      </span>
+      <h2 class="pkg-heading__title">
+        <span class="pkg-heading__dash" aria-hidden="true"></span>
+        Our Health Check Packages
+        <span class="pkg-heading__dash" aria-hidden="true"></span>
+      </h2>
+    </div>
+
+    <div class="pkg-grid pkg-grid--featured">
+      @for (pkg of featuredPackages; track pkg.slug) {
+        <article class="pkg-card pkg-card--featured pkg-card--{{ pkg.accent }}">
+          <div class="pkg-card__body">
+            <span class="pkg-card__icon">
+              <app-doctors-icon [name]="pkg.icon" />
+            </span>
+            <h3 class="pkg-card__title">{{ pkg.title }}</h3>
+            <p class="pkg-card__desc">{{ pkg.description }}</p>
+
+            <ul class="pkg-card__features">
+              @for (feature of pkg.features; track feature.title) {
+                <li>
+                  <span class="pkg-card__feature-icon">
+                    <app-doctors-icon [name]="feature.icon" />
+                  </span>
+                  <span>{{ feature.title }}</span>
+                </li>
+              }
+            </ul>
+
+            <div class="pkg-card__footer">
+              <div class="pkg-card__price">
+                <span class="pkg-card__price-label">Starting at</span>
+                <span class="pkg-card__price-value">&#8377;{{ pkg.price }}/-</span>
+              </div>
+              <a [routerLink]="['/health-package', pkg.slug]" class="pkg-card__cta">
+                View Details
+                <app-doctors-icon name="arrow" />
+              </a>
+            </div>
+          </div>
+
+          @if (pkg.photo) {
+            <div class="pkg-card__photo">
+              <img [src]="pkg.photo" [alt]="pkg.title" loading="lazy" width="600" height="700" />
+            </div>
+          }
+        </article>
+      }
+    </div>
+
+    <h3 class="pkg-subheading">Other Health Check Packages</h3>
+
+    <div class="pkg-grid pkg-grid--standard">
+      @for (pkg of standardPackages; track pkg.slug) {
+        <article class="pkg-card pkg-card--{{ pkg.accent }}">
+          <span class="pkg-card__icon">
+            <app-doctors-icon [name]="pkg.icon" />
+          </span>
+          <h3 class="pkg-card__title">{{ pkg.title }}</h3>
+          <p class="pkg-card__desc">{{ pkg.description }}</p>
+
+          <ul class="pkg-card__features">
+            @for (feature of pkg.features; track feature.title) {
+              <li>
+                <span class="pkg-card__feature-icon">
+                  <app-doctors-icon [name]="feature.icon" />
+                </span>
+                <span>{{ feature.title }}</span>
+              </li>
+            }
+          </ul>
+
+          <div class="pkg-card__price">
+            <span class="pkg-card__price-label">Starting at</span>
+            <span class="pkg-card__price-value">&#8377;{{ pkg.price }}/-</span>
+          </div>
+          <a [routerLink]="['/health-package', pkg.slug]" class="pkg-card__cta pkg-card__cta--block">
+            View Details
+            <app-doctors-icon name="arrow" />
+          </a>
+        </article>
+      }
+    </div>
+
+    <h3 class="pkg-subheading">Why Choose Us?</h3>
+
+    <div class="pkg-trust">
+      @for (item of trustItems; track item.title) {
+        <div class="pkg-trust__item">
+          <span class="pkg-trust__icon">
+            <app-doctors-icon [name]="item.icon" />
+          </span>
+          <div>
+            <strong>{{ item.title }}</strong>
+            <span>{{ item.subtitle }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

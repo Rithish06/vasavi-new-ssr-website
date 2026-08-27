@@ -1,0 +1,654 @@
+<div class="hero-section">
+    <img src="Images/cardiology/cardiology-banner-vasavi.webp" class="desktop_banner"
+        alt="A promotional hospital banner showcasing “Comprehensive Cardiac Care Under One Roof” with a digital 3D heart and 24/7 state-of-the-art CATHLAB services.">
+    <img src="Images/cardiology/cardiology-banner-mobile-size.webp" class="mobile_banner"
+        alt="Expert cardiology care in Bangalore with precise diagnosis, personalized treatment, and compassionate doctors">
+    <a  class="book-btn" (click)="scrollToSection('appointment')">
+        Book an Appointment
+    </a>
+</div>
+
+
+<!-- navs -->
+<div class="carousel-container sticky-top">
+    <div class="carousel-track" id="carouselTrack" #carouselTrack>
+        <a *ngFor="let section of sections" class="section-item"
+            [class.active]="activeSection === section.id" (click)="scrollToSection(section.id)">
+            {{ section.name }}
+        </a>
+
+    </div>
+
+    <button class="carousel-btn prev" id="prevBtn" #prevBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-btn next" id="nextBtn" #nextBtn>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+    </button>
+</div>
+<!-- section 2 -->
+
+<div class="container_1" id="overview">
+    <div class="content">
+        <h1 class="heading text-left" style="padding: 0; margin: 0">Best Cardiology Hospital in Banashankari, Bangalore
+        </h1>
+        <h2 class="sub_heading text-left" style="margin-top: 10px;">Advanced Heart Care by Top Cardiologists in
+            Banashankari, Bangalore</h2>
+        <p class="para_style">At Vasavi Hospitals, we are committed to delivering expert, affordable, and comprehensive
+            heart care. Whether you
+            need a routine heart checkup or complex cardiac surgery, our cardiology department in Banashankari is
+            fully equipped to handle it all. We combine experienced heart specialists, modern technology, and
+            compassionate care to deliver the best outcomes for every patient.</p>
+    </div>
+
+    <div class="image">
+        <img src="Images/cardiology/3d-human-heart-model.webp"
+            alt="A detailed 3D illustration of a human heart showing arteries and veins, used to highlight cardiac anatomy and advanced cardiology treatments.">
+    </div>
+</div>
+
+
+<!-- section 3 -->
+
+
+<div class="treatments" id="services">
+    <h2 class="heading text-center">Cardiology Services at Vasavi Hospitals</h2>
+    <p class="para_style text-center treatment_header_des">we offer a wide range of advanced cardiac services, combining
+        clinical expertise with cutting-edge technology.Our Core Cardiology Services :</p>
+
+    <div class="treatment_container_1">
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <h3 class="sub_heading">Cardiac Consultation and Evaluation</h3>
+            <p class="box_para">Expert cardiologists assess your symptoms and guide you with accurate diagnosis and
+                treatment.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <h3 class="sub_heading">Preventive Cardiology</h3>
+            <p class="box_para">Focused on preventing heart disease through risk assessments, lifestyle changes, and
+                continuous monitoring.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-heart-crack"></i>
+            </div>
+            <h3 class="sub_heading">Heart Failure Treatment</h3>
+            <p class="box_para">Advanced medical care, device therapies, and follow-ups to manage chronic heart
+                failure effectively.</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h3 class="sub_heading">Heart Rhythm Management</h3>
+            <p class="box_para">Pacemakers, ICDs, and other therapies to correct abnormal or dangerous heart
+                rhythms.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-lungs"></i>
+            </div>
+            <h3 class="sub_heading">Angioplasty & Coronary Stenting</h3>
+            <p class="box_para">Minimally invasive procedure to open blocked arteries and restore smooth blood flow.
+            </p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-pump-medical"></i>
+            </div>
+            <h3 class="sub_heading">Intra-Aortic Balloon Pump (IABP) Support</h3>
+            <p class="box_para">Emergency support system for patients with severe heart failure or shock.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-route"></i>
+            </div>
+            <h3 class="sub_heading">Coronary Artery Bypass Grafting (CABG)</h3>
+            <p class="box_para">Surgical bypass to improve blood circulation in blocked coronary arteries</p>
+        </div>
+    </div>
+
+    <div class="treatment_container_2">
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3 class="sub_heading">Heart Valve Surgery</h3>
+            <p class="box_para">Precision repair or replacement of damaged heart valves using advanced surgical
+                techniques.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h3 class="sub_heading">Pacemaker Implantation (Temporary & Permanent)</h3>
+            <p class="box_para">Reliable devices implanted to maintain steady and safe heart rhythms.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3 class="sub_heading">Intra Cardiac Defibrillator (ICD)</h3>
+            <p class="box_para">Device that prevents sudden cardiac arrest by correcting life-threatening heart
+                rhythms.</p>
+        </div>
+        <div class="treatment-box">
+            <div class="service-icon">
+                <i class="fa-solid fa-sync"></i>
+            </div>
+            <h3 class="sub_heading">Cardiac Resynchronization Therapy (CRT)</h3>
+            <p class="box_para">Specialized treatment to improve pumping efficiency and reduce heart failure
+                symptoms.</p>
+        </div>
+    </div>
+</div>
+
+<!-- section 4 -->
+
+<div class="surgeriers" id="surgeries">
+    <h2 class="heading text-centxer">Advanced Cardiology Surgery Options</h2>
+    <p class="para_style text-center treatment_header_des">Not all heart conditions need surgery. But when advanced
+        procedures are required, our highly skilled cardiac team ensures world-class care with precision and compassion.
+    </p>
+    <!-- <p class="para_style text-center treatment_header_des">We offer all two types of Cardiology surgeries: -->
+
+
+    <div class="surgery_container">
+        <div class="surgery_content">
+            <div class="sur_card">
+                <div class="sur_card_content">
+                    <h3 class="sub_heading">Open Surgeries</h3>
+                    <p class="box_para">For complex cases where traditional access is needed, our surgeons have
+                        decades of experience.</p>
+                </div>
+                <img src="Images/urology/vasavi-hospital-open-surgery-banashankari-bangalore.png" alt="">
+            </div>
+
+            <!-- <div class="sur_card">
+                    <div class="sur_card_content">
+                        <h3 class="sub_heading">Laparoscopic (Keyhole) Surgeries</h3>
+                        <p class="box_para">Minimally invasive, faster recovery, and smaller scars-ideal for many
+                            kidney, bladder, and prostate procedures.</p>
+                    </div>
+                    <img src="assets/Images/urology/vasavi-hospital-laparoscopic-surgery-banashankari-bangalore.png"
+                        alt="">
+                </div> -->
+
+            <!-- <div class="sur_card">
+                    <div class="sur_card_content">
+                        <h3 class="sub_heading">Robotic Surgeries</h3>
+                        <p class="box_para">We are proud to be equipped with the da Vinci Xi Robotic Surgical System,
+                            which allows for high-precision robotic heart surgeries.</p>
+                        <a href="" class="box_para" style="color: blue; cursor: pointer">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <img src="assets/Images/urology/vasavi-hospital-robotic-surgery-banashankari-bangalore.png" alt="">
+                </div> -->
+        </div>
+
+
+        <div class="form-container" id="appointment">
+            <h3 class="form-title">Book Appointment</h3>
+            <p class="form-subtitle">Schedule your visit with our Cardiology specialists</p>
+          
+            <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+            <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+          
+            <!-- ✅ IMPORTANT: bind the form to FormGroup -->
+            <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()" novalidate>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input id="name" formControlName="name" placeholder="Enter your full name" />
+                  <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">Name is required</small>
+                    <small *ngIf="f['name'].errors['pattern']">Only letters and spaces allowed</small>
+                    <small *ngIf="f['name'].errors['minlength']">At least 2 characters</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="phone">Contact Number *</label>
+                  <input id="phone" formControlName="phone" placeholder="Enter 10-digit mobile number" />
+                  <div class="error" *ngIf="submitted && f['phone'].errors">
+                    <small *ngIf="f['phone'].errors['required']">Contact number is required</small>
+                    <small *ngIf="f['phone'].errors['pattern']">Enter valid 10-digit number</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="input-wrapper">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" formControlName="email" placeholder="Enter your email" />
+                  <div class="error" *ngIf="submitted && f['email'].errors">
+                    <small *ngIf="f['email'].errors['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors['email']">Invalid email format</small>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="date">Preferred Date *</label>
+                  <input type="date" id="date" formControlName="date" />
+                  <div class="error" *ngIf="submitted && f['date'].errors">
+                    <small *ngIf="f['date'].errors['required']">Appointment date is required</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="doctor_name">Select Doctor *</label>
+                <select id="doctor_name" formControlName="doctor">
+                  <option value="">-- Select Doctor --</option>
+                  <option value="Dr. Krishna Kumar B. R">Dr. Krishna Kumar B. R</option>
+                  <!-- <option value="Dr. Girish Navasundi">Dr. Girish Navasundi</option> -->
+                  <!-- <option value="Dr. Praneeth">Dr. Praneeth</option> -->
+                </select>
+                <div class="error" *ngIf="submitted && f['doctor'].errors">
+                  <small *ngIf="f['doctor'].errors['required']">Please select a doctor</small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">Message / Reason for Visit *</label>
+                <textarea id="message" formControlName="message" placeholder="Describe your symptoms..."></textarea>
+                <div class="error" *ngIf="submitted && f['message'].errors">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                  <small *ngIf="f['message'].errors['minlength']">Minimum 10 characters required</small>
+                </div>
+              </div>
+          
+              <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+          </div>
+    </div>
+</div>
+
+<!-- cathlab section -->
+<div class="container_1" id="cathlab">
+    <div class="cathlab_section">
+        <div class="cathlab_container">
+            <div class="cathlab_content">
+                <h2 class="cathlab_main_title">Advanced Cath Lab in Banashankari, Bangalore</h2>
+                <p class="cathlab_intro_text">At Vasavi Hospitals, our state-of-the-art
+                    Cardiac
+                    Catheterization Laboratory (Cath Lab) is designed to deliver high-precision
+                    diagnosis and minimally invasive heart treatments. This facility is a cornerstone
+                    of
+                    our cardiology department in Banashankari, helping our doctors perform complex
+                    procedures with maximum safety and accuracy.</p>
+
+                <h3 class="cathlab_sub_title">What Makes Our Cath Lab Special?</h3>
+
+                <div class="cathlab_features">
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">High-End Imaging Technology</h4>
+                            <p class="cathlab_feature_desc">Provides real-time, high-resolution images of the heart and
+                                blood
+                                vessels.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Expert Interventional Cardiologists</h4>
+                            <p class="cathlab_feature_desc">Our team of specialists performs delicate procedures
+                                with
+                                precision and care.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">Minimally Invasive Procedures</h4>
+                            <p class="cathlab_feature_desc">Most procedures are done through a tiny incision,
+                                ensuring
+                                quicker recovery.</p>
+                        </div>
+                    </div>
+
+                    <div class="cathlab_feature_item">
+                        <div class="cathlab_icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="cathlab_feature_content">
+                            <h4 class="cathlab_feature_title">24/7 Emergency Care</h4>
+                            <p class="cathlab_feature_desc">Emergency cardiac procedures like
+                                angioplasty can be performed anytime, ensuring immediate care.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="cathlab_image_section">
+                    <div class="cathlab_image_wrapper">
+                        <img src="assets/img/cathlab/advanced-cathlab-vasavi-hospital-banashankari-bangalore.jpg"
+                            alt="Advanced Cardiac Catheterization Laboratory at Vasavi Hospitals Banashankari Bangalore"
+                            class="cathlab_image">
+                        <div class="cathlab_image_overlay">
+                            <div class="cathlab_overlay_content">
+                                <i class="fa-solid fa-heartbeat"></i>
+                                <span>Advanced Heart Care</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<div class="doctors-section" id="doctors">
+    <h2 class="heading">Meet Our Expert Cardiology Specialists</h2>
+    <p class="para_style doc_sec_para">Our team of board-certified cardiologists brings decades of combined experience
+        in diagnosing and treating heart and vascular conditions with expertise and compassionate care.</p>
+
+    <div class="doctors-container">
+        <!-- Doctor 1 -->
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-krishna-kumar-b-r-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Krishna Kumar B. R</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS, Diploma in Clinical Cardiology</p>
+            <p class="doctor-experience">17+ Years Experience</p>
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <a class="appointment-btn"  [routerLink]="'/doctors/dr-krishna-kumar-b-r'">Book Appointment</a>
+        </div>
+
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-girish-b-navasundi.png" alt="">
+            </div> -->
+            <!-- <h3 class="doctor-name">Dr. Girish Navasundi</h3> -->
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <!-- <p class="qualification">MBBS MD DNB </p> -->
+            <!-- <p class="doctor-experience">/p> -->
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <!-- <a class="appointment-btn" href="/doctor-profile.php?slug=dr-ramesh-hanumegowda">Book Appointment</a> -->
+        <!-- </div> -->
+
+        <!-- <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-praneeth-s.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Praneeth</h3>
+            <p class="doctor-title">Senior Consultant Urologist</p>
+            <p class="qualification">MBBS MD DM</p>
+            <p class="doctor-experience">/p>
+            <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p>
+            <a class="appointment-btn" href="/doctor-profile.php?slug=dr-ramesh-hanumegowda">Book Appointment</a>
+        </div> -->
+
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-balaraj.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Balaraj</h3>
+            <!-- <p class="doctor-title">Senior Consultant Urologist</p> -->
+            <p class="qualification">MBBS MD DNB DM Cardiology</p>
+            <!-- <p class="doctor-experience">/p> -->
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <!-- <a class="appointment-btn" href="/doctor-profile.php?slug=dr-ramesh-hanumegowda">Book Appointment</a> -->
+        </div>
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <img src="Images/new-doctor-image/dr-balakrishna-sq.png" alt="">
+            </div>
+            <h3 class="doctor-name">Dr. Balakrishna G T</h3>
+            <p class="doctor-title">Consultant Interventional Cardiologist</p>
+            <p class="qualification">MBBS | MD General Medicine, DM Cardiology</p>
+            <!-- <p class="doctor-experience">/p> -->
+            <!-- <p class="doctor-specialties">Specializes in Kidney Stones, Prostate Surgery, and Minimally Invasive Procedures</p> -->
+            <div class="appointment-btn" [routerLink]="'/doctors/dr-balakrishna-g-t'">Book Appointment</div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- What We Treat Section -->
+<div class="conditions_treatment_section" id="treatments">
+    <div class="conditions_header">
+        <h2 class="conditions_main_heading">Our Cardiac Care Specialties</h2>
+        <p class="conditions_intro_para">Our cardiology department in Banashankari provides care for a wide range of
+            heart problems, including:</p>
+    </div>
+
+    <div class="conditions_grid_wrapper">
+        <div class="conditions_cards_grid">
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-heart-crack"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Heart Failure Management</h3>
+                    <p class="condition_card_description">We provide advanced therapies and personalized care plans
+                        to strengthen heart function and improve daily living.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Heart Rhythm Disorders (Arrhythmia)</h3>
+                    <p class="condition_card_description">From irregular beats to serious rhythm issues, we offer
+                        medications, pacemakers and ICD treatments.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-lungs"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Coronary Artery Disease</h3>
+                    <p class="condition_card_description">Our experts diagnose and treat blocked arteries with
+                        angioplasty, stenting and preventive care.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-syringe"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">High Blood Pressure & High Cholesterol</h3>
+                    <p class="condition_card_description">Comprehensive management to reduce heart risks through
+                        lifestyle changes, medications, and regular checkups.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Valve Disorders</h3>
+                    <p class="condition_card_description">Specialized treatments, including minimally invasive and
+                        surgical valve repair or replacement procedures.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-user-injured"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Post-Heart Attack Recovery</h3>
+                    <p class="condition_card_description">Cardiac rehabilitation programs to restore health, prevent
+                        recurrence and support long-term recovery.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Preventive Cardiology & Heart Checkups</h3>
+                    <p class="condition_card_description">Affordable packages in Banashankari for early detection
+                        and lifestyle guidance.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+
+            <div class="condition_treatment_card">
+                <div class="condition_card_icon">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <div class="condition_card_body">
+                    <h3 class="condition_card_title">Congenital Heart Defects</h3>
+                    <p class="condition_card_description">Complete care for children and adults with structural
+                        heart conditions, including corrective procedures.</p>
+                </div>
+                <div class="condition_card_accent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- doctor section -->
+<!-- <div class="doctors-section">
+        <h2 class="heading">Meet Our Expert Urology Specialists</h2>
+        <p class="para_style">Our team of board-certified urologists brings decades of combined experience in treating complex urological conditions with compassion and precision.</p>
+
+        <div class="doctors-container">
+            <div class="doctor-card">
+                <div class="doctor-image">
+                    <img src="assets/Images/new-doctor-image/dr-ramesh-hanumegowda-urologist-transparent.png" alt="">
+                </div>
+                <h3 class="doctor-name">Dr. Ramesh Hanumegowda</h3>
+                <p class="qualification">MBBS, MS, MCh</p>
+                <p class="doctor-experience">15+ Years Experience</p>
+                <button class="appointment-btn" onclick="scrollToForm()">Book Appointment</button>
+            </div>
+
+            
+        </div>
+    </div> -->
+
+<!-- section 5 -->
+
+<div class="why_choose_us" id="whyvasavi">
+    <div class="why_content">
+        <h2 class="heading">Why Vasavi Hospitals, Bangalore, for Cardiology?</h2>
+
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Expert Cardiologists</b> – Our team
+                includes highly experienced cardiologists and cardiac surgeons, specializing in both preventive and
+                advanced heart care.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Comprehensive Heart Care</b> - We
+                provide everything under one roof-preventive check-ups, emergency care, interventional cardiology, and
+                cardiac surgeries.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Faster Recovery & Better Outcomes</b>
+                - With minimally invasive techniques and personalized care, patients experience quicker recovery and
+                long-lasting heart health.</span>
+        </div>
+        <div class="content_flex">
+            <div class="tic_icon"><i class="fa-solid fa-check"></i></div> <span><b>Trusted by Families Across
+                    Bangalore</b> - Thousands of patients rely on Vasavi Hospitals for their heart health, making us one
+                of the most trusted names in cardiology.</span>
+        </div>
+
+
+        <div class="wcu_description" style="margin-bottom: 30px;">At Vasavi Hospitals, we don’t just treat heart
+            conditions - we care for your heart with compassion, expertise, and dedication.</div>
+    </div>
+
+    <img src="Images/cardiology/vasavi-hospital-cardiologist-consultation-banashankari-bangalore.webp"
+        alt="Cardiologist consultation at Vasavi Hospitals Banashankari Bangalore">
+</div>
+
+<div class="container_1" style="margin : 50px 0">
+    <div class="consclusion">
+        <h2 class="heading">Book Your Appointment Today</h2>
+        <p class="para_style">Looking for a heart doctor near you in Banashankari Bangalore? Visit Vasavi
+            Hospitals,
+            the best hospital for heart health in Banashankari, and get the expert care you deserve.</p>
+
+    </div>
+</div>
+
+<!-- faq section -->
+<div class="faqs container_2" id="faqs">
+    <h2 class="heading text-center">FAQs</h2>
+
+    <div class="faq_grid">
+
+        <div class="faq_container">
+            <div class="ques">1.How do I book an appointment with a cardiologist at Vasavi Hospitals?</div>
+            <div class="ans">You can book an appointment easily by visiting our Book an Appointment page or calling our
+                24x7 helpline at <a href="tel:08071500500">080 71 500 500</a>. Our team will guide you to the right
+                cardiology specialist.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">2.What conditions are treated by the cardiology department?</div>
+            <div class="ans">Our cardiology department treats all major heart-related conditions including heart
+                attacks, blocked arteries, high blood pressure, irregular heartbeats, heart failure, and congenital
+                heart problems.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">3.What should I expect during my first consultation?</div>
+            <div class="ans">During your first visit, the cardiologist will discuss your symptoms, check your medical
+                history, perform a physical examination, and may recommend tests like ECG or echocardiography. Based on
+                the results, you will receive a clear and personalized treatment plan.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">4.Does Vasavi Hospitals offer advanced heart procedures?</div>
+            <div class="ans">Yes, we provide advanced treatments including angioplasty, bypass surgery, valve repair or
+                replacement, and device implantations like pacemakers – all using the latest technology for safe and
+                effective outcomes.</div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">5.Are there non-surgical treatment options available?</div>
+            <div class="ans">Absolutely. Many heart conditions can be managed with medications, lifestyle changes,
+                regular monitoring, and cardiac rehabilitation programs designed to improve long-term heart health.
+            </div>
+        </div>
+        <div class="faq_container">
+            <div class="ques">6.What follow-up care is provided after treatment?</div>
+            <div class="ans">We offer personalized follow-up care which includes regular check-ups, guidance on
+                medicines, diet and exercise advice, and support to help you return to normal life quickly and reduce
+                the risk of future heart problems.</div>
+        </div>
+    </div>
+</div>
+
+<app-cta></app-cta>

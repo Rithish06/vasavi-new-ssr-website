@@ -1,0 +1,268 @@
+/* Vasavi Color Scheme */
+:host {
+  --primary-blue: #003d7a;
+  --secondary-blue: #0066cc;
+  --accent-cyan: #00b4d8;
+  --light-gray: #f5f5f5;
+  --border-gray: #e0e0e0;
+  --error-red: #dc3545;
+  --text-dark: #333333;
+  --text-light: #666666;
+}
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 61, 122, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container */
+.popup-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 61, 122, 0.15);
+  width: 90%;
+  max-width: 450px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header */
+.popup-header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-title {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.close-btn:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Form Section */
+.form-section {
+  padding: 28px 24px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Form Input */
+.form-input {
+  padding: 12px 14px;
+  border: 2px solid var(--border-gray);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+  background-color: #fafbff;
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.form-input.input-error {
+  border-color: var(--error-red);
+  background-color: #fff5f5;
+}
+
+.form-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.otp-input {
+  font-size: 18px;
+  letter-spacing: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+/* Error Text */
+.error-text {
+  font-size: 12px;
+  color: var(--error-red);
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* OTP Message */
+.otp-message {
+  background-color: var(--light-gray);
+  border-left: 4px solid var(--accent-cyan);
+  padding: 14px 16px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.otp-message p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* Buttons */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.25);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 61, 122, 0.35);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--light-gray);
+  color: var(--primary-blue);
+  border: 2px solid var(--border-gray);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+}
+
+.back-btn:hover {
+  background-color: var(--border-gray);
+  border-color: var(--primary-blue);
+}
+
+.back-btn:active {
+  background-color: var(--light-gray);
+}
+
+/* OTP Actions */
+.otp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .popup-container {
+    width: 95%;
+    margin: 16px;
+  }
+
+  .popup-title {
+    font-size: 20px;
+  }
+
+  .form-section {
+    padding: 20px 16px;
+  }
+
+  .submit-btn,
+  .back-btn {
+    font-size: 14px;
+    padding: 11px;
+  }
+}
