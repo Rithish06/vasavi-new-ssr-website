@@ -1,11 +1,22 @@
-import { Component, inject, OnDestroy, OnInit, PLATFORM_ID, computed, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, HostListener, inject, OnDestroy, OnInit, PLATFORM_ID, computed, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import {
   CommonModule,
   isPlatformBrowser
 } from '@angular/common';
+import { QuickAppointmentBooking } from '../../components/quick-appointment-booking/quick-appointment-booking';
+import { AppointmentBooking, buildUpcomingDates, DateOption } from '../../components/appointment-booking/appointment-booking';
+import { DEPARTMENTS, Doctor, DOCTORS, MORE_DEPARTMENTS } from '../../data/doctors.data';
+
+/** Every department this page's "Select Department" quick-filter offers -
+ *  the same roster the Doctors page's filter checkboxes use, so a name
+ *  picked here is guaranteed to match a real filter over there. */
+const ALL_DEPARTMENTS = [...DEPARTMENTS, ...MORE_DEPARTMENTS];
+
+/** Most doctor suggestions to show at once under "Find a Doctor" - enough
+ *  to be useful without turning into a second full doctor listing. */
+const MAX_DOCTOR_SUGGESTIONS = 8;
 
 interface Department {
   name: string;
@@ -17,14 +28,15 @@ interface Department {
 
 @Component({
   selector: 'app-home-page',
-  imports: [CommonModule],
+  imports: [CommonModule, QuickAppointmentBooking, AppointmentBooking],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
 export class HomePage implements OnDestroy, OnInit {
-  // private router
 
-  showForm = false;
+  /** Whether the "Book an Appointment" popup is open - opened from every
+   *  "Book an Appointment" CTA on this page (hero button, care-team strip). */
+  protected readonly showBookingModal = signal(false);
 
   departments: Department[] = [
     {
@@ -190,6 +202,167 @@ export class HomePage implements OnDestroy, OnInit {
   private platformId = inject(PLATFORM_ID);
   private sanitizer = inject(DomSanitizer);
 
+  // ===================================================================
+  // Booking bar - "Select Department" -> "Find a Doctor" (scoped to that
+  // department) -> "Select Date" -> "Submit". Submit opens the same
+  // booking form used across the site (doctor-detail / doctors list),
+  // pre-filled with whatever doctor and date were picked here.
+  // ===================================================================
+
+  protected readonly allDepartments = ALL_DEPARTMENTS;
+
+  protected readonly departmentDropdownOpen = signal(false);
+  protected readonly doctorDropdownOpen = signal(false);
+  protected readonly dateDropdownOpen = signal(false);
+
+  protected readonly selectedDepartment = signal<string | null>(null);
+  protected readonly selectedDoctor = signal<Doctor | null>(null);
+  protected readonly doctorSearchQuery = signal('');
+  protected readonly selectedDate = signal<DateOption | null>(null);
+
+  /** Same upcoming-weekday list the booking form itself offers, so a date
+   *  picked here lines up exactly with what "Select Date" means later. */
+  protected readonly dateOptions = buildUpcomingDates();
+
+  /** Shown if "Submit" is pressed before a doctor has been picked -
+   *  cleared as soon as one is chosen. */
+  protected readonly bookingBarError = signal('');
+
+  /** Doctors to list under "Find a Doctor". Once a department is chosen
+   *  this shows that department's own roster (search narrows it further);
+   *  with no department picked yet it falls back to a global name/
+   *  speciality search across every doctor. */
+  protected readonly doctorSuggestions = computed(() => {
+    const department = this.selectedDepartment();
+    const query = this.doctorSearchQuery().trim().toLowerCase();
+    const pool = department ? DOCTORS.filter((doc) => doc.department === department) : DOCTORS;
+
+    if (!query) {
+      return department ? pool.slice(0, MAX_DOCTOR_SUGGESTIONS) : [];
+    }
+    return pool.filter((doc) => {
+      const haystack = `${doc.name} ${doc.department} ${doc.title}`.toLowerCase();
+      return haystack.includes(query);
+    }).slice(0, MAX_DOCTOR_SUGGESTIONS);
+  });
+
+  protected toggleDepartmentDropdown(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.doctorDropdownOpen.set(false);
+    this.dateDropdownOpen.set(false);
+    this.departmentDropdownOpen.update((open) => !open);
+  }
+
+  protected toggleDoctorDropdown(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.departmentDropdownOpen.set(false);
+    this.dateDropdownOpen.set(false);
+    this.doctorDropdownOpen.update((open) => !open);
+  }
+
+  protected toggleDateDropdown(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.departmentDropdownOpen.set(false);
+    this.doctorDropdownOpen.set(false);
+    this.dateDropdownOpen.update((open) => !open);
+  }
+
+  protected selectDepartment(dept: string): void {
+    this.selectedDepartment.set(dept);
+    this.departmentDropdownOpen.set(false);
+
+    // A doctor picked under a previously selected department no longer
+    // applies once the department changes.
+    const doctor = this.selectedDoctor();
+    if (doctor && doctor.department !== dept) {
+      this.selectedDoctor.set(null);
+      this.doctorSearchQuery.set('');
+    }
+  }
+
+  protected clearDepartment(event: Event): void {
+    event.stopPropagation();
+    this.selectedDepartment.set(null);
+  }
+
+  protected setDoctorSearchQuery(value: string): void {
+    this.doctorSearchQuery.set(value);
+    // Typing a fresh search invalidates whichever doctor was picked before.
+    if (this.selectedDoctor()) this.selectedDoctor.set(null);
+  }
+
+  protected selectDoctorSuggestion(doc: Doctor): void {
+    this.selectedDoctor.set(doc);
+    this.doctorSearchQuery.set(doc.name);
+    this.doctorDropdownOpen.set(false);
+    this.bookingBarError.set('');
+  }
+
+  protected clearDoctor(event: Event): void {
+    event.stopPropagation();
+    this.selectedDoctor.set(null);
+    this.doctorSearchQuery.set('');
+  }
+
+  protected selectDate(option: DateOption): void {
+    this.selectedDate.set(option);
+    this.dateDropdownOpen.set(false);
+  }
+
+  protected clearDate(event: Event): void {
+    event.stopPropagation();
+    this.selectedDate.set(null);
+  }
+
+  protected closeBookingDropdowns(): void {
+    this.departmentDropdownOpen.set(false);
+    this.doctorDropdownOpen.set(false);
+    this.dateDropdownOpen.set(false);
+  }
+
+  /** Closes every dropdown on any click outside the booking bar - the
+   *  toggle buttons themselves call stopPropagation(), so this only ever
+   *  fires for genuine "clicked elsewhere" clicks. */
+  @HostListener('document:click')
+  protected onDocumentClick(): void {
+    if (this.departmentDropdownOpen() || this.doctorDropdownOpen() || this.dateDropdownOpen()) {
+      this.closeBookingDropdowns();
+    }
+  }
+
+  /** Whether the "Book Appointment" popup (pre-filled from the booking bar
+   *  above) is open. */
+  protected readonly showAppointmentModal = signal(false);
+
+  /** A doctor must be picked before "Submit" opens the booking form - the
+   *  form needs a doctor to book with, same as everywhere else on the
+   *  site it's used. */
+  protected submitBookingRequest(event: Event): void {
+    event.preventDefault();
+    this.closeBookingDropdowns();
+
+    if (!this.selectedDoctor()) {
+      this.bookingBarError.set('Please choose a doctor to continue - pick a department first to see their doctors.');
+      return;
+    }
+
+    this.bookingBarError.set('');
+    this.showAppointmentModal.set(true);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  protected closeAppointmentModal(): void {
+    this.showAppointmentModal.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
+  }
+
   // Cache of sanitized icon markup — Angular's default [innerHTML]
   // sanitizer strips raw <svg> tags, so each icon string needs to be
   // explicitly marked as trusted HTML before it will render.
@@ -285,14 +458,31 @@ export class HomePage implements OnDestroy, OnInit {
   }
 
 
-  openForm(): void {
-    console.log('clicked');
-    this.showForm = true;
+  /** Opens the "Book an Appointment" popup - triggered by any "Book an
+   *  Appointment" CTA on this page. */
+  protected openBookingModal(event: Event): void {
+    event.preventDefault();
+    this.showBookingModal.set(true);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden';
+    }
   }
 
+  protected closeBookingModal(): void {
+    this.showBookingModal.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
+  }
 
-  closeForm(): void {
-    this.showForm = false;
+  @HostListener('window:keydown', ['$event'])
+  protected onWindowKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Escape') return;
+    if (this.showBookingModal()) this.closeBookingModal();
+    if (this.showAppointmentModal()) this.closeAppointmentModal();
+    if (this.departmentDropdownOpen() || this.doctorDropdownOpen() || this.dateDropdownOpen()) {
+      this.closeBookingDropdowns();
+    }
   }
 
   openAboutUs() {

@@ -3,6 +3,17 @@
     margin: 0;
 }
 
+:host {
+    /* Single source of truth for every font-family on this page - every
+       rule below reads this instead of a literal font list, so the whole
+       page is guaranteed to render in one uniform typeface family with no
+       chance of drifting per-section. */
+    --page-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    display: block;
+    font-family: var(--page-font);
+}
+
 .header {
     height: 105px;
     background: rgba(255, 255, 255, 0.97);
@@ -89,7 +100,14 @@
 }
 
 .hero {
-    overflow: hidden;
+    /* Was `overflow: hidden` - a leftover from an earlier design with a
+       separately-positioned decorative image that needed clipping to the
+       hero's edge. That element is gone; the background photo below
+       doesn't need this (CSS backgrounds always clip to their own box
+       regardless of `overflow`), and keeping it here was cutting off the
+       floating booking-bar dropdowns (see `.booking-dropdown`) whenever
+       they extended past the hero's own box. */
+    overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,7 +129,7 @@
 }
 
 .hero-content h1 {
-    font-family: Arial;
+    font-family: var(--page-font);
     font-size: 55px;
     font-style: normal;
     font-weight: 700;
@@ -135,7 +153,7 @@
 
 .hero-content p {
     color: #3B4660;
-    font-family: Arial;
+    font-family: var(--page-font);
     font-size: 21px;
     font-style: normal;
     font-weight: 400;
@@ -225,11 +243,11 @@
     background: white;
     border-radius: 31px;
     box-shadow: 0 12px 40px rgba(30, 55, 110, .13);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .booking-row {
-    height: 142px;
+    min-height: 142px;
     padding: 25px 38px;
     display: flex;
     align-items: center;
@@ -237,14 +255,41 @@
 }
 
 .booking-item {
+    position: relative;
     min-width: 0;
     flex: 1;
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: center;
+}
+
+/* "Select Department" / "Find a Doctor" / "Book an Appointment" are all
+   really buttons (the first two open a filter dropdown, the third opens
+   the full appointment popup) - this resets them back to plain,
+   unstyled-button layout so they look identical to the old inert <div>s. */
+.booking-item__trigger {
+    width: 100%;
+    min-width: 0;
+    display: flex;
     align-items: center;
     gap: 20px;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+}
+
+.booking-item--cta .booking-item__trigger {
+    gap: 16px;
 }
 
 .round-icon {
+    flex-shrink: 0;
     width: 55px;
     height: 55px;
     border-radius: 50%;
@@ -257,13 +302,14 @@
 }
 
 .round-icon svg {
-    width: 55;
-    height: 55;
+    width: 55px;
+    height: 55px;
 }
 
 .booking-text {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .booking-text h6 {
@@ -271,54 +317,288 @@
 }
 
 .booking-text strong {
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 34px;
     /* 170% */
 }
 
 .booking-text span {
-    color: #2C2C2C;
-    font-family: Montserrat;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #7c8394;
+    font-family: var(--page-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 }
 
+/* A real selection (a department name, a doctor's name) reads darker than
+   the "Choose a department" / "Search by name or speciality" placeholder
+   text, so it's obvious at a glance whether a filter is actually set. */
+.booking-text span.filled {
+    color: #2C2C2C;
+    font-weight: 600;
+}
+
 .down {
+    flex-shrink: 0;
     font-size: 17px;
     color: #101f42;
+    transition: transform 0.2s ease;
+}
+
+.booking-item.open .down {
+    transform: rotate(180deg);
+    color: var(--color-blue-600);
 }
 
 .separator {
+    align-self: stretch;
     width: 2px;
-    height: 68px;
+    height: auto;
+    min-height: 68px;
     background: #e2e7f0;
+}
+
+/* ===================================================================
+   "Select Department" / "Find a Doctor" / "Select Date" filter panels
+
+   Floats below its own trigger (position:absolute, width:100% of its
+   `.booking-item`) rather than growing the row in normal flow, so
+   opening a panel - especially the multi-row date grid - doesn't
+   balloon the whole hero section's height and shove the quick-row/
+   stats/rest of the page down every time someone opens one.
+
+   An earlier version tried growing the card in normal flow instead,
+   specifically to avoid a wide fixed-min-width panel spilling sideways
+   over the next item and eating its clicks. That risk doesn't apply
+   here because `width: 100%` ties the panel to its own item's column -
+   it can never be wider than the trigger it belongs to, so it can't
+   reach into a neighboring item at any screen size. On mobile, where
+   items stack into a single column instead of sitting side by side,
+   floating would cover the *next* item down the stack - so the mobile
+   breakpoint below switches this back to static, in-flow growth, where
+   it's already safe (nothing can be underneath a full-width item but
+   the next one, which happily gets pushed further down).
+   =================================================================== */
+
+.booking-dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #f8faff;
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 40;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
+}
+
+.booking-dropdown__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+}
+
+.booking-dropdown__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-family: var(--page-font);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-text-dark, #1a2340);
+    text-align: left;
+    cursor: pointer;
+}
+
+.booking-dropdown__option:hover,
+.booking-dropdown__option:focus-visible {
+    background: #f0f4ff;
+    outline: none;
+}
+
+.booking-dropdown__option.active {
+    background: var(--color-blue-600);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.booking-dropdown__option--doctor {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.booking-dropdown__doctor-name {
+    font-weight: 600;
+    color: var(--color-navy-900, #0c1668);
+}
+
+.booking-dropdown__doctor-dept {
+    font-size: 0.8rem;
+    color: var(--color-text-gray, #6b7280);
+}
+
+.booking-dropdown__clear {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: none;
+    padding: 6px 8px;
+    margin-bottom: 2px;
+    font-family: var(--page-font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-blue-600);
+    cursor: pointer;
+}
+
+.booking-dropdown__clear:hover {
+    text-decoration: underline;
+}
+
+.booking-dropdown__hint {
+    padding: 14px 12px;
+    font-family: var(--page-font);
+    font-size: 0.86rem;
+    color: var(--color-text-gray, #6b7280);
+    line-height: 1.5;
+}
+
+.booking-dropdown__search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.booking-dropdown__search-wrap i.fa-magnifying-glass {
+    position: absolute;
+    left: 12px;
+    font-size: 0.82rem;
+    color: var(--color-text-gray, #6b7280);
+    pointer-events: none;
+}
+
+.booking-dropdown__search {
+    width: 100%;
+    padding: 11px 34px 11px 34px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(15, 23, 42, 0.14);
+    font-family: var(--page-font);
+    font-size: 0.92rem;
+    color: var(--color-text-dark, #1a2340);
+}
+
+.booking-dropdown__search:focus-visible {
+    outline: none;
+    border-color: var(--color-blue-600);
+}
+
+.booking-dropdown__search-clear {
+    position: absolute;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--color-text-gray, #6b7280);
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.booking-dropdown__list--date {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.booking-dropdown__option--date {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 10px 6px;
+    text-align: center;
+}
+
+.booking-dropdown__date-weekday {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    opacity: 0.8;
+}
+
+.booking-dropdown__date-day {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.booking-dropdown__date-month {
+    font-size: 0.72rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.booking-bar-error {
+    margin: 10px 4px 0;
+    font-family: var(--page-font);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #d92d20;
 }
 
 .find-btn {
     border: 0;
-    width: 200px;
+    width: auto;
+    white-space: nowrap;
     border-radius: 60px;
     color: white;
     background: #008EFE;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
     cursor: pointer;
 }
 
 .find-btn span {
     color: #FFF;
-    font-family: Roboto;
-    font-size: 18px;
+    font-family: var(--page-font);
+    font-size: 17px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    white-space: nowrap;
 }
 
 .quick-row {
@@ -365,16 +645,16 @@
 
 .quick-item-text strong {
     color: #2C2C2C;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: normal;
 }
 
 .quick-item-text span {
     color: #2C2C2C;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -431,7 +711,7 @@
 
 .stat-text strong {
     color: #FFF;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -440,7 +720,7 @@
 
 .stat-text span {
     color: #FFF;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -547,7 +827,7 @@
 
 .about-content-para {
     color: #2C2C2C;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -558,7 +838,7 @@
 
 .eyebrow {
     color: #02188D;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -589,7 +869,7 @@
 
 .about-content-head span {
     color: #02188D;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -602,7 +882,7 @@
 
 .about-content-head .highlight {
     color: #1B8FCD;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -643,7 +923,7 @@
 
 .story-button span {
     color: #FFF;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -681,7 +961,7 @@
 
 .number-circle span {
     color: #10256B;
-    font-family: Inter;
+    font-family: var(--page-font);
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
@@ -802,7 +1082,7 @@
 
 .departments-doctors {
     width: 100%;
-    font-family: "Inter", "Poppins", Arial, sans-serif;
+    font-family: var(--page-font);
     color: #14224b;
     overflow: hidden;
 }
@@ -864,7 +1144,7 @@
 
 .small-label {
     color: #02188D;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -893,7 +1173,7 @@
 
 .section-heading h2 {
     color: #041346;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -912,7 +1192,7 @@
 
 .section-heading h2 span {
     color: #1B8FCD;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
     font-weight: 700;
@@ -921,7 +1201,7 @@
 
 .doctor-title-head span {
     color: #1B8FCD;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -930,7 +1210,7 @@
 
 .section-heading-para {
     color: #2C2C2C;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -1247,7 +1527,7 @@
 
 .doctor-title-head {
     color: #041346;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -1258,7 +1538,7 @@
 .doctor-description {
     width: 538px;
     color: #2C2C2C;
-    font-family: Montserrat;
+    font-family: var(--page-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -1434,7 +1714,7 @@
 
 .vasavi-extra {
     width: 100%;
-    font-family: "Inter", "Poppins", Arial, sans-serif;
+    font-family: var(--page-font);
     color: #17244a;
     overflow: hidden;
 }
@@ -1505,7 +1785,7 @@
 
 .heading h2 {
     color: #102b78;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--page-font);
     font-size: clamp(37px, 3.5vw, 58px);
     line-height: .98;
     letter-spacing: -1.8px;
@@ -1578,7 +1858,7 @@
     color: #a9c3ff;
     font-size: 170px;
     line-height: 1;
-    font-family: Arial, sans-serif;
+    font-family: var(--page-font);
     font-weight: 100;
     opacity: .55;
 }
@@ -1685,7 +1965,7 @@
 }
 
 .footer-health strong {
-    font-family: Georgia, serif;
+    font-family: var(--page-font);
     color: #132e76;
     font-size: 16px;
 }
@@ -1745,7 +2025,7 @@
 }
 
 .insurance-copy h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--page-font);
     font-size: 39px;
     line-height: 1.04;
     font-weight: 600;
@@ -1856,7 +2136,7 @@
 
 .technology-heading h2 {
     color: #10275f;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--page-font);
     font-size: 37px;
     line-height: 1.1;
     font-weight: 600;
@@ -1931,7 +2211,7 @@
             rgba(235, 244, 255, 0.95) 0%,
             rgba(248, 251, 255, 0.88) 42%,
             #ffffff 78%);
-    font-family: "Inter", "Poppins", Arial, sans-serif;
+    font-family: var(--page-font);
     color: #14203e;
 }
 
@@ -1962,6 +2242,15 @@
     background-image: url("/Images/Home-new/testimonials-section-bg-image.png");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Instagram feed widget - sits right after the Google Reviews section as
+   the last block on the page, same horizontal padding rhythm as the
+   sections above it. */
+.instagram-feed-container {
+    width: 100%;
+    padding: 50px 20px;
+    background: var(--color-white, #ffffff);
 }
 
 
@@ -2012,7 +2301,7 @@
 }
 
 .testimonial-heading h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--page-font);
     font-size: clamp(48px, 4.2vw, 67px);
     line-height: 1.08;
     font-weight: 700;
@@ -2078,7 +2367,7 @@
 .quote-mark {
     height: 42px;
     color: #095df2;
-    font-family: Georgia, serif;
+    font-family: var(--page-font);
     font-size: 67px;
     font-weight: 700;
     line-height: .72;
@@ -2230,6 +2519,46 @@
 
     font-size: 24px;
     cursor: pointer;
+}
+
+/* ===========================================================================
+   Book an Appointment popup (hero CTA + care-team strip CTA)
+   ========================================================================= */
+
+.qa-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.qa-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: rgba(6, 11, 34, 0.6);
+    backdrop-filter: blur(3px);
+}
+
+.qa-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    max-height: min(680px, 92vh);
+    overflow-y: auto;
+    border-radius: 22px;
+}
+
+@media (max-width: 599.98px) {
+    .qa-modal {
+        padding: 12px;
+    }
 }
 
 .departments-section {
@@ -3528,5 +3857,168 @@
     .legacy-divider {
         width: 100%;
         height: 1px;
+    }
+}
+
+/* ===========================================================================
+   Booking bar - consolidated, clean responsive pass (appended so it wins
+   over the older, scattered rules above at the same breakpoints - the
+   fixed-height row above genuinely overflowed once the Department/Doctor
+   filters could show real, sometimes-long selected values or a filter
+   dropdown, so this pass fixes both the crowding and the overflow).
+   =========================================================================== */
+
+/* Tablet: everything above still fits in a row, it's just tight - give it
+   breathing room instead of a hard-coded 142px that clips longer text. */
+@media (max-width: 1099.98px) {
+    .booking-row {
+        padding: 20px 22px;
+        gap: 14px;
+    }
+
+    .booking-item__trigger {
+        gap: 12px;
+    }
+
+    .booking-text strong {
+        font-size: 17px;
+        line-height: 1.3;
+    }
+
+    .booking-text span {
+        font-size: 14px;
+    }
+
+    .find-btn {
+        width: 168px;
+        padding: 14px 16px;
+    }
+}
+
+/* Mobile: stack the three filters and the CTA into a single column, each
+   one a full-width row with its own tap target and its own dropdown
+   directly underneath it - no more fixed height, no more clipped text. */
+@media (max-width: 767px) {
+    .booking-card {
+        width: 94%;
+        border-radius: 22px;
+    }
+
+    .booking-row {
+        min-height: 0;
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px 16px;
+        gap: 4px;
+    }
+
+    .booking-item {
+        width: 100%;
+        padding: 10px 2px;
+    }
+
+    .booking-item__trigger {
+        gap: 14px;
+    }
+
+    .round-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+
+    .round-icon svg {
+        width: 44px;
+        height: 44px;
+    }
+
+    .booking-text strong {
+        font-size: 15px;
+        line-height: 1.3;
+    }
+
+    .booking-text span {
+        font-size: 13px;
+    }
+
+    .separator {
+        width: 100%;
+        height: 1px;
+        min-height: 0;
+    }
+
+    /* Stacked layout: items sit one above another, so a floated panel
+       from one would cover the item directly below it. Back to static,
+       in-flow growth instead - safe here since there's nothing to its
+       side to overlap, only the next item further down the stack. */
+    .booking-dropdown {
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        box-shadow: none;
+        z-index: auto;
+    }
+
+    .find-btn {
+        width: 100%;
+        margin-top: 10px;
+        padding: 14px 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    .booking-card {
+        width: 100%;
+        border-radius: 18px;
+    }
+
+    .booking-row {
+        padding: 14px 12px;
+    }
+
+    .round-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+
+    .round-icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .booking-text strong {
+        font-size: 14px;
+    }
+
+    .booking-text span {
+        font-size: 12.5px;
+    }
+
+    .booking-dropdown__doctor-name {
+        font-size: 0.88rem;
+    }
+}
+
+/* "Find and book an appointment" needs real room to breathe - several
+   older breakpoints above (135px / 93px / 102px / 168px) sized this
+   button for the old short "Find & Book" / "Submit" labels and would
+   clip or overlap the longer text. Placed last in the cascade and scoped
+   to whenever the bar is still a row (>= 768px, matching the "stack into
+   a column" breakpoint above) so it wins over every earlier fixed-width
+   .find-btn rule and lets the button size itself to its own label. */
+@media (min-width: 768px) {
+    .find-btn {
+        width: auto;
+        min-width: 0;
+        height: auto;
+        white-space: nowrap;
+        padding: 16px 24px;
+    }
+
+    .find-btn span {
+        font-size: 15px;
+        white-space: nowrap;
     }
 }

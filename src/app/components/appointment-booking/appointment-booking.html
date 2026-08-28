@@ -130,16 +130,14 @@
     @case ('success') {
       <div class="doctor-booking__success">
         <span class="doctor-booking__success-icon"><app-doctors-icon name="check" /></span>
-        <h3>Request Received!</h3>
+        <h3>Appointment Booked Successfully!</h3>
         <p>
-          We've noted your preference for
+          Your appointment request for
           <strong>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} at {{ selectedTime() }}</strong>
           @if (doctorName()) {
-            with <strong>{{ doctorName() }}</strong>.
-          } @else {
-            .
+            with <strong>{{ doctorName() }}</strong>
           }
-          Our care team will call <strong>{{ patientPhone() }}</strong> shortly to confirm.
+          has been received. Our team will call <strong>{{ patientPhone() }}</strong> shortly to confirm.
         </p>
         <button type="button" class="btn btn--outline doctor-booking__cta" (click)="bookAnother()">
           Book Another Appointment

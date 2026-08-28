@@ -1,0 +1,301 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+/* ===================================================================
+   Shared button styles (same recipe used across the site)
+   =================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn--filled {
+  background: var(--color-blue-600);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(36, 84, 230, 0.26);
+}
+
+.btn--filled:hover,
+.btn--filled:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(36, 84, 230, 0.32);
+}
+
+.btn--outline {
+  background: #ffffff;
+  color: var(--color-navy-800);
+  border: 1.5px solid rgba(18, 27, 111, 0.22);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  border-color: var(--color-navy-800);
+  background: rgba(18, 27, 111, 0.04);
+}
+
+/* ===================================================================
+   Booking card
+   =================================================================== */
+
+.qab-card {
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(18, 27, 111, 0.14);
+  padding: 26px 24px 22px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.qab-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.qab-head-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-blue-600);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qab-head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.qab-head-text h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-navy-900);
+}
+
+.qab-head-text p {
+  margin-top: 2px;
+  font-size: 0.82rem;
+  color: var(--color-text-gray);
+}
+
+.qab-close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--color-text-gray);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.qab-close svg {
+  width: 13px;
+  height: 13px;
+}
+
+.qab-close:hover,
+.qab-close:focus-visible {
+  background: rgba(15, 23, 42, 0.1);
+  color: var(--color-text-dark);
+}
+
+.qab-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+.qab-field input,
+.qab-field textarea {
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(15, 23, 42, 0.14);
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--color-text-dark);
+  background: #ffffff;
+  resize: none;
+}
+
+.qab-field textarea {
+  min-height: 62px;
+}
+
+.qab-field input:focus-visible,
+.qab-field textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-blue-600);
+}
+
+.qab-field-error {
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.qab-field-hint {
+  color: var(--color-text-gray);
+  font-weight: 500;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+/* ===================================================================
+   Service Needed selector
+   =================================================================== */
+
+.qab-service-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.qab-service-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(15, 23, 42, 0.12);
+  background: #f8faff;
+  color: var(--color-text-dark);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.qab-service-chip svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-blue-600);
+}
+
+.qab-service-chip:hover {
+  border-color: var(--color-blue-600);
+}
+
+.qab-service-chip.active {
+  background: var(--color-blue-600);
+  border-color: var(--color-blue-600);
+  color: #ffffff;
+}
+
+.qab-service-chip.active svg {
+  color: #ffffff;
+}
+
+/* ===================================================================
+   Submit / success
+   =================================================================== */
+
+.qab-cta {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.qab-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 12px 4px 8px;
+}
+
+.qab-success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(21, 155, 92, 0.12);
+  color: #159b5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.qab-success-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.qab-success h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-navy-900);
+}
+
+.qab-success p {
+  font-size: 0.88rem;
+  color: var(--color-text-gray);
+  line-height: 1.55;
+}
+
+.qab-success .qab-cta {
+  margin-top: 10px;
+}
+
+.qab-secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 18px 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-gray);
+}
+
+.qab-secure svg {
+  width: 14px;
+  height: 14px;
+  color: #159b5c;
+  flex-shrink: 0;
+}
+
+/* ===================================================================
+   Responsive
+   =================================================================== */
+
+@media (max-width: 420px) {
+  .qab-service-options {
+    grid-template-columns: 1fr;
+  }
+}

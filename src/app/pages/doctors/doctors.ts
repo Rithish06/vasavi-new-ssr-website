@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DoctorsIcon } from './doctors-icon';
 import { AppointmentBooking } from '../../components/appointment-booking/appointment-booking';
 import { DEPARTMENTS, DOCTORS, MORE_DEPARTMENTS } from '../../data/doctors.data';
@@ -36,6 +36,7 @@ const PAGE_SIZE = 9;
 })
 export class DoctorsPage {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly route = inject(ActivatedRoute);
 
   protected readonly departments = DEPARTMENTS;
   protected readonly moreDepartments = MORE_DEPARTMENTS;
@@ -121,6 +122,26 @@ export class DoctorsPage {
   });
 
   constructor() {
+    // Picks up the "Select Department" / "Find a Doctor" quick-filter the
+    // home page's booking bar hands off via "Find & Book" - read on both
+    // server and client (not afterNextRender-gated) so the very first
+    // render, SSR included, already reflects the filter instead of
+    // flashing the unfiltered list first.
+    const queryParams = this.route.snapshot.queryParamMap;
+    const department = queryParams.get('department');
+    const doctorName = queryParams.get('doctor');
+    const search = queryParams.get('search');
+
+    if (department && (DEPARTMENTS.includes(department) || MORE_DEPARTMENTS.includes(department))) {
+      this.selectedDepartments.set(new Set([department]));
+      if (MORE_DEPARTMENTS.includes(department)) this.showMoreDepartments.set(true);
+    }
+    if (doctorName) {
+      this.searchText.set(doctorName);
+    } else if (search) {
+      this.searchText.set(search);
+    }
+
     afterNextRender(() => {
       if (!isPlatformBrowser(this.platformId)) return;
       try {

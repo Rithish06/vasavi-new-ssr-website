@@ -4,7 +4,7 @@ import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
 
 type BookingStep = 'select' | 'contact' | 'success';
 
-interface DateOption {
+export interface DateOption {
   iso: string;
   weekday: string;
   day: string;
@@ -26,7 +26,7 @@ const HOSPITAL_PHONE_TEL = '+18004124779';
  * in our data yet, so this is every upcoming working day, not a live
  * schedule - see the note on `submitBooking()`.
  */
-function buildUpcomingDates(count = 12): DateOption[] {
+export function buildUpcomingDates(count = 12): DateOption[] {
   const weekdayFmt = new Intl.DateTimeFormat('en-US', { weekday: 'short' });
   const monthFmt = new Intl.DateTimeFormat('en-US', { month: 'short' });
   const options: DateOption[] = [];
@@ -99,6 +99,14 @@ export class AppointmentBooking {
    */
   readonly showClose = input<boolean>(false);
 
+  /**
+   * A date already picked before this modal opened (e.g. the home page's
+   * booking bar collects a date up front) - pre-selects that date on the
+   * 'select' step instead of starting from scratch, while still asking for
+   * a time slot, which is never collected anywhere else.
+   */
+  readonly initialDate = input<DateOption | null>(null);
+
   readonly close = output<void>();
 
   protected readonly dateOptions = signal<DateOption[]>(buildUpcomingDates());
@@ -120,7 +128,7 @@ export class AppointmentBooking {
     effect(() => {
       this.doctorName();
       this.step.set('select');
-      this.selectedDate.set(null);
+      this.selectedDate.set(this.initialDate());
       this.selectedTime.set(null);
       this.patientName.set('');
       this.patientPhone.set('');
@@ -195,7 +203,7 @@ export class AppointmentBooking {
 
   protected bookAnother(): void {
     this.step.set('select');
-    this.selectedDate.set(null);
+    this.selectedDate.set(this.initialDate());
     this.selectedTime.set(null);
     this.patientName.set('');
     this.patientPhone.set('');
