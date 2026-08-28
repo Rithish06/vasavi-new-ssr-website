@@ -95,6 +95,42 @@
   color: var(--color-gold-500);
 }
 
+.topbar__nabh {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+
+.topbar__portal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-gold-500);
+  color: var(--color-navy-950);
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: filter 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.topbar__portal-btn svg {
+  flex-shrink: 0;
+}
+
+.topbar__portal-btn:hover,
+.topbar__portal-btn:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+  transform: translateY(-1px);
+}
+
 .topbar__phone {
   margin-left: auto;
   display: flex;
@@ -425,17 +461,6 @@
   color: var(--color-navy-900);
 }
 
-/* "View All Health Packages" - first entry in the health dropdown, links to
-   the packages hub page rather than one specific package. Set apart with a
-   bottom rule + accent color so it doesn't read as just another package. */
-.dropdown-menu--health li:first-child a {
-  font-weight: 700;
-  color: var(--color-blue-600);
-  border-bottom: 1px solid rgba(18, 27, 111, 0.1);
-  border-radius: 6px 6px 0 0;
-  margin-bottom: 4px;
-}
-
 /* Reproduce the approved column layout with a fixed row count + column
    auto-flow, fed by a flat list that's already ordered column-by-column
    (see navbar.ts). Column count steps up in tiers as there's more room -
@@ -546,6 +571,14 @@
   box-shadow: 0 14px 28px rgba(18, 32, 111, 0.34);
 }
 
+/* Shown only once the nav collapses to the hamburger panel (see the
+   below-1100px block below) - the topbar's own Patient Portal button
+   (.topbar__portal-btn) covers desktop widths, so the two never show at
+   the same time. */
+.portal-btn-mobile {
+  display: none;
+}
+
 .nav-scrim {
   display: none;
   border: none;
@@ -632,6 +665,35 @@
     justify-content: center;
   }
 
+  .topbar__portal-btn,
+  .topbar__divider--portal {
+    display: none;
+  }
+
+  .portal-btn-mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 20px 20px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--color-navy-800);
+    background: #ffffff;
+    color: var(--color-navy-800);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .portal-btn-mobile:hover,
+  .portal-btn-mobile:focus-visible {
+    background: rgba(18, 27, 111, 0.04);
+    border-color: var(--color-navy-900);
+  }
+
   .nav-scrim {
     display: block;
     position: fixed;
@@ -689,6 +751,10 @@
 }
 
 @media (max-width: 420px) {
+  .topbar__nabh {
+    display: none;
+  }
+
   .topbar__badge span:last-child {
     display: none;
   }

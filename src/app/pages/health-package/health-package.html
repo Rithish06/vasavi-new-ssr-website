@@ -13,14 +13,14 @@
       </p>
 
       <div class="hc-hero__ctas">
-        <a routerLink="/health-package" class="hc-btn hc-btn--filled">
+        <button type="button" class="hc-btn hc-btn--filled" (click)="scrollToPackages()">
           <app-doctors-icon name="shield" />
           Explore Packages
-        </a>
-        <a routerLink="/book-appointment" class="hc-btn hc-btn--outline">
+        </button>
+        <button type="button" class="hc-btn hc-btn--outline" (click)="openBookingModal($event)">
           <app-doctors-icon name="calendar" />
           Book a Health Check
-        </a>
+        </button>
       </div>
 
       <div class="hc-hero__features">
@@ -72,7 +72,7 @@
   </div>
 </section>
 
-<section class="pkg-section">
+<section class="pkg-section" id="health-packages-section">
   <div class="pkg-section__inner">
     <div class="pkg-heading">
       <span class="pkg-heading__icon">
@@ -88,6 +88,7 @@
     <div class="pkg-grid pkg-grid--featured">
       @for (pkg of featuredPackages; track pkg.slug) {
         <article class="pkg-card pkg-card--featured pkg-card--{{ pkg.accent }}">
+          <span class="pkg-card__glow" aria-hidden="true"></span>
           <div class="pkg-card__body">
             <span class="pkg-card__icon">
               <app-doctors-icon [name]="pkg.icon" />
@@ -111,18 +112,12 @@
                 <span class="pkg-card__price-label">Starting at</span>
                 <span class="pkg-card__price-value">&#8377;{{ pkg.price }}/-</span>
               </div>
-              <a [routerLink]="['/health-package', pkg.slug]" class="pkg-card__cta">
+              <a [routerLink]="['/health-package', pkg.slug]" class="pkg-card__cta pkg-card__cta--filled">
                 View Details
                 <app-doctors-icon name="arrow" />
               </a>
             </div>
           </div>
-
-          @if (pkg.photo) {
-            <div class="pkg-card__photo">
-              <img [src]="pkg.photo" [alt]="pkg.title" loading="lazy" width="600" height="700" />
-            </div>
-          }
         </article>
       }
     </div>
@@ -178,3 +173,13 @@
     </div>
   </div>
 </section>
+
+<!-- ============ Book a Health Check popup ============ -->
+@if (showBookingModal()) {
+  <div class="hc-modal" role="dialog" aria-modal="true" aria-label="Book a Health Check">
+    <button type="button" class="hc-modal__backdrop" (click)="closeBookingModal()" aria-label="Close booking form"></button>
+    <div class="hc-modal__panel">
+      <app-health-check-booking [packages]="allPackages" [showClose]="true" (close)="closeBookingModal()" />
+    </div>
+  </div>
+}

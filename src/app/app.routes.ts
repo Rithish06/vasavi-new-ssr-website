@@ -266,6 +266,27 @@ export const routes: Routes = [
       import('./health-package/health-check/health-check').then((m) => m.HealthCheck),
   },
 
+  // -- Awards & Recognition --
+  {
+    path: 'awards',
+    loadComponent: () => import('./pages/awards/awards').then((m) => m.AwardsPage),
+    title: 'Awards & Recognition - Vasavi Hospitals',
+  },
+
+  // -- Photo Gallery --
+  {
+    path: 'gallery',
+    loadComponent: () => import('./pages/gallery/gallery').then((m) => m.GalleryPage),
+    title: 'Photo Gallery - Vasavi Hospitals',
+  },
+
+  // -- Contact Us --
+  {
+    path: 'contact-us',
+    loadComponent: () => import('./pages/contact-us/contact-us').then((m) => m.ContactUs),
+    title: 'Contact Us - Vasavi Hospitals',
+  },
+
   // Individual doctor profile pages live at a top-level slug (e.g.
   // "/dr-ashok-m-v"), matching the `slug` values in the doctor data and the
   // "View Profile" links on the doctors listing page. This wildcard ":slug"

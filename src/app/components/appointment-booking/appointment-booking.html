@@ -1,0 +1,155 @@
+<div class="doctor-booking">
+  <div class="doctor-booking__head">
+    <span class="doctor-booking__head-icon"><app-doctors-icon name="calendar" /></span>
+    <div class="doctor-booking__head-text">
+      <h2>Book Appointment</h2>
+      @if (doctorName()) {
+        <p class="doctor-booking__head-doctor">{{ doctorName() }}</p>
+      }
+    </div>
+    @if (showClose()) {
+      <button type="button" class="doctor-booking__close" (click)="onClose()" aria-label="Close booking form">
+        <app-doctors-icon name="close" />
+      </button>
+    }
+  </div>
+
+  @switch (step()) {
+    @case ('select') {
+      <div class="doctor-booking__step-label">
+        <span class="doctor-booking__step-num">1</span>
+        <h3>Select Date</h3>
+      </div>
+      <div class="doctor-booking__carousel">
+        <button type="button" class="doctor-booking__nav" (click)="scrollChips(dateScroller, -1)" aria-label="Earlier dates">
+          <app-doctors-icon name="chevron-left" />
+        </button>
+        <div class="doctor-booking__chips" #dateScroller>
+          @for (d of dateOptions(); track d.iso) {
+            <button
+              type="button"
+              class="doctor-booking__chip"
+              [class.active]="selectedDate()?.iso === d.iso"
+              (click)="selectDate(d)"
+            >
+              <span class="doctor-booking__chip-weekday">{{ d.weekday }}</span>
+              <span class="doctor-booking__chip-day">{{ d.day }}</span>
+              <span class="doctor-booking__chip-month">{{ d.month }}</span>
+            </button>
+          }
+        </div>
+        <button type="button" class="doctor-booking__nav" (click)="scrollChips(dateScroller, 1)" aria-label="Later dates">
+          <app-doctors-icon name="chevron-right" />
+        </button>
+      </div>
+
+      <div class="doctor-booking__step-label">
+        <span class="doctor-booking__step-num">2</span>
+        <h3>Select Time Slot</h3>
+      </div>
+      <div class="doctor-booking__carousel">
+        <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, -1)" aria-label="Earlier times">
+          <app-doctors-icon name="chevron-left" />
+        </button>
+        <div class="doctor-booking__chips doctor-booking__chips--time" #timeScroller>
+          @for (t of timeOptions; track t) {
+            <button
+              type="button"
+              class="doctor-booking__chip doctor-booking__chip--time"
+              [class.active]="selectedTime() === t"
+              (click)="selectTime(t)"
+            >
+              {{ t }}
+            </button>
+          }
+        </div>
+        <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, 1)" aria-label="Later times">
+          <app-doctors-icon name="chevron-right" />
+        </button>
+      </div>
+
+      @if (validationError()) {
+        <p class="doctor-booking__error">{{ validationError() }}</p>
+      }
+
+      <button type="button" class="btn btn--filled doctor-booking__cta" (click)="proceedToContact()">
+        <app-doctors-icon name="calendar" />
+        Book Appointment
+        <app-doctors-icon name="arrow-up-right" />
+      </button>
+      <a class="btn btn--outline doctor-booking__cta" [href]="'tel:' + hospitalPhoneTel">
+        <app-doctors-icon name="phone" />
+        Call Now
+      </a>
+    }
+
+    @case ('contact') {
+      <button type="button" class="doctor-booking__change" (click)="backToDateTime()">
+        <app-doctors-icon name="chevron-left" />
+        Change date &amp; time
+      </button>
+
+      <div class="doctor-booking__summary">
+        <app-doctors-icon name="calendar" />
+        <span>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} &bull; {{ selectedTime() }}</span>
+      </div>
+
+      <label class="doctor-booking__field">
+        <span>Your Name</span>
+        <input
+          type="text"
+          [value]="patientName()"
+          (input)="setPatientName($any($event.target).value)"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        />
+        @if (contactErrors().name) {
+          <small class="doctor-booking__field-error">{{ contactErrors().name }}</small>
+        }
+      </label>
+
+      <label class="doctor-booking__field">
+        <span>Phone Number</span>
+        <input
+          type="tel"
+          [value]="patientPhone()"
+          (input)="setPatientPhone($any($event.target).value)"
+          placeholder="10-digit mobile number"
+          autocomplete="tel"
+        />
+        @if (contactErrors().phone) {
+          <small class="doctor-booking__field-error">{{ contactErrors().phone }}</small>
+        }
+      </label>
+
+      <button type="button" class="btn btn--filled doctor-booking__cta" (click)="submitBooking()">
+        Confirm Booking
+      </button>
+    }
+
+    @case ('success') {
+      <div class="doctor-booking__success">
+        <span class="doctor-booking__success-icon"><app-doctors-icon name="check" /></span>
+        <h3>Request Received!</h3>
+        <p>
+          We've noted your preference for
+          <strong>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} at {{ selectedTime() }}</strong>
+          @if (doctorName()) {
+            with <strong>{{ doctorName() }}</strong>.
+          } @else {
+            .
+          }
+          Our care team will call <strong>{{ patientPhone() }}</strong> shortly to confirm.
+        </p>
+        <button type="button" class="btn btn--outline doctor-booking__cta" (click)="bookAnother()">
+          Book Another Appointment
+        </button>
+      </div>
+    }
+  }
+
+  <p class="doctor-booking__secure">
+    <app-doctors-icon name="shield" />
+    Your information is secure and confidential.
+  </p>
+</div>

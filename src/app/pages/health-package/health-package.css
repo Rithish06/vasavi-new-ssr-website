@@ -101,8 +101,11 @@
   border-radius: 10px;
   font-size: 14.5px;
   font-weight: 700;
+  font-family: inherit;
   text-decoration: none;
   white-space: nowrap;
+  border: none;
+  cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
 }
 
@@ -401,8 +404,9 @@
 
 /* ===========================================================================
    "Our Health Check Packages" - package grid
-   Three featured (annual/comprehensive) packages with a supplied cut-out
-   photo each, then five compact packages without a photo. Copy comes from
+   Three featured (annual/comprehensive) packages in a grand, photo-less
+   card treatment (accent glow, badge icon, pill feature chips, filled
+   gradient CTA), then five compact packages below. Copy comes from
    HealthPackagePage's featuredPackages/standardPackages (health-package.ts),
    itself sourced from health-check.ts's `packages` array so it stays in
    sync with each package's own "/health-package/:slug" detail page.
@@ -503,17 +507,48 @@
 }
 
 .pkg-card--featured {
+  position: relative;
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
   overflow: hidden;
 }
 
+/* Soft accent-colored glow tucked into the top-right corner - the grand,
+   "feel good" backdrop that replaces the old cut-out photo. */
+.pkg-card__glow {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pkg-accent-soft, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+/* Slim gradient bar along the top edge of each featured card. */
+.pkg-card--featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--pkg-accent-gradient);
+}
+
 .pkg-card__body {
+  position: relative;
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
   padding: 30px 20px;
+}
+
+.pkg-card--featured .pkg-card__body {
+  padding: 46px 34px 34px;
+  text-align: center;
 }
 
 /* ---------- Icon avatar + accent colors ---------- */
@@ -551,6 +586,41 @@
   --pkg-red-soft: rgba(220, 38, 38, 0.1);
 }
 
+/* Per-accent gradient/glow/shadow tokens used only by the grand featured
+   card treatment (glow blob, top bar, filled CTA). */
+.pkg-card--featured.pkg-card--pink {
+  --pkg-accent-soft: var(--pkg-pink-soft);
+  --pkg-accent-gradient: linear-gradient(135deg, #d81b60, #ee5586);
+  --pkg-accent-shadow: rgba(216, 27, 96, 0.26);
+  --pkg-accent-shadow-strong: rgba(216, 27, 96, 0.36);
+}
+
+.pkg-card--featured.pkg-card--blue {
+  --pkg-accent-soft: rgba(36, 84, 230, 0.1);
+  --pkg-accent-gradient: linear-gradient(135deg, #2454e6, #5b93ff);
+  --pkg-accent-shadow: rgba(36, 84, 230, 0.26);
+  --pkg-accent-shadow-strong: rgba(36, 84, 230, 0.36);
+}
+
+.pkg-card--featured.pkg-card--red {
+  --pkg-accent-soft: var(--pkg-red-soft);
+  --pkg-accent-gradient: linear-gradient(135deg, #dc2626, #f16f6c);
+  --pkg-accent-shadow: rgba(220, 38, 38, 0.26);
+  --pkg-accent-shadow-strong: rgba(220, 38, 38, 0.36);
+}
+
+.pkg-card--featured .pkg-card__icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 22px;
+  box-shadow: 0 0 0 8px var(--pkg-accent-soft);
+}
+
+.pkg-card--featured .pkg-card__icon svg {
+  width: 30px;
+  height: 30px;
+}
+
 .pkg-card__title {
   font-size: 19px;
   font-weight: 800;
@@ -568,6 +638,11 @@
   line-height: 1.55;
   color: var(--color-text-gray);
   margin: 0 0 18px;
+}
+
+.pkg-card--featured .pkg-card__desc {
+  max-width: 34ch;
+  margin-inline: auto;
 }
 
 /* ---------- Mini feature list ---------- */
@@ -613,47 +688,37 @@
   color: var(--pkg-red);
 }
 
-/* Featured cards (3 headline packages): icon-left, label-right rows laid
-   out in three evenly spaced columns, matching the reference mockup
-   exactly - labels wrap onto a second line (left-aligned under the first
-   line, not centered under the icon) rather than truncating. */
+/* Featured cards (3 headline packages): each feature is a soft
+   accent-tinted pill - icon in a small white badge, label beside it -
+   centered and wrapping as a group, for a grander, more boutique feel
+   than a plain list. */
 .pkg-card--featured .pkg-card__features {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 14px;
-  row-gap: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 28px;
 }
 
 .pkg-card--featured .pkg-card__features li {
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
   text-align: left;
-  white-space: normal;
-  overflow-wrap: break-word;
-  font-size: 11.5px;
-  line-height: 1.35;
-  min-width: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  background: var(--pkg-accent-soft);
+  padding: 7px 14px 7px 7px;
+  border-radius: 999px;
 }
 
 .pkg-card--featured .pkg-card__feature-icon {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  margin-top: 1px;
-}
-
-.pkg-card--featured.pkg-card--pink .pkg-card__feature-icon {
-  background: var(--pkg-pink-soft);
-}
-
-.pkg-card--featured.pkg-card--blue .pkg-card__feature-icon {
-  background: rgba(36, 84, 230, 0.1);
-}
-
-.pkg-card--featured.pkg-card--red .pkg-card__feature-icon {
-  background: var(--pkg-red-soft);
+  background: var(--color-white);
+  box-shadow: 0 2px 6px rgba(18, 27, 111, 0.12);
 }
 
 /* ---------- Price + CTA ---------- */
@@ -661,10 +726,11 @@
 .pkg-card__footer {
   margin-top: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--pkg-accent-soft, rgba(18, 27, 111, 0.12));
 }
 
 .pkg-card:not(.pkg-card--featured) .pkg-card__price {
@@ -688,6 +754,14 @@
 .pkg-card__price-value {
   font-size: 24px;
   font-weight: 800;
+}
+
+.pkg-card--featured .pkg-card__price {
+  align-items: center;
+}
+
+.pkg-card--featured .pkg-card__price-value {
+  font-size: 32px;
 }
 
 .pkg-card--pink .pkg-card__price-value {
@@ -760,45 +834,27 @@
   color: var(--color-white);
 }
 
-/* ---------- Featured card photo ---------- */
-
-.pkg-card__photo {
-  position: relative;
-  flex: 0 0 32%;
-  overflow: hidden;
+/* Filled, gradient-accent CTA used only by the grand featured cards -
+   needs the same `.pkg-card--<accent> .pkg-card__cta` specificity as the
+   outline rules above so it wins the cascade instead of being flattened
+   back to an outline button by them. */
+.pkg-card--pink .pkg-card__cta--filled,
+.pkg-card--blue .pkg-card__cta--filled,
+.pkg-card--red .pkg-card__cta--filled {
+  border: none;
+  color: var(--color-white);
+  background: var(--pkg-accent-gradient);
+  box-shadow: 0 14px 28px var(--pkg-accent-shadow, rgba(18, 27, 111, 0.18));
+  padding: 13px 30px;
 }
 
-.pkg-card__photo::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 230px;
-  height: 230px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pkg-card--pink .pkg-card__photo::before {
-  background: radial-gradient(circle, var(--pkg-pink-soft), rgba(216, 27, 96, 0) 70%);
-}
-
-.pkg-card--blue .pkg-card__photo::before {
-  background: radial-gradient(circle, rgba(36, 84, 230, 0.14), rgba(36, 84, 230, 0) 70%);
-}
-
-.pkg-card--red .pkg-card__photo::before {
-  background: radial-gradient(circle, var(--pkg-red-soft), rgba(220, 38, 38, 0) 70%);
-}
-
-.pkg-card__photo img {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 102%;
-  width: auto;
-  max-width: none;
+.pkg-card--pink .pkg-card__cta--filled:hover,
+.pkg-card--blue .pkg-card__cta--filled:hover,
+.pkg-card--red .pkg-card__cta--filled:hover {
+  color: var(--color-white);
+  background: var(--pkg-accent-gradient);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px var(--pkg-accent-shadow-strong, rgba(18, 27, 111, 0.26));
 }
 
 /* ---------- Trust strip ---------- */
@@ -855,15 +911,6 @@
 /* ---------- Breakpoints ---------- */
 
 @media (max-width: 899.98px) {
-  .pkg-card--featured {
-    flex-direction: column;
-  }
-
-  .pkg-card--featured .pkg-card__photo {
-    flex: 0 0 220px;
-    order: -1;
-  }
-
   .pkg-trust__item:not(:first-child) {
     border-left: none;
     padding-left: 0;
@@ -885,5 +932,45 @@
 
   .pkg-card:not(.pkg-card--featured) .pkg-card__features {
     flex-direction: column;
+  }
+}
+
+/* ===========================================================================
+   Book a Health Check popup
+   ========================================================================= */
+
+.hc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.hc-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(6, 11, 34, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.hc-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(640px, 92vh);
+  overflow-y: auto;
+  border-radius: 22px;
+}
+
+@media (max-width: 599.98px) {
+  .hc-modal {
+    padding: 12px;
   }
 }

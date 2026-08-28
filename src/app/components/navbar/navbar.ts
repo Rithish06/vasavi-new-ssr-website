@@ -10,7 +10,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 /** Which flyout (if any) is currently open. Only one at a time. */
-type DropdownKey = 'services' | 'packages' | 'health' | null;
+type DropdownKey = 'services' | 'packages' | null;
 
 interface MenuItem {
   label: string;
@@ -91,21 +91,6 @@ const PACKAGES_MENU: MenuItem[] = [
   { label: 'Coronary Angiography', path: '/coronary-angiography-in-bangalore' },
 ];
 
-/** "Health Package" - one entry per preventive health check-up package
- * (health-package/:slug is a single param-driven page; labels/slugs come
- * straight from the `packages` array in health-check.ts). */
-const HEALTH_PACKAGES_MENU: MenuItem[] = [
-  { label: 'View All Health Packages', path: '/health-package' },
-  { label: 'Diabetes Health Check', path: '/health-package/diabetes-health-check' },
-  { label: 'Cardiac Health Package', path: '/health-package/cardiac-wellness-package' },
-  { label: 'Comprehensive Annual Heart Care Package', path: '/health-package/comprehensive-annual-heart-care-package' },
-  { label: 'Comprehensive Annual Diabetes Care Package', path: '/health-package/comprehensive-annual-diabetes-care-package' },
-  { label: 'Basic Health Check Package', path: '/health-package/basic-health-check-package' },
-  { label: 'Well Women Health Check-Up', path: '/health-package/well-women-health-check-up' },
-  { label: 'Master Health Check – Men', path: '/health-package/vasavi-master-health-check-men' },
-  { label: 'Master Health Check – Women', path: '/health-package/vasavi-master-health-check-women' },
-];
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -121,9 +106,6 @@ export class Navbar {
 
   /** Full "Surgery Packages" mega-menu, in column-major reading order (see PACKAGES_MENU). */
   protected readonly packagesMenu: MenuItem[] = PACKAGES_MENU;
-
-  /** "Health Package" menu - the preventive check-up packages. */
-  protected readonly healthPackagesMenu: MenuItem[] = HEALTH_PACKAGES_MENU;
 
   /** Adds a subtle shadow once the page has scrolled past the top bar. */
   protected readonly isScrolled = signal(false);

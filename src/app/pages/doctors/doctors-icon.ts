@@ -233,6 +233,32 @@ import { Component, input } from '@angular/core';
           <path d="m9 12 1.8 1.8L15 10" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M9 16.5h6" stroke-linecap="round" />
         }
+        @case ('mail') {
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m4 6.5 8 6.5 8-6.5" stroke-linecap="round" stroke-linejoin="round" />
+        }
+        @case ('home') {
+          <path d="m4 11 8-7 8 7" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9" stroke-linecap="round" stroke-linejoin="round" />
+        }
+        @case ('send') {
+          <path d="M22 2 11 13" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M22 2 15 22l-4-9-9-4 20-7Z" stroke-linejoin="round" />
+        }
+        @case ('lock') {
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round" />
+        }
+        @case ('refresh') {
+          <path d="M23 4v6h-6M1 20v-6h6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke-linecap="round" />
+        }
+        @case ('navigation') {
+          <path d="m3 11 18-8-8 18-2-8-8-2Z" stroke-linejoin="round" />
+        }
+        @case ('message') {
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round" />
+        }
       }
     </svg>
   `,

@@ -1,0 +1,150 @@
+<section class="awd-hero">
+  <div class="awd-hero__media" style="background-image: url('/Images/Awards-Images/vasavi-hospitals-health-excellence-award-stage.jpg')"></div>
+  <div class="awd-hero__scrim" aria-hidden="true"></div>
+  <div class="awd-hero__inner">
+    <span class="awd-hero__eyebrow">VASAVI HOSPITALS</span>
+    <h1 class="awd-hero__title">Awards &amp; <span class="awd-hero__title-accent">Recognition</span></h1>
+    <p class="awd-hero__desc">
+      Honored by The Times Group and ranked among India's leading hospitals - recognition earned through
+      the outcomes our doctors deliver, appointment after appointment.
+    </p>
+    <div class="awd-hero__ctas">
+      <!-- <a routerLink="/book-appointment" class="awd-btn awd-btn--filled">
+        <app-doctors-icon name="calendar" />
+        Book an Appointment
+      </a> -->
+      <a routerLink="/doctors" class="awd-btn awd-btn--outline">
+        <app-doctors-icon name="users" />
+        Meet Our Doctors
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="awd-stats">
+  <div class="awd-stats__inner">
+    @for (stat of stats; track stat.label) {
+      <div class="awd-stat">
+        <span class="awd-stat__icon">
+          <app-doctors-icon [name]="stat.icon" />
+        </span>
+        <div class="awd-stat__body">
+          <strong>{{ stat.value }}</strong>
+          <span>{{ stat.label }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="awd-section">
+  <div class="awd-section__inner">
+    <div class="awd-heading">
+      <span class="awd-heading__icon">
+        <app-doctors-icon name="trophy" />
+      </span>
+      <h2 class="awd-heading__title">
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+        Our Awards &amp; Honors
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+      </h2>
+      <p class="awd-heading__desc">
+        Independent recognition of the clinical outcomes, patient trust and care quality that define Vasavi Hospitals.
+      </p>
+    </div>
+
+    <div class="awd-grid">
+      @for (award of featuredAwards; track award.title) {
+        <article class="awd-card">
+          <div class="awd-card__media">
+            <img [src]="award.image" [alt]="award.title" loading="lazy" width="480" height="320" />
+          </div>
+          <div class="awd-card__body">
+            <span class="awd-card__award">{{ award.award }}</span>
+            <h3 class="awd-card__title">{{ award.title }}</h3>
+            <p class="awd-card__desc">{{ award.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="awd-section awd-section--tint">
+  <div class="awd-section__inner">
+    <div class="awd-heading">
+      <span class="awd-heading__icon">
+        <app-doctors-icon name="star" />
+      </span>
+      <h2 class="awd-heading__title">
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+        Doctors Recognized Nationally
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+      </h2>
+      <p class="awd-heading__desc">
+        Individually featured in the Times of India All India Lifestyle Hospital &amp; Clinic Ranking Survey 2022,
+        alongside the hospital's own 7th-place Orthopaedics ranking.
+      </p>
+    </div>
+
+    <div class="awd-doctor-grid">
+      @for (doctor of recognizedDoctors; track doctor.name) {
+        <article class="awd-doctor-card">
+          <div class="awd-doctor-card__photo">
+            <img [src]="doctor.image" [alt]="doctor.name" loading="lazy" width="420" height="420" />
+          </div>
+          <div class="awd-doctor-card__body">
+            <span class="awd-doctor-card__badge">
+              <app-doctors-icon name="badge" />
+              Nationally Ranked
+            </span>
+            <h3>{{ doctor.name }}</h3>
+            <p class="awd-doctor-card__title">{{ doctor.title }}</p>
+            <p class="awd-doctor-card__credentials">{{ doctor.credentials }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="awd-section">
+  <div class="awd-section__inner">
+    <div class="awd-heading">
+      <span class="awd-heading__icon">
+        <app-doctors-icon name="certificate" />
+      </span>
+      <h2 class="awd-heading__title">
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+        Moments of Recognition
+        <span class="awd-heading__dash" aria-hidden="true"></span>
+      </h2>
+    </div>
+
+    <div class="awd-photo-grid">
+      @for (photo of galleryPhotos; track photo.image) {
+        <figure class="awd-photo">
+          <img [src]="photo.image" [alt]="photo.caption" loading="lazy" width="480" height="360" />
+          <figcaption>{{ photo.caption }}</figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="awd-cta">
+  <div class="awd-cta__inner">
+    <h2>Care That Earns Recognition</h2>
+    <p>The same doctors and departments honored by The Times Group are ready to care for you and your family.</p>
+    <div class="awd-cta__actions">
+      <a routerLink="/book-appointment" class="awd-btn awd-btn--filled awd-btn--large">
+        <app-doctors-icon name="calendar" />
+        Book an Appointment
+      </a>
+      <a routerLink="/doctors" class="awd-btn awd-btn--outline-light awd-btn--large">
+        Meet Our Doctors
+        <app-doctors-icon name="arrow" />
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 import {
   Component,
+  HostListener,
   PLATFORM_ID,
   afterNextRender,
   computed,
@@ -9,12 +10,14 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DoctorsIcon } from './doctors-icon';
+import { AppointmentBooking } from '../../components/appointment-booking/appointment-booking';
 import { DEPARTMENTS, DOCTORS, MORE_DEPARTMENTS } from '../../data/doctors.data';
 
 type SortKey = 'exp-desc' | 'exp-asc' | 'name-asc';
 type ViewMode = 'grid' | 'list';
 
 const FAVORITES_STORAGE_KEY = 'vasavi:favorite-doctors';
+const FAVORITE_TIP_DISMISSED_KEY = 'vasavi:favorite-tip-dismissed';
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'exp-desc', label: 'Experience - High to Low' },
@@ -27,7 +30,7 @@ const PAGE_SIZE = 9;
 @Component({
   selector: 'app-doctors-page',
   standalone: true,
-  imports: [RouterLink, DoctorsIcon],
+  imports: [RouterLink, DoctorsIcon, AppointmentBooking],
   templateUrl: './doctors.html',
   styleUrl: './doctors.css',
 })
@@ -51,12 +54,24 @@ export class DoctorsPage {
   protected readonly favorites = signal<Set<string>>(new Set());
   protected readonly currentPage = signal(1);
 
+  /** The "tap the heart to save doctors" tip above the results grid - shown
+   *  by default (so it's there the moment this section scrolls into view)
+   *  and hidden for good once the person dismisses it, via localStorage. */
+  protected readonly showFavoriteTip = signal(true);
+
+  /** Name of the doctor whose card's "Book Appointment" button was just
+   *  clicked - non-null while the booking popup is open, and is what the
+   *  popup's <app-appointment-booking> instance is bound to, so the form
+   *  it shows (and any eventual submission) is tied to that exact card. */
+  protected readonly bookingDoctorName = signal<string | null>(null);
+
   protected readonly totalDoctorCount = DOCTORS.length;
 
   protected readonly filteredDoctors = computed(() => {
     const query = this.searchText().trim().toLowerCase();
     const depts = this.selectedDepartments();
     const minExp = this.minExperience();
+    const favs = this.favorites();
 
     let list = DOCTORS.filter((doc) => {
       if (query) {
@@ -68,7 +83,14 @@ export class DoctorsPage {
       return true;
     });
 
+    // Favorited doctors always float to the top, ahead of whichever sort
+    // order is selected - that ordering only breaks ties within each group
+    // (favorited vs. not), so liking a doctor is what actually moves them.
     list = [...list].sort((a, b) => {
+      const aFav = favs.has(a.id);
+      const bFav = favs.has(b.id);
+      if (aFav !== bFav) return aFav ? -1 : 1;
+
       switch (this.sortBy()) {
         case 'exp-desc':
           return b.experienceYears - a.experienceYears;
@@ -105,6 +127,9 @@ export class DoctorsPage {
         const raw = window.localStorage.getItem(FAVORITES_STORAGE_KEY);
         if (raw) {
           this.favorites.set(new Set(JSON.parse(raw)));
+        }
+        if (window.localStorage.getItem(FAVORITE_TIP_DISMISSED_KEY) === 'true') {
+          this.showFavoriteTip.set(false);
         }
       } catch {
         /* localStorage unavailable (private mode, etc.) - favorites just won't persist. */
@@ -154,6 +179,42 @@ export class DoctorsPage {
       } catch {
         /* ignore persistence failures */
       }
+    }
+  }
+
+  protected dismissFavoriteTip(): void {
+    this.showFavoriteTip.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        window.localStorage.setItem(FAVORITE_TIP_DISMISSED_KEY, 'true');
+      } catch {
+        /* ignore persistence failures */
+      }
+    }
+  }
+
+  /** Opens the "Book Appointment" popup for one specific doctor card - the
+   *  popup hosts the exact same booking form used on that doctor's own
+   *  profile page (see <app-appointment-booking>), pre-tied to their name. */
+  protected openBookingModal(name: string, event: Event): void {
+    event.preventDefault();
+    this.bookingDoctorName.set(name);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  protected closeBookingModal(): void {
+    this.bookingDoctorName.set(null);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  protected onWindowKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.bookingDoctorName() !== null) {
+      this.closeBookingModal();
     }
   }
 

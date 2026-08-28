@@ -1,0 +1,82 @@
+<div class="hcb-card">
+  <div class="hcb-head">
+    <span class="hcb-head-icon"><app-doctors-icon name="calendar" /></span>
+    <div class="hcb-head-text">
+      <h2>Book a Health Check</h2>
+      <p>Tell us who to call and we'll confirm your slot</p>
+    </div>
+    @if (showClose()) {
+      <button type="button" class="hcb-close" (click)="onClose()" aria-label="Close booking form">
+        <app-doctors-icon name="close" />
+      </button>
+    }
+  </div>
+
+  @switch (step()) {
+    @case ('form') {
+      <label class="hcb-field">
+        <span>Your Name</span>
+        <input
+          type="text"
+          [value]="patientName()"
+          (input)="setPatientName($any($event.target).value)"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        />
+        @if (contactErrors().name) {
+          <small class="hcb-field-error">{{ contactErrors().name }}</small>
+        }
+      </label>
+
+      <label class="hcb-field">
+        <span>Phone Number</span>
+        <input
+          type="tel"
+          [value]="patientPhone()"
+          (input)="setPatientPhone($any($event.target).value)"
+          placeholder="10-digit mobile number"
+          autocomplete="tel"
+        />
+        @if (contactErrors().phone) {
+          <small class="hcb-field-error">{{ contactErrors().phone }}</small>
+        }
+      </label>
+
+      <label class="hcb-field">
+        <span>Health Check Package</span>
+        <select [value]="selectedPackageSlug()" (change)="setPackage($any($event.target).value)">
+          <option value="" disabled>Select a package</option>
+          @for (pkg of packages(); track pkg.slug) {
+            <option [value]="pkg.slug">{{ pkg.title }}</option>
+          }
+        </select>
+        @if (contactErrors().package) {
+          <small class="hcb-field-error">{{ contactErrors().package }}</small>
+        }
+      </label>
+
+      <button type="button" class="btn btn--filled hcb-cta" (click)="submitBooking()">
+        Submit
+      </button>
+    }
+
+    @case ('success') {
+      <div class="hcb-success">
+        <span class="hcb-success-icon"><app-doctors-icon name="check" /></span>
+        <h3>Request Received!</h3>
+        <p>
+          We've noted your interest in <strong>{{ selectedPackageTitle() }}</strong>.
+          Our care team will call <strong>{{ patientPhone() }}</strong> shortly to confirm your slot.
+        </p>
+        <button type="button" class="btn btn--outline hcb-cta" (click)="bookAnother()">
+          Book Another Package
+        </button>
+      </div>
+    }
+  }
+
+  <p class="hcb-secure">
+    <app-doctors-icon name="shield" />
+    Your information is secure and confidential.
+  </p>
+</div>

@@ -178,6 +178,16 @@
       </div>
     </div>
 
+    @if (showFavoriteTip()) {
+      <div class="doctors-favtip" role="status">
+        <span class="doctors-favtip__icon"><app-doctors-icon name="heart" [filled]="true" /></span>
+        <p>Tap the heart on a doctor to save them - saved doctors always appear first, so booking a follow-up is quick and you won't need to search again.</p>
+        <button type="button" class="doctors-favtip__close" (click)="dismissFavoriteTip()" aria-label="Dismiss tip">
+          <app-doctors-icon name="close" />
+        </button>
+      </div>
+    }
+
     @if (pagedDoctors().length === 0) {
       <div class="doctors-empty">
         <p>No doctors match your filters right now.</p>
@@ -222,10 +232,10 @@
               @if (doc.slug) {
                 <a class="btn btn--outline" [routerLink]="doc.slug">View Profile</a>
               }
-              <a class="btn btn--filled" routerLink="/book-appointment">
+              <button type="button" class="btn btn--filled" (click)="openBookingModal(doc.name, $event)">
                 <app-doctors-icon name="calendar" />
                 Book Appointment
-              </a>
+              </button>
             </div>
           </article>
         }
@@ -234,13 +244,13 @@
       @if (totalPages() > 1) {
         <nav class="doctors-pagination" aria-label="Doctor results pages">
           <button type="button" (click)="prevPage()" [disabled]="currentPage() === 1" aria-label="Previous page">
-            <app-doctors-icon name="chevron-down" />
+            <app-doctors-icon name="chevron-left" />
           </button>
           @for (n of pageNumbers(); track n) {
             <button type="button" [class.active]="currentPage() === n" (click)="goToPage(n)">{{ n }}</button>
           }
           <button type="button" (click)="nextPage()" [disabled]="currentPage() === totalPages()" aria-label="Next page">
-            <app-doctors-icon name="chevron-down" />
+            <app-doctors-icon name="chevron-right" />
           </button>
         </nav>
       }
@@ -279,3 +289,17 @@
     </div>
   </div>
 </section>
+
+<!-- ============ Book Appointment popup ============ -->
+<!-- Same exact booking form as the doctor-detail page, hosted per-card via
+     the "Book Appointment" button above - `bookingDoctorName` is set to
+     that card's doctor, so the form and (eventually) its submission are
+     tied to the right doctor. -->
+@if (bookingDoctorName(); as name) {
+  <div class="doctors-modal" role="dialog" aria-modal="true" [attr.aria-label]="'Book appointment with ' + name">
+    <button type="button" class="doctors-modal__backdrop" (click)="closeBookingModal()" aria-label="Close booking form"></button>
+    <div class="doctors-modal__panel">
+      <app-appointment-booking [doctorName]="name" [showClose]="true" (close)="closeBookingModal()" />
+    </div>
+  </div>
+}

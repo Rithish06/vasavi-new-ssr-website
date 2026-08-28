@@ -1,0 +1,87 @@
+<section class="gal-hero">
+  <div class="gal-hero__media" style="background-image: url('/Images/gallery/vasavi-hospitals-bangalore-main-entrance.jpg')"></div>
+  <div class="gal-hero__scrim" aria-hidden="true"></div>
+  <div class="gal-hero__inner">
+    <span class="gal-hero__eyebrow">VASAVI HOSPITALS</span>
+    <h1 class="gal-hero__title">Photo <span class="gal-hero__title-accent">Gallery</span></h1>
+    <p class="gal-hero__desc">
+      A look inside our facility - from the operation theatres and critical care units to the rooms and
+      spaces where patients and families spend their time with us.
+    </p>
+  </div>
+</section>
+
+<section class="gal-filters">
+  <div class="gal-filters__inner">
+    <button
+      type="button"
+      class="gal-chip"
+      [class.gal-chip--active]="activeCategory() === 'all'"
+      (click)="setCategory('all')"
+    >
+      All Photos
+      <span class="gal-chip__count">{{ totalCount }}</span>
+    </button>
+    @for (cat of categories; track cat.key) {
+      <button
+        type="button"
+        class="gal-chip"
+        [class.gal-chip--active]="activeCategory() === cat.key"
+        (click)="setCategory(cat.key)"
+      >
+        {{ cat.label }}
+        <span class="gal-chip__count">{{ countFor(cat.key) }}</span>
+      </button>
+    }
+  </div>
+</section>
+
+<section class="gal-grid-section">
+  <div class="gal-grid">
+    @for (photo of filteredPhotos(); track photo.src; let i = $index) {
+      <figure class="gal-item" (click)="openLightbox(i)">
+        <img [src]="photo.src" [alt]="photo.title" loading="lazy" />
+        <figcaption class="gal-item__caption">
+          <span class="gal-item__title">{{ photo.title }}</span>
+          <span class="gal-item__icon" aria-hidden="true">
+            <app-doctors-icon name="grid-badge" />
+          </span>
+        </figcaption>
+      </figure>
+    }
+  </div>
+</section>
+
+@if (lightboxIndex() !== null) {
+  <div class="gal-lightbox" (click)="closeLightbox()">
+    <button type="button" class="gal-lightbox__close" (click)="closeLightbox()" aria-label="Close">
+      <app-doctors-icon name="close" />
+    </button>
+
+    <button
+      type="button"
+      class="gal-lightbox__nav gal-lightbox__nav--prev"
+      (click)="showPrev(); $event.stopPropagation()"
+      aria-label="Previous photo"
+    >
+      <app-doctors-icon name="chevron-left" />
+    </button>
+
+    <figure class="gal-lightbox__figure" (click)="$event.stopPropagation()">
+      <img [src]="filteredPhotos()[lightboxIndex()!].src" [alt]="filteredPhotos()[lightboxIndex()!].title" />
+      <figcaption>
+        <span class="gal-lightbox__title">{{ filteredPhotos()[lightboxIndex()!].title }}</span>
+        <span class="gal-lightbox__count">{{ lightboxIndex()! + 1 }} / {{ filteredPhotos().length }}</span>
+      </figcaption>
+    </figure>
+
+    <button
+      type="button"
+      class="gal-lightbox__nav gal-lightbox__nav--next"
+      (click)="showNext(); $event.stopPropagation()"
+      aria-label="Next photo"
+    >
+      <app-doctors-icon name="chevron-right" />
+    </button>
+  </div>
+}

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DoctorsIcon } from '../doctors/doctors-icon';
+import { HealthCheckBooking, HealthPackageOption } from '../../components/health-check-booking/health-check-booking';
 
 interface MiniFeature {
   icon: string;
@@ -30,8 +32,6 @@ interface HealthPackageCard {
   icon: string;
   accent: PackageAccent;
   features: PackageFeature[];
-  /** Only the three featured cards have a photo - see health-package.css. */
-  photo?: string;
 }
 
 interface TrustItem {
@@ -44,11 +44,16 @@ interface TrustItem {
 @Component({
   selector: 'app-health-package-page',
   standalone: true,
-  imports: [RouterLink, DoctorsIcon],
+  imports: [RouterLink, DoctorsIcon, HealthCheckBooking],
   templateUrl: './health-package.html',
   styleUrl: './health-package.css',
 })
 export class HealthPackagePage {
+  private readonly platformId = inject(PLATFORM_ID);
+
+  /** Whether the "Book a Health Check" popup form is open. */
+  protected readonly showBookingModal = signal(false);
+
   protected readonly miniFeatures: MiniFeature[] = [
     { icon: 'heart', label: 'Heart Health' },
     { icon: 'droplet', label: 'Diabetes Screening' },
@@ -65,8 +70,9 @@ export class HealthPackagePage {
     { icon: 'check', label: 'Wellness' },
   ];
 
-  /** The three headline annual/comprehensive packages - shown large, each
-   *  with its supplied photo. */
+  /** The three headline annual/comprehensive packages - shown large in a
+   *  photo-less, "grand" card treatment (glow accent, badge icon, pill
+   *  feature chips) - see health-package.css. */
   protected readonly featuredPackages: HealthPackageCard[] = [
     {
       slug: 'vasavi-master-health-check-women',
@@ -75,7 +81,6 @@ export class HealthPackagePage {
       price: '4,500',
       icon: 'person',
       accent: 'pink',
-      photo: '/Images/Healthcheck-new/master-health-check-women.png',
       features: [
         { icon: 'venus', title: 'Women-Focused Screening' },
         { icon: 'leaf', title: 'Holistic Wellness' },
@@ -89,7 +94,6 @@ export class HealthPackagePage {
       price: '9,999',
       icon: 'droplet',
       accent: 'blue',
-      photo: '/Images/Healthcheck-new/diabetes-health-care.png',
       features: [
         { icon: 'droplet', title: 'Complete Diabetes Screening' },
         { icon: 'shield', title: 'Type 1 & Type 2 Screening' },
@@ -103,7 +107,6 @@ export class HealthPackagePage {
       price: '6,999',
       icon: 'heart',
       accent: 'red',
-      photo: '/Images/Healthcheck-new/cardiac-health-care.png',
       features: [
         { icon: 'heart', title: 'Comprehensive Screening' },
         { icon: 'heart-pulse', title: 'Preventive & Diagnostic' },
@@ -184,4 +187,45 @@ export class HealthPackagePage {
     { icon: 'flask', title: 'Advanced Labs', subtitle: 'Accurate Reports' },
     { icon: 'clock', title: 'Easy Booking', subtitle: 'Quick & Hassle-free' },
   ];
+
+  /** Every package on this page, flattened into the {slug, title} shape the
+   *  booking popup's dropdown needs - keeps the dropdown in sync with the
+   *  featured/standard cards above instead of keeping a separate list. */
+  protected readonly allPackages: HealthPackageOption[] = [...this.featuredPackages, ...this.standardPackages].map(
+    (pkg) => ({ slug: pkg.slug, title: pkg.title }),
+  );
+
+  /** Opens the "Book a Health Check" popup - triggered by the hero CTA. */
+  protected openBookingModal(event: Event): void {
+    event.preventDefault();
+    this.showBookingModal.set(true);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  protected closeBookingModal(): void {
+    this.showBookingModal.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  protected onWindowKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.showBookingModal()) {
+      this.closeBookingModal();
+    }
+  }
+
+  /** Scrolls to "Our Health Check Packages" under the sticky navbar - the hero's "Explore Packages" CTA. */
+  protected scrollToPackages(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const target = document.getElementById('health-packages-section');
+    if (!target) return;
+    const header = document.querySelector('.site-header') as HTMLElement | null;
+    const headerHeight = header?.offsetHeight ?? 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
 }

@@ -88,6 +88,7 @@
 .doctors-hero__content {
   max-width: 600px;
   padding-top: 20px;
+  margin-left: 60px;
 }
 
 .doctors-hero__content h1 {
@@ -638,6 +639,75 @@
   color: var(--color-navy-900);
 }
 
+/* --- "Save your doctor" tip --- */
+
+.doctors-favtip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: rgba(226, 83, 107, 0.06);
+  border: 1px solid rgba(226, 83, 107, 0.18);
+}
+
+.doctors-favtip__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(226, 83, 107, 0.12);
+  color: #e2536b;
+}
+
+.doctors-favtip__icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.doctors-favtip p {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+.doctors-favtip__close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--color-text-gray);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.doctors-favtip__close svg {
+  width: 13px;
+  height: 13px;
+}
+
+.doctors-favtip__close:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--color-text-dark);
+}
+
+@media (max-width: 599.98px) {
+  .doctors-favtip {
+    align-items: flex-start;
+  }
+}
+
 .doctors-results__controls {
   display: flex;
   align-items: center;
@@ -1023,12 +1093,24 @@
   .doctors-trust {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .doctors-hero__help {
+    margin-left: 60px;
+  }
 }
 
 @media (max-width: 539.98px) {
   .doctors-trust {
     grid-template-columns: 1fr;
     margin-bottom: 48px;
+  }
+
+  .doctors-hero__content{
+    margin-left: 10px;
+  }
+
+  .doctors-hero__help {
+    margin-left: 10px;
   }
 }
 
@@ -1091,5 +1173,45 @@
   .doctors-advanced__reset {
     margin-left: 0;
     align-self: flex-start;
+  }
+}
+
+/* ===================================================================
+   Book Appointment popup
+   =================================================================== */
+
+.doctors-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.doctors-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(6, 11, 34, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.doctors-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(680px, 92vh);
+  overflow-y: auto;
+  border-radius: 22px;
+}
+
+@media (max-width: 599.98px) {
+  .doctors-modal {
+    padding: 12px;
   }
 }

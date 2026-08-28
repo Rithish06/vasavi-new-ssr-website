@@ -112,10 +112,17 @@
         <ul class="footer-list">
           @for (item of quickLinks; track item.path) {
             <li>
-              <a [routerLink]="item.path">
-                <app-footer-icon name="arrow" />
-                {{ item.label }}
-              </a>
+              @if (item.external) {
+                <a [href]="item.path">
+                  <app-footer-icon name="arrow" />
+                  {{ item.label }}
+                </a>
+              } @else {
+                <a [routerLink]="item.path">
+                  <app-footer-icon name="arrow" />
+                  {{ item.label }}
+                </a>
+              }
             </li>
           }
         </ul>
@@ -181,7 +188,21 @@
     <!-- ============ Quick-action strip ============ -->
     <div class="footer-actions">
       @for (card of actionCards; track card.path) {
-        <a class="footer-action" [routerLink]="card.path">
+        <a class="footer-action" [routerLink]="card?.path" *ngIf="card?.path">
+          <span class="footer-action__icon">
+            <app-footer-icon [name]="card.icon" />
+          </span>
+          <span class="footer-action__body">
+            <strong>{{ card.title }}</strong>
+            <span class="footer-action__desc">{{ card.description }}</span>
+            <span class="footer-action__cta">
+              {{ card.ctaLabel }}
+              <app-footer-icon name="arrow" />
+            </span>
+          </span>
+        </a>
+
+        <a class="footer-action" [href]="card?.link" *ngIf="card?.link && !card?.path">
           <span class="footer-action__icon">
             <app-footer-icon [name]="card.icon" />
           </span>

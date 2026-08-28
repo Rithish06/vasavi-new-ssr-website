@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FooterIcon } from './footer-icon';
+import { CommonModule } from '@angular/common';
 
 interface LinkItem {
   label: string;
   path: string;
+  /** Set for links that leave the Angular app entirely (e.g. the blog,
+   *  which lives outside this SPA) - the template renders these with a
+   *  plain `href` (a normal page navigation) instead of `routerLink`. */
+  external?: boolean;
 }
 
 interface ServiceItem extends LinkItem {
@@ -22,7 +27,8 @@ interface ActionCard {
   title: string;
   description: string;
   ctaLabel: string;
-  path: string;
+  path?: string;
+  link?: string
 }
 
 /** Icon keys resolved to inline SVG paths in footer.html via the [ngSwitch]-free
@@ -52,7 +58,7 @@ export const FOOTER_ICONS = {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink, FooterIcon],
+  imports: [RouterLink, FooterIcon, CommonModule],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
@@ -65,7 +71,7 @@ export class Footer {
     { label: 'CGHS', path: '/cghs-hospital-in-bangalore' },
     { label: 'Awards', path: '/awards' },
     { label: 'Gallery', path: '/gallery' },
-    { label: 'Blog', path: '/blog' },
+    { label: 'Blog', path: 'https://vasavihospitals.com/blog/', external: true },
     { label: 'Contact Us', path: '/contact-us' },
     { label: 'Careers', path: '/careers' },
   ];
@@ -111,7 +117,7 @@ export class Footer {
       title: 'Book an Appointment',
       description: 'Schedule your visit with our specialists in just a few clicks.',
       ctaLabel: 'Book Now',
-      path: '/book-appointment',
+      link: 'http://115.243.85.241:650/',
     },
     {
       icon: FOOTER_ICONS.stethoscope,
@@ -132,9 +138,7 @@ export class Footer {
       title: 'Health Packages',
       description: 'Explore our preventive health check-up packages.',
       ctaLabel: 'Explore Now',
-      // health-package/:slug is param-driven (no bare index route) - land on
-      // the Basic Health Check Package as the entry point into that range.
-      path: '/health-package/basic-health-check-package',
+      path: '/health-package',
     },
   ];
 

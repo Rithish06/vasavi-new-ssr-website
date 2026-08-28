@@ -1,0 +1,294 @@
+<!-- ============ Hero ============ -->
+<section class="contact-hero">
+  <div class="contact-hero__decor" aria-hidden="true"></div>
+
+  <div class="contact-hero__inner">
+    <nav class="contact-breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/">
+        <app-doctors-icon name="home" />
+        Home
+      </a>
+      <app-doctors-icon name="chevron-right" />
+      <span class="contact-breadcrumb__current">Contact Us</span>
+    </nav>
+
+    <div class="contact-hero__content">
+      <h1>Care Starts the <span>Moment You Reach Us.</span></h1>
+
+      <div class="contact-hero__divider" aria-hidden="true">
+        <span class="contact-hero__divider-line"></span>
+        <app-doctors-icon name="heart" />
+        <span class="contact-hero__divider-line"></span>
+      </div>
+
+      <p class="contact-hero__tagline">We Cure With Care</p>
+      <span class="contact-hero__tagline-rule" aria-hidden="true"></span>
+
+      <p class="contact-hero__desc">
+        Reach Vasavi Hospitals for appointments, medical assistance, directions or general enquiries. Our team is
+        here to guide you.
+      </p>
+    </div>
+
+    <div class="contact-cards">
+      @for (card of infoCards; track card.title) {
+        <article class="contact-card contact-card--{{ card.accent }}">
+          <div class="contact-card__top">
+            <span class="contact-card__icon"><app-doctors-icon [name]="card.icon" /></span>
+            <span class="contact-card__arrow"><app-doctors-icon name="arrow" /></span>
+          </div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+          @if (card.highlight) {
+            <p class="contact-card__highlight">{{ card.highlight }}</p>
+          }
+        </article>
+      }
+    </div>
+
+    <div class="contact-trust">
+      @for (item of trustItems; track item.title) {
+        <div class="contact-trust__item">
+          <span class="contact-trust__icon"><app-doctors-icon [name]="item.icon" /></span>
+          <div>
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.subtitle }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============ Get in Touch ============ -->
+<section class="contact-main">
+  <div class="contact-panel">
+    <!-- ============ Left: form ============ -->
+    <div class="contact-form-col">
+      <h2>Get in Touch</h2>
+      <p>We'd love to hear from you. Fill in the details and our team will get back to you at the earliest.</p>
+
+      @if (!submitted()) {
+        <div class="contact-form">
+          <div class="contact-field-group">
+            <div class="contact-field" [class.has-error]="errors().name">
+              <span class="contact-field__icon"><app-doctors-icon name="person" /></span>
+              <label class="sr-only" for="contact-name">Full name</label>
+              <input
+                id="contact-name"
+                type="text"
+                [value]="fullName()"
+                (input)="setFullName($any($event.target).value)"
+                placeholder="Name *"
+                autocomplete="name"
+              />
+            </div>
+            @if (errors().name) {
+              <small class="contact-field__error">{{ errors().name }}</small>
+            }
+          </div>
+
+          <div class="contact-field-group">
+            <div class="contact-field" [class.has-error]="errors().phone">
+              <span class="contact-field__icon"><app-doctors-icon name="phone" /></span>
+              <label class="sr-only" for="contact-phone">Contact number</label>
+              <input
+                id="contact-phone"
+                type="tel"
+                [value]="phone()"
+                (input)="setPhone($any($event.target).value)"
+                placeholder="Contact Number *"
+                autocomplete="tel"
+              />
+            </div>
+            @if (errors().phone) {
+              <small class="contact-field__error">{{ errors().phone }}</small>
+            }
+          </div>
+
+          <div class="contact-field-group">
+            <div class="contact-field" [class.has-error]="errors().email">
+              <span class="contact-field__icon"><app-doctors-icon name="mail" /></span>
+              <label class="sr-only" for="contact-email">Email</label>
+              <input
+                id="contact-email"
+                type="email"
+                [value]="email()"
+                (input)="setEmail($any($event.target).value)"
+                placeholder="Email *"
+                autocomplete="email"
+              />
+            </div>
+            @if (errors().email) {
+              <small class="contact-field__error">{{ errors().email }}</small>
+            }
+          </div>
+
+          <div class="contact-field-group">
+            <div class="contact-field" [class.has-error]="errors().service">
+              <span class="contact-field__icon"><app-doctors-icon name="grid-badge" /></span>
+              <label class="sr-only" for="contact-service">Service</label>
+              <input
+                id="contact-service"
+                type="text"
+                [value]="service()"
+                (input)="setService($any($event.target).value)"
+                placeholder="Service *"
+                autocomplete="off"
+              />
+            </div>
+            @if (errors().service) {
+              <small class="contact-field__error">{{ errors().service }}</small>
+            }
+          </div>
+
+          <div class="contact-field-group">
+            <div class="contact-field contact-field--textarea" [class.has-error]="errors().message">
+              <span class="contact-field__icon"><app-doctors-icon name="message" /></span>
+              <label class="sr-only" for="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                [value]="message()"
+                (input)="setMessage($any($event.target).value)"
+                placeholder="Message *"
+              ></textarea>
+            </div>
+            @if (errors().message) {
+              <small class="contact-field__error">{{ errors().message }}</small>
+            }
+          </div>
+
+          <div class="contact-field-group">
+            <div class="contact-captcha">
+              <div class="contact-captcha__box" aria-hidden="true">{{ captchaText() || ' ' }}</div>
+              <button type="button" class="contact-captcha__refresh" (click)="refreshCaptcha()" aria-label="Get a new CAPTCHA">
+                <app-doctors-icon name="refresh" />
+              </button>
+              <label class="sr-only" for="contact-captcha">Enter CAPTCHA</label>
+              <input
+                id="contact-captcha"
+                class="contact-captcha__input"
+                [class.has-error]="errors().captcha"
+                type="text"
+                [value]="captchaInput()"
+                (input)="setCaptchaInput($any($event.target).value)"
+                placeholder="Enter CAPTCHA"
+                autocomplete="off"
+              />
+            </div>
+            @if (errors().captcha) {
+              <small class="contact-field__error">{{ errors().captcha }}</small>
+            }
+          </div>
+
+          <button type="button" class="btn btn--filled contact-submit" (click)="submit()">
+            <app-doctors-icon name="send" />
+            Send Message
+          </button>
+
+          <p class="contact-privacy">
+            <app-doctors-icon name="lock" />
+            Your information is secure with us. We respect your privacy.
+          </p>
+        </div>
+      } @else {
+        <div class="contact-success">
+          <span class="contact-success__icon"><app-doctors-icon name="check" /></span>
+          <h3>Message Sent!</h3>
+          <p>
+            Thanks, <strong>{{ fullName() }}</strong>. Our team will get back to you shortly at
+            <strong>{{ phone() }}</strong>.
+          </p>
+          <button type="button" class="btn btn--outline contact-submit" (click)="sendAnother()">
+            Send Another Message
+          </button>
+        </div>
+      }
+    </div>
+
+    <!-- ============ Right: map + info ============ -->
+    <div class="contact-map-col">
+      <div class="contact-map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=Vasavi%20Hospitals%2C%20Kumaraswamy%20Layout%2C%20Bengaluru&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="Vasavi Hospitals location"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+
+        <div class="contact-map-card">
+          <a class="contact-map-card__directions" [href]="directionsUrl" target="_blank" rel="noopener">
+            <app-doctors-icon name="navigation" />
+            Directions
+          </a>
+          <h3>Vasavi Hospitals</h3>
+          <address>
+            @for (line of hospitalAddressLines; track line) {
+              {{ line }}<br />
+            }
+          </address>
+          <div class="contact-map-card__rating">
+            {{ rating }}
+            <span class="contact-map-card__stars" [attr.aria-label]="rating + ' out of 5 stars'">★★★★☆</span>
+            <a class="contact-map-card__reviews" href="#">{{ reviewCount }} reviews</a>
+          </div>
+          <a class="contact-map-card__larger" [href]="largerMapUrl" target="_blank" rel="noopener">View larger map</a>
+        </div>
+      </div>
+
+      <div class="contact-info-strip">
+        <div class="contact-info-item">
+          <span class="contact-info-item__icon"><app-doctors-icon name="pin" /></span>
+          <div class="contact-info-item__label">Address</div>
+          <div class="contact-info-item__value">
+            @for (line of hospitalAddressLines; track line) {
+              {{ line }}<br />
+            }
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <span class="contact-info-item__icon"><app-doctors-icon name="phone" /></span>
+          <div class="contact-info-item__label">Phone</div>
+          <div class="contact-info-item__value">
+            <a [href]="'tel:' + hospitalPhoneTel">{{ hospitalPhoneDisplay }}</a>
+            <span class="contact-info-item__muted">Mon - Sun<br />24 x 7</span>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <span class="contact-info-item__icon"><app-doctors-icon name="mail" /></span>
+          <div class="contact-info-item__label">Email</div>
+          <div class="contact-info-item__value">
+            <a [href]="'mailto:' + hospitalEmail">{{ hospitalEmail }}</a>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <span class="contact-info-item__icon"><app-doctors-icon name="clock" /></span>
+          <div class="contact-info-item__label">Working Hours</div>
+          <div class="contact-info-item__value">
+            @for (line of workingHoursLines; track line) {
+              {{ line }}<br />
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-cta-bar">
+        <div class="contact-cta-bar__left">
+          <span class="contact-cta-bar__icon"><app-doctors-icon name="navigation" /></span>
+          <div>
+            <h4>Need help reaching us?</h4>
+            <p>Get directions, parking info and travel options.</p>
+          </div>
+        </div>
+        <a class="btn btn--outline" [href]="directionsUrl" target="_blank" rel="noopener">
+          <app-doctors-icon name="send" />
+          Get Directions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

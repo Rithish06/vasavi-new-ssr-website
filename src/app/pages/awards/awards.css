@@ -1,0 +1,530 @@
+/* ===========================================================================
+   Awards & Recognition ("/awards")
+   Every award, date and doctor credential in this page's data (awards.ts)
+   was transcribed directly off the certificate/medal/plaque photography in
+   public/Images/Awards-Images - the images ARE the evidence here, so unlike
+   the health-package cards this page keeps photos front and center instead
+   of designing around a photo-less card.
+   ========================================================================= */
+
+/* ---------- Hero ---------- */
+
+.awd-hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.awd-hero__media {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center 20%;
+  background-size: cover;
+}
+
+.awd-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(6, 11, 34, 0.94) 0%, rgba(9, 15, 48, 0.86) 42%, rgba(12, 22, 104, 0.5) 75%, rgba(12, 22, 104, 0.28) 100%);
+}
+
+.awd-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1360px;
+  width: 100%;
+  margin-inline: auto;
+  padding: 100px clamp(20px, 4vw, 56px) 76px;
+}
+
+.awd-hero__eyebrow {
+  position: relative;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-white);
+  padding-bottom: 12px;
+}
+
+.awd-hero__eyebrow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-gold-500);
+}
+
+.awd-hero__title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(32px, 4.4vw, 54px);
+  line-height: 1.14;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 14px 0 18px;
+  max-width: 14ch;
+}
+
+.awd-hero__title-accent {
+  color: var(--color-gold-500);
+}
+
+.awd-hero__desc {
+  font-size: clamp(14.5px, 1.1vw, 17px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 52ch;
+  margin: 0 0 32px;
+}
+
+.awd-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ---------- Buttons (shared) ---------- */
+
+.awd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1.5px solid transparent;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.awd-btn--filled {
+  color: var(--color-white);
+  background: var(--gradient-cta);
+  box-shadow: 0 10px 24px rgba(36, 84, 230, 0.32);
+}
+
+.awd-btn--filled:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(36, 84, 230, 0.4);
+}
+
+.awd-btn--outline {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.awd-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.awd-btn--outline-light {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.awd-btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.awd-btn--large {
+  padding: 15px 30px;
+  font-size: 15px;
+}
+
+/* ---------- Stat strip ---------- */
+
+.awd-stats {
+  position: relative;
+  z-index: 3;
+  margin-top: -46px;
+  padding-inline: clamp(20px, 4vw, 56px);
+}
+
+.awd-stats__inner {
+  max-width: 1360px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--color-white);
+  border-radius: 18px;
+  box-shadow: 0 24px 48px rgba(18, 27, 111, 0.14);
+  overflow: hidden;
+}
+
+.awd-stat {
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px clamp(18px, 3vw, 32px);
+  border-right: 1px solid rgba(18, 27, 111, 0.08);
+}
+
+.awd-stat:last-child {
+  border-right: none;
+}
+
+.awd-stat__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--color-blue-600);
+  background: rgba(36, 84, 230, 0.1);
+}
+
+.awd-stat__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.awd-stat__body strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.1;
+}
+
+.awd-stat__body span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-gray);
+}
+
+/* ---------- Shared section shell ---------- */
+
+.awd-section {
+  padding: 88px 0;
+}
+
+.awd-section--tint {
+  background: linear-gradient(180deg, #f3f6ff 0%, #ffffff 100%);
+}
+
+.awd-section__inner {
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+}
+
+.awd-heading {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.awd-heading__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--color-white);
+  background: var(--gradient-cta);
+  margin-bottom: 10px;
+}
+
+.awd-heading__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
+
+.awd-heading__dash {
+  width: clamp(24px, 4vw, 52px);
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-gold-500);
+  flex-shrink: 0;
+}
+
+.awd-heading__desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--color-text-gray);
+  margin: 14px 0 0;
+}
+
+/* ---------- Featured awards grid ---------- */
+
+.awd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 26px;
+}
+
+.awd-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid rgba(18, 27, 111, 0.07);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(18, 27, 111, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.awd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 48px rgba(18, 27, 111, 0.14);
+}
+
+.awd-card__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.awd-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.awd-card:hover .awd-card__media img {
+  transform: scale(1.05);
+}
+
+.awd-card__body {
+  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.awd-card__award {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-blue-600);
+  margin-bottom: 8px;
+}
+
+.awd-card__title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--color-navy-900);
+  margin: 0 0 8px;
+}
+
+.awd-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+/* ---------- Doctors recognized ---------- */
+
+.awd-doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+}
+
+.awd-doctor-card {
+  background: var(--color-white);
+  border: 1px solid rgba(18, 27, 111, 0.07);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(18, 27, 111, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.awd-doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 48px rgba(18, 27, 111, 0.14);
+}
+
+.awd-doctor-card__photo {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #eef2ff;
+}
+
+.awd-doctor-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.awd-doctor-card__body {
+  padding: 22px;
+  text-align: center;
+}
+
+.awd-doctor-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(240, 168, 60, 0.14);
+  color: #9a6a12;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.awd-doctor-card__body h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-navy-900);
+  margin: 0 0 4px;
+}
+
+.awd-doctor-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-blue-600);
+  margin: 0 0 8px;
+}
+
+.awd-doctor-card__credentials {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+/* ---------- Photo gallery ---------- */
+
+.awd-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.awd-photo {
+  position: relative;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 16px 32px rgba(18, 27, 111, 0.1);
+}
+
+.awd-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.awd-photo:hover img {
+  transform: scale(1.06);
+}
+
+.awd-photo figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 32px 16px 14px;
+  background: linear-gradient(180deg, rgba(6, 11, 34, 0) 0%, rgba(6, 11, 34, 0.82) 78%);
+  color: var(--color-white);
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* ---------- Closing CTA ---------- */
+
+.awd-cta {
+  background: linear-gradient(120deg, var(--color-navy-900) 0%, var(--color-navy-700) 55%, var(--color-teal-500) 130%);
+  padding: 72px 0;
+}
+
+.awd-cta__inner {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+  text-align: center;
+}
+
+.awd-cta__inner h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0 0 14px;
+}
+
+.awd-cta__inner p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 30px;
+}
+
+.awd-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 899.98px) {
+  .awd-stats {
+    margin-top: -34px;
+  }
+
+  .awd-stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(18, 27, 111, 0.08);
+  }
+
+  .awd-stat:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .awd-hero {
+    min-height: 420px;
+  }
+
+  .awd-hero__inner {
+    padding: 84px clamp(20px, 4vw, 56px) 64px;
+  }
+
+  .awd-section {
+    padding: 56px 0;
+  }
+
+  .awd-heading {
+    margin-bottom: 32px;
+  }
+
+  .awd-heading__dash {
+    display: none;
+  }
+}
