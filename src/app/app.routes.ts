@@ -287,6 +287,11 @@ export const routes: Routes = [
     title: 'Contact Us - Vasavi Hospitals',
   },
 
+  {
+    path: 'about-us',
+    loadComponent: () => import('./pages/about/about').then((m) => m.AboutPage),
+    title: 'About Us — Vasavi Hospitals',
+  },
   // Individual doctor profile pages live at a top-level slug (e.g.
   // "/dr-ashok-m-v"), matching the `slug` values in the doctor data and the
   // "View Profile" links on the doctors listing page. This wildcard ":slug"
