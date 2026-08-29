@@ -1293,8 +1293,10 @@
 }
 
 @media (max-width: 450px){
+
    #doctor-booking-card {
     max-width: 400px;
     margin-top: 30px;
   }
+  
 }
