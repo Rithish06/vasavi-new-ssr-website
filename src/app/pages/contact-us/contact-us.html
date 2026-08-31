@@ -32,17 +32,36 @@
 
     <div class="contact-cards">
       @for (card of infoCards; track card.title) {
-        <article class="contact-card contact-card--{{ card.accent }}">
-          <div class="contact-card__top">
-            <span class="contact-card__icon"><app-doctors-icon [name]="card.icon" /></span>
-            <span class="contact-card__arrow"><app-doctors-icon name="arrow" /></span>
-          </div>
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.description }}</p>
-          @if (card.highlight) {
-            <p class="contact-card__highlight">{{ card.highlight }}</p>
-          }
-        </article>
+        @if (card.path) {
+          <a class="contact-card contact-card--{{ card.accent }}" [routerLink]="card.path">
+            <div class="contact-card__top">
+              <span class="contact-card__icon"><app-doctors-icon [name]="card.icon" /></span>
+              <span class="contact-card__arrow"><app-doctors-icon name="arrow" /></span>
+            </div>
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+            @if (card.highlight) {
+              <p class="contact-card__highlight">{{ card.highlight }}</p>
+            }
+          </a>
+        } @else {
+          <a
+            class="contact-card contact-card--{{ card.accent }}"
+            [href]="card.link"
+            [target]="card.link && card.link.startsWith('http') ? '_blank' : null"
+            [rel]="card.link && card.link.startsWith('http') ? 'noopener' : null"
+          >
+            <div class="contact-card__top">
+              <span class="contact-card__icon"><app-doctors-icon [name]="card.icon" /></span>
+              <span class="contact-card__arrow"><app-doctors-icon name="arrow" /></span>
+            </div>
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+            @if (card.highlight) {
+              <p class="contact-card__highlight">{{ card.highlight }}</p>
+            }
+          </a>
+        }
       }
     </div>
 
@@ -231,7 +250,7 @@
           <div class="contact-map-card__rating">
             {{ rating }}
             <span class="contact-map-card__stars" [attr.aria-label]="rating + ' out of 5 stars'">★★★★☆</span>
-            <a class="contact-map-card__reviews" href="#">{{ reviewCount }} reviews</a>
+            <a class="contact-map-card__reviews" [href]="largerMapUrl" target="_blank" rel="noopener">{{ reviewCount }} reviews</a>
           </div>
           <a class="contact-map-card__larger" [href]="largerMapUrl" target="_blank" rel="noopener">View larger map</a>
         </div>

@@ -295,12 +295,13 @@
 .awd-card__media {
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: rgba(18, 27, 111, 0.04);
 }
 
 .awd-card__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.35s ease;
 }
 

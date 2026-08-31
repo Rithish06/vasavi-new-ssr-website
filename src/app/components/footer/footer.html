@@ -141,10 +141,10 @@
             </li>
           }
         </ul>
-        <a class="footer-link footer-link--underline" routerLink="/services">
+        <!-- <a class="footer-link footer-link--underline" routerLink="/services">
           View All Services
           <app-footer-icon name="arrow" />
-        </a>
+        </a> -->
       </div>
 
       <div class="footer-col footer-col--contact">
@@ -195,10 +195,12 @@
           <span class="footer-action__body">
             <strong>{{ card.title }}</strong>
             <span class="footer-action__desc">{{ card.description }}</span>
-            <span class="footer-action__cta">
-              {{ card.ctaLabel }}
-              <app-footer-icon name="arrow" />
-            </span>
+            @if (!card.hideCta) {
+              <span class="footer-action__cta">
+                {{ card.ctaLabel }}
+                <app-footer-icon name="arrow" />
+              </span>
+            }
           </span>
         </a>
 
@@ -209,10 +211,12 @@
           <span class="footer-action__body">
             <strong>{{ card.title }}</strong>
             <span class="footer-action__desc">{{ card.description }}</span>
-            <span class="footer-action__cta">
-              {{ card.ctaLabel }}
-              <app-footer-icon name="arrow" />
-            </span>
+            @if (!card.hideCta) {
+              <span class="footer-action__cta">
+                {{ card.ctaLabel }}
+                <app-footer-icon name="arrow" />
+              </span>
+            }
           </span>
         </a>
       }

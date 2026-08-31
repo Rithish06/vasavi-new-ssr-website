@@ -46,20 +46,6 @@ export function buildUpcomingDates(count = 12): DateOption[] {
   return options;
 }
 
-/** Half-hour slots across the generic 9:00 AM – 5:00 PM OPD window. */
-function buildTimeSlots(): string[] {
-  const slots: string[] = [];
-  for (let mins = 9 * 60; mins <= 16 * 60 + 30; mins += 30) {
-    const h24 = Math.floor(mins / 60);
-    const m = mins % 60;
-    const period = h24 >= 12 ? 'PM' : 'AM';
-    let h12 = h24 % 12;
-    if (h12 === 0) h12 = 12;
-    slots.push(`${h12}:${String(m).padStart(2, '0')} ${period}`);
-  }
-  return slots;
-}
-
 /**
  * The exact "Book Appointment" form used on a doctor's own profile page
  * (doctor-detail), pulled out into its own reusable component so it can
@@ -102,19 +88,23 @@ export class AppointmentBooking {
   /**
    * A date already picked before this modal opened (e.g. the home page's
    * booking bar collects a date up front) - pre-selects that date on the
-   * 'select' step instead of starting from scratch, while still asking for
-   * a time slot, which is never collected anywhere else.
+   * 'select' step instead of starting from scratch.
    */
   readonly initialDate = input<DateOption | null>(null);
 
   readonly close = output<void>();
 
   protected readonly dateOptions = signal<DateOption[]>(buildUpcomingDates());
-  protected readonly timeOptions = buildTimeSlots();
 
   protected readonly step = signal<BookingStep>('select');
   protected readonly selectedDate = signal<DateOption | null>(null);
-  protected readonly selectedTime = signal<string | null>(null);
+  /**
+   * Free-text, optional. Replaces the old fixed half-hour time-slot picker -
+   * the team calls to confirm an exact time anyway (see the success-step
+   * copy), so this just lets a caller flag a rough preference ("after 3pm",
+   * "morning") without forcing them through a 16-slot grid.
+   */
+  protected readonly preferredTime = signal('');
   protected readonly validationError = signal('');
 
   protected readonly patientName = signal('');
@@ -129,7 +119,7 @@ export class AppointmentBooking {
       this.doctorName();
       this.step.set('select');
       this.selectedDate.set(this.initialDate());
-      this.selectedTime.set(null);
+      this.preferredTime.set('');
       this.patientName.set('');
       this.patientPhone.set('');
       this.contactErrors.set({});
@@ -142,21 +132,20 @@ export class AppointmentBooking {
     this.validationError.set('');
   }
 
-  protected selectTime(time: string): void {
-    this.selectedTime.set(time);
-    this.validationError.set('');
+  protected setPreferredTime(value: string): void {
+    this.preferredTime.set(value);
   }
 
-  /** Horizontally scrolls a date/time chip strip - used by the ‹ › nav buttons. */
+  /** Horizontally scrolls a date chip strip - used by the ‹ › nav buttons. */
   protected scrollChips(container: HTMLElement, direction: 1 | -1): void {
     if (!isPlatformBrowser(this.platformId)) return;
     container.scrollBy({ left: direction * 220, behavior: 'smooth' });
   }
 
-  /** Date and time are both mandatory before moving to the contact step. */
+  /** A date is mandatory before moving to the contact step; preferred time is optional. */
   protected proceedToContact(): void {
-    if (!this.selectedDate() || !this.selectedTime()) {
-      this.validationError.set('Please select a date and a time slot to continue.');
+    if (!this.selectedDate()) {
+      this.validationError.set('Please select a date to continue.');
       return;
     }
     this.validationError.set('');
@@ -196,7 +185,7 @@ export class AppointmentBooking {
 
     // NOTE: there's no booking backend wired up yet - this only simulates a
     // submission locally. Once a booking API/CRM endpoint exists, POST
-    // { doctorName: doctorName(), date: selectedDate().iso, time: selectedTime(), name, phone }
+    // { doctorName: doctorName(), date: selectedDate().iso, preferredTime: preferredTime(), name, phone }
     // here before advancing to the success step.
     this.step.set('success');
   }
@@ -204,7 +193,7 @@ export class AppointmentBooking {
   protected bookAnother(): void {
     this.step.set('select');
     this.selectedDate.set(this.initialDate());
-    this.selectedTime.set(null);
+    this.preferredTime.set('');
     this.patientName.set('');
     this.patientPhone.set('');
     this.contactErrors.set({});

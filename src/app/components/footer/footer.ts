@@ -28,7 +28,10 @@ interface ActionCard {
   description: string;
   ctaLabel: string;
   path?: string;
-  link?: string
+  link?: string;
+  /** Hides the ctaLabel "button" row - used where there's nothing to click
+   *  through to yet (e.g. no dedicated Insurance & TPA page). */
+  hideCta?: boolean;
 }
 
 /** Icon keys resolved to inline SVG paths in footer.html via the [ngSwitch]-free
@@ -132,6 +135,7 @@ export class Footer {
       description: 'List of empanelled insurance partners and TPA details.',
       ctaLabel: 'Know More',
       path: '/insurance-tpa',
+      hideCta: true,
     },
     {
       icon: FOOTER_ICONS.clipboard,

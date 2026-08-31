@@ -34,17 +34,23 @@ export class DoctorDetailPage {
   });
 
   /**
-   * Every doctor's individual profile page currently uses this same
-   * pre-composed hero graphic (dotted grid, arc-and-dot flourish, floating
-   * cross and corner wave baked into the artwork itself) rather than each
-   * doctor's own listing-page photo - real per-doctor photos vary too much
-   * in aspect ratio/background to hold a consistent hero height and
-   * spacing. The listing page's cards are untouched and still use each
-   * doctor's own `img`. `hasFramedPhoto` stays as a flag (rather than being
-   * inlined) so a future per-doctor photo can be reintroduced later without
-   * re-touching the template's conditional logic.
+   * The profile-page hero photo. Real per-doctor headshots live in
+   * `imgDetail` (public/Images/new-doctor-image/new-doc-images) and are
+   * used here whenever a doctor has one; doctors without a supplied
+   * `imgDetail` yet fall back to the same placeholder graphic every doctor
+   * used before real photos existed. The listing page is untouched either
+   * way - it always uses each doctor's own `img`, never `imgDetail`.
    */
-  protected readonly heroImg = computed(() => '/Images/new-doctor-image/new-doc-images/dr-mutharaj.png');
+  protected readonly heroImg = computed(
+    () => this.doctor()?.imgDetail || '/Images/new-doctor-image/new-doc-images/dr-male-vector.png',
+  );
+
+  /**
+   * Every doctor's profile page keeps using the same full-bleed hero
+   * treatment (see `.doctor-hero__photo-wrap--full` in doctor-detail.css) -
+   * design/layout is unchanged, only which image `heroImg()` resolves to
+   * above has changed.
+   */
   protected readonly hasFramedPhoto = computed(() => true);
 
   /**

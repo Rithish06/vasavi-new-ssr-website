@@ -43,30 +43,15 @@
         </button>
       </div>
 
-      <div class="doctor-booking__step-label">
-        <span class="doctor-booking__step-num">2</span>
-        <h3>Select Time Slot</h3>
-      </div>
-      <div class="doctor-booking__carousel">
-        <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, -1)" aria-label="Earlier times">
-          <app-doctors-icon name="chevron-left" />
-        </button>
-        <div class="doctor-booking__chips doctor-booking__chips--time" #timeScroller>
-          @for (t of timeOptions; track t) {
-            <button
-              type="button"
-              class="doctor-booking__chip doctor-booking__chip--time"
-              [class.active]="selectedTime() === t"
-              (click)="selectTime(t)"
-            >
-              {{ t }}
-            </button>
-          }
-        </div>
-        <button type="button" class="doctor-booking__nav" (click)="scrollChips(timeScroller, 1)" aria-label="Later times">
-          <app-doctors-icon name="chevron-right" />
-        </button>
-      </div>
+      <label class="doctor-booking__field doctor-booking__field--time">
+        <span>Preferred Time <em>(optional)</em></span>
+        <input
+          type="text"
+          [value]="preferredTime()"
+          (input)="setPreferredTime($any($event.target).value)"
+          placeholder="e.g. morning, or after 3 PM"
+        />
+      </label>
 
       @if (validationError()) {
         <p class="doctor-booking__error">{{ validationError() }}</p>
@@ -91,7 +76,12 @@
 
       <div class="doctor-booking__summary">
         <app-doctors-icon name="calendar" />
-        <span>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} &bull; {{ selectedTime() }}</span>
+        <span>
+          {{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }}
+          @if (preferredTime().trim()) {
+            &bull; {{ preferredTime() }}
+          }
+        </span>
       </div>
 
       <label class="doctor-booking__field">
@@ -133,9 +123,12 @@
         <h3>Appointment Booked Successfully!</h3>
         <p>
           Your appointment request for
-          <strong>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }} at {{ selectedTime() }}</strong>
+          <strong>{{ selectedDate()?.weekday }}, {{ selectedDate()?.day }} {{ selectedDate()?.month }}</strong>
           @if (doctorName()) {
             with <strong>{{ doctorName() }}</strong>
+          }
+          @if (preferredTime().trim()) {
+            (preferred time: <strong>{{ preferredTime() }}</strong>)
           }
           has been received. Our team will call <strong>{{ patientPhone() }}</strong> shortly to confirm.
         </p>

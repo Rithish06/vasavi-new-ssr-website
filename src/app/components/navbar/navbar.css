@@ -96,12 +96,21 @@
 }
 
 .topbar__nabh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 700;
   font-size: 0.78rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.85);
   white-space: nowrap;
+}
+
+.topbar__nabh img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .topbar__portal-btn {
@@ -746,7 +755,7 @@
   }
 
   .brand__logo {
-    height: 42px;
+    height: 62px;
   }
 }
 
@@ -769,6 +778,6 @@
   }
 
   .brand__logo {
-    height: 36px;
+    height: 50px;
   }
 }

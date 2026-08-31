@@ -134,9 +134,14 @@
 /* ---------- Mini-feature strip ---------- */
 
 .hc-hero__features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  /* A fixed 2x2 grid instead of flex-wrap: with 4 items of very different
+     label lengths, flex-wrap reflowed differently depending on how much
+     width happened to be available - sometimes 2+2, sometimes 2+1+1 - so
+     it never looked the same (or evenly balanced) at every screen size.
+     Grid always lays these 4 items out as exactly 2 columns x 2 rows,
+     regardless of container width. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
   margin-top: 14px;
   padding: 10px 12px;
   border: 1.5px solid rgba(18, 27, 111, 0.12);
@@ -152,11 +157,22 @@
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
+  min-width: 0;
+}
+
+/* Left column gets a right divider against the right column. */
+.hc-feature:nth-child(odd) {
   border-right: 1px solid rgba(18, 27, 111, 0.1);
 }
 
-.hc-feature:last-child {
-  border-right: none;
+/* Top row gets a bottom divider against the row underneath it. */
+.hc-feature:nth-child(-n + 2) {
+  border-bottom: 1px solid rgba(18, 27, 111, 0.1);
+  padding-bottom: 8px;
+}
+
+.hc-feature:nth-child(n + 3) {
+  padding-top: 8px;
 }
 
 .hc-feature__icon {

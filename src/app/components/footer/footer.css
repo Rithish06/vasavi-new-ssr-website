@@ -99,6 +99,13 @@
 }
 
 .footer-cta__text p {
+  /* Unlike h1-h6, <p> isn't covered by the global heading reset, so it was
+     keeping the browser's default ~1em top/bottom margin. That extra
+     invisible space (collapsing with the h3's own margin-bottom above it,
+     and trailing below the visible text) was inflating this block's real
+     height past the 54px icon beside it and throwing off the vertical
+     centering between them. */
+  margin: 0;
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.72);
 }

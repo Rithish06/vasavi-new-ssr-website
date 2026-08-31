@@ -12,6 +12,10 @@ interface InfoCard {
   description: string;
   /** Optional bold callout line under the description (a phone number or email). */
   highlight?: string;
+  /** Internal route - rendered with routerLink so it doesn't full-reload the SPA. */
+  path?: string;
+  /** External/protocol link (tel:, mailto:, maps) - rendered with a plain href. */
+  link?: string;
 }
 
 interface TrustItem {
@@ -61,13 +65,20 @@ export class ContactUs {
   protected readonly hospitalEmail = HOSPITAL_EMAIL;
 
   protected readonly infoCards: InfoCard[] = [
-    { icon: 'calendar', accent: 'blue', title: 'Book an Appointment', description: 'Find a doctor and schedule your visit' },
+    {
+      icon: 'calendar',
+      accent: 'blue',
+      title: 'Book an Appointment',
+      description: 'Find a doctor and schedule your visit',
+      path: '/doctors',
+    },
     {
       icon: 'phone',
       accent: 'green',
       title: 'Call Vasavi Hospitals',
       description: 'Speak directly with our team',
       highlight: HOSPITAL_PHONE_DISPLAY,
+      link: 'tel:' + HOSPITAL_PHONE_TEL,
     },
     {
       icon: 'mail',
@@ -75,8 +86,15 @@ export class ContactUs {
       title: 'Email Us',
       description: "We're here to answer your queries",
       highlight: HOSPITAL_EMAIL,
+      link: 'mailto:' + HOSPITAL_EMAIL,
     },
-    { icon: 'pin', accent: 'purple', title: 'Get Directions', description: 'Kumaraswamy Layout, Bengaluru' },
+    {
+      icon: 'pin',
+      accent: 'purple',
+      title: 'Get Directions',
+      description: 'Kumaraswamy Layout, Bengaluru',
+      link: 'https://www.google.com/maps/dir/?api=1&destination=Vasavi+Hospitals+Kumaraswamy+Layout+Bengaluru',
+    },
   ];
 
   protected readonly trustItems: TrustItem[] = [

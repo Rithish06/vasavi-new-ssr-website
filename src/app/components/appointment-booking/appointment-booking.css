@@ -324,6 +324,17 @@
   margin-bottom: 16px;
 }
 
+.doctor-booking__field--time {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+
+.doctor-booking__field--time span em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--color-text-gray);
+}
+
 .doctor-booking__field input {
   padding: 11px 12px;
   border-radius: 10px;
