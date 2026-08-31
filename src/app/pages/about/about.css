@@ -1,0 +1,4403 @@
+/* =========================================================
+   MAIN SECTION
+   ========================================================= */
+
+.about-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   HOSPITAL IMAGE
+   ========================================================= */
+
+.hero-bg {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  /*
+    Make the image wider so the hospital
+    comes further toward the left.
+  */
+  width: 68%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+    Adjust the image composition.
+    50% = center of original image
+  */
+  object-position: center center;
+
+  display: block;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   WHITE FADE
+   ========================================================= */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 6) 25%,
+      rgba(255, 255, 255, 19.98) 32%,
+      rgba(255, 255, 255, 20.9) 29%,
+      rgba(204, 347, 249, -0.3) 38%,
+      rgba(255, 255, 255, -7.96) 31%,
+      rgba(255, 255, 255, 0.12) 12%,
+      rgba(255, 255, 255, 0) 25%)
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: 390px;
+
+  margin-left: 4.2vw;
+
+  padding-top: 26px;
+}
+
+
+/* =========================================================
+   GOLD TOP LINE
+   ========================================================= */
+
+.hero-line {
+  width: 39px;
+  height: 4px;
+
+  background: #c89b3c;
+
+  border-radius: 5px;
+
+  margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.hero-title {
+  margin: 0;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.06;
+
+  letter-spacing: -1.4px;
+
+  color: #092240;
+}
+
+
+/* Forward container */
+.forward-wrap {
+  position: relative;
+
+  display: inline-block;
+
+  padding-bottom: 28px;
+}
+
+
+/* Forward text */
+.forward-text {
+  display: inline-block;
+
+  color: #E18A17;
+}
+
+
+/* Curved gold line */
+.forward-curve {
+  position: absolute;
+
+  left: 0px;
+  bottom: 10px;
+  width: calc(100% + 80px);
+  height: 20px;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.hero-description {
+  width: 365px;
+
+  margin: 0 0 14px 0;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+
+  line-height: 1.52;
+
+  font-weight: 400;
+
+  color: #273653;
+}
+
+
+/* =========================================================
+   NABH CARD
+   ========================================================= */
+
+.nabh-card {
+  display: flex;
+
+  align-items: center;
+
+  width: 272px;
+
+  min-height: 52px;
+
+  padding: 6px 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d9a936;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  margin-bottom: 13px;
+}
+
+
+/* NABH logo */
+
+.nabh-logo {
+  width: 39px;
+  height: 39px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+
+/* Divider */
+
+.nabh-divider {
+  width: 1px;
+  height: 31px;
+
+  background: #dfd2ae;
+
+  margin: 0 9px;
+
+  flex-shrink: 0;
+}
+
+
+/* Card text */
+
+.nabh-content {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  flex: 1;
+}
+
+.nabh-content strong {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+
+  line-height: 1.2;
+
+  color: #c0392b;
+
+  font-weight: 700;
+}
+
+.nabh-content span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+
+  line-height: 1.25;
+
+  color: #0d1b4b;
+
+  font-weight: 600;
+}
+
+
+/* Location */
+
+.location-icon {
+  width: 27px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #c89b3c;
+}
+
+.location-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+
+/* =========================================================
+   APPOINTMENT BUTTON
+   ========================================================= */
+
+.appointment-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  height: 40px;
+
+  padding: 0 15px;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background: #0d1b4b;
+
+  color: #ffffff;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.appointment-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.appointment-btn .arrow {
+  font-size: 18px;
+
+  line-height: 1;
+
+  margin-left: 3px;
+}
+
+.appointment-btn:hover {
+  background: #162660;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+/* =========================================================
+   STATS SECTION
+   ========================================================= */
+
+.stats-section {
+  width: 100%;
+  background: #06245f;
+  padding: 0 5.5%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   STATS GRID
+   ========================================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+}
+
+
+/* =========================================================
+   STAT ITEM
+   ========================================================= */
+
+.stat-item {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 14px;
+
+  padding: 14px 28px;
+
+  box-sizing: border-box;
+
+  color: #ffffff;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   VERTICAL GOLD LINES — using pseudo-elements for precise lines
+   ========================================================= */
+
+.stat-item:nth-child(1)::after,
+.stat-item:nth-child(2)::after,
+.stat-item:nth-child(3)::after,
+.stat-item:nth-child(5)::after,
+.stat-item:nth-child(6)::after,
+.stat-item:nth-child(7)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 40px;
+  background: rgba(200, 155, 60, 0.65);
+}
+
+
+/* =========================================================
+   HORIZONTAL GOLD LINE between rows
+   ========================================================= */
+
+.stat-item:nth-child(-n + 4) {
+  border-bottom: 1px solid rgba(200, 155, 60, 0.40);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #e2a300;
+}
+
+
+.stat-icon svg {
+  width: 40px;
+  height: 40px;
+
+  display: block;
+
+  color: #e2a300;
+
+  stroke: currentColor;
+}
+
+
+/* =========================================================
+   STAT NUMBER
+   ========================================================= */
+
+.stat-number {
+  color: #ffffff;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.65rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  margin-bottom: 4px;
+}
+
+
+/* =========================================================
+   STAT LABEL
+   ========================================================= */
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.88);
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.70rem;
+
+  font-weight: 400;
+
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SMALL SECONDARY LABEL
+   ========================================================= */
+
+.stat-label small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 0.66rem;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   VERIFICATION
+   ========================================================= */
+
+.verification {
+  width: 100%;
+
+  text-align: center;
+
+  padding-top: 7px;
+  padding-bottom: 2px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.64rem;
+
+  font-style: italic;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   DESKTOP 1400+
+   ========================================================= */
+
+@media (min-width: 1400px) {
+
+  .hero-section {
+    height: 470px;
+  }
+
+  .hero-content {
+    margin-left: 4.5vw;
+
+    padding-top: 31px;
+  }
+
+  .hero-title {
+    font-size: 44px;
+  }
+
+  .hero-description {
+    font-size: 13.5px;
+  }
+
+  .stats-section {
+    padding-left: 4.5vw;
+    padding-right: 4.5vw;
+  }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .hero-section {
+    height: 430px;
+  }
+
+  .hero-content {
+    width: 370px;
+
+    margin-left: 4vw;
+
+    padding-top: 25px;
+  }
+
+  .hero-title {
+    font-size: 39px;
+  }
+
+  .hero-description {
+    width: 345px;
+
+    font-size: 12.5px;
+  }
+
+  .stat-item {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    gap: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  .hero-section {
+    height: 420px;
+  }
+
+  .hero-bg {
+    object-position: 63% center;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(90deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.98) 32%,
+        rgba(255, 255, 255, 0.78) 45%,
+        rgba(255, 255, 255, 0.20) 62%,
+        transparent 75%);
+  }
+
+  .hero-content {
+    width: 350px;
+
+    margin-left: 30px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-description {
+    width: 330px;
+
+    font-size: 12px;
+  }
+
+  .nabh-card {
+    width: 265px;
+  }
+
+  .stats-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .stat-item {
+    padding: 12px 10px;
+  }
+
+  .stat-item:nth-child(1)::after,
+  .stat-item:nth-child(2)::after,
+  .stat-item:nth-child(3)::after,
+  .stat-item:nth-child(5)::after,
+  .stat-item:nth-child(6)::after,
+  .stat-item:nth-child(7)::after {
+    height: 32px;
+  }
+
+  .stat-number {
+    font-size: 21px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .hero-section {
+    height: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding-top: 255px;
+  }
+
+  /*
+    Image becomes top banner
+  */
+
+  .hero-bg {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 275px;
+
+    object-fit: cover;
+
+    object-position: 65% center;
+  }
+
+
+  /*
+    Vertical fade on mobile
+  */
+
+  .hero-overlay {
+    height: 275px;
+
+    background:
+      linear-gradient(to bottom,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.45) 58%,
+        #ffffff 100%);
+  }
+
+
+  .hero-content {
+    width: 100%;
+
+    margin: 0;
+
+    padding: 20px 20px 28px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+  }
+
+
+  .hero-line {
+    width: 34px;
+    height: 3px;
+
+    margin-bottom: 11px;
+  }
+
+
+  .hero-title {
+    font-size: 31px;
+
+    line-height: 1.08;
+
+    letter-spacing: -0.7px;
+  }
+
+
+  .title-line {
+    width: 130px;
+
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+
+
+  .hero-description {
+    width: 100%;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+    margin-bottom: 15px;
+  }
+
+
+  .nabh-card {
+    width: 100%;
+
+    min-height: 54px;
+
+    padding: 6px 8px;
+  }
+
+
+  .nabh-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+
+  .nabh-divider {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+
+  .nabh-content strong {
+    font-size: 10px;
+  }
+
+
+  .nabh-content span {
+    font-size: 9px;
+  }
+
+
+  .appointment-btn {
+    height: 40px;
+
+    font-size: 11px;
+
+    padding: 0 14px;
+  }
+
+
+  /* ================= STATS MOBILE ================= */
+
+  .stats-section {
+    padding: 0 10px;
+  }
+
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .stat-item {
+    min-height: 65px;
+
+    padding: 10px 8px;
+
+    gap: 7px;
+  }
+
+  .stat-item:nth-child(1)::after,
+  .stat-item:nth-child(2)::after,
+  .stat-item:nth-child(3)::after,
+  .stat-item:nth-child(5)::after,
+  .stat-item:nth-child(6)::after,
+  .stat-item:nth-child(7)::after {
+    height: 28px;
+  }
+
+  /* On 2-col mobile grid, only odd items (col 1) get the right separator */
+  .stat-item:nth-child(2n)::after {
+    display: none;
+  }
+
+  .stat-item:nth-child(n + 3) {
+    border-top: 1px solid rgba(200, 155, 60, 0.35);
+  }
+
+
+  .stat-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+
+  .stat-icon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+
+  .stat-number {
+    font-size: 17px;
+  }
+
+
+  .stat-label {
+    font-size: 8px;
+  }
+
+
+  .stat-label small {
+    font-size: 7px;
+  }
+
+
+  .verification {
+    font-size: 8px;
+
+    margin-top: 6px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .hero-section {
+    padding-top: 235px;
+  }
+
+  .hero-bg,
+  .hero-overlay {
+    height: 250px;
+  }
+
+  .hero-content {
+    padding: 18px 16px 25px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 11.5px;
+  }
+
+  .stat-item {
+    min-height: 62px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    gap: 5px;
+  }
+
+  .stat-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .stat-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .stat-number {
+    font-size: 15px;
+  }
+
+  .stat-label {
+    font-size: 7px;
+  }
+
+}
+
+/* =========================================================
+   VISION & MISSION SECTION
+   ========================================================= */
+
+.vision-mission-section {
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+
+  padding: 40px 0 60px;
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+   ========================================================= */
+
+.vm-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.vm-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 580px;
+  max-width: 90%;
+  /* margin-left: 6%; */
+  /* text-align: left; */
+  left: 15%;
+}
+
+
+/* ---------- Eyebrow ---------- */
+
+.vm-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  color: #073d91;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  white-space: nowrap;
+}
+
+.vm-eyebrow-line {
+  position: relative;
+
+  width: 62px;
+  height: 1px;
+
+  background: #d5a02d;
+
+  flex-shrink: 0;
+}
+
+.vm-eyebrow-line:first-child::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  right: -3px;
+
+  width: 6px;
+  height: 6px;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  background: #d5a02d;
+}
+
+.vm-eyebrow-line:last-child::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: -3px;
+
+  width: 6px;
+  height: 6px;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  background: #d5a02d;
+}
+
+
+/* ---------- Title ---------- */
+
+.vm-title {
+  margin: 16px 0 0;
+
+  font-family: 'DM Sans', sans-serif;
+  color: #073d91;
+
+  font-size: 44px;
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+}
+
+.vm-title-line {
+  width: 52px;
+  height: 3px;
+
+  margin: 18px 0 20px;
+
+  background: #d5a02d;
+}
+
+.vm-intro {
+  margin: 0;
+
+  font-family: 'DM Sans', sans-serif;
+  color: #263653;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   TOP RIGHT HEALTHCARE IMAGE
+   ========================================================= */
+
+/* =========================================================
+   RIGHT SIDE HEALTHCARE IMAGE - EXACT DESIGN
+   ========================================================= */
+
+.vm-image {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+
+  width: 38% !important;
+  height: 320px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  z-index: 1;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vm-image-img {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+
+/* Fade the left side of the image into white */
+.vm-image::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.92) 7%,
+      rgba(255, 255, 255, 0.55) 18%,
+      rgba(255, 255, 255, 0) 38%);
+}
+
+
+/* =========================================================
+   COMMON BLUE PANEL
+   ========================================================= */
+
+.vm-blue-panel {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #073d91;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   VISION CARD
+   ========================================================= */
+
+.vm-vision-card {
+  position: relative;
+  z-index: 4;
+
+  width: 72%;
+  height: 160px;
+
+  margin-top: 42px;
+  margin-left: 6%;
+
+  border: 1px solid #c2d3ec;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, .97);
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   VISION BLUE PANEL — skewed left panel
+   ========================================================= */
+
+.vm-vision-panel {
+  position: relative;
+  flex-shrink: 0;
+  width: 34%;
+  height: 100%;
+
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Gold accent strip — vertical bar at the arrow tip */
+
+/* .vm-gold-strip {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #d5a02d;
+  z-index: 3;
+} */
+
+.vm-vision-card .vm-gold-strip {
+  display: none;
+}
+
+
+/* =========================================================
+   PANEL ICON
+   ========================================================= */
+
+.vm-icon-circle {
+  position: relative;
+  z-index: 3;
+
+  width: 120px;
+  height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid rgba(255, 255, 255, .85);
+
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.vm-icon-img {
+  width: 72px !important;
+  height: 72px !important;
+
+  max-width: none !important;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* =========================================================
+   PANEL CURVES
+   ========================================================= */
+
+.vm-panel-curves {
+  position: absolute;
+
+  left: -55px;
+  bottom: -55px;
+
+  width: 240px;
+  height: 125px;
+
+  border-top: 1px solid rgba(255, 255, 255, .18);
+
+  border-radius: 50%;
+
+  transform: rotate(10deg);
+}
+
+.vm-panel-curves::before,
+.vm-panel-curves::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  width: 240px;
+  height: 125px;
+
+  border-top: 1px solid rgba(255, 255, 255, .18);
+
+  border-radius: 50%;
+}
+
+.vm-panel-curves::before {
+  top: 13px;
+}
+
+.vm-panel-curves::after {
+  top: 26px;
+}
+
+
+/* =========================================================
+   VISION CONTENT
+   ========================================================= */
+
+.vm-vision-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 30px 0 28px;
+
+  box-sizing: border-box;
+}
+
+.vm-heading {
+  font-family: 'DM Sans', sans-serif;
+  color: #073d91;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  letter-spacing: 5px;
+
+  line-height: 1;
+}
+
+.vm-heading-line {
+  width: 27px;
+  height: 3px;
+
+  margin: 10px 0 11px;
+
+  background: #d5a02d;
+}
+
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.vm-quote-content {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.vm-quote-content p {
+  margin: 0;
+
+  font-family: 'DM Sans', sans-serif;
+  color: #293751;
+
+  font-size: 17px;
+  line-height: 1.4;
+
+  font-weight: 500;
+}
+
+.vm-quote-open,
+.vm-quote-close {
+  color: #b7cbea;
+
+  font-family: Georgia, serif;
+
+  font-size: 55px;
+  line-height: .5;
+
+  font-weight: 700;
+}
+
+.vm-quote-open {
+  align-self: flex-start;
+}
+
+.vm-quote-close {
+  align-self: flex-end;
+}
+
+
+/* =========================================================
+   MISSION CARD
+   ========================================================= */
+
+.vm-mission-card {
+  position: relative;
+  z-index: 4;
+
+  width: 72%;
+  height: 180px;
+
+  margin-top: 16px;
+  margin-left: 6%;
+
+  border: 1px solid #c2d3ec;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, .97);
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   MISSION CONTENT
+   ========================================================= */
+
+.vm-mission-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 24px 0 36px;
+
+  box-sizing: border-box;
+}
+
+.vm-mission-content p {
+  max-width: 720px;
+
+  margin: 0;
+
+  color: #293751;
+
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.vm-mission-divider {
+  width: 72%;
+  height: 1px;
+
+  margin: 12px 0;
+
+  background: #d5a02d;
+}
+
+
+/* =========================================================
+   MISSION BLUE PANEL
+   ========================================================= */
+
+.vm-mission-panel {
+  position: relative;
+  flex-shrink: 0;
+  width: 34%;
+  height: 100%;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vm-mission-card .vm-gold-strip {
+  display: none;
+}
+
+
+/* Mission panel: order matters — gold strip sits before panel in DOM for mission */
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .vision-mission-section {
+    min-height: auto;
+
+    padding: 40px 15px 50px;
+  }
+
+  .vm-header {
+    width: 100%;
+    margin: 0;
+  }
+
+  .vm-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .vm-eyebrow-line {
+    width: 30px;
+  }
+
+  .vm-title {
+    font-size: 29px;
+  }
+
+  .vm-intro {
+    font-size: 11px;
+  }
+
+  .vm-intro br {
+    display: none;
+  }
+
+  /* Image */
+
+  .vm-image {
+    position: relative;
+
+    top: auto;
+    right: auto;
+
+    width: 100%;
+    height: 220px;
+
+    margin-top: 25px;
+  }
+
+  /* Vision */
+
+  .vm-vision-card {
+    width: 100%;
+    height: auto;
+    min-height: 130px;
+
+    margin: 20px 0 0;
+
+    border: 1px solid #c2d3ec;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .vm-vision-panel {
+    position: relative;
+    width: 36%;
+    height: auto;
+    clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+    flex-shrink: 0;
+  }
+
+  .vm-vision-card .vm-gold-strip {
+    display: none;
+  }
+
+  .vm-vision-content {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    flex: 1;
+    padding: 14px 14px 14px 18px;
+  }
+
+  .vm-icon-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .vm-icon-img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .vm-heading {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .vm-quote-content p {
+    font-size: 11px;
+  }
+
+  .vm-quote-open,
+  .vm-quote-close {
+    font-size: 36px;
+  }
+
+  /* Mission */
+
+  .vm-mission-card {
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+
+    margin: 15px 0 0;
+
+    border: 1px solid #c2d3ec;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .vm-mission-content {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    flex: 1;
+    padding: 16px 14px 16px 20px;
+  }
+
+  .vm-mission-content p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .vm-mission-divider {
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .vm-mission-panel {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 34%;
+    height: auto;
+    flex-shrink: 0;
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .vm-mission-card .vm-gold-strip {
+    right: 36%;
+    left: auto;
+  }
+}
+
+/* =========================================================
+   TECHNOLOGY SECTION
+   ========================================================= */
+
+.technology-section {
+  position: relative;
+  width: 100%;
+  min-height: 780px;
+  padding: 30px 5% 45px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+   ========================================================= */
+
+.technology-section picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.tech-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  /* object-fit: cover; */
+  object-position: center center;
+
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.tech-bg-mobile {
+  display: none;
+}
+
+
+/* Keep all actual content above background */
+
+.tech-header,
+.robotic-heading,
+.robotic-grid,
+.technology-list {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.tech-header {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto 22px;
+}
+
+
+.tech-title {
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  column-gap: 12px;
+
+  line-height: .95;
+}
+
+
+/* TECHNOLOGY */
+
+.tech-title span {
+  flex-basis: 100%;
+
+  color: #092d65;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(40px, 4.5vw, 60px);
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* THAT TRANSFORMS */
+
+.tech-title strong {
+  color: #c88708;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* Care. */
+
+.tech-title em {
+  color: #092d65;
+
+  font-family: 'Dancing Script', cursive;
+
+  font-size: clamp(42px, 5vw, 66px);
+
+  font-weight: 500;
+  font-style: normal;
+
+  margin-left: 2px;
+}
+
+
+.tech-subtitle {
+  margin: 20px 0 0;
+
+  font-family: 'DM Sans', sans-serif;
+  color: #26364e;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  line-height: 1.5;
+}
+
+.tech-subtitle-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 0;
+}
+
+.tech-subtitle-line {
+  display: block;
+  width: 120px;
+  height: 1.5px;
+  background: #c88708;
+}
+
+.tech-subtitle-arrow {
+  display: block;
+  color: #c88708;
+  font-size: 22px;
+  line-height: 1;
+  margin-top: -5px;
+}
+
+
+/* =========================================================
+   ROBOTIC SURGERY HEADING
+   ========================================================= */
+
+.robotic-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  gap: 16px;
+
+  margin: 34px auto 0;
+
+  font-family: 'DM Sans', sans-serif;
+  color: #0b326d;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 5px;
+
+  white-space: nowrap;
+}
+
+
+.robotic-line {
+  position: relative;
+
+  width: 275px;
+  height: 1px;
+
+  background: #d8a02a;
+}
+
+
+.robotic-line::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  right: -1px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #d8a02a;
+
+  transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   ROBOTIC CARDS
+   ========================================================= */
+
+.robotic-grid {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 20px auto 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+
+.robotic-card {
+  position: relative;
+
+  height: 390px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, .97);
+
+  border: 1px solid #aebed5;
+
+  border-radius: 12px;
+
+  box-sizing: border-box;
+}
+
+
+/* First card gold border */
+
+.davinci-card {
+  border-color: #d9a12b;
+}
+
+
+/* Second card blue border */
+
+.mako-card {
+  border-color: #aabbd5;
+}
+
+/* Mako card — corner flipped to top-right */
+.mako-card .card-corner {
+  left: auto;
+  right: 0;
+
+  clip-path: polygon(100% 0,
+      0 0,
+      100% 100%);
+}
+
+/* Mako card — dots flipped to bottom-right */
+.mako-card .tech-dots {
+  left: auto;
+  right: 10px;
+}
+
+
+/* =========================================================
+   BLUE CARD CORNER
+   ========================================================= */
+
+.card-corner {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 70px;
+  height: 64px;
+
+  background: #083b8f;
+
+  clip-path: polygon(0 0,
+      100% 0,
+      0 100%);
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   ROBOT CARD CONTENT
+   ========================================================= */
+
+.robotic-content {
+  position: absolute;
+
+  top: 50%;
+  left: 0;
+
+  transform: translateY(-50%);
+
+  width: 43%;
+
+  padding: 0 0 0 38px;
+
+  box-sizing: border-box;
+
+  z-index: 4;
+}
+
+
+.robotic-number {
+  color: #c88809;
+
+  font-family: 'Georgia', "Times New Roman", serif;
+
+  font-size: 72px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+.robotic-small-line {
+  width: 45px;
+  height: 2px;
+
+  margin: 14px 0 16px;
+
+  background: #c88809;
+}
+
+
+.robotic-content h3 {
+  margin: 0;
+
+  color: #0a316d;
+
+  font-family: 'DM Sans', sans-serif;
+
+  font-size: 23px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+.robotic-content p {
+  margin: 6px 0 0;
+
+  color: #1b3559;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   ROBOT IMAGE
+   ========================================================= */
+
+.robotic-image {
+  position: absolute;
+
+  right: 0;
+  top: 0;
+
+  width: 62%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+
+.robotic-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center center;
+}
+
+
+/* =========================================================
+   INDIVIDUAL ROBOT IMAGE POSITION
+   ========================================================= */
+
+.davinci-card .robotic-image {
+  right: 0;
+  width: 65%;
+}
+
+
+.mako-card .robotic-image {
+  right: 0;
+  width: 58%;
+}
+
+
+/* =========================================================
+   BOTTOM DOTS INSIDE ROBOT CARDS
+   ========================================================= */
+
+.tech-dots {
+  position: absolute;
+
+  left: 12px;
+  bottom: 12px;
+
+  width: 80px;
+  height: 72px;
+
+  opacity: .85;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   TECHNOLOGY LIST
+   ========================================================= */
+
+.technology-list {
+  width: 100%;
+  max-width: 1100px;
+
+  min-height: 174px;
+
+  margin: 22px auto 0;
+
+  padding: 13px 5px;
+
+  display: grid;
+
+  grid-template-columns: repeat(10, 1fr);
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, .96);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 8px 25px rgba(25, 52, 85, .13);
+}
+
+
+/* =========================================================
+   TECHNOLOGY ITEM
+   ========================================================= */
+
+.technology-item {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  min-width: 0;
+
+  padding: 2px 7px;
+
+  box-sizing: border-box;
+}
+
+
+/* Vertical separator */
+
+.technology-item:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  top: 17px;
+  right: 0;
+
+  width: 1px;
+  height: 113px;
+
+  background: #dedede;
+}
+
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.technology-number {
+  color: #c88708;
+
+  /* font-family: Georgia, "Times New Roman", serif; */
+
+  font-size: 21px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* Gold line */
+
+.technology-line {
+  width: 25px;
+  height: 2px;
+
+  margin: 8px 0 9px;
+
+  background: #c88708;
+}
+
+
+/* =========================================================
+   SMALL TECHNOLOGY ICON
+   ========================================================= */
+
+.technology-item img {
+  display: block;
+
+  width: 46px;
+  height: 46px;
+
+  margin: 0 auto 8px;
+
+  object-fit: contain;
+}
+
+.technology-item svg {
+  display: block;
+
+  width: 46px;
+  height: 46px;
+
+  margin: 0 auto 8px;
+}
+
+
+/* =========================================================
+   TECHNOLOGY TEXT
+   ========================================================= */
+
+.technology-item span {
+  display: block;
+
+  max-width: 105px;
+
+  color: #102f5b;
+
+  font-family: 'DM Sans', sans-serif;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   DESKTOP 1400+
+   ========================================================= */
+
+@media (min-width: 1400px) {
+
+  .technology-section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .robotic-grid {
+    max-width: 1160px;
+  }
+
+  .robotic-card {
+    height: 300px;
+  }
+
+  .technology-list {
+    max-width: 1160px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .technology-section {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .robotic-line {
+    width: 150px;
+  }
+
+  .robotic-card {
+    height: 270px;
+  }
+
+  .technology-list {
+    grid-template-columns: repeat(5, 1fr);
+
+    row-gap: 18px;
+  }
+
+  .technology-item:nth-child(5)::after {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .technology-section {
+    min-height: auto;
+
+    padding: 35px 15px 35px;
+  }
+
+  .tech-bg {
+    display: none;
+  }
+
+  .tech-bg-mobile {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Header */
+
+  .tech-title {
+    display: block;
+  }
+
+  .tech-title span {
+    font-size: 28px;
+  }
+
+  .tech-title strong {
+    display: inline-block;
+
+    font-size: 25px;
+  }
+
+  .tech-title em {
+    display: inline-block;
+
+    font-size: 36px;
+  }
+
+  .tech-subtitle {
+    font-size: 12px;
+
+    margin-top: 10px;
+  }
+
+
+  /* Robotic heading */
+
+  .robotic-heading {
+    gap: 7px;
+
+    margin-top: 28px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+  }
+
+  .robotic-line {
+    width: 45px;
+  }
+
+
+  /* Robot cards */
+
+  .robotic-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 600px;
+  }
+
+  .robotic-card {
+    height: 260px;
+  }
+
+
+  .robotic-content {
+    width: 45%;
+
+    padding: 0 0 0 22px;
+  }
+
+  .robotic-number {
+    font-size: 52px;
+  }
+
+  .robotic-small-line {
+    margin: 9px 0 11px;
+  }
+
+  .robotic-content h3 {
+    font-size: 16px;
+  }
+
+  .robotic-content p {
+    font-size: 10px;
+  }
+
+
+  .davinci-card .robotic-image {
+    width: 62%;
+  }
+
+  .mako-card .robotic-image {
+    width: 58%;
+    right: 0;
+  }
+
+
+  /* Technology items */
+
+  .technology-list {
+    grid-template-columns: repeat(2, 1fr);
+
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border-radius: 16px;
+  }
+
+
+  .technology-item {
+    min-height: 125px;
+
+    padding: 8px 4px;
+  }
+
+
+  .technology-item:not(:last-child)::after {
+    display: none;
+  }
+
+
+  .technology-item img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .technology-item svg {
+    width: 42px;
+    height: 42px;
+  }
+
+
+  .technology-item span {
+    font-size: 10px;
+  }
+
+}
+
+/* =========================================================
+   CORE COMMITTEE SECTION
+========================================================= */
+
+.committee-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: auto;
+
+  padding: 25px 5% 55px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+========================================================= */
+
+.committee-bg {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background:
+    /* Top-right blue shape */
+    radial-gradient(ellipse 360px 470px at 103% -3%,
+      #073d91 0%,
+      #073d91 65%,
+      transparent 66%),
+
+    /* Bottom-left blue shape */
+    radial-gradient(ellipse 550px 400px at -4% 105%,
+      #073d91 0%,
+      #073d91 63%,
+      transparent 64%);
+}
+
+
+/* =========================================================
+   CURVED WHITE OVERLAY
+========================================================= */
+
+.committee-bg::before {
+  content: "";
+
+  position: absolute;
+
+  top: -150px;
+  right: -180px;
+
+  width: 480px;
+  height: 720px;
+
+  border-radius: 50%;
+
+  border-left: 1px solid #d5a02d;
+
+  transform: rotate(-24deg);
+
+  opacity: .9;
+}
+
+
+/* Bottom gold curve */
+
+.committee-bg::after {
+  content: "";
+
+  position: absolute;
+
+  left: -180px;
+  bottom: -210px;
+
+  width: 720px;
+  height: 400px;
+
+  border-radius: 50%;
+
+  border-top: 1px solid #d5a02d;
+
+  transform: rotate(8deg);
+
+  opacity: .95;
+}
+
+
+/* =========================================================
+   DOT PATTERNS
+========================================================= */
+
+.committee-dots {
+  position: absolute;
+
+  z-index: 1;
+
+  width: 85px;
+  height: 125px;
+
+  opacity: .35;
+
+  background-image:
+    radial-gradient(circle,
+      #7f9bd0 1.5px,
+      transparent 1.8px);
+
+  background-size: 13px 13px;
+
+  pointer-events: none;
+}
+
+
+/* Top left */
+
+.committee-dots-top {
+  top: 20px;
+  left: 42px;
+}
+
+
+/* Bottom right */
+
+.committee-dots-bottom {
+  right: 45px;
+  bottom: 45px;
+
+  width: 90px;
+  height: 75px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.committee-header {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  text-align: center;
+
+  margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.committee-title {
+  margin: 0;
+
+  line-height: .98;
+
+  font-family: 'DM Sans', sans-serif;
+
+  font-weight: 400;
+}
+
+
+/* Our Core */
+
+.committee-title span {
+  display: block;
+
+  color: #073d91;
+
+  font-size: clamp(42px, 4.2vw, 57px);
+
+  font-weight: 400;
+
+  letter-spacing: -1px;
+}
+
+
+/* Committee */
+
+.committee-title strong {
+  color: #073d91;
+
+  font-size: clamp(48px, 4.7vw, 64px);
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+
+/* Members */
+
+.committee-title em {
+  color: #e3a126;
+
+  font-size: clamp(48px, 4.7vw, 64px);
+
+  font-style: normal;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+
+  margin-left: 8px;
+}
+
+
+/* =========================================================
+   COMMITTEE IMAGE CARD
+========================================================= */
+
+.committee-image-card {
+  position: relative;
+
+  z-index: 5;
+
+  width: 84%;
+
+  margin: 8px auto 0;
+
+  overflow: hidden;
+  /* 
+  background: #ffffff;
+
+  border: 2px solid #174a9b;
+
+  border-radius: 34px;
+
+  box-sizing: border-box; */
+
+  /* inner whitespace matching PDF design */
+  padding: 16px 18px;
+}
+
+
+/* White gaps in top border — left and right of centre */
+
+/* .committee-image-card::before,
+.committee-image-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: -2px;
+
+  width: 42px;
+
+  height: 6px;
+
+  background: #ffffff;
+
+  z-index: 6;
+} */
+
+/* .committee-image-card::before {
+  left: 75px;
+}
+
+.committee-image-card::after {
+  right: 75px;
+} */
+
+
+/* Image */
+
+.committee-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+
+/* =========================================================
+   MEMBER AREA
+========================================================= */
+
+.committee-members {
+  position: relative;
+
+  z-index: 5;
+
+  width: 84%;
+
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 60px;
+}
+
+
+/* =========================================================
+   STANDING ROW
+========================================================= */
+
+.standing-members {
+  margin-top: 14px;
+}
+
+
+/* =========================================================
+   SITTING ROW
+========================================================= */
+
+.sitting-members {
+  margin-top: 16px;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.committee-label {
+  position: absolute;
+
+  left: 6px;
+
+  top: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  height: 42px;
+
+  border-radius: 24px 24px 10px;
+
+  color: #ffffff;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: .2px;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, .12);
+}
+
+
+/* Blue label */
+
+.standing-label {
+  background: #073d91;
+}
+
+
+/* Gold label */
+
+.sitting-label {
+  background: #d99a19;
+}
+
+
+/* =========================================================
+   LABEL ICON
+========================================================= */
+
+.committee-label-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #073d91;
+
+  box-sizing: border-box;
+
+  margin-left: -3px;
+
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+
+/* Sitting icon background */
+
+.sitting-label .committee-label-icon {
+  background: #c17f10;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* Simple people symbol */
+
+.people-icon {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+}
+
+.people-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+
+
+/* Label text */
+
+.committee-label>span:last-child {
+  padding: 0 17px 0 9px;
+}
+
+
+/* =========================================================
+   LEFT TO RIGHT TEXT
+========================================================= */
+
+.committee-left-right {
+  position: absolute;
+
+  left: 160px;
+
+  top: 12px;
+
+  color: #073d91;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* Sitting LEFT TO RIGHT */
+
+.sitting-members .committee-left-right {
+  color: #d99a19;
+}
+
+
+/* =========================================================
+   HORIZONTAL LINE
+========================================================= */
+
+.member-line {
+  position: absolute;
+
+  left: 158px;
+  right: 0;
+
+  top: 37px;
+
+  height: 1px;
+  width: 75%;
+  z-index: -1;
+}
+
+
+/* Blue */
+
+.standing-line {
+  background: #174a9b;
+}
+
+
+/* Gold */
+
+.sitting-line {
+  background: #d99a19;
+}
+
+
+/* End dot */
+
+.member-line span {
+  position: absolute;
+
+  right: -2px;
+
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  transform: translateY(-50%);
+}
+
+
+/* Blue dot */
+
+.standing-line span {
+  background: #174a9b;
+}
+
+
+/* Gold dot */
+
+.sitting-line span {
+  background: #d99a19;
+}
+
+
+/* =========================================================
+   MEMBER NAMES
+========================================================= */
+
+.member-names {
+  display: grid;
+
+  width: calc(100% - 158px);
+
+  /* margin-left: 158px; */
+
+  padding-top: 55px;
+
+  box-sizing: border-box;
+}
+
+
+/* Standing = 5 columns */
+
+.standing-members .member-names {
+  grid-template-columns:
+    repeat(5, 1fr);
+}
+
+
+/* Sitting = 7 columns */
+
+.sitting-members .member-names {
+  grid-template-columns:
+    repeat(7, 1fr);
+}
+
+
+/* =========================================================
+   INDIVIDUAL MEMBER
+========================================================= */
+
+.member-name {
+  position: relative;
+
+  min-height: 43px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 0 15px;
+
+  color: #092e69;
+
+  font-family: 'DM Sans', sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  line-height: 1.45;
+
+  box-sizing: border-box;
+}
+
+
+/* Vertical separators */
+
+.member-name:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 1px;
+  height: 43px;
+
+  background: #dfb85e;
+}
+
+
+/* =========================================================
+   SITTING ROW SIZE
+========================================================= */
+
+.sitting-members .member-name {
+  min-height: 47px;
+
+  padding: 0 10px;
+}
+
+
+/* =========================================================
+   DESKTOP LARGE
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .committee-section {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .committee-image-card,
+  .committee-members {
+    width: 82%;
+  }
+
+  .member-name {
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .committee-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .committee-image-card,
+  .committee-members {
+    width: 88%;
+  }
+
+  .member-name {
+    font-size: 12px;
+
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .committee-label {
+    font-size: 12px;
+  }
+
+  .committee-left-right {
+    left: 145px;
+
+    font-size: 10px;
+  }
+
+  .member-line {
+    left: 145px;
+  }
+
+  .member-names {
+    width: calc(100% - 145px);
+
+    margin-left: 145px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .committee-section {
+    min-height: auto;
+
+    padding:
+      35px 20px 50px;
+  }
+
+  .committee-image-card,
+  .committee-members {
+    width: 94%;
+  }
+
+  .committee-image-card {
+    border-radius: 25px;
+  }
+
+  .committee-left-right {
+    left: 125px;
+  }
+
+  .member-line {
+    left: 125px;
+  }
+
+  .member-names {
+    width: calc(100% - 125px);
+
+    margin-left: 125px;
+  }
+
+  .member-name {
+    font-size: 10px;
+
+    padding: 0 5px;
+  }
+
+  .committee-label {
+    left: -8px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .committee-section {
+    min-height: auto;
+    padding: 30px 14px 40px;
+  }
+
+
+  /* HEADER */
+
+  .committee-title span {
+    font-size: 26px;
+  }
+
+  .committee-title strong {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+
+  .committee-title em {
+    font-size: 28px;
+    margin-left: 4px;
+  }
+
+
+  /* IMAGE */
+
+  .committee-image-card {
+    width: 100%;
+    margin-top: 18px;
+    border-width: 1.5px;
+    border-radius: 14px;
+  }
+
+
+  /* MEMBER AREA */
+
+  .committee-members {
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 0;
+    bottom: 0;
+  }
+
+
+  /* LABEL — inline, not absolute */
+
+  .committee-label {
+    position: relative;
+    left: auto;
+    top: auto;
+    height: 36px;
+    font-size: 11px;
+    display: inline-flex;
+    margin-bottom: 6px;
+  }
+
+  .committee-label-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  .people-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .people-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .committee-label>span:last-child {
+    padding: 0 12px 0 5px;
+  }
+
+
+  /* LEFT TO RIGHT */
+
+  .committee-left-right {
+    position: relative;
+    left: auto;
+    top: auto;
+    font-size: 9px;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+
+  /* LINE */
+
+  .member-line {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+
+  /* NAMES */
+
+  .member-names {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 0;
+  }
+
+  /* Standing — 2 columns */
+
+  .standing-members .member-names {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 0;
+  }
+
+  /* Sitting — 2 columns */
+
+  .sitting-members .member-names {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .member-name {
+    min-height: 44px;
+    font-size: 10px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  .member-name:not(:last-child)::after {
+    height: 34px;
+  }
+
+  /* Remove separator from every 2nd column */
+
+  .standing-members .member-name:nth-child(2n)::after,
+  .sitting-members .member-name:nth-child(2n)::after {
+    display: none;
+  }
+
+
+  /* Decorative dots */
+
+  .committee-dots-top {
+    left: 10px;
+    top: 10px;
+    transform: scale(.65);
+  }
+
+  .committee-dots-bottom {
+    right: 10px;
+    bottom: 20px;
+    transform: scale(.65);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .committee-section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .committee-title span {
+    font-size: 28px;
+  }
+
+  .committee-title strong,
+  .committee-title em {
+    font-size: 31px;
+  }
+
+  .committee-image-card {
+    border-radius: 15px;
+  }
+
+  .committee-left-right {
+    font-size: 8px;
+  }
+
+  .member-name {
+    font-size: 9px;
+    min-height: 42px;
+    padding: 4px 6px;
+  }
+}
+
+
+/* =========================================================
+   CEO'S MESSAGE SECTION
+========================================================= */
+
+.ceo-section {
+  position: relative;
+  width: 100%;
+  min-height: 680px;
+  padding: 50px 4% 55px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Background image — covers full section, sits behind everything */
+.ceo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  /* object-position: center center; */
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+/* Ensure all direct children sit above the bg */
+.ceo-photo-wrap,
+.ceo-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   LEFT — PHOTO COLUMN
+========================================================= */
+
+.ceo-photo-wrap {
+  position: relative;
+  flex: 0 0 38%;
+  min-height: 580px;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Large light-grey oval centred in the column */
+.ceo-oval {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  height: 88%;
+  background: #e5e9f2;
+  border-radius: 50% 50% 0 0 / 45% 45% 0 0;
+  z-index: 0;
+}
+
+/* Gold curved arc that wraps the bottom-left of the oval */
+.ceo-arc {
+  position: absolute;
+  bottom: -30px;
+  left: -20px;
+  width: 65%;
+  height: 55%;
+  border: 3px solid #c8a84b;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* CEO photo sits on top, no clip — natural transparent background */
+.ceo-photo {
+  position: absolute;
+  bottom: 180px;
+  left: -10px;
+  /* transform: translateX(-46%); */
+  /* width: 88%;
+  height: 96%; */
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 2;
+  display: block;
+}
+
+/* Gold arc + navy speech bubble */
+.ceo-bubble-outer {
+  position: absolute;
+  top: 55px;
+  right: 32px;
+  z-index: 5;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold arc SVG — fills the outer container */
+.ceo-arc-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Navy speech bubble — centered inside the arc */
+.ceo-bubble-inner {
+  position: relative;
+  z-index: 2;
+  width: 62px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ceo-bubble-inner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Navy swoosh / shape at bottom-left corner */
+.ceo-swoosh {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  height: 28%;
+  background: #06245f;
+  border-radius: 0 60% 0 0;
+  z-index: 0;
+}
+
+/* Dot grids */
+.ceo-dots {
+  position: absolute;
+  background-image: radial-gradient(circle, #8fa5cc 1.4px, transparent 1.7px);
+  background-size: 12px 12px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.ceo-dots-tl {
+  top: 18px;
+  left: 14px;
+  width: 80px;
+  height: 95px;
+}
+
+.ceo-dots-br {
+  bottom: 10px;
+  right: 10px;
+  width: 80px;
+  height: 65px;
+}
+
+.ceo-dots-sig {
+  position: relative;
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 80px;
+  height: 45px;
+  opacity: 0.4;
+}
+
+
+/* =========================================================
+   RIGHT — CONTENT COLUMN
+========================================================= */
+
+.ceo-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+  padding: 50px 4% 50px 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   TITLE BLOCK
+========================================================= */
+
+.ceo-title-block {
+  margin-bottom: 14px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ceo-our {
+  display: block;
+  font-size: 48px;
+  font-weight: 600;
+  color: #06245f;
+  line-height: 1.2;
+  font-style: normal;
+}
+
+.ceo-title {
+  margin: 0 0 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+  color: #06245f;
+  letter-spacing: -1px;
+}
+
+.ceo-title em {
+  color: #E5A63F;
+  font-style: normal;
+}
+
+/* Divider: line ◆ line */
+.ceo-title-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.ceo-rule-line {
+  /* flex: 1; */
+  width: 30%;
+  height: 2px;
+  background: #06245f;
+  position: relative;
+}
+
+/* Left line: dot on the far left end */
+.ceo-rule-line:first-child::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #06245f;
+}
+
+/* Right line: dot on the far right end */
+.ceo-rule-line:last-child::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #06245f;
+}
+
+.ceo-rule-diamond {
+  color: #06245f;
+  font-size: 40px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   MESSAGE POINTS
+========================================================= */
+
+.ceo-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ceo-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+.ceo-point-icon {
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* Odd icons: blue/lavender circle */
+.ceo-point:nth-child(odd) .ceo-point-icon {
+  background-color: #d6dff0;
+}
+
+/* Even icons: gold/beige circle */
+.ceo-point:nth-child(even) .ceo-point-icon {
+  background-color: #f0dfc0;
+}
+
+.ceo-point-icon svg {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.ceo-point p {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  color: #273653;
+  font-size: 18px;
+  line-height: 1.6;
+  padding-bottom: 10px;
+  border-bottom: 1.5px dashed #b0bdd4;
+  width: 100%;
+}
+
+.ceo-point:last-child p {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.ceo-signature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* margin-top: 20px; */
+  position: relative;
+}
+
+.ceo-sig-quotes {
+  font-family: Georgia, serif;
+  font-size: 54px;
+  line-height: 0.8;
+  color: #c5d3e8;
+  letter-spacing: -10px;
+  flex-shrink: 0;
+  align-self: flex-end;
+  padding-bottom: 50px;
+}
+
+.ceo-sig-bar {
+  width: 4px;
+  height: 50px;
+  background: #E5A93C;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.ceo-sig-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #06245f;
+  line-height: 1.3;
+}
+
+.ceo-sig-role {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+}
+
+
+/* =========================================================
+   LAPTOP ≤1200
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .ceo-photo-wrap {
+    flex: 0 0 36%;
+    min-height: 540px;
+  }
+
+  .ceo-point p {
+    font-size: 12.5px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET ≤900
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ceo-section {
+    padding-right: 3%;
+    min-height: auto;
+  }
+
+  .ceo-photo-wrap {
+    flex: 0 0 34%;
+    min-height: 480px;
+  }
+
+  .ceo-bubble-outer {
+    width: 74px;
+    height: 74px;
+    top: 45px;
+    right: 22px;
+  }
+
+  .ceo-bubble-inner {
+    width: 50px;
+    height: 46px;
+  }
+
+  .ceo-point p {
+    font-size: 12px;
+  }
+
+  .ceo-content {
+    padding: 35px 3% 35px 2%;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE ≤767
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .ceo-section {
+    flex-direction: column;
+    padding: 0 0 40px;
+    min-height: auto;
+  }
+
+  .ceo-photo-wrap {
+    flex: none;
+    width: 100%;
+    min-height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .ceo-photo {
+    position: relative;
+    width: 65%;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    object-fit: contain;
+    object-position: bottom center;
+    display: block;
+  }
+
+  .ceo-oval {
+    width: 80%;
+    height: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .ceo-bubble-outer {
+    top: 30px;
+    right: 10%;
+    width: 70px;
+    height: 70px;
+  }
+
+  .ceo-bubble-inner {
+    width: 48px;
+    height: 44px;
+  }
+
+  .ceo-content {
+    padding: 20px 18px 10px;
+  }
+
+  .ceo-our {
+    font-size: 15px;
+  }
+
+  .ceo-title {
+    font-size: 32px;
+  }
+
+  .ceo-point p {
+    font-size: 12px;
+  }
+
+  .ceo-signature {
+    left: 70px;
+    bottom: 10px;
+  }
+
+  .ceo-sig-quotes {
+    font-size: 34px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE ≤480
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .ceo-photo-wrap {
+    min-height: 300px;
+  }
+
+  .ceo-photo {
+    width: 72%;
+  }
+
+  .ceo-title {
+    font-size: 28px;
+  }
+
+  .ceo-point {
+    gap: 10px;
+  }
+
+  .ceo-point-icon {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .ceo-point-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ceo-point p {
+    font-size: 11.5px;
+  }
+
+  .ceo-sig-name {
+    font-size: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   OUR PROMISE SECTION
+   bg image: 1493 × 1053 px  →  ratio = 70.53%
+========================================================= */
+
+.promise-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BACKGROUND — in-flow to drive section height
+========================================================= */
+
+.promise-section picture {
+  display: block;
+  width: 100%;
+}
+
+.promise-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* =========================================================
+   LEFT CONTENT — overlaid on left half (desktop)
+========================================================= */
+
+.promise-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 52%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 30px 40px 6%;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TITLE BLOCK
+========================================================= */
+
+.promise-title-block {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  /* everything centered under the icon */
+  margin-bottom: 3.5%;
+}
+
+/* icon + heading stacked, both centered */
+.promise-title-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heart logo — large, centered above the text */
+.promise-icon {
+  display: block;
+  width: clamp(215px, 11vw, 195px);
+  height: auto;
+}
+
+/* "Our  Promise" heading */
+.promise-title {
+  margin: 0;
+  line-height: 1.05;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.promise-our {
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 900;
+  color: #073d91;
+  font-style: normal;
+  font-family: Arial, sans-serif;
+}
+
+.promise-word {
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 900;
+  color: #F0A100;
+  font-family: Arial, sans-serif;
+}
+
+/* Rule: ───────── ◆ ───────── spans full title width */
+.promise-rule {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  /* margin-top: 8px; */
+  width: 50%;
+}
+
+.promise-rule-line {
+  flex: 1;
+  height: 1.5px;
+  background: #9daabf;
+  position: relative;
+}
+
+
+
+.promise-rule-diamond {
+  color: #F0A100;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   PROMISE POINTS
+========================================================= */
+
+/* Outer wrapper — positions the vertical line relative to icons */
+.promise-points-wrap {
+  position: relative;
+}
+
+/* Single vertical line that runs through the center of all icons */
+.promise-vertical-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* center it on the icon circles: half of icon width */
+  left: calc(clamp(44px, 5vw, 62px) / 2);
+  transform: translateX(-50%);
+  width: 1.5px;
+  background: #b8c8dc;
+  z-index: 0;
+}
+
+.promise-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 28px);
+  position: relative;
+}
+
+.promise-point {
+  display: flex;
+  align-items: center;
+  /* vertically center icon with text */
+  gap: 14px;
+}
+
+/* Light-blue circle icon — sits ON TOP of the vertical line */
+.promise-point-icon {
+  width: clamp(44px, 5vw, 62px);
+  height: clamp(44px, 5vw, 62px);
+  border-radius: 50%;
+  background: #d8e6f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  /* above the vertical line */
+}
+
+.promise-point-icon img,
+.promise-point-icon svg {
+  width: 62%;
+  height: 62%;
+  display: block;
+}
+
+/* ── Text column: gold bullet + paragraph ── */
+.promise-point-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+/* Gold bullet dot */
+.promise-point-bullet {
+  display: block;
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d9a329;
+  flex-shrink: 0;
+}
+
+.promise-point-body p {
+  margin: 0;
+  color: #273653;
+  font-size: clamp(13px, 1.3vw, 17px);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   GOLD DIVIDER  ─── ♡ ───
+========================================================= */
+
+.promise-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: clamp(8px, 2%, 20px) 0;
+}
+
+.promise-divider-line {
+  width: 50%;
+  flex: none;
+  height: 1px;
+  background: #d9a329;
+}
+
+.promise-divider-heart {
+  color: #d9a329;
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   FOOTER TAGLINE
+========================================================= */
+
+.promise-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.promise-footer-bar {
+  width: 4px;
+  height: clamp(32px, 3.5vw, 46px);
+  background: #073d91;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.promise-footer p {
+  margin: 0;
+  color: #073d91;
+  font-size: clamp(9.5px, 2vw, 18px);
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+/* =========================================================
+   TABLET ≤1000
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .promise-section {
+    min-height: 420px;
+  }
+
+  .promise-section picture {
+    min-height: 420px;
+  }
+
+  .promise-bg {
+    min-height: 420px;
+    object-fit: cover;
+    object-position: right center;
+  }
+
+  .promise-content {
+    width: 55%;
+    padding: 24px 16px 24px 4%;
+  }
+
+  .promise-our,
+  .promise-word {
+    font-size: clamp(22px, 3vw, 36px);
+  }
+
+  .promise-icon {
+    width: clamp(140px, 12vw, 180px);
+  }
+
+  .promise-point-body p {
+    font-size: clamp(11px, 1.4vw, 15px);
+  }
+}
+
+/* =========================================================
+   TABLET ≤767 starts below — keep this gap
+========================================================= */
+
+/* =========================================================
+   MOBILE ≤767 — text on top, image below
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .promise-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .promise-section picture {
+    order: 2;
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+  }
+
+  .promise-bg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .promise-content {
+    position: relative;
+    width: 100%;
+    min-height: unset;
+    padding: 30px 20px 36px;
+    order: 1;
+  }
+
+  .promise-our,
+  .promise-word {
+    font-size: 28px;
+  }
+
+  .promise-point-body p {
+    font-size: 14px;
+  }
+
+  .promise-footer p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE ≤480
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .promise-section picture {
+    height: auto;
+  }
+
+  .promise-bg {
+    height: 100%;
+  }
+
+  .promise-content {
+    padding: 24px 16px 28px;
+  }
+
+  .promise-our,
+  .promise-word {
+    font-size: 24px;
+  }
+
+  .promise-point-body p {
+    font-size: 12px;
+  }
+
+  .promise-footer p {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   APPOINTMENT MODAL
+   ========================================================= */
+
+.qa-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.qa-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(6, 11, 34, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.qa-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(680px, 92vh);
+  overflow-y: auto;
+  border-radius: 22px;
+}
+
+@media (max-width: 599.98px) {
+  .qa-modal {
+    padding: 12px;
+  }
+}
