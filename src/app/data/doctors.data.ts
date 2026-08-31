@@ -25,6 +25,8 @@ export interface Doctor {
   name: string;
   /** Real 1:1 headshot in public/Images/new-doctor-image - sq variant used where available. */
   img: string;
+  imgDetail?: string;
+  // img-detail: string;
   alt: string;
   /** Consultant designation shown under the name, e.g. "Sr. Consultant Bariatric Surgeon". */
   title: string;
@@ -453,6 +455,7 @@ export const DOCTORS: Doctor[] = [
     id: 'dr-mutharaju-k-r',
     name: 'Dr. Mutharaju K. R',
     img: IMG + 'dr-mutharaju-k-r-sq.png',
+    imgDetail: IMG + 'dr-mutharaju-k-r-sq.png',
     alt: 'Dr. Mutharaju K R | Bariatric Surgeon | Vasavi Hospitals Bangalore',
     title: 'Sr. Consultant Bariatric Surgeon',
     department: 'Bariatric Surgery',

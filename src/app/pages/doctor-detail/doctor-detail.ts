@@ -44,7 +44,7 @@ export class DoctorDetailPage {
    * inlined) so a future per-doctor photo can be reintroduced later without
    * re-touching the template's conditional logic.
    */
-  protected readonly heroImg = computed(() => '/Images/new-doctor-image/new-doc-images/dr-male-vector.png');
+  protected readonly heroImg = computed(() => '/Images/new-doctor-image/new-doc-images/dr-mutharaj.png');
   protected readonly hasFramedPhoto = computed(() => true);
 
   /**
