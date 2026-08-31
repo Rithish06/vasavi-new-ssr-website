@@ -8,7 +8,7 @@
        rule below reads this instead of a literal font list, so the whole
        page is guaranteed to render in one uniform typeface family with no
        chance of drifting per-section. */
-    --page-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --page-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,;
 
     display: block;
     font-family: var(--page-font);
@@ -157,7 +157,7 @@
     font-size: 21px;
     font-style: normal;
     font-weight: 400;
-    line-height: 26px;
+    line-height: 30px;
 }
 
 .socials {
@@ -185,19 +185,19 @@
 }
 
 .appointment-btn {
-    width: 386px;
-    height: 52px;
+    width: 262px;
+    height: 48px;
     padding: 0 24px;
     border-radius: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
     text-decoration: none;
     color: white;
     background: #1236B8;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     border: none;
 }
 
@@ -302,7 +302,7 @@
 }
 
 .round-icon svg {
-    width: 55px;
+    width: 28px;
     height: 55px;
 }
 
@@ -607,10 +607,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #edf0f6;
+    border: 1px solid #edf0f6;
 }
 
-.quick-item {
+.quick-item a {
     display: flex;
     align-items: center;
     gap: 22px;
@@ -670,10 +670,10 @@
 .stats {
     display: flex;
     /* width: 1316px; */
-    padding: 17px 115px 18px 116px;
+    padding: 17px 15px 18px 15px;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 77px;
     border-radius: 20px;
     background: #00198D;
 }
@@ -776,6 +776,10 @@
     z-index: 5;
     color: #fff;
     border: 1.5px solid rgb(0, 153, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 11px;
 }
 
 .badge-title {
@@ -798,6 +802,25 @@
     width: 50px;
     height: 2px;
     background: #fff;
+}
+
+.serving-badge-line i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #139de9;
+}
+
+.heading-line span {
+    display: block;
+    width: 67px;
+    height: 4px;
+    background: #139de9;
+    border-radius: 2px;
+}
+
+.arrow {
+    font-size: 20px;
 }
 
 .badge-dot {
@@ -833,7 +856,7 @@
     font-weight: 600;
     line-height: 28px;
     /* 155.556% */
-    width: 614px;
+    width: 640px;
 }
 
 .eyebrow {
@@ -846,11 +869,23 @@
     letter-spacing: 3.6px;
 }
 
-.heading-line {
+.heading-line, .doctor-line {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 20px 0px 10px 0px;
+}
+
+.small-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.department-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .heading-line span {
@@ -858,13 +893,52 @@
     width: 67px;
     height: 4px;
     background: #139de9;
+    border-radius: 2px;
+}
+
+.doctor-line span {
+        display: block;
+    width: 30px;
+    height: 2px;
+    background: #139de9;
+    border-radius: 2px;
+}
+
+.small-line  span{
+    display: block;
+    width: 67px;
+    height: 1.5px;
+    background: #064fe2;
+    border-radius: 2px;
+}
+
+.department-line span {
+    display: block;
+    width: 67px;
+    height: 4px;
+    background: #139de9;
+    border-radius: 2px;
 }
 
 .heading-line i {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #102d9b;
+    background: #139de9;
+}
+
+.small-line i {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #064fe2;
+}
+
+.department-line i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #139de9;
 }
 
 .about-content-head span {
@@ -903,7 +977,7 @@
 }
 
 .story-button {
-    display: inline-flex;
+    display: flex;
     padding: 16px 20px;
     justify-content: center;
     align-items: center;
@@ -913,12 +987,6 @@
     border: none;
     width: 248px;
     height: 56px;
-}
-
-.story-button .arrow {
-    width: 24px;
-    height: 24px;
-    aspect-ratio: 1/1;
 }
 
 .story-button span {
@@ -957,6 +1025,7 @@
     border-radius: 90px;
     border: 2px solid #35498A;
     background: #FDFDFD;
+    height: 64px;
 }
 
 .number-circle span {
@@ -998,6 +1067,12 @@
     aspect-ratio: 1/1;
 }
 
+.legacy-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .legacy-text h3 {
     color: #0751ad;
     font-size: 18px;
@@ -1018,14 +1093,14 @@
 
 
 .timeline {
-    min-height: 112px;
-    padding: 14px 28px;
+    height: 112px;
+    padding: 14px 16px;
     border-radius: 22px;
     background: #f7faff;
     display: grid;
-    grid-template-columns: 1fr 1.25fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
 }
 
 .timeline-year {
@@ -1143,13 +1218,13 @@
 }
 
 .small-label {
-    color: #02188D;
-    font-family: var(--page-font);
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 3.6px;
+color: #02188D;
+font-family: Montserrat;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 4px;
 }
 
 .heading-rule {
@@ -1171,37 +1246,38 @@
     background: #1437a1;
 }
 
-.section-heading h2 {
+.department-head {
     color: #041346;
     font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 649;
     line-height: normal;
+    width: 43%;
 }
 
 .our-doctors {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     background-image: url('/Images/Home-new/doctor-section-bg-image.png');
     background-repeat: no-repeat;
     background-size: cover;
     padding: 50px 0px;
 }
 
-.section-heading h2 span {
+.department-head span {
     color: #1B8FCD;
     font-family: var(--page-font);
     font-size: 42px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 649;
     line-height: normal;
 }
 
 .doctor-title-head span {
     color: #1B8FCD;
-    font-family: var(--page-font);
+    font-family: Montserrat;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -1215,6 +1291,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 28px;
+    width: 43%;
     /* 155.556% */
 }
 
@@ -1327,7 +1404,7 @@
 
 .department-card {
     position: relative;
-    width: 200px;
+    width: 230px;
     height: 228px;
     padding: 10px 11px 12px;
     border: 1px solid #e0e8f4;
@@ -1384,7 +1461,7 @@
 .department-help {
     height: 100px;
     padding: 8px 45px;
-    gap: 185px;
+    gap: 120px;
     border-radius: 10px;
     background: rgba(255, 255, 255, .92);
     display: flex;
@@ -1392,8 +1469,13 @@
     box-shadow: 0 5px 20px rgba(35, 77, 145, .07);
 }
 
-.help-part,
-.call-part {
+.help-part {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.call-part a {
     display: flex;
     align-items: center;
     gap: 11px;
@@ -1402,14 +1484,17 @@
 
 .call-part {
     flex: .85;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    justify-content: center;
 }
 
 .help-icon,
 .call-icon {
-    width: 50px;
+    width: 57px;
     height: 59px;
     border-radius: 50%;
-    flex: 0 0 62px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1459,13 +1544,13 @@
 }
 
 .small-appointment {
-    width: 180px;
-    height: 30px;
-    border: 1px solid #446cff;
+    width: 250px;
+    height: 46px;
+    border: 2px solid #446cff;
     border-radius: 4px;
     color: #1138aa;
     background: white;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     padding: 2px 10px 2px 10px;
 }
@@ -1523,26 +1608,49 @@
     justify-content: center;
     align-items: center;
     gap: 45px;
+    padding: 0px 200px;
 }
 
 .doctor-title-head {
     color: #041346;
-    font-family: var(--page-font);
+    font-family: Montserrat;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    width: 455px;
+
+}
+
+.doctor-head-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: column;
+    /* padding: 20px 0px 10px 0px; */
+}
+
+.doctor-head-line span {
+    display: block;
+    width: 1px;
+    height: 53px;
+    background: #c4c5c6;
+    border-radius: 2px;
+}
+
+.doctor-head-line i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #139de9;
 }
 
 .doctor-description {
-    width: 538px;
-    color: #2C2C2C;
-    font-family: var(--page-font);
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
+    width: 568px;
+color: #2C2C2C;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 28px; /* 155.556% */
     /* 155.556% */
 }
 
@@ -1576,8 +1684,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    gap: 15px;
-    height: 377px;
+    gap: 10px;
+    height: auto;
     width: 275px;
     border-radius: 15px;
 }
@@ -1615,39 +1723,54 @@
 .name p {
     color: #384866;
     font-size: 14px;
-    min-height: 6px;
+    font-weight: 600;
 }
 
-.doctor-line {
-    width: 22px;
-    height: 2px;
-    background: #0a8fe8;
+/* 1. Create the bounding container */
+.line-container {
+    position: relative; 
+    width: 100%;       /* Match the width you want for your lines */
+    height: 4px;       /* Match the thickness of your thickest line */
 }
 
-.doctor-head-line {
-    width: 50px;
-    height: 0;
-    transform: rotate(90deg);
-    fill: #1B8FCD;
-    stroke-width: 2px;
-    stroke: #DBDBDB;
+/* 2. Style the shared line properties */
+.line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 2px;/* Optional: rounds the edges */
+}
+
+/* 3. Style the bottom/background line */
+.base-line {
+    width: 242px;
+height: 1px;       /* Full width */
+    background-color: #e0e0e0; /* Light gray */
+    z-index: 1;        /* Keeps it at the bottom */
+}
+
+/* 4. Style the top/overlapping line */
+.top-line {
+    background: #1B8FCD; /* Bright accent color */
+    width: 30px;
+height: 3px;       /* Forces it to sit on top */
 }
 
 .experience {
     width: 100%;
-    padding: 8px;
-    border-radius: 16px;
+    padding: 14px 20px; 
+    border-radius: 60px;
     background: #f0f6ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 20px;
     color: #163aa3;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .icon {
-    border: 2px solid;
+    border: 1.5px solid;
     border-color: rgb(31, 55, 193);
     border-radius: 5px;
     width: 46px;
@@ -1662,8 +1785,8 @@
 }
 
 .experience svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 24px;
 }
 
 .experience span {
@@ -1687,29 +1810,26 @@
     justify-content: center;
     align-items: center;
     gap: 9px;
-    width: 175px;
-    height: 48px;
+    width: 190px;
+    height: 40px;
     flex: 1;
     border: 0;
-    border-radius: 4px;
-    background: #073dc5;
-    color: white;
-    font-size: 12px;
+border-radius: 6px;
+background: linear-gradient(90deg, #0330C1 0%, #0649EF 100%);
     white-space: nowrap;
     padding: 5px 15px 5px 15px;
+    color: #FFF;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
 
-.doctor-actions a {
-    width: 29px;
-    height: 27px;
-    border: 1px solid #1644db;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1039b1;
-    text-decoration: none;
-    font-size: 14px;
+.calendar svg {
+    width: 16px;
+height: 16px;
+aspect-ratio: 1/1;
 }
 
 .vasavi-extra {
@@ -1731,31 +1851,12 @@
     font-weight: 800;
 }
 
-.small-line {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.small-line span {
-    width: 43px;
-    height: 2px;
-    background: #1266ee;
-}
-
-.small-line i {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #1266ee;
-}
-
 .opinion-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     width: 100%;
     height: auto;
     padding: 42px 58px 28px;
@@ -1805,6 +1906,28 @@
     font-size: 50px;
 }
 
+.head {
+    line-height: 52px;
+}
+
+.heading .blue {
+    color: #3c68d7;
+font-family: Montserrat;
+font-size: 52px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.heading span {
+    color: #041346;
+font-family: Montserrat;
+font-size: 52px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
 .box {
     width: 265px;
     min-height: 69px;
@@ -1851,6 +1974,13 @@
     opacity: .93;
 }
 
+.opinion-section img{
+    display: block;
+    position: relative;
+        top: 185px;
+    right: 475px;
+}
+
 .heart-outline {
     position: absolute;
     left: 28%;
@@ -1878,16 +2008,20 @@
 .surgery-title {
     text-align: center;
     color: #0d3199;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .surgery-title::before,
 .surgery-title::after {
     content: "";
     display: inline-block;
-    width: 50px;
-    height: 1px;
+    width: 79px;
+    height: 1.5px;
     background: #b6d1ff;
     vertical-align: middle;
 }
@@ -1908,11 +2042,31 @@
 
 .surgery-grid li {
     position: relative;
-    padding-left: 18px;
+    padding-left: 28px;
     color: #394766;
     font-size: 14px;
     line-height: 1.25;
-    padding-top: 9px;
+    padding-top: 16px;
+}
+
+/* 3. Insert and position the icon */
+.surgery-grid li::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    
+    /* CHOOSE ONE OF THE OPTIONS BELOW FOR YOUR CONTENT: */
+    content: " "; /* Option A: Use an emoji */
+    /* content: url('check-icon.svg'); */ /* Option B: Use an image file */
+    width: 15px;
+    height: 15px;
+    
+    font-size: 16px; /* Adjust size if using an emoji or font icon */
+    /* Your exact SVG with '#' converted to '%23' for web safety */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z' fill='%231B8FCD'/%3E%3C/svg%3E");
+    
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .surgery-grid .more {
@@ -1934,7 +2088,7 @@
 }
 
 .footer-health,
-.footer-call {
+.footer-call a{
     display: flex;
     gap: 20px;
     flex-direction: row;
@@ -2038,6 +2192,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    font-size: 13px;
 }
 
 .insurance-copy h2 span {
@@ -2070,7 +2225,7 @@
 .insurance-logos {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 13px;
+    gap: 16px;
 }
 
 .insurance-logo {
@@ -2177,7 +2332,14 @@
 .tech-number {
     color: #1466ed;
     font-size: 16px;
-    font-weight: 550;
+    font-weight: 750;
+        background-color: rgb(243, 243, 243);
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
 }
 
 .tech-image img {
@@ -2280,24 +2442,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 5px;
 }
 
 .heading-decoration span,
 .heading-bottom-line span {
     width: 70px;
-    height: 3px;
+    height: 1px;
     background: #075cf0;
     display: block;
+    border-radius: 2px;
 }
 
 .heading-decoration i,
 .heading-bottom-line i {
     display: block;
-    width: 7px;
-    height: 7px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: #075cf0;
+}
+
+.tech-top-line {
+    position: absolute;   
 }
 
 .testimonial-heading h2 {
@@ -2322,7 +2489,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
 }
 
 .heading-bottom-line span {
@@ -2380,14 +2547,6 @@
     line-height: 1.75;
     font-weight: 400;
 }
-
-.small-line {
-    width: 35px;
-    height: 3px;
-    background: #075df4;
-}
-
-
 
 .patient-info {
     display: flex;
@@ -2578,12 +2737,17 @@
 .department-layout {
     display: grid;
     grid-template-columns: 350px 1fr;
-    gap: 175px;
+    gap: 154px;
     width: 100%;
 }
 
+.featured-para {
+    font-size: 16px;
+    width: 62%;
+}
+
 .featured-card {
-    width: 500px;
+    width: 483px;
     height: 450px;
     padding: 40px;
     border-radius: 24px;
@@ -2597,7 +2761,7 @@
 .department-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 10px;
 }
 
 .department-card {
@@ -2655,41 +2819,6 @@
     height: 25px;
 }
 
-.department-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #eef3ff;
-    border-radius: 50%;
-}
-
-.department-icon-wrapper svg {
-    display: block;
-    width: 42px;
-    height: 42px;
-}
-
-.featured-icon-wrapper {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(70, 100, 220, 0.6);
-    border-radius: 50%;
-}
-
-.featured-icon-wrapper svg {
-    display: block;
-    width: 60px;
-    height: 60px;
-}
-
-.department-icon-wrapper svg path {
-    fill: red !important;
-}
 
 .featured-card p {
     width: 276px;
@@ -2781,24 +2910,13 @@
     line-height: 1.6;
 }
 
-.arrow {
-    position: absolute;
-
-    right: 20px;
-    bottom: 20px;
-
-    color: #008cff;
-
-    font-size: 28px;
-}
-
-.featured-card{
+.featured-card {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.featured-head{
+.featured-head {
     font-size: 30px;
     font-weight: 900;
 }
@@ -2823,7 +2941,6 @@
     }
 
     .featured-card {
-        height: 300px;
         padding: 28px;
         width: 100%;
     }
@@ -2841,22 +2958,23 @@
 
 @media(max-width: 1439px) {
 
-    .featured-card{
+    .featured-card {
         width: 100%;
         height: 70vh;
     }
 
-    .featured-head{
+    .featured-head {
         font-size: 52px;
     }
 
-    .featured-para{
+    .featured-para {
+
         font-size: 26px;
         width: 60%;
     }
 
 
-    .department-card{
+    .department-card {
         height: auto;
         width: 100%;
     }
@@ -2866,19 +2984,19 @@
         width: 100%;
     }
 
-    .department-card h3{
+    .department-card h3 {
         font-size: 22px;
     }
 
-    .hero-content{
+    .hero-content {
         padding: 10px 279px 0px 0px;
     }
-    
-    .booking-card{
+
+    .booking-card {
         padding-bottom: 20px;
     }
 
-    .about-content-para{
+    .about-content-para {
         width: 100%;
     }
 
@@ -2888,28 +3006,37 @@
         flex-direction: column;
     }
 
-    .doctor-grid{
+    .doctor-grid {
         flex-wrap: wrap;
         gap: 27px;
     }
 
-    .doctor-photo img{
+    .doctor-photo img {
         width: 100%;
         height: auto;
     }
 
     .doctor-card {
-       width: 35%;
+        width: 35%;
         height: auto;
     }
 
-    .our-doctors{
+    .our-doctors {
         gap: 20px;
     }
 
-    .small-appointment{
-        font-size: 10px;
+    .small-appointment {
+        font-size: 13px;
         width: 141px;
+    }
+
+    .doctor-head-line {
+        flex-direction: row;
+    }
+
+    .doctor-head-line span{
+        height: 1px;
+        width: 60px;
     }
 
     .find-btn span {
@@ -2928,34 +3055,34 @@
         padding-right: 187px;
     }
 
-    .surgery-list{
+    .surgery-list {
         width: 100%;
     }
 
-    .opinion-footer{
-            padding: 17px 35px;
-            width: 100%;
+    .opinion-footer {
+        padding: 17px 35px;
+        width: 100%;
     }
 
-    .content p{
+    .content p {
         font-size: 20px;
     }
 
-    .surgery-grid li{
-        padding-left: 0px;
+    .surgery-grid li {
+        padding-left: 25px;
         font-size: 16px;
     }
 
-    .box span{
+    .box span {
         font-size: 16px;
     }
 
     .footer-health span,
-    .footer-call span{
+    .footer-call span {
         font-size: 16px;
     }
 
-    .head{
+    .head {
         line-height: 55px;
     }
 
@@ -2964,33 +3091,37 @@
         flex-direction: column;
     }
 
-    .doctor-title-head{
+    .doctor-title-head {
         width: 100%;
         text-align: center;
     }
 
-    .doctor-description{
-        width: 60%;
+    .doctor-description {
+        width: 100%;
         text-align: center;
         font-size: 22px;
     }
 
-    .view-doctors{
+    .view-doctors {
         width: 180px;
         font-size: 16px;
         height: 35px;
     }
 
-    .our-departments{
+    .opinion-section img{
+        display: none;
+    }
+
+    .our-departments {
         padding: 30px;
     }
 
-    .insurance-logos{
+    .insurance-logos {
         grid-template-columns: repeat(4, 1fr);
     }
 
     .small-label,
-    .section-heading-para{
+    .section-heading-para {
         font-size: 22px;
     }
 
@@ -3051,7 +3182,7 @@
         font-size: 20px;
     }
 
-    .name p{
+    .name p {
         font-size: 16px;
     }
 
@@ -3067,7 +3198,7 @@
     }
 
     .doctor-actions button {
-         font-size: 12px;
+        font-size: 12px;
         width: 198px;
         height: 43px;
     }
@@ -3077,11 +3208,11 @@
         font-size: 18px;
     }
 
-    .insurance-copy h2{
+    .insurance-copy h2 {
         font-size: 42px;
     }
 
-    .insurance-eyebrow{
+    .insurance-eyebrow {
         font-size: 16px;
     }
 
@@ -3096,20 +3227,20 @@
         padding: 0px 20px;
     }
 
-    .quick-row{
+    .quick-row {
         padding: 13px 15px;
     }
 
-    .stats{
-            padding: 30px;
-            gap: 17px;
+    .stats {
+        padding: 30px;
+        gap: 17px;
     }
 
-    .booking-item{
+    .booking-item {
         gap: 10px;
     }
 
-    .booking-row{
+    .booking-row {
         gap: 5px;
     }
 
@@ -3122,7 +3253,6 @@
         border-radius: 30px;
     }
 
-
     .number-circle span {
         font-size: 20px;
     }
@@ -3134,19 +3264,26 @@
 
     .legacy-icon {
         height: 48px;
-        flex: 0 0 48px;
+    }
+
+    .department-head {
+        width: 60%;
+    }
+
+    .section-heading-para{
+        width: 60%;
     }
 }
 
 @media(max-width: 1023px) {
 
-    .learn-more{
+    .learn-more {
         font-size: 20px;
     }
 
-    .serving-badge{
+    .serving-badge {
         left: 550px;
-        top: 498px;
+        top: 525px;
     }
 
     .department-layout {
@@ -3154,16 +3291,25 @@
         gap: 25px;
     }
 
+    .about-content-para {
+        font-size: 16px;
+    }
+
+    .number-circle{
+        height: 48px;
+    width: 48px;
+    }
+
     .department-card {
         width: 100%;
         height: auto;
     }
 
-    .featured-card{
+    .featured-card {
         width: 100%;
     }
 
-    .featured-para{
+    .featured-para {
         font-size: 20px;
     }
 
@@ -3171,14 +3317,14 @@
         background-size: 90% 83%;
     }
 
-    .department-card p{
+    .department-card p {
         font-size: 16px;
     }
 
-    .department-card h3{
+    .department-card h3 {
         font-size: 20px;
     }
-    
+
 
     .insurance-section {
         gap: 20px;
@@ -3186,7 +3332,7 @@
         flex-direction: column;
     }
 
-    .department-icon-wrapper{
+    .department-icon-wrapper {
         width: 63px;
         height: 63px;
     }
@@ -3196,7 +3342,7 @@
     }
 
     .insurance-para {
-        width: 57%;
+        width: 65%;
         text-align: center;
     }
 
@@ -3212,14 +3358,14 @@
         width: 100%;
     }
 
-    .featured-icon-wrapper{
-            width: 64px;
-    height: 59px;
+    .featured-icon-wrapper {
+        width: 64px;
+        height: 59px;
     }
 
-    .featured-icon-wrapper svg{
-            width: 57px;
-    height: 37px;
+    .featured-icon-wrapper svg {
+        width: 57px;
+        height: 37px;
     }
 
     .opinion-footer {
@@ -3236,11 +3382,11 @@
         gap: 5px;
     }
 
-    .head{
+    .head {
         line-height: 47px;
     }
 
-    .heading{
+    .heading {
         font-size: 40px;
     }
 
@@ -3248,7 +3394,7 @@
         font-size: 16px;
     }
 
-    .surgery-list{
+    .surgery-list {
         padding: 10px;
     }
 
@@ -3256,16 +3402,16 @@
         padding: 0px 0px 0px 18px;
     }
 
-    .surgery-grid li{
-        padding-left: 0px;
-        font-size: 12px;
+    .surgery-grid li {
+        padding-left: 21px;
+        font-size: 11px;
     }
 
     .doctor-grid {
         flex-wrap: wrap;
     }
 
-    .footer-health span{
+    .footer-health span {
         font-size: 14px;
     }
 
@@ -3273,6 +3419,20 @@
         gap: 15px;
         width: 100%;
         flex-direction: column;
+        padding: 0px;
+    }
+
+    .doctor-head-line {
+        flex-direction: row;
+    }
+
+    .doctor-head-line span {
+        height: 1px;
+        width: 80px;
+    }
+
+    .opinion-section img {
+        display: none;
     }
 
     .doctor-description {
@@ -3284,11 +3444,12 @@
         text-align: center;
     }
 
-    .doctor-title-head{
+    .doctor-title-head {
         font-size: 34px;
         width: 100%;
         text-align: center;
     }
+
     .doctor-title-head span {
         font-size: 34px;
     }
@@ -3301,11 +3462,11 @@
         height: auto;
     }
 
-    .our-doctors{
+    .our-doctors {
         padding: 20px 0px;
     }
 
-    .doctor-card{
+    .doctor-card {
         width: 42%;
         height: auto;
     }
@@ -3318,7 +3479,18 @@
     .department-help {
         height: auto;
         padding: 12px 15px;
-        gap: 18px;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .small-appointment{
+        font-size: 16px;
+        width: 227px;
+        height: 1px;
+    }
+    .help-separator{
+        width: 140px;
+        height: 1px;
     }
 
     .department-grid {
@@ -3326,8 +3498,21 @@
     }
 
     .legacy-icon {
-        height: 40px;
-        flex: 0 0 40px;
+        height: 45px;
+        width: 45px
+    }
+
+    .section-heading-para{
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .department-head{
+        width: 90%;
+    }
+
+    .featured-head {
+        font-size: 38px;
     }
 
     .legacy-card {
@@ -3364,12 +3549,12 @@
         padding: 10px 168px 0px 0px;
     }
 
-    .hero-content h1{
+    .hero-content h1 {
         font-size: 50px;
         line-height: 55px;
     }
 
-    .hero-content p{
+    .hero-content p {
         font-size: 18px;
     }
 
@@ -3384,7 +3569,6 @@
 
     .stat-icon {
         height: 55px;
-        flex: 0 0 56px;
     }
 
     .stat-icon svg {
@@ -3392,7 +3576,8 @@
         height: 25px;
     }
 
-    .stat, .stats {
+    .stat,
+    .stats {
         gap: 10px;
     }
 
@@ -3440,7 +3625,7 @@
         padding: 0px 10px;
     }
 
-    .find-btn span{
+    .find-btn span {
         font-size: 10px;
     }
 
@@ -3449,11 +3634,11 @@
         height: 20px;
     }
 
-    .insurance-copy{
+    .insurance-copy {
         align-items: center;
     }
 
-    .insurance-copy h2{
+    .insurance-copy h2 {
         text-align: center;
     }
 
@@ -3465,9 +3650,10 @@
         gap: 5px;
     }
 
-    .booking-text strong{
+    .booking-text strong {
         font-size: 14px;
     }
+
     .booking-text span {
         font-size: 12px;
     }
@@ -3475,34 +3661,40 @@
 
 @media(max-width: 767px) {
 
-    .technology-heading h2{
-        font-size: 28px;
+    .name p {
+        font-size: 14px;
     }
 
-    .featured-card p{
+    .technology-heading h2 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .featured-card p {
         width: 100%;
         font-size: 12px;
     }
+
     .hero-content {
         width: 100%;
         padding: 20px;
     }
 
-    .separator
- {
+    .separator {
         width: 70px;
         height: 2px;
     }
 
     .quick-divider,
-        .stat-divider{
-                width: 70px;
+    .stat-divider {
+        width: 70px;
         height: 2px;
         align-self: center;
     }
 
     .hero-content h1 {
         font-size: 32px;
+        line-height: 37px;
     }
 
     .hero-content p {
@@ -3510,7 +3702,8 @@
     }
 
     .insurance-logos {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        font-size: 14px;
     }
 
     .insurance-section {
@@ -3524,9 +3717,31 @@
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .doctor-title,
+    .doctor-title {
+        flex-direction: column;
+        gap: 0px;
+        padding: 0px;
+    }
+
+    .section-heading-para {
+        font-size: 14px;
+        line-height: 22px;
+        width: 100%;
+    }
+
     .doctor-grid {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    
+    .number-circle {
+        height: 45px;
+        width: 45px;
+    }
+
+    .number-circle span{
+        font-size: 16px;
     }
 
     .department-help {
@@ -3536,7 +3751,24 @@
         padding: 15px;
     }
 
-    .department-grid,
+    .department-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7px;
+    }
+
+    .department-card h3 {
+        font-size: 16px;
+    }
+
+    .department-card p {
+        font-size: 14px;
+    }
+
+    .department-icon-wrapper svg {
+        width: 50px;
+        height: 34px;
+    }
+
     .testimonial-cards {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -3551,11 +3783,21 @@
         height: auto;
     }
 
+    .booking-bar-error {
+        margin: 4px 28px 20px;
+        text-align: center;
+    }
+
+    .find-btn span {
+        font-size: 14px;
+    }
+
     .quick-row {
         flex-direction: column;
         height: auto;
         gap: 10px;
         align-items: flex-start;
+        margin: 0px 10px
     }
 
     .stats {
@@ -3563,6 +3805,38 @@
         height: auto;
         gap: 15px;
         align-items: flex-start;
+        margin: 10px 20px;
+        padding: 19px 78px;
+    }
+
+    .stats strong {
+        font-size: 18px;
+    }
+
+    .stat-text span {
+        font-size: 14px;
+    }
+
+    .featured-card{
+        height: 40vh;
+    }
+
+    .featured-icon-wrapper svg{
+        width: 24px;
+        height: 34px;
+    }
+
+    .feature-btn {
+            width: 119px;
+    height: 25px;
+    font-size: 12px;
+    padding: 2px;
+    }
+
+    .small-appointment{
+                font-size: 14px;
+        width: 206px;
+        height: 40px;
     }
 
     .about-image-wrap img {
@@ -3591,6 +3865,7 @@
     .department-card {
         width: 100%;
         height: 220px;
+        padding: 20px;
     }
 
     .legacy-divider {
@@ -3611,51 +3886,60 @@
         gap: 16px;
     }
 
-    .hero{
+    .hero {
         gap: 0px;
-                background-size: 90% 34%;
+        background-size: 90% 34%;
     }
 
-    .featured-head{
-        font-size: 30px;
+    .featured-head {
+        font-size: 26px;
     }
 
-    .featured-para{
-        font-size: 16px;
-    }
-
-    .technology-grid {
-        grid-template-columns: repeat(1, 1fr);
-
-    }
-
-    .tech-para{
+    .featured-para {
         font-size: 14px;
     }
 
-    .tech-card h3{
+    .technology-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .tech-para {
+        font-size: 14px;
+    }
+
+    .tech-card h3 {
         font-size: 12px;
     }
 
-    .eyebrow{
+    .eyebrow {
         font-size: 12px;
     }
 
-    .about-content-head span{
-        font-size: 30px;
+    .about-content-head span {
+        font-size: 32px;
     }
 
-    .about-content-head .highlight{
-        font-size: 30px;
+    .about-content-head .highlight {
+        font-size: 32px;
     }
 
-    .about-content-para{
+    .department-head {
+        font-size: 32px;
+        width: 100%;
+    }
+
+    .department-head span{
+        font-size: 32px;
+    }
+
+    .about-content-para {
         font-size: 14px;
         line-height: 23px;
         width: 275px;
     }
 
-    .heading-line{
+    .heading-line {
         padding: 5px 0px 2px 0px;
     }
 
@@ -3664,88 +3948,128 @@
     }
 
     .section-heading h2,
-    .section-heading h2 span{
+    .section-heading h2 span {
         font-size: 32px;
     }
 
-    .our-departments{
-        padding: 25px 20px ;
+    .our-departments {
+        padding: 25px 20px;
     }
 
-    .department-layout{
+    .department-layout {
         gap: 10px;
     }
 
-    .featured-icon-wrapper{
-        width: 68px;
-        height: 68px;
+    .featured-icon-wrapper {
+width: 38px;
+        height: 35px;
     }
 
-    .insurance-copy h2{
+    .learn-more {
+        font-size: 12px;
+        margin-top: 0px;
+    }
+
+    .insurance-copy h2 {
         font-size: 30px;
     }
 
-    .insurance-para{
+    .insurance-para {
         font-size: 14px;
-        width: 100%;
+        width: 95%;
     }
 
-    .insurance-copy{
+    .insurance-copy {
         gap: 10px;
     }
 
-    .doctor-title-head,
-    .doctor-title-head span{
+    .doctor-title-head {
+        font-size: 28px;
+        width: 75%;
+    }
+
+    .doctor-head-line {flex-direction: row;
+    padding-top: 10px;}
+
+    .doctor-title-head span {
         font-size: 28px;
     }
 
-    .our-doctors{
+    .doctor-head-line span{
+        width: 68px;
+    height: 1px;
+    }
+
+    .our-doctors {
         padding: 20px 0px;
     }
 
-    .doctor-card{
-                width: 262px;
-        height: 344px;
+    .doctor-card {
+        width: 280px;
+        height: auto;
     }
 
-    .heading{
-        font-size: 24px;
+    .opinion-section img{
+        display: none;
     }
 
-    .name h3{
-        font-size: 18px;
+    .heading span{
+        font-size: 32px;
     }
 
-    .experience{
-        font-size: 14px;
+    .heading .blue{
+        font-size: 32px;
     }
 
-    .surgery-list ul{
-        text-align: center;
-    }
-
-    .footer-health strong,
-    .footer-health span{
+    .content p {
         font-size: 12px;
     }
 
-    .content p{
+    .name h3 {
+        font-size: 18px;
+    }
+
+    .experience {
         font-size: 14px;
     }
 
-    .opinion-section{
+    .surgery-list ul {
+        
+        padding: 0px 0px 0px 110px;
+    }
+
+    .surgery-list li{
+        padding-left: 30px;
+    }
+
+    .footer-health strong,
+    .footer-health span {
+        font-size: 12px;
+    }
+
+    .box strong,
+    .box span{
+        font-size: 14px;
+    }
+
+    .opinion-section {
         padding: 15px;
     }
 
-    .surgery-list{
+    .surgery-title {
+        font-size: 14px;
+        gap: 5px;
+    }
+
+    .surgery-list {
         padding: 10px;
     }
 
-    .opinion-footer{
+    .opinion-footer {
         gap: 10px;
     }
 
-    .footer-divider{
+    .footer-divider {
         height: 2px;
     }
 
@@ -3754,29 +4078,26 @@
         text-align: center;
     }
 
-    .serving-badge{
+    .serving-badge {
         display: none;
     }
 
-    .testimonials-container{
+    .testimonials-container {
         padding: 35px;
     }
-    
-    .doctor-description{
+
+    .doctor-description {
         width: 100%;
         padding: 20px;
     }
 
-    .insurance-copy
-
-     .about-section {
+    .insurance-copy .about-section {
         width: 100%;
         padding: 25px 20px;
         overflow: hidden;
     }
 
-    .insurance-copy h2
-    {
+    .insurance-copy h2 {
         width: 100%;
     }
 
@@ -3799,16 +4120,11 @@
     }
 
     .about-content-para {
-        width: 100%;        /* IMPORTANT */
+        width: 100%;
+        /* IMPORTANT */
         max-width: 100%;
         font-size: 14px;
         line-height: 23px;
-    }
-
-    .story-button {
-        width: 100%;
-        max-width: 280px;
-        height: 50px;
     }
 
 
@@ -3929,7 +4245,7 @@
     }
 
     .round-icon svg {
-        width: 44px;
+        width: 22px;
         height: 44px;
     }
 
