@@ -2,6 +2,7 @@ import { Component, PLATFORM_ID, afterNextRender, inject, signal } from '@angula
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DoctorsIcon } from '../doctors/doctors-icon';
+import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
 
 type CardAccent = 'blue' | 'green' | 'purple';
 
@@ -59,6 +60,7 @@ function generateCaptcha(length = 5): string {
 })
 export class ContactUs {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly leads = inject(LeadService);
 
   protected readonly hospitalPhoneDisplay = HOSPITAL_PHONE_DISPLAY;
   protected readonly hospitalPhoneTel = HOSPITAL_PHONE_TEL;
@@ -123,6 +125,8 @@ export class ContactUs {
   protected readonly captchaInput = signal('');
   protected readonly errors = signal<ContactFormErrors>({});
   protected readonly submitted = signal(false);
+  protected readonly submitting = signal(false);
+  protected readonly submitError = signal('');
 
   /** The CAPTCHA answer, regenerated on demand. Left blank until the
    *  browser is ready (see the constructor) - a value picked during SSR
@@ -178,6 +182,8 @@ export class ContactUs {
   }
 
   protected submit(): void {
+    if (this.submitting()) return;
+
     const name = this.fullName().trim();
     const phone = this.phone().trim();
     const email = this.email().trim();
@@ -203,11 +209,20 @@ export class ContactUs {
       return;
     }
 
-    // NOTE: there's no contact-form backend wired up yet - this only
-    // simulates a submission locally. Once an endpoint exists, POST
-    // { name, phone, email, service, message } here before showing the
-    // confirmation state.
-    this.submitted.set(true);
+    this.submitting.set(true);
+    this.submitError.set('');
+    this.leads.sendContactEnquiry({ name, phone, email, service, message }).subscribe({
+      next: () => {
+        this.submitting.set(false);
+        this.submitted.set(true);
+      },
+      error: () => {
+        this.submitting.set(false);
+        this.submitError.set(LEAD_SUBMIT_ERROR);
+        // The old code is spent either way - a retry needs a fresh one.
+        this.refreshCaptcha();
+      },
+    });
   }
 
   protected sendAnother(): void {
@@ -218,6 +233,7 @@ export class ContactUs {
     this.service.set('');
     this.message.set('');
     this.errors.set({});
+    this.submitError.set('');
     this.refreshCaptcha();
   }
 }

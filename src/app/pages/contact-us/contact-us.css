@@ -570,6 +570,24 @@
   margin-top: 4px;
 }
 
+.contact-submit[disabled] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+/* Whole-submission failure (the network/server), as opposed to the
+   per-field `.contact-field__error` notes - so it reads as a banner
+   above the button rather than as one more field being wrong. */
+.contact-submit-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
 .contact-privacy {
   display: flex;
   align-items: center;
