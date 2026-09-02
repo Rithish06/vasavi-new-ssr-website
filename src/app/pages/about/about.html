@@ -1285,7 +1285,7 @@
     <div class="qa-modal" role="dialog" aria-modal="true" aria-label="Book an Appointment">
       <button type="button" class="qa-modal__backdrop" (click)="closeBookingModal()" aria-label="Close booking form"></button>
       <div class="qa-modal__panel">
-        <app-quick-appointment-booking [showClose]="true" (close)="closeBookingModal()" />
+        <app-quick-appointment-booking sourcePage="About Page" [showClose]="true" (close)="closeBookingModal()" />
       </div>
     </div>
   }

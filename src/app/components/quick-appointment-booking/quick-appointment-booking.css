@@ -226,9 +226,27 @@
    Submit / success
    =================================================================== */
 
+/* Whole-submission failure (the network/server), as opposed to the
+   per-field `.qab-field-error` notes - so it reads as a banner above the
+   button rather than as one more field being wrong. */
+.qab-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
 .qab-cta {
   width: 100%;
   margin-top: 6px;
+}
+
+.qab-cta[disabled] {
+  opacity: 0.65;
+  cursor: progress;
 }
 
 .qab-success {

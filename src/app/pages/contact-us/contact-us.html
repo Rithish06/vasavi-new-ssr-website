@@ -200,9 +200,18 @@
             }
           </div>
 
-          <button type="button" class="btn btn--filled contact-submit" (click)="submit()">
+          @if (submitError()) {
+            <p class="contact-submit-error">{{ submitError() }}</p>
+          }
+
+          <button
+            type="button"
+            class="btn btn--filled contact-submit"
+            (click)="submit()"
+            [disabled]="submitting()"
+          >
             <app-doctors-icon name="send" />
-            Send Message
+            {{ submitting() ? 'Sending…' : 'Send Message' }}
           </button>
 
           <p class="contact-privacy">

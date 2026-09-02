@@ -55,8 +55,17 @@
         }
       </label>
 
-      <button type="button" class="btn btn--filled hcb-cta" (click)="submitBooking()">
-        Submit
+      @if (submitError()) {
+        <p class="hcb-error">{{ submitError() }}</p>
+      }
+
+      <button
+        type="button"
+        class="btn btn--filled hcb-cta"
+        (click)="submitBooking()"
+        [disabled]="submitting()"
+      >
+        {{ submitting() ? 'Sending…' : 'Submit' }}
       </button>
     }
 
