@@ -569,7 +569,7 @@ export class RoboticTkrComponent implements OnInit, AfterViewInit, OnDestroy {
   //     },
   //     {
   //       img: "Images/senior-doctor/Vector.png",
-  //       count: "10,000+",
+  //       count: "15,764+",
   //       department: "Patients Treated Successfully"
   //     },
 
