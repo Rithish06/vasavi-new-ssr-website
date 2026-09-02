@@ -688,7 +688,6 @@
 .stat-icon {
     width: 73px;
     height: 73px;
-    flex: 0 0 73px;
     border: 2px solid #159eea;
     border-radius: 50%;
     color: white;
@@ -2724,13 +2723,6 @@ line-height: normal;
     padding: 50px 20px;
 }
 
-.department-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 16px;
-    max-width: 1500px;
-    margin: auto;
-}
 
 /* Featured card */
 
@@ -2756,12 +2748,6 @@ line-height: normal;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.department-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
 }
 
 .department-card {
@@ -2840,17 +2826,6 @@ line-height: normal;
     font-weight: 600;
 }
 
-
-/* Department cards */
-
-.department-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 16px;
-}
-
 .department-card {
     position: relative;
 
@@ -2921,20 +2896,6 @@ line-height: normal;
     font-weight: 900;
 }
 
-
-/* Responsive */
-
-@media (max-width: 1100px) {
-    .department-layout {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .department-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 600px) {
     .department-grid {
         grid-template-columns: 1fr;
@@ -2951,10 +2912,54 @@ line-height: normal;
     }
 }
 
+@media(max-width: 2559px) {
+    .insurance-logos {
+        gap: 36px;
+        grid-template-columns: repeat(4, 1fr);
+    }
 
+    .featured-card {
+            width: 452px;
+    height: 405px;
+    }
 
+    .department-layout {
+        gap: 120px;
+        align-items: center;
+    }
 
+    .department-card {
+        width: 300px;
+    }
 
+    .our-departments {
+        padding: 50px 25px;
+    }
+
+    .doctor-title {
+        padding: 0px 145px;
+    }
+
+    .department-help {
+        gap: 100px;
+    }
+
+    .department-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about-content-p {
+        width: 50%;
+    }
+
+    .serving-badge {
+        left: 44px;
+    }
+
+    .stats {
+            padding: 17px 38px 18px 38px;
+    }
+}
 
 @media(max-width: 1439px) {
 
@@ -3277,6 +3282,10 @@ line-height: normal;
 
 @media(max-width: 1023px) {
 
+    .tech-card h3{
+        font-size: 14px;
+    }
+
     .learn-more {
         font-size: 20px;
     }
@@ -3287,7 +3296,7 @@ line-height: normal;
     }
 
     .department-layout {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: revert;
         gap: 25px;
     }
 
@@ -3478,7 +3487,7 @@ line-height: normal;
 
     .department-help {
         height: auto;
-        padding: 12px 15px;
+        padding: 17px 15px;
         gap: 10px;
         flex-direction: column;
     }
@@ -3486,7 +3495,7 @@ line-height: normal;
     .small-appointment{
         font-size: 16px;
         width: 227px;
-        height: 1px;
+        height: 42px;
     }
     .help-separator{
         width: 140px;
@@ -3569,6 +3578,7 @@ line-height: normal;
 
     .stat-icon {
         height: 55px;
+        width: 55px;
     }
 
     .stat-icon svg {
@@ -3596,7 +3606,11 @@ line-height: normal;
     }
 
     .stats strong {
-        font-size: 26px;
+        font-size: 20px;
+    }
+
+    .stat-text span{
+        font-size: 12px;
     }
 
     .quick-icon svg {
@@ -3614,9 +3628,13 @@ line-height: normal;
         gap: 4px;
     }
 
+    .quick-item a{
+        gap: 7px;
+    }
+
     .quick-item strong,
     .quick-item span {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .find-btn {
@@ -3644,6 +3662,7 @@ line-height: normal;
 
     .round-icon {
         height: 40px;
+        width: 42px;
     }
 
     .booking-item {
@@ -4197,7 +4216,7 @@ width: 38px;
     }
 
     .booking-text strong {
-        font-size: 17px;
+        font-size: 12px;
         line-height: 1.3;
     }
 
@@ -4326,7 +4345,7 @@ width: 38px;
    .find-btn rule and lets the button size itself to its own label. */
 @media (min-width: 768px) {
     .find-btn {
-        width: auto;
+        width: 20%;
         min-width: 0;
         height: auto;
         white-space: nowrap;
