@@ -252,9 +252,10 @@ button a {
         height: 34px;
     }
   }
-
-@media(max-width: 1023px) {
-  .department-layout {
-    grid-template-columns: revert;
-  }
+@media(min-width: 320px){
+      .department-icon-wrapper svg {
+        width: 25px;
+        height: 25px;
+    }
 }
+

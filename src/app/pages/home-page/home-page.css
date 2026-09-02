@@ -8,7 +8,7 @@
        rule below reads this instead of a literal font list, so the whole
        page is guaranteed to render in one uniform typeface family with no
        chance of drifting per-section. */
-    --page-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,;
+    --page-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, ;
 
     display: block;
     font-family: var(--page-font);
@@ -166,7 +166,7 @@
     gap: 25px;
     align-items: center;
     display: none;
-}   
+}
 
 .socials-icon {
     border: 2px solid;
@@ -868,7 +868,8 @@
     letter-spacing: 3.6px;
 }
 
-.heading-line, .doctor-line {
+.heading-line,
+.doctor-line {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -896,14 +897,14 @@
 }
 
 .doctor-line span {
-        display: block;
+    display: block;
     width: 30px;
     height: 2px;
     background: #139de9;
     border-radius: 2px;
 }
 
-.small-line  span{
+.small-line span {
     display: block;
     width: 67px;
     height: 1.5px;
@@ -1217,13 +1218,13 @@
 }
 
 .small-label {
-color: #02188D;
-font-family: Montserrat;
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-letter-spacing: 4px;
+    color: #02188D;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4px;
 }
 
 .heading-rule {
@@ -1645,11 +1646,12 @@ letter-spacing: 4px;
 
 .doctor-description {
     width: 568px;
-color: #2C2C2C;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 155.556% */
+    color: #2C2C2C;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    /* 155.556% */
     /* 155.556% */
 }
 
@@ -1727,9 +1729,11 @@ line-height: 28px; /* 155.556% */
 
 /* 1. Create the bounding container */
 .line-container {
-    position: relative; 
-    width: 100%;       /* Match the width you want for your lines */
-    height: 4px;       /* Match the thickness of your thickest line */
+    position: relative;
+    width: 100%;
+    /* Match the width you want for your lines */
+    height: 4px;
+    /* Match the thickness of your thickest line */
 }
 
 /* 2. Style the shared line properties */
@@ -1737,27 +1741,33 @@ line-height: 28px; /* 155.556% */
     position: absolute;
     top: 0;
     left: 0;
-    border-radius: 2px;/* Optional: rounds the edges */
+    border-radius: 2px;
+    /* Optional: rounds the edges */
 }
 
 /* 3. Style the bottom/background line */
 .base-line {
     width: 242px;
-height: 1px;       /* Full width */
-    background-color: #e0e0e0; /* Light gray */
-    z-index: 1;        /* Keeps it at the bottom */
+    height: 1px;
+    /* Full width */
+    background-color: #e0e0e0;
+    /* Light gray */
+    z-index: 1;
+    /* Keeps it at the bottom */
 }
 
 /* 4. Style the top/overlapping line */
 .top-line {
-    background: #1B8FCD; /* Bright accent color */
+    background: #1B8FCD;
+    /* Bright accent color */
     width: 30px;
-height: 3px;       /* Forces it to sit on top */
+    height: 3px;
+    /* Forces it to sit on top */
 }
 
 .experience {
     width: 100%;
-    padding: 14px 20px; 
+    padding: 14px 20px;
     border-radius: 60px;
     background: #f0f6ff;
     display: flex;
@@ -1813,22 +1823,22 @@ height: 3px;       /* Forces it to sit on top */
     height: 40px;
     flex: 1;
     border: 0;
-border-radius: 6px;
-background: linear-gradient(90deg, #0330C1 0%, #0649EF 100%);
+    border-radius: 6px;
+    background: linear-gradient(90deg, #0330C1 0%, #0649EF 100%);
     white-space: nowrap;
     padding: 5px 15px 5px 15px;
     color: #FFF;
-font-family: Roboto;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .calendar svg {
     width: 16px;
-height: 16px;
-aspect-ratio: 1/1;
+    height: 16px;
+    aspect-ratio: 1/1;
 }
 
 .vasavi-extra {
@@ -1911,20 +1921,20 @@ aspect-ratio: 1/1;
 
 .heading .blue {
     color: #3c68d7;
-font-family: Montserrat;
-font-size: 52px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+    font-family: Montserrat;
+    font-size: 52px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .heading span {
     color: #041346;
-font-family: Montserrat;
-font-size: 52px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+    font-family: Montserrat;
+    font-size: 52px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .box {
@@ -1973,10 +1983,10 @@ line-height: normal;
     opacity: .93;
 }
 
-.opinion-section img{
+.opinion-section img {
     display: block;
     position: relative;
-        top: 185px;
+    top: 185px;
     right: 475px;
 }
 
@@ -2053,17 +2063,20 @@ line-height: normal;
     position: absolute;
     left: 0;
     top: 50%;
-    
+
     /* CHOOSE ONE OF THE OPTIONS BELOW FOR YOUR CONTENT: */
-    content: " "; /* Option A: Use an emoji */
-    /* content: url('check-icon.svg'); */ /* Option B: Use an image file */
+    content: " ";
+    /* Option A: Use an emoji */
+    /* content: url('check-icon.svg'); */
+    /* Option B: Use an image file */
     width: 15px;
     height: 15px;
-    
-    font-size: 16px; /* Adjust size if using an emoji or font icon */
+
+    font-size: 16px;
+    /* Adjust size if using an emoji or font icon */
     /* Your exact SVG with '#' converted to '%23' for web safety */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z' fill='%231B8FCD'/%3E%3C/svg%3E");
-    
+
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -2087,7 +2100,7 @@ line-height: normal;
 }
 
 .footer-health,
-.footer-call a{
+.footer-call a {
     display: flex;
     gap: 20px;
     flex-direction: row;
@@ -2332,7 +2345,7 @@ line-height: normal;
     color: #1466ed;
     font-size: 16px;
     font-weight: 750;
-        background-color: rgb(243, 243, 243);
+    background-color: rgb(243, 243, 243);
     width: 30px;
     height: 30px;
     padding: 5px;
@@ -2463,7 +2476,7 @@ line-height: normal;
 }
 
 .tech-top-line {
-    position: absolute;   
+    position: absolute;
 }
 
 .testimonial-heading h2 {
@@ -2911,11 +2924,11 @@ line-height: normal;
         padding: 10px 0px 0px 0px;
     }
 
-    .socials{
+    .socials {
         display: flex;
-    justify-content: flex-start;
-    gap: 25px;
-    align-items: center;
+        justify-content: flex-start;
+        gap: 25px;
+        align-items: center;
     }
 }
 
@@ -2926,8 +2939,8 @@ line-height: normal;
     }
 
     .featured-card {
-            width: 452px;
-    height: 405px;
+        width: 452px;
+        height: 405px;
     }
 
     .department-layout {
@@ -2964,15 +2977,23 @@ line-height: normal;
     }
 
     .stats {
-            padding: 17px 38px 18px 38px;
+        padding: 17px 38px 18px 38px;
     }
 }
 
 @media(max-width: 1439px) {
 
+    .insurance-logo {
+        width: 100%;
+    }
+
+    .insurance-logos {
+        gap: 20px;
+    }
+
     .featured-card {
         width: 100%;
-        height: 70vh;
+        height: 80vh;
     }
 
     .featured-head {
@@ -3046,7 +3067,7 @@ line-height: normal;
         flex-direction: row;
     }
 
-    .doctor-head-line span{
+    .doctor-head-line span {
         height: 1px;
         width: 60px;
     }
@@ -3120,7 +3141,7 @@ line-height: normal;
         height: 35px;
     }
 
-    .opinion-section img{
+    .opinion-section img {
         display: none;
     }
 
@@ -3229,7 +3250,9 @@ line-height: normal;
     }
 
     .tech-card h3 {
-        font-size: 16px;
+        font-size: 14px;
+        min-height: 0px;
+
     }
 
     .find-btn {
@@ -3282,14 +3305,19 @@ line-height: normal;
         width: 60%;
     }
 
-    .section-heading-para{
+    .section-heading-para {
         width: 60%;
+    }
+
+    .department-layout {
+        grid-template-columns: revert;
+        gap: 25px;
     }
 }
 
 @media(max-width: 1023px) {
 
-    .tech-card h3{
+    .tech-card h3 {
         font-size: 14px;
     }
 
@@ -3302,18 +3330,13 @@ line-height: normal;
         top: 525px;
     }
 
-    .department-layout {
-        grid-template-columns: revert;
-        gap: 25px;
-    }
-
     .about-content-para {
         font-size: 16px;
     }
 
-    .number-circle{
+    .number-circle {
         height: 48px;
-    width: 48px;
+        width: 48px;
     }
 
     .department-card {
@@ -3499,12 +3522,13 @@ line-height: normal;
         flex-direction: column;
     }
 
-    .small-appointment{
+    .small-appointment {
         font-size: 16px;
         width: 227px;
         height: 42px;
     }
-    .help-separator{
+
+    .help-separator {
         width: 140px;
         height: 1px;
     }
@@ -3518,12 +3542,12 @@ line-height: normal;
         width: 45px
     }
 
-    .section-heading-para{
+    .section-heading-para {
         font-size: 18px;
         width: 100%;
     }
 
-    .department-head{
+    .department-head {
         width: 90%;
     }
 
@@ -3616,7 +3640,7 @@ line-height: normal;
         font-size: 20px;
     }
 
-    .stat-text span{
+    .stat-text span {
         font-size: 12px;
     }
 
@@ -3635,7 +3659,7 @@ line-height: normal;
         gap: 4px;
     }
 
-    .quick-item a{
+    .quick-item a {
         gap: 7px;
     }
 
@@ -3685,7 +3709,10 @@ line-height: normal;
     }
 }
 
-@media(max-width: 767px) {
+@media (min-width: 319px) and (max-width: 767px) {
+    .socials {
+        display: none;
+    }
 
     .name p {
         font-size: 14px;
@@ -3760,13 +3787,13 @@ line-height: normal;
         gap: 10px;
     }
 
-    
+
     .number-circle {
         height: 45px;
         width: 45px;
     }
 
-    .number-circle span{
+    .number-circle span {
         font-size: 16px;
     }
 
@@ -3843,24 +3870,24 @@ line-height: normal;
         font-size: 14px;
     }
 
-    .featured-card{
-        height: 40vh;
+    .featured-card {
+        height: 42vh;
     }
 
-    .featured-icon-wrapper svg{
+    .featured-icon-wrapper svg {
         width: 24px;
         height: 34px;
     }
 
     .feature-btn {
-            width: 119px;
-    height: 25px;
-    font-size: 12px;
-    padding: 2px;
+        width: 119px;
+        height: 25px;
+        font-size: 12px;
+        padding: 2px;
     }
 
-    .small-appointment{
-                font-size: 14px;
+    .small-appointment {
+        font-size: 14px;
         width: 206px;
         height: 40px;
     }
@@ -3955,7 +3982,7 @@ line-height: normal;
         width: 100%;
     }
 
-    .department-head span{
+    .department-head span {
         font-size: 32px;
     }
 
@@ -3987,7 +4014,7 @@ line-height: normal;
     }
 
     .featured-icon-wrapper {
-width: 38px;
+        width: 38px;
         height: 35px;
     }
 
@@ -4014,16 +4041,18 @@ width: 38px;
         width: 75%;
     }
 
-    .doctor-head-line {flex-direction: row;
-    padding-top: 10px;}
+    .doctor-head-line {
+        flex-direction: row;
+        padding-top: 10px;
+    }
 
     .doctor-title-head span {
         font-size: 28px;
     }
 
-    .doctor-head-line span{
+    .doctor-head-line span {
         width: 68px;
-    height: 1px;
+        height: 1px;
     }
 
     .our-doctors {
@@ -4035,15 +4064,15 @@ width: 38px;
         height: auto;
     }
 
-    .opinion-section img{
+    .opinion-section img {
         display: none;
     }
 
-    .heading span{
+    .heading span {
         font-size: 32px;
     }
 
-    .heading .blue{
+    .heading .blue {
         font-size: 32px;
     }
 
@@ -4060,11 +4089,11 @@ width: 38px;
     }
 
     .surgery-list ul {
-        
+
         padding: 0px 0px 0px 110px;
     }
 
-    .surgery-list li{
+    .surgery-list li {
         padding-left: 30px;
     }
 
@@ -4074,7 +4103,7 @@ width: 38px;
     }
 
     .box strong,
-    .box span{
+    .box span {
         font-size: 14px;
     }
 
@@ -4202,6 +4231,121 @@ width: 38px;
     }
 }
 
+/* for small mibile size */
+@media (max-width: 321px) {
+    .featured-para {
+        font-size: 10px;
+    }
+
+    .featured-head {
+        font-size: 14px;
+    }
+
+    .featured-card {
+        height: 32vh;
+        padding: 17px;
+    }
+
+    .department-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .department-card {
+        padding: 12px;
+    }
+
+        .department-icon-wrapper[_ngcontent-ng-c2899054857] {
+        width: 42px;
+        height: 42px;
+    }
+
+    .department-card{
+        gap: 10px;
+        height: 20vh;
+        justify-content: center;
+        min-height: 0px;
+    }
+
+    .department-card h3{
+        font-size: 14px;
+    }
+
+    .department-card p {
+        font-size: 12px;
+    }
+
+    .surgery-list ul {
+        padding: 0px 0px 0px 66px;
+    }
+    .footer-call{
+        padding-left: 0px;
+        gap: 10px;
+    }
+
+    .footer-call span{
+        font-size: 14px;
+    }
+
+    .footer-health {
+        gap:8px;
+    }
+
+    .footer-health strong,
+.footer-health span {
+    font-size: 10px;
+}
+
+.insurance-logoo {
+    font-size: 10px;
+    gap: 5px;
+}
+
+.technology-section{
+    padding: 40px 10px 30px;
+}
+
+.testimonial-heading h2{
+    font-size: 36px;
+}
+
+.testimonial-para {
+        line-height: 1.4;
+font-size: 18px;
+}
+
+    .opinion-footer{
+        padding: 17px;
+    }
+
+    .footer-icon{
+        width: 49px;
+        height: 49px;
+    }
+
+    .footer-icon svg {
+        width: 27px;
+        height: 27px;
+    }
+
+    .round-icon svg{
+        width: 21px;
+        height: 28px;
+    }
+
+    .hero-content p {
+        line-height: 22px;
+    }
+
+    .round-icon svg{
+        width: 22px;
+        height: 22px;
+    }
+
+    .stats{
+        padding: 19px 56px;
+    }
+}
+
 /* ===========================================================================
    Booking bar - consolidated, clean responsive pass (appended so it wins
    over the older, scattered rules above at the same breakpoints - the
@@ -4323,11 +4467,6 @@ width: 38px;
         width: 38px;
         height: 38px;
         font-size: 17px;
-    }
-
-    .round-icon svg {
-        width: 38px;
-        height: 38px;
     }
 
     .booking-text strong {
