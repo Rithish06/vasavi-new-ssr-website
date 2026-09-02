@@ -80,8 +80,17 @@
         </label>
       }
 
-      <button type="button" class="btn btn--filled qab-cta" (click)="submitBooking()">
-        Submit Request
+      @if (submitError()) {
+        <p class="qab-error">{{ submitError() }}</p>
+      }
+
+      <button
+        type="button"
+        class="btn btn--filled qab-cta"
+        (click)="submitBooking()"
+        [disabled]="submitting()"
+      >
+        {{ submitting() ? 'Sending…' : 'Submit Request' }}
       </button>
     }
 

@@ -1,6 +1,7 @@
 import { Component, PLATFORM_ID, effect, inject, input, output, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
+import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
 
 type BookingStep = 'select' | 'contact' | 'success';
 
@@ -63,6 +64,7 @@ export function buildUpcomingDates(count = 12): DateOption[] {
 })
 export class AppointmentBooking {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly leads = inject(LeadService);
 
   protected readonly hospitalPhoneDisplay = HOSPITAL_PHONE_DISPLAY;
   protected readonly hospitalPhoneTel = HOSPITAL_PHONE_TEL;
@@ -110,6 +112,8 @@ export class AppointmentBooking {
   protected readonly patientName = signal('');
   protected readonly patientPhone = signal('');
   protected readonly contactErrors = signal<ContactErrors>({});
+  protected readonly submitting = signal(false);
+  protected readonly submitError = signal('');
 
   constructor() {
     // Reset any in-progress booking whenever the doctor this form is for
@@ -124,6 +128,7 @@ export class AppointmentBooking {
       this.patientPhone.set('');
       this.contactErrors.set({});
       this.validationError.set('');
+      this.submitError.set('');
     });
   }
 
@@ -171,6 +176,8 @@ export class AppointmentBooking {
   }
 
   protected submitBooking(): void {
+    if (this.submitting()) return;
+
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
     const digits = phone.replace(/\D/g, '');
@@ -183,11 +190,38 @@ export class AppointmentBooking {
     this.contactErrors.set(errors);
     if (Object.keys(errors).length > 0) return;
 
-    // NOTE: there's no booking backend wired up yet - this only simulates a
-    // submission locally. Once a booking API/CRM endpoint exists, POST
-    // { doctorName: doctorName(), date: selectedDate().iso, preferredTime: preferredTime(), name, phone }
-    // here before advancing to the success step.
-    this.step.set('success');
+    // The date is picked on the previous step and can't be cleared from
+    // here, so this is a guard rather than a reachable validation path.
+    const date = this.selectedDate();
+    if (!date) {
+      this.validationError.set('Please select a date to continue.');
+      this.step.set('select');
+      return;
+    }
+
+    this.submitting.set(true);
+    this.submitError.set('');
+    this.leads
+      .sendDoctorAppointment({
+        name,
+        phone,
+        doctor: this.doctorName() || 'Not specified',
+        // The chips only carry weekday/day/month, so the year comes off the
+        // ISO string - an email that just says "Mon, 15 Sep" is ambiguous
+        // for anything booked across a year boundary.
+        date: `${date.weekday}, ${date.day} ${date.month} ${date.iso.slice(0, 4)}`,
+        preferredTime: this.preferredTime(),
+      })
+      .subscribe({
+        next: () => {
+          this.submitting.set(false);
+          this.step.set('success');
+        },
+        error: () => {
+          this.submitting.set(false);
+          this.submitError.set(LEAD_SUBMIT_ERROR);
+        },
+      });
   }
 
   protected bookAnother(): void {
@@ -198,6 +232,7 @@ export class AppointmentBooking {
     this.patientPhone.set('');
     this.contactErrors.set({});
     this.validationError.set('');
+    this.submitError.set('');
   }
 
   protected onClose(): void {

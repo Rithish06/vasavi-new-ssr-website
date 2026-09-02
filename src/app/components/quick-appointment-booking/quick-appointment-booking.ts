@@ -1,5 +1,6 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
+import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
 
 export type ServiceNeeded = 'doctor' | 'surgery' | 'health-check' | 'others';
 
@@ -45,10 +46,20 @@ const SERVICE_OPTIONS: ServiceOption[] = [
   styleUrl: './quick-appointment-booking.css',
 })
 export class QuickAppointmentBooking {
+  private readonly leads = inject(LeadService);
+
   protected readonly serviceOptions = SERVICE_OPTIONS;
 
   /** Shows a close (X) button in the header - used when hosted in a modal. */
   readonly showClose = input<boolean>(false);
+
+  /**
+   * Which page this popup was opened from - passed along with the enquiry so
+   * the care team can see where the visitor was when they asked. This popup
+   * is site-wide, so it defaults to the home page (where it's used most)
+   * and any other host page names itself.
+   */
+  readonly sourcePage = input<string>('Home Page');
 
   readonly close = output<void>();
 
@@ -59,6 +70,8 @@ export class QuickAppointmentBooking {
   protected readonly service = signal<ServiceNeeded | null>(null);
   protected readonly detail = signal('');
   protected readonly errors = signal<BookingErrors>({});
+  protected readonly submitting = signal(false);
+  protected readonly submitError = signal('');
 
   /** "Doctor Appointment" and "Others" ask a free-text follow-up; "Surgery
    *  Enquiry" and "Health Check" need nothing beyond the service itself. */
@@ -123,6 +136,8 @@ export class QuickAppointmentBooking {
   }
 
   protected submitBooking(): void {
+    if (this.submitting()) return;
+
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
     const digits = phone.replace(/\D/g, '');
@@ -144,11 +159,29 @@ export class QuickAppointmentBooking {
     this.errors.set(errors);
     if (Object.keys(errors).length > 0) return;
 
-    // NOTE: there's no booking backend wired up yet - this only simulates a
-    // submission locally. Once a booking API/CRM endpoint exists, POST
-    // { name, phone, service, detail: needsDetail() ? detail : undefined }
-    // here before advancing to the success step.
-    this.step.set('success');
+    this.submitting.set(true);
+    this.submitError.set('');
+    this.leads
+      .sendQuickEnquiry({
+        name,
+        phone,
+        // The label the visitor actually clicked, not the internal slug.
+        service: this.selectedServiceLabel(),
+        // "Surgery Enquiry" and "Health Check" never show the field, so
+        // there's nothing to send for them.
+        detail: this.needsDetail() ? detail : '',
+        page: this.sourcePage(),
+      })
+      .subscribe({
+        next: () => {
+          this.submitting.set(false);
+          this.step.set('success');
+        },
+        error: () => {
+          this.submitting.set(false);
+          this.submitError.set(LEAD_SUBMIT_ERROR);
+        },
+      });
   }
 
   protected bookAnother(): void {
@@ -158,6 +191,7 @@ export class QuickAppointmentBooking {
     this.service.set(null);
     this.detail.set('');
     this.errors.set({});
+    this.submitError.set('');
   }
 
   protected onClose(): void {

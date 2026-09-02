@@ -1,5 +1,6 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
+import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
 
 interface ContactErrors {
   name?: string;
@@ -28,6 +29,8 @@ export interface HealthPackageOption {
   styleUrl: './health-check-booking.css',
 })
 export class HealthCheckBooking {
+  private readonly leads = inject(LeadService);
+
   /** Every package the dropdown should offer - supplied by the host page
    *  (its own featured + standard package lists) so this component doesn't
    *  keep a separate copy of the package catalogue. */
@@ -44,6 +47,8 @@ export class HealthCheckBooking {
   protected readonly patientPhone = signal('');
   protected readonly selectedPackageSlug = signal('');
   protected readonly contactErrors = signal<ContactErrors>({});
+  protected readonly submitting = signal(false);
+  protected readonly submitError = signal('');
 
   protected setPatientName(value: string): void {
     this.patientName.set(value);
@@ -71,6 +76,8 @@ export class HealthCheckBooking {
   }
 
   protected submitBooking(): void {
+    if (this.submitting()) return;
+
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
     const digits = phone.replace(/\D/g, '');
@@ -85,10 +92,26 @@ export class HealthCheckBooking {
     this.contactErrors.set(errors);
     if (Object.keys(errors).length > 0) return;
 
-    // NOTE: there's no booking backend wired up yet - this only simulates a
-    // submission locally. Once a booking API/CRM endpoint exists, POST
-    // { name, phone, package: pkg } here before advancing to the success step.
-    this.step.set('success');
+    this.submitting.set(true);
+    this.submitError.set('');
+    this.leads
+      .sendHealthCheckRequest({
+        name,
+        phone,
+        // The display title, not the slug - this is read by a person in an
+        // email, and the slug means nothing to the front office.
+        packageName: this.selectedPackageTitle(),
+      })
+      .subscribe({
+        next: () => {
+          this.submitting.set(false);
+          this.step.set('success');
+        },
+        error: () => {
+          this.submitting.set(false);
+          this.submitError.set(LEAD_SUBMIT_ERROR);
+        },
+      });
   }
 
   protected bookAnother(): void {
@@ -97,6 +120,7 @@ export class HealthCheckBooking {
     this.patientPhone.set('');
     this.selectedPackageSlug.set('');
     this.contactErrors.set({});
+    this.submitError.set('');
   }
 
   protected onClose(): void {

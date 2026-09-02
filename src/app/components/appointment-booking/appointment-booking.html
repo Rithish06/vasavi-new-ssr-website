@@ -112,8 +112,17 @@
         }
       </label>
 
-      <button type="button" class="btn btn--filled doctor-booking__cta" (click)="submitBooking()">
-        Confirm Booking
+      @if (submitError()) {
+        <p class="doctor-booking__error">{{ submitError() }}</p>
+      }
+
+      <button
+        type="button"
+        class="btn btn--filled doctor-booking__cta"
+        (click)="submitBooking()"
+        [disabled]="submitting()"
+      >
+        {{ submitting() ? 'Sending…' : 'Confirm Booking' }}
       </button>
     }
 

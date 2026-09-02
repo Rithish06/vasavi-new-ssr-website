@@ -275,6 +275,11 @@
   margin-top: 14px;
 }
 
+.doctor-booking__cta[disabled] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
 .doctor-booking__change {
   display: inline-flex;
   align-items: center;
