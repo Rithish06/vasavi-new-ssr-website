@@ -2951,7 +2951,10 @@ line-height: normal;
     }
 
     .socials{
-        display: block;
+        display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+    align-items: center;
     }
 }
 
