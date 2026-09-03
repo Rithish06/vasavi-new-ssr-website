@@ -252,3 +252,10 @@ button a {
         height: 34px;
     }
   }
+@media(min-width: 320px){
+      .department-icon-wrapper svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+

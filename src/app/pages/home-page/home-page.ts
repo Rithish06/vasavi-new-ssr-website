@@ -436,26 +436,26 @@ export class HomePage implements OnDestroy, OnInit {
 
   startAutoSlide(): void {
 
-    this.stopAutoSlide();
+    // this.stopAutoSlide();
 
-    this.intervalId = setInterval(() => {
+    // this.intervalId = setInterval(() => {
 
       // Fade the featured card out, swap to the next department
       // while it's invisible, then fade back in — a smooth
       // clockwise rotation through the department list every 3s.
-      this.fading.set(true);
+    //   this.fading.set(true);
 
-      this.fadeTimeoutId = setTimeout(() => {
+    //   this.fadeTimeoutId = setTimeout(() => {
 
-        this.activeIndex.update(index =>
-          (index + 1) % this.departments.length
-        );
+    //     this.activeIndex.update(index =>
+    //       (index + 1) % this.departments.length
+    //     );
 
-        this.fading.set(false);
+    //     this.fading.set(false);
 
-      }, this.FADE_DURATION_MS);
+    //   }, this.FADE_DURATION_MS);
 
-    }, this.SLIDE_INTERVAL_MS);
+    // }, this.SLIDE_INTERVAL_MS);
   }
 
 
