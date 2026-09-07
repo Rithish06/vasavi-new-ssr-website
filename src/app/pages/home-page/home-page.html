@@ -1,4 +1,8 @@
 <div class="hero">
+    <div class="hero-mobile-banner-wrap">
+        <img class="hero-mobile-banner" src="/Images/Home-new/home-page-banner-mobile.png" alt="Vasavi Hospitals" />
+    </div>
+
     <div class="hero-content">
         <div>
             <h1>
@@ -278,8 +282,11 @@
                         </svg>
                     </div>
                     <div class="quick-item-text">
-                        <strong>Call Now</strong>
-                        <span>Speak to our team</span>
+                        <div class="quick-item-text__full">
+                            <strong>Call Now</strong>
+                            <span>Speak to our team</span>
+                        </div>
+                        <span class="quick-item-text__short">Call</span>
                     </div>
                 </a>
 
@@ -298,8 +305,11 @@
                         </svg>
                     </div>
                     <div class="quick-item-text">
-                        <strong>WhatsApp</strong>
-                        <span>Chat with us</span>
+                        <div class="quick-item-text__full">
+                            <strong>WhatsApp</strong>
+                            <span>Chat with us</span>
+                        </div>
+                        <span class="quick-item-text__short">WhatsApp</span>
                     </div>
                 </a>
             </div>
@@ -316,8 +326,11 @@
                         </svg>
                     </div>
                     <div class="quick-item-text">
-                        <strong>Get Directions</strong>
-                        <span>Find us easily</span>
+                        <div class="quick-item-text__full">
+                            <strong>Get Directions</strong>
+                            <span>Find us easily</span>
+                        </div>
+                        <span class="quick-item-text__short">Directions</span>
                     </div>
                 </a>
             </div>
@@ -334,8 +347,11 @@
                         </svg>
                     </div>
                     <div class="quick-item-text">
-                        <strong>Health Check Packages</strong>
-                        <span>Prevent. Detect. Protect.</span>
+                        <div class="quick-item-text__full">
+                            <strong>Health Check Packages</strong>
+                            <span>Prevent. Detect. Protect.</span>
+                        </div>
+                        <span class="quick-item-text__short">Checkups</span>
                     </div>
                 </a>
             </div>
@@ -610,9 +626,10 @@
             </div>
 
             <!-- Remaining departments -->
-            <div class="department-grid" [class.fading]="fading()">
+            <div class="department-grid" #deptGrid>
 
-                <div *ngFor="let department of visibleDepartments()" class="department-card">
+                <a *ngFor="let department of visibleDepartments()" class="department-card" [href]="department.route"
+                    [attr.data-dept]="department.name">
 
                     <div class="department-icon-wrapper" [innerHTML]="sanitizeIcon(department.cardIcon)"></div>
 
@@ -620,7 +637,9 @@
 
                     <p>{{ department.description }}</p>
 
-                </div>
+                    <span class="department-arrow">&rarr;</span>
+
+                </a>
 
             </div>
 
@@ -988,29 +1007,29 @@
         </div>
         <div class="surgery-grid">
             <ul>
-                <li>Hernia Surgery</li>
-                <li>Total Knee Replacement</li>
-                <li>Total Hip Replacement</li>
-                <li>Gallbladder Removal</li>
-                <li>Appendectomy</li>
+                <li><a href="/hernia-surgery-in-bangalore">Hernia Surgery</a></li>
+                <li><a href="/total-knee-replacement-in-bangalore">Total Knee Replacement</a></li>
+                <li><a href="/total-hip-replacement-in-bangalore">Total Hip Replacement</a></li>
+                <li><a href="/gallbladder-removal-surgery-in-bangalore">Gallbladder Removal</a></li>
+                <li><a href="/appendectomy-surgery-in-bangalore">Appendectomy</a></li>
             </ul>
             <ul>
-                <li>Tonsillectomy</li>
-                <li>Adenoid Removal</li>
-                <li>Sinus Surgery</li>
-                <li>Piles Surgery</li>
-                <li>Fistula Surgery</li>
+                <li><a href="/tonsillectomy-surgery-in-bangalore">Tonsillectomy</a></li>
+                <li><a href="/adenoid-removal-in-bangalore">Adenoid Removal</a></li>
+                <li><a href="/sinus-surgery-in-bangalore">Sinus Surgery</a></li>
+                <li><a href="/piles-surgery-in-bangalore">Piles Surgery</a></li>
+                <li><a href="/fistula-surgery-in-bangalore">Fistula Surgery</a></li>
             </ul>
             <ul>
-                <li>Prostate Removal (TURP)</li>
-                <li>Ovarian Cystectomy</li>
-                <li>Fibroid Removal</li>
-                <li>CT Angiography</li>
-                <li>Coronary Angiography</li>
+                <li><a href="/turp-surgery-in-bangalore">Prostate Removal (TURP)</a></li>
+                <li><a href="/ovarian-cystectomy-in-bangalore">Ovarian Cystectomy</a></li>
+                <li><a href="/fibroid-removal-in-bangalore">Fibroid Removal</a></li>
+                <li><a href="/ct-angiography-in-bangalore">CT Angiography</a></li>
+                <li><a href="/coronary-angiography-in-bangalore">Coronary Angiography</a></li>
             </ul>
             <ul>
-                <li>Hysterectomy</li>
-                <li>ACL Reconstruction</li>
+                <li><a href="/hysterectomy-surgery-in-bangalore">Hysterectomy</a></li>
+                <li><a href="/acl-reconstruction-in-bangalore">ACL Reconstruction</a></li>
             </ul>
         </div>
     </div>

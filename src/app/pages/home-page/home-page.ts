@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, OnDestroy, OnInit, PLATFORM_ID, computed, signal, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, computed, signal, Input, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -218,6 +218,16 @@ export class HomePage implements OnDestroy, OnInit {
   private intervalId?: ReturnType<typeof setInterval>;
   private fadeTimeoutId?: ReturnType<typeof setTimeout>;
 
+  // The small department cards that survive a rotation (everyone except
+  // the one becoming newly featured, and the one just retired from
+  // featured rejoining at the end) keep the same DOM element - Angular's
+  // default *ngFor tracking is by object identity, and these are the
+  // same Department objects, just reordered. That means their positions
+  // can be measured before and after the reorder and animated between
+  // the two with a FLIP (First-Last-Invert-Play) transform, instead of
+  // just cutting to the new layout.
+  @ViewChild('deptGrid') private deptGridRef?: ElementRef<HTMLElement>;
+
   private platformId = inject(PLATFORM_ID);
   private sanitizer = inject(DomSanitizer);
   doctor:any;
@@ -436,26 +446,117 @@ export class HomePage implements OnDestroy, OnInit {
 
   startAutoSlide(): void {
 
-    // this.stopAutoSlide();
+    this.stopAutoSlide();
 
-    // this.intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
 
-      // Fade the featured card out, swap to the next department
-      // while it's invisible, then fade back in — a smooth
-      // clockwise rotation through the department list every 3s.
-    //   this.fading.set(true);
+      // Measure every small card's current position before anything
+      // changes, so the survivors can be animated from here to wherever
+      // they land after the reorder.
+      const beforeRects = this.captureDepartmentCardRects();
 
-    //   this.fadeTimeoutId = setTimeout(() => {
+      // Fade the featured card (and the one small card about to be
+      // promoted into it) out, swap to the next department while
+      // they're invisible, then fade back in — a smooth clockwise
+      // rotation through the department list every 3s.
+      this.fading.set(true);
 
-    //     this.activeIndex.update(index =>
-    //       (index + 1) % this.departments.length
-    //     );
+      this.fadeTimeoutId = setTimeout(() => {
 
-    //     this.fading.set(false);
+        this.activeIndex.update(index =>
+          (index + 1) % this.departments.length
+        );
 
-    //   }, this.FADE_DURATION_MS);
+        this.fading.set(false);
 
-    // }, this.SLIDE_INTERVAL_MS);
+        // Angular hasn't laid out the reordered grid yet on this same
+        // tick - two animation frames reliably lands after that layout
+        // has happened, so the "after" measurement below is accurate.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            this.playDepartmentCardShift(beforeRects);
+          });
+        });
+
+      }, this.FADE_DURATION_MS);
+
+    }, this.SLIDE_INTERVAL_MS);
+  }
+
+  /** Snapshots each visible small department card's on-screen position,
+   *  keyed by department name so it survives the array reordering that
+   *  happens between "before" and "after". */
+  private captureDepartmentCardRects(): Map<string, DOMRect> {
+    const rects = new Map<string, DOMRect>();
+    const container = this.deptGridRef?.nativeElement;
+    if (!container) return rects;
+
+    container.querySelectorAll<HTMLElement>('.department-card').forEach(card => {
+      const key = card.getAttribute('data-dept');
+      if (key) rects.set(key, card.getBoundingClientRect());
+    });
+
+    return rects;
+  }
+
+  /** FLIP-animates every small card that's still in the grid after a
+   *  rotation from its old position to its new one, staggered slightly
+   *  card-by-card so the shift reads as one sweep rather than everything
+   *  jumping at once. The card that just joined at the end (the one
+   *  freshly retired from featured) has no "before" entry, so instead of
+   *  FLIPping it, this toggles the ".department-card--entering" class on
+   *  it for a plain fade/slide-in - it's a genuinely new element rather
+   *  than one that moved into a new position. */
+  private playDepartmentCardShift(beforeRects: Map<string, DOMRect>): void {
+    const container = this.deptGridRef?.nativeElement;
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll<HTMLElement>('.department-card'));
+
+    cards.forEach((card, i) => {
+      const key = card.getAttribute('data-dept');
+      const before = key ? beforeRects.get(key) : undefined;
+
+      if (!before) {
+        // Genuinely new card (the department just retired from featured,
+        // re-joining at the end of the grid) - it never moved, so there's
+        // nothing to FLIP. Give it its own fade/slide-in instead, via a
+        // class rather than a bare CSS rule so surviving cards below never
+        // pick this up just because they were moved to a new DOM position.
+        card.classList.add('department-card--entering');
+        card.addEventListener('animationend', function clearEntering() {
+          card.classList.remove('department-card--entering');
+          card.removeEventListener('animationend', clearEntering);
+        });
+        return;
+      }
+
+      const after = card.getBoundingClientRect();
+      const dx = before.left - after.left;
+      const dy = before.top - after.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+
+      // Jump it back to where it used to be with no transition...
+      card.style.transition = 'none';
+      card.style.transform = `translate(${dx}px, ${dy}px)`;
+
+      // ...force the browser to register that starting position...
+      void card.offsetWidth;
+
+      // ...then release it into a transitioned move back to its real,
+      // new position - staggered per card so they visibly shift into
+      // place one after another instead of all at once.
+      requestAnimationFrame(() => {
+        card.style.transition = `transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) ${i * 35}ms`;
+        card.style.transform = '';
+
+        const clearInlineStyles = () => {
+          card.style.transition = '';
+          card.removeEventListener('transitionend', clearInlineStyles);
+        };
+        card.addEventListener('transitionend', clearInlineStyles);
+      });
+    });
   }
 
 

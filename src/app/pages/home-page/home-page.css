@@ -118,6 +118,14 @@
     background-size: 75%;
 }
 
+/* Dedicated mobile banner image shown above the hero content at 768px
+   and below (see the max-width: 768px query below) - hidden here so it
+   never shows above that breakpoint, where the desktop background
+   photo on .hero is used instead. */
+.hero-mobile-banner {
+    display: none;
+}
+
 
 .hero-content {
     display: flex;
@@ -641,6 +649,18 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
+}
+
+/* .quick-item-text__full is the normal icon + title + subtitle layout,
+   used from desktop up to tablet. .quick-item-text__short is a single
+   short word ("Call", "WhatsApp"...) swapped in on tablet/mobile
+   instead (see the max-width: 1023px query below) - the two-line title
+   + subtitle reads as clutter once the row gets tight or stacks. */
+.quick-item-text__full {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .quick-item-text strong {
@@ -659,6 +679,17 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.quick-item-text__short {
+    display: none;
+    color: #2C2C2C;
+    font-family: var(--page-font);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    white-space: nowrap;
 }
 
 .quick-divider {
@@ -2058,6 +2089,23 @@
     padding-top: 16px;
 }
 
+/* Each checklist item now routes to that surgery's own page
+   (surgery-packages/... in app.routes.ts, matched 1:1 to these labels) -
+   block-level so the whole text row is clickable, not just the letters,
+   and colored/underlined only on hover so the list still reads as a
+   plain checklist at rest. */
+.surgery-grid li a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.surgery-grid li a:hover,
+.surgery-grid li a:focus-visible {
+    color: #0d3199;
+    text-decoration: underline;
+}
+
 /* 3. Insert and position the icon */
 .surgery-grid li::before {
     position: absolute;
@@ -2330,7 +2378,7 @@
 }
 
 .tech-card {
-    height: 337px;
+    height: auto;
     padding: 12px 12px 8px;
     border-radius: 12px;
     background: rgba(255, 255, 255, .9);
@@ -2357,7 +2405,7 @@
 .tech-image img {
     display: flex;
     width: 100%;
-    height: 190px;
+    height: auto;
 }
 
 .tech-card h3 {
@@ -2753,7 +2801,8 @@
 
 .featured-card {
     width: 483px;
-    height: 450px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     padding: 40px;
     border-radius: 24px;
     color: white;
@@ -2842,9 +2891,14 @@
 .department-card {
     position: relative;
 
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
     min-height: 230px;
 
     padding: 28px;
+    padding-bottom: 56px;
 
     border: 1px solid #dce5f6;
     border-radius: 20px;
@@ -2854,6 +2908,27 @@
     cursor: pointer;
 
     transition: 0.3s ease;
+}
+
+/* Each department card is now a real link (see [href]="department.route"
+   in the template) - this arrow is the visual cue that it's clickable,
+   sitting in the corner like the "Learn More" arrow on the featured card
+   does. It nudges forward on hover instead of jumping straight to a
+   different color, matching the card's own hover lift. */
+.department-arrow {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+
+    font-size: 20px;
+    line-height: 1;
+    color: #168cff;
+
+    transition: transform 0.2s ease;
+}
+
+.department-card:hover .department-arrow {
+    transform: translateX(4px);
 }
 
 .department-card:hover {
@@ -2940,7 +3015,7 @@
 
     .featured-card {
         width: 452px;
-        height: 405px;
+        height: auto;
     }
 
     .department-layout {
@@ -2949,7 +3024,7 @@
     }
 
     .department-card {
-        width: 300px;
+        width: 100%;
     }
 
     .our-departments {
@@ -2964,8 +3039,12 @@
         gap: 100px;
     }
 
+    /* 8 unfeatured department cards in a 4-column x 2-row grid instead of
+       3 columns x 3 rows - lines the card grid's total height up with
+       the featured Cardiology card next to it instead of running a
+       third, mostly-empty row past it. */
     .department-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .about-content-p {
@@ -2993,7 +3072,9 @@
 
     .featured-card {
         width: 100%;
-        height: 80vh;
+        max-width: 460px;
+        height: auto;
+        margin: 0 auto;
     }
 
     .featured-head {
@@ -3740,9 +3821,15 @@
 
     .quick-divider,
     .stat-divider {
-        width: 70px;
-        height: 2px;
-        align-self: center;
+        /* Was a short 70px line centered in the row - but .quick-row and
+           .stats both left-align their stacked items here, so a
+           center-aligned divider floats off to one side instead of
+           reading as a rule between the rows above and below it.
+           Stretching it to the full row width instead makes it read as
+           an actual divider. */
+        width: auto;
+        height: 1px;
+        align-self: stretch;
     }
 
     .hero-content h1 {
@@ -3871,7 +3958,8 @@
     }
 
     .featured-card {
-        height: 42vh;
+        max-width: 420px;
+        height: auto;
     }
 
     .featured-icon-wrapper svg {
@@ -3902,7 +3990,19 @@
     }
 
     .opinion-copy {
+        /* .opinion-section centers its children (align-items: center) and
+           .opinion-copy has no width of its own, so it was shrinking to
+           fit its widest child - which was ".box" below, fixed at 265px.
+           That left the whole intro (eyebrow, heading, paragraph) sitting
+           in a narrower, off-center column than the surgery-list/footer
+           cards beneath it (which stretch to the section's full 100%
+           inner width), so the heading text started ~47px further right
+           than the cards' edge - the misaligned look. Stretching this to
+           the same full width lines everything up on one consistent
+           left edge. */
         padding: 0px;
+        width: 100%;
+        align-self: stretch;
     }
 
     .help-separator {
@@ -4089,8 +4189,17 @@
     }
 
     .surgery-list ul {
-
-        padding: 0px 0px 0px 110px;
+        /* The 110px left indent here was eating over a third of the
+           card's width on a narrow phone screen (it reads fine on
+           tablet, where this rule doesn't apply) - it pushed every
+           checklist item hard to the right and left the card looking
+           lopsided. The grid is already single-column at this width
+           (see ".surgery-grid" above), so each <ul> just needs its
+           normal small breathing room, not a leftover multi-column
+           indent - and no right border, since there's no neighboring
+           column to divide from anymore. */
+        padding: 0;
+        border-right: none;
     }
 
     .surgery-list li {
@@ -4107,7 +4216,27 @@
         font-size: 14px;
     }
 
+    .box {
+        /* Fixed at 265px in the base rule (sized for the desktop column
+           next to the photo) - now that .opinion-copy stretches full
+           width above, this needs to follow along instead of staying
+           pinned to its old fixed width. */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .opinion-section {
+        /* The base background photo (hands + heart outline anchored to
+           the right, wavy lines top-left) is sized as a percentage of
+           the section's OWN box (101.983% / 104.457%) - tuned for a
+           wide, short desktop row. On a narrow, tall mobile stack that
+           same sizing stretches and crops the photo into a distorted
+           sliver that mostly just shows a zoomed-in slice of the hands,
+           bleeding through the semi-transparent surgery-list card below
+           and making the checklist hard to read. A soft flat gradient in
+           the same blue family keeps the section feeling calm and
+           on-brand without the distortion. */
+        background: linear-gradient(180deg, #eef4ff 0%, #f6faff 55%, #ffffff 100%);
         padding: 15px;
     }
 
@@ -4242,7 +4371,7 @@
     }
 
     .featured-card {
-        height: 32vh;
+        height: auto;
         padding: 17px;
     }
 
@@ -4352,39 +4481,22 @@ font-size: 18px;
    fixed-height row above genuinely overflowed once the Department/Doctor
    filters could show real, sometimes-long selected values or a filter
    dropdown, so this pass fixes both the crowding and the overflow).
+
+   Tablet used to keep the row layout and just tighten padding/font-size,
+   but four items (three filters + the CTA) plus their real selected
+   values never actually fit a tablet-width row without clipping or an
+   ellipsis - see the squashed "d book an appoint..." bar on a tablet
+   screenshot. So tablet now gets the same stacked, full-width layout as
+   mobile; the "still fits in a row" breakpoint has been folded into the
+   one below instead of kept as a separate, thinner pass.
    =========================================================================== */
 
-/* Tablet: everything above still fits in a row, it's just tight - give it
-   breathing room instead of a hard-coded 142px that clips longer text. */
+/* Tablet + mobile: stack the three filters and the CTA into a single
+   column, each one a full-width row with its own tap target and its own
+   dropdown directly underneath it - no more fixed height, no more
+   clipped text, and no more relying on a row that only really fits on a
+   desktop-width screen. */
 @media (max-width: 1099.98px) {
-    .booking-row {
-        padding: 20px 22px;
-        gap: 14px;
-    }
-
-    .booking-item__trigger {
-        gap: 12px;
-    }
-
-    .booking-text strong {
-        font-size: 12px;
-        line-height: 1.3;
-    }
-
-    .booking-text span {
-        font-size: 14px;
-    }
-
-    .find-btn {
-        width: 168px;
-        padding: 14px 16px;
-    }
-}
-
-/* Mobile: stack the three filters and the CTA into a single column, each
-   one a full-width row with its own tap target and its own dropdown
-   directly underneath it - no more fixed height, no more clipped text. */
-@media (max-width: 767px) {
     .booking-card {
         width: 94%;
         border-radius: 22px;
@@ -4486,10 +4598,11 @@ font-size: 18px;
    older breakpoints above (135px / 93px / 102px / 168px) sized this
    button for the old short "Find & Book" / "Submit" labels and would
    clip or overlap the longer text. Placed last in the cascade and scoped
-   to whenever the bar is still a row (>= 768px, matching the "stack into
-   a column" breakpoint above) so it wins over every earlier fixed-width
-   .find-btn rule and lets the button size itself to its own label. */
-@media (min-width: 768px) {
+   to whenever the bar is still a row (>= 1100px, matching the "stack
+   into a column" breakpoint above) so it wins over every earlier
+   fixed-width .find-btn rule and lets the button size itself to its own
+   label. */
+@media (min-width: 1100px) {
     .find-btn {
         width: 20%;
         min-width: 0;
@@ -4501,5 +4614,385 @@ font-size: 18px;
     .find-btn span {
         font-size: 15px;
         white-space: nowrap;
+    }
+}
+
+/* 1099.98px and below (phones through portrait/landscape tablets): swap
+   the desktop background photo on .hero for the dedicated mobile banner
+   image, laid out as a "layered card" - a full-bleed, bottom-rounded
+   photo up top, with the heading/text/CTA overlapping its bottom edge
+   in a white rounded card (negative margin-top pulls the card up over
+   the image). Same breakpoint as the booking-bar stacking pass above,
+   so the whole hero switches to its compact identity together.
+
+   The Department/Doctor/Date filter row is dropped entirely at this
+   size - it never comfortably fit next to real selected values on a
+   phone or tablet width, and "Book an Appointment" (still in the card)
+   already opens the same booking flow. .booking-card stays visible for
+   the quick-contact row and the stats band that live inside it. */
+@media (max-width: 1099.98px) {
+    .hero {
+        background-image: none;
+        padding-bottom: 28px;
+    }
+
+    .hero-mobile-banner-wrap {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0 0 28px 28px;
+    }
+
+    .hero-mobile-banner {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1531 / 1027;
+        object-fit: cover;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        width: calc(100% - 32px);
+        /* Capped and auto-centered instead of stretching edge to edge -
+           on a phone this is a no-op (the viewport is already narrower
+           than the cap), but on a wider phone or tablet it keeps the
+           card proportioned like the mobile one instead of leaving the
+           centered heading/paragraph/button stranded in a sea of empty
+           white space either side. The banner image peeks out from
+           behind the card's rounded corners on wider screens, which
+           reads as intentional layering rather than a mistake. */
+        max-width: 420px;
+        margin: -32px auto 0;
+        padding: 28px 22px 24px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 16px 40px rgba(18, 54, 184, .18);
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+        line-height: 23px;
+    }
+
+    .appointment-btn {
+        width: 100%;
+        max-width: 300px;
+        height: 50px;
+        font-size: 15px;
+    }
+
+    /* The filter row (and the error line that can appear under it) is
+       gone at this size - see the comment above the media query. */
+    .booking-row,
+    .booking-bar-error {
+        display: none;
+    }
+
+    .booking-card {
+        /* Same reasoning as .hero-content above - capped and centered so
+           it reads as part of the same narrow column instead of a wide
+           bar sitting under a noticeably narrower card. */
+        max-width: 420px;
+        margin: 20px auto 0;
+    }
+
+    /* Quick-row is now the first thing inside .booking-card (the filter
+       row above it is gone). It has no margin of its own - previously
+       that was fine because the filter row's own padding held it away
+       from the card's rounded top corners - so without a margin here
+       its square corners would poke past that curve. */
+    .quick-row {
+        margin: 16px 16px 0;
+    }
+}
+
+/* Tablet band within the above (portrait to landscape tablet): the same
+   layered-card identity, but sized up a step so it doesn't read as a
+   phone layout stretched onto a bigger screen - a taller banner and a
+   noticeably wider card would either crop the photo awkwardly or leave
+   it looking sparse. The image crop tightens (a shorter aspect ratio)
+   so the photo doesn't grow to phone-height proportions on a wide
+   screen, and the card/typography step up to fill the extra width. */
+@media (min-width: 768px) and (max-width: 1099.98px) {
+    .hero-mobile-banner {
+        aspect-ratio: 2 / 1;
+    }
+
+    .hero-content,
+    .booking-card {
+        max-width: 560px;
+    }
+
+    .hero-content {
+        padding: 34px 36px 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+        line-height: 39px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+        line-height: 25px;
+    }
+
+    .appointment-btn {
+        max-width: 340px;
+        height: 54px;
+        font-size: 16px;
+    }
+
+    /* The stats band (Successful Surgeries / Specialities / Beds /
+       Patients Satisfied) is designed as one wide row with a 77px gap -
+       fine when it spans most of the page, but now that .booking-card
+       (and everything in it) is capped at 560px, that row no longer has
+       room and the fixed-size icons start overlapping the text next to
+       them. A 2x2 grid fits comfortably at this width instead; the
+       vertical divider lines between stats only make sense in a single
+       row, so they're hidden here (display: none removes them from the
+       grid's auto-placement instead of leaving empty cells). */
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 20px;
+        padding: 24px;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+}
+
+/* Quick-row (Call / WhatsApp / Get Directions / Health Check Packages) on
+   tablet and mobile: the icon + two-line title/subtitle reads as clutter
+   once the row gets tight (tablet) or stacks one-per-line (mobile), so
+   swap in a single short word next to the icon instead - see
+   .quick-item-text__full / __short in the base rules above. Matches the
+   1099.98px "tablet and below" cutoff used for the booking bar above,
+   so both sections switch to their compact layout together. */
+@media (max-width: 1099.98px) {
+    .quick-item-text__full {
+        display: none;
+    }
+
+    .quick-item-text__short {
+        display: block;
+    }
+
+    .quick-row {
+        padding: 13px 20px;
+    }
+
+    .quick-item a {
+        gap: 10px;
+    }
+
+    .quick-icon {
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+    }
+
+    .quick-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 499.98px) {
+    .quick-row {
+        padding: 13px 16px;
+    }
+}
+
+/* Mobile: 2 icons per row instead of stacking Call / WhatsApp /
+   Directions / Checkups one under another - a shorter, less scrolly
+   block that still gives each icon + short label its own tap target.
+   Matches the same <768px range the one-per-row stack used before. */
+@media (max-width: 767.98px) {
+    .quick-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 12px;
+        margin: 0;
+    }
+
+    .quick-item a {
+        gap: 10px;
+    }
+
+    /* The divider lines only make sense between rows in a single
+       column - hidden here so they don't leave odd half-width lines
+       cutting across a 2-column grid. */
+    .quick-divider {
+        display: none;
+    }
+
+    /* .stats still carried its old 78px side padding, sized for a wide
+       desktop-width bar. Inside the narrow mobile card that ate most of
+       the row's width, squeezed "Successful Surgeries" etc. onto two
+       lines, and left a large uneven gap after the shorter text - which
+       read as misaligned rather than just "left-aligned with padding".
+       Matches quick-row's mobile padding instead. */
+    .stats {
+        padding: 20px 20px;
+    }
+
+    .stat {
+        gap: 16px;
+    }
+
+    .stat-text span {
+        white-space: nowrap;
+    }
+}
+
+/* Legacy card (01 Healthcare / 02 Education / 03 Service + the 1951 -> Today
+   timeline) from tablet up through small-laptop widths. The only rules that
+   ever applied here were a leftover ".legacy-card { flex-wrap: wrap; gap:
+   5px }" (meant as a rough fallback, not a real design) and, above 1023px,
+   an even cruder wrapped version with 15px gaps and no wrap-aware sizing on
+   the items or the divider lines - so the 3 items, 3 thin divider lines and
+   the timeline block all wrapped onto whichever row they happened to fit,
+   overlapping and crowding each other. This replaces both with one clean
+   layout for the whole 768-1439px span: 2 items per row (the flex-basis is
+   a fraction of the row so it always divides evenly into 2, however wide
+   the card gets), a lone 3rd item centered on its own row, and the
+   timeline as a full-width row underneath - no wrapping mid-item, no
+   overlap. The thin divider lines only made sense in the old single-row
+   layout, so they're hidden rather than left as orphaned stray lines. */
+@media (min-width: 768px) and (max-width: 1439.98px) {
+    .legacy-card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        gap: 28px 40px;
+        padding: 30px 32px;
+        border-radius: 28px;
+    }
+
+    .legacy-item {
+        flex: 1 1 calc(50% - 20px);
+        gap: 16px;
+    }
+
+    .legacy-divider {
+        display: none;
+    }
+
+    .number-circle {
+        width: 52px;
+        height: 52px;
+        padding: 10px;
+        flex: none;
+    }
+
+    .number-circle span {
+        font-size: 20px;
+    }
+
+    .legacy-icon {
+        width: 52px;
+        height: 52px;
+        padding: 11px;
+        flex: none;
+    }
+
+    .legacy-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .legacy-text {
+        min-width: 0;
+    }
+
+    .legacy-text h3 {
+        font-size: 17px;
+        line-height: 1.3;
+    }
+
+    .legacy-text p {
+        font-size: 13.5px;
+        line-height: 1.5;
+    }
+
+    .timeline {
+        flex: 1 1 100%;
+        order: 4;
+        height: auto;
+        padding: 20px 28px;
+    }
+}
+
+/* Auto-rotating featured speciality card (see startAutoSlide() in
+   home-page.ts): every 3s it moves to the next department, cross-fading
+   instead of hard-cutting so the image and text swap invisibly mid-
+   transition. The ".fading" class is toggled on the featured card only -
+   it fades/scales out, the data swaps underneath, then it fades back in. */
+.featured-card {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.featured-card.fading {
+    opacity: 0;
+    transform: scale(0.98);
+}
+
+/* The small department cards don't cross-fade as a block anymore. Instead
+   playDepartmentCardShift() in home-page.ts runs a FLIP animation: it
+   measures each surviving card's position before the rotation, lets
+   Angular re-render (visibleDepartments() shifts every card left by one
+   slot, since *ngFor tracks them by object identity the DOM nodes are
+   moved rather than recreated), then animates from the old position to
+   the new one with a small per-card stagger so the cards visibly glide
+   into place one after another, clockwise. The one truly new card
+   (the previously-featured department, now re-joining at the end of the
+   grid) has no "before" position to animate from, so home-page.ts adds
+   the ".department-card--entering" class to it for a simple fade/slide-in
+   instead.
+
+   Important: this is a class the script adds/removes rather than a bare
+   ".department-card { animation: ... }" rule, because moving an existing
+   DOM node to a new position (which is what happens to the surviving
+   cards on every rotation) restarts a CSS animation attached directly to
+   the element even though nothing about the element itself changed -
+   that was fighting the FLIP position glide above with an unwanted
+   opacity flicker on every surviving card, not just the new one. */
+.department-card--entering {
+    animation: departmentCardEnter 0.5s ease;
+}
+
+@keyframes departmentCardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .featured-card {
+        transition: none;
+    }
+
+    .department-card--entering {
+        animation: none;
     }
 }
