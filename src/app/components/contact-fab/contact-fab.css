@@ -1,0 +1,104 @@
+:host {
+    display: block;
+}
+
+/* ==========================================================
+   Mobile & tablet: full-width bottom bar (shown <= 1023px)
+   ========================================================== */
+
+.contact-fab-bar {
+    display: none;
+}
+
+/* ==========================================================
+   Laptop and up: floating circular buttons (shown by default,
+   hidden <= 1023px below)
+   ========================================================== */
+
+.contact-fab-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-fab-float__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(16, 43, 120, .28);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.contact-fab-float__btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(16, 43, 120, .34);
+}
+
+.contact-fab-float__btn--whatsapp {
+    background: #25d366;
+}
+
+.contact-fab-float__btn--call {
+    background: #0d3199;
+}
+
+@media (max-width: 1023px) {
+    .contact-fab-float {
+        display: none;
+    }
+
+    /* :host itself (not fixed) sits at the very end of the normal
+       document flow, right after <app-footer> in app.html - giving it a
+       height here reserves that much blank space at the bottom of the
+       page so the fixed bar below doesn't end up sitting on top of the
+       footer's last row of links/content. */
+    :host {
+        display: block;
+        height: 60px;
+    }
+
+    .contact-fab-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+        display: flex;
+        height: 60px;
+        box-shadow: 0 -4px 16px rgba(16, 43, 120, .18);
+    }
+
+    .contact-fab-bar__btn {
+        flex: 1 1 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .2px;
+    }
+
+    .contact-fab-bar__btn--call {
+        background: #0d3199;
+    }
+
+    .contact-fab-bar__btn--whatsapp {
+        background: #25d366;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-fab-float__btn {
+        transition: none;
+    }
+}

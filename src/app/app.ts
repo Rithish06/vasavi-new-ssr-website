@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
+import { ContactFab } from './components/contact-fab/contact-fab';
 
 /** Loaded globally via angular.json's `scripts` array - defines `window.AOS`. */
 declare const AOS: {
@@ -11,7 +12,7 @@ declare const AOS: {
 };
 
 @Component({
-  imports: [RouterOutlet, Navbar, Footer],
+  imports: [RouterOutlet, Navbar, Footer, ContactFab],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
