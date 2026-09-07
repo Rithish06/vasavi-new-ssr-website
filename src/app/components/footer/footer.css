@@ -435,6 +435,17 @@
   border-bottom: none;
 }
 
+/* Insurance & TPA has no page to link to, so it renders as a plain <div>
+   (see footer.html) instead of an <a> - undo the hover tint above for it
+   specifically so it doesn't look clickable when it isn't. */
+.footer-action--static {
+  cursor: default;
+}
+
+.footer-action--static:hover {
+  background: transparent;
+}
+
 @media (min-width: 640px) {
   .footer-actions {
     grid-template-columns: 1fr 1fr;

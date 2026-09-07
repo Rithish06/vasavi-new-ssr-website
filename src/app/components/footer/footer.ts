@@ -133,8 +133,13 @@ export class Footer {
       icon: FOOTER_ICONS.shield,
       title: 'Insurance & TPA',
       description: 'List of empanelled insurance partners and TPA details.',
+      // No dedicated Insurance & TPA page exists, so this card has no
+      // `path`/`link` at all (previously it had `path: '/insurance-tpa'`,
+      // which doesn't match any route in app.routes.ts and was silently
+      // falling through to the app's trailing `:doctorSlug` wildcard
+      // route). footer.html renders a card with neither a path nor a
+      // link as plain static text instead of a clickable <a>.
       ctaLabel: 'Know More',
-      path: '/insurance-tpa',
       hideCta: true,
     },
     {

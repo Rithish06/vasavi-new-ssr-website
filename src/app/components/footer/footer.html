@@ -219,6 +219,25 @@
             }
           </span>
         </a>
+
+        <!-- No path and no link (e.g. Insurance & TPA - there's no
+             dedicated page for it yet): render the same card as plain,
+             non-clickable static content instead of a dead/wrong link. -->
+        <div class="footer-action footer-action--static" *ngIf="!card?.path && !card?.link">
+          <span class="footer-action__icon">
+            <app-footer-icon [name]="card.icon" />
+          </span>
+          <span class="footer-action__body">
+            <strong>{{ card.title }}</strong>
+            <span class="footer-action__desc">{{ card.description }}</span>
+            @if (!card.hideCta) {
+              <span class="footer-action__cta">
+                {{ card.ctaLabel }}
+                <app-footer-icon name="arrow" />
+              </span>
+            }
+          </span>
+        </div>
       }
     </div>
 

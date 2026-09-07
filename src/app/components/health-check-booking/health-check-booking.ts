@@ -1,6 +1,7 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
 import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
+import { INDIAN_MOBILE_ERROR, isValidIndianMobile } from '../../phone-validator';
 
 interface ContactErrors {
   name?: string;
@@ -80,13 +81,12 @@ export class HealthCheckBooking {
 
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
-    const digits = phone.replace(/\D/g, '');
     const pkg = this.selectedPackageSlug();
 
     const errors: ContactErrors = {};
     if (!name) errors.name = 'Please enter your name.';
     if (!phone) errors.phone = 'Please enter your phone number.';
-    else if (digits.length < 10) errors.phone = 'Enter a valid 10-digit phone number.';
+    else if (!isValidIndianMobile(phone)) errors.phone = INDIAN_MOBILE_ERROR;
     if (!pkg) errors.package = 'Please select a health check package.';
 
     this.contactErrors.set(errors);

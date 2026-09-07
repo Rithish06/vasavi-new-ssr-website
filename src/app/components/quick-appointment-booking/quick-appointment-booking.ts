@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
 import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
+import { INDIAN_MOBILE_ERROR, isValidIndianMobile } from '../../phone-validator';
 
 export type ServiceNeeded = 'doctor' | 'surgery' | 'health-check' | 'others';
 
@@ -140,14 +141,13 @@ export class QuickAppointmentBooking {
 
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
-    const digits = phone.replace(/\D/g, '');
     const service = this.service();
     const detail = this.detail().trim();
 
     const errors: BookingErrors = {};
     if (!name) errors.name = 'Please enter your name.';
     if (!phone) errors.phone = 'Please enter your phone number.';
-    else if (digits.length < 10) errors.phone = 'Enter a valid 10-digit phone number.';
+    else if (!isValidIndianMobile(phone)) errors.phone = INDIAN_MOBILE_ERROR;
     if (!service) errors.service = 'Please select what you need.';
     if (service && this.needsDetail() && !detail) {
       errors.detail =

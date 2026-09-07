@@ -2,6 +2,7 @@ import { Component, PLATFORM_ID, effect, inject, input, output, signal } from '@
 import { isPlatformBrowser } from '@angular/common';
 import { DoctorsIcon } from '../../pages/doctors/doctors-icon';
 import { LEAD_SUBMIT_ERROR, LeadService } from '../../lead-service';
+import { INDIAN_MOBILE_ERROR, isValidIndianMobile } from '../../phone-validator';
 
 type BookingStep = 'select' | 'contact' | 'success';
 
@@ -180,12 +181,11 @@ export class AppointmentBooking {
 
     const name = this.patientName().trim();
     const phone = this.patientPhone().trim();
-    const digits = phone.replace(/\D/g, '');
 
     const errors: ContactErrors = {};
     if (!name) errors.name = 'Please enter your name.';
     if (!phone) errors.phone = 'Please enter your phone number.';
-    else if (digits.length < 10) errors.phone = 'Enter a valid 10-digit phone number.';
+    else if (!isValidIndianMobile(phone)) errors.phone = INDIAN_MOBILE_ERROR;
 
     this.contactErrors.set(errors);
     if (Object.keys(errors).length > 0) return;

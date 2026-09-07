@@ -102,6 +102,8 @@
         <span>Phone Number</span>
         <input
           type="tel"
+          inputmode="tel"
+          maxlength="13"
           [value]="patientPhone()"
           (input)="setPatientPhone($any($event.target).value)"
           placeholder="10-digit mobile number"
