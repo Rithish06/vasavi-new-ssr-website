@@ -168,6 +168,16 @@
   text-underline-offset: 3px;
 }
 
+/* Extra breathing room from the edge - desktop only (tablet/mobile keep
+   the tighter spacing from the max-width: 767.98px block below, which
+   also covers the min-width: 767.98px-1099.98px tablet range since
+   nothing overrides .topbar__phone in between). */
+@media (min-width: 1100px) {
+  .topbar__phone {
+    margin-right: 40px;
+  }
+}
+
 /* ===================================================================
    Main navigation
    =================================================================== */

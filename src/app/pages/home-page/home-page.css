@@ -2055,7 +2055,7 @@
     gap: 15px;
     width: 90%;
     padding: 14px 28px 18px;
-    background: rgba(255, 255, 255, .7);
+    background: rgba(255, 255, 255, .8);
     border: 1px solid #e3eaf5;
     border-radius: 18px;
     box-shadow: 0 4px 20px rgba(50, 80, 130, .04);
@@ -2099,10 +2099,11 @@
 .surgery-grid li {
     position: relative;
     padding-left: 28px;
-    color: #394766;
+    color: black;
     font-size: 14px;
     line-height: 1.25;
     padding-top: 16px;
+    font-weight: 700;
 }
 
 /* Each checklist item now routes to that surgery's own page
