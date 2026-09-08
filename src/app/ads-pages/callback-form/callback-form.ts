@@ -72,7 +72,7 @@ export class CallbackForm {
   // }
 
   ngOnInit(): void {
-    // this.fetchUserLocation();
+    this.fetchUserLocation();
     // console.log('CallbackForm initialized for page:', this.pageName);
   }
 

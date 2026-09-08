@@ -1902,6 +1902,9 @@
     padding: 42px 58px 28px;
     background: url("/Images/Home-new/opinion-section-bg-image.png") lightgray -22.436px -18.183px / 101.983% 104.457% no-repeat;
     background-repeat: no-repeat;
+    /* Anchors the decorative heart icon below, which is positioned
+       relative to this section instead of sitting in the flex flow. */
+    position: relative;
 }
 
 
@@ -2015,10 +2018,23 @@
 }
 
 .opinion-section img {
+    /* This decorative icon floats beside the "WE'RE HERE FOR YOU" heading,
+       it isn't meant to take up its own row above it. It used to be
+       `position: relative` with a big top/right offset, which visually
+       moved it down next to the heading but - since relative positioning
+       never removes an element from normal flow - still reserved its
+       original 120x120 box (plus the flex gap after it) as empty space at
+       the very top of the section, which is what was showing up as the
+       oversized empty band above "A Second Opinion." Absolute positioning
+       takes it out of flow entirely, so the section shrinks to fit its
+       real content while the icon keeps the same on-screen spot next to
+       the heading (values below are the equivalent on-screen position,
+       recentered off the section itself instead of off the icon's old
+       flow position). */
     display: block;
-    position: relative;
-    top: 185px;
-    right: 475px;
+    position: absolute;
+    top: 87px;
+    left: calc(50% - 535px);
 }
 
 .heart-outline {
