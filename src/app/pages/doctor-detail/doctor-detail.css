@@ -1300,3 +1300,408 @@
   }
   
 }
+/* ===================================================================
+   SEO sections added to the doctor profile page
+   -------------------------------------------------------------------
+   Everything below is additive: no existing rule is modified, so any
+   doctor without the new `education` / `faqs` / `relatedLinks` /
+   `seo` data renders exactly as the page did before. The sections
+   reuse the page's existing recipe - 1280px inner, 64px/72px vertical
+   rhythm, alternating #ffffff and #f8f9ff grounds, and the same
+   "short bar with a trailing dot" heading flourish.
+   =================================================================== */
+
+/* -- Back link + breadcrumb row ------------------------------------ */
+
+.doctor-hero__topbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 28px;
+}
+
+/* The row now owns the spacing that the back link used to carry on its
+   own, so the two sit on one baseline instead of stacking. */
+.doctor-hero__topbar .doctor-hero__back {
+  margin-bottom: 0;
+}
+
+.doctor-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.84rem;
+}
+
+.doctor-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(18, 27, 111, 0.55);
+}
+
+.doctor-breadcrumb svg {
+  width: 13px;
+  height: 13px;
+}
+
+.doctor-breadcrumb a {
+  color: var(--color-blue-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.doctor-breadcrumb a:hover,
+.doctor-breadcrumb a:focus-visible {
+  text-decoration: underline;
+}
+
+.doctor-breadcrumb [aria-current='page'] {
+  color: var(--color-navy-800);
+  font-weight: 600;
+}
+
+/* -- Keyword line inside the H1 ------------------------------------ */
+
+/* Sits inside the <h1> so the page's primary keyword is genuinely in the
+   main heading, but at body-text weight and size so the doctor's name
+   stays the visually dominant element. */
+.doctor-hero__h1-sub {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(18, 27, 111, 0.72);
+}
+
+.doctor-hero__location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(18, 27, 111, 0.66);
+}
+
+.doctor-hero__location svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--color-blue-600);
+}
+
+/* -- Education & Training ------------------------------------------ */
+
+.doctor-education {
+  background: #f8f9ff;
+  padding: 64px 24px 72px;
+}
+
+.doctor-education__inner {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.doctor-education__head h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.15;
+}
+
+/* Same underline-with-a-dot flourish as the Affiliations/Honors
+   headings, but left-aligned rather than centered. */
+.doctor-education__underline {
+  display: block;
+  width: 56px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-blue-600);
+  margin: 16px 0 0;
+  position: relative;
+}
+
+.doctor-education__underline::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--color-blue-600);
+  background: #ffffff;
+  transform: translateY(-50%);
+}
+
+.doctor-education__list {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.doctor-education__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 24px;
+  background: #ffffff;
+  border: 1px solid rgba(18, 27, 111, 0.09);
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(18, 27, 111, 0.05);
+}
+
+.doctor-education__icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(36, 84, 230, 0.1);
+  color: var(--color-blue-600);
+}
+
+.doctor-education__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.doctor-education__body h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+  line-height: 1.35;
+}
+
+.doctor-education__institution {
+  margin-top: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-blue-600);
+  line-height: 1.5;
+}
+
+.doctor-education__detail {
+  margin-top: 6px;
+  font-size: 0.88rem;
+  color: rgba(18, 27, 111, 0.66);
+  line-height: 1.55;
+}
+
+/* -- FAQ ------------------------------------------------------------ */
+
+.doctor-faq {
+  background: #ffffff;
+  padding: 64px 24px 72px;
+}
+
+.doctor-faq__inner {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.doctor-faq__head h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.15;
+}
+
+.doctor-faq__list {
+  margin-top: 32px;
+  display: grid;
+  gap: 12px;
+}
+
+.doctor-faq__item {
+  border: 1px solid rgba(18, 27, 111, 0.1);
+  border-radius: 14px;
+  background: #fbfcff;
+  overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.doctor-faq__item[open] {
+  border-color: rgba(36, 84, 230, 0.35);
+  box-shadow: 0 12px 28px rgba(18, 27, 111, 0.06);
+}
+
+.doctor-faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Safari/Chrome still paint their own disclosure triangle unless both of
+   these are suppressed - the chevron span replaces it. */
+.doctor-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.doctor-faq__item summary::marker {
+  content: '';
+}
+
+.doctor-faq__item summary:focus-visible {
+  outline: 2px solid var(--color-blue-600);
+  outline-offset: -3px;
+}
+
+.doctor-faq__item summary h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+  line-height: 1.45;
+}
+
+.doctor-faq__chevron {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(36, 84, 230, 0.1);
+  color: var(--color-blue-600);
+  transition: transform 0.2s ease;
+}
+
+.doctor-faq__chevron svg {
+  width: 15px;
+  height: 15px;
+}
+
+.doctor-faq__item[open] .doctor-faq__chevron {
+  transform: rotate(180deg);
+}
+
+.doctor-faq__item > p {
+  padding: 0 22px 20px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(18, 27, 111, 0.75);
+}
+
+/* -- Related care --------------------------------------------------- */
+
+.doctor-related {
+  background: #f8f9ff;
+  padding: 64px 24px 76px;
+}
+
+.doctor-related__inner {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.doctor-related__head h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 800;
+  color: var(--color-navy-900);
+  line-height: 1.15;
+}
+
+.doctor-related__grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.doctor-related__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(18, 27, 111, 0.09);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.doctor-related__card:hover,
+.doctor-related__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(36, 84, 230, 0.4);
+  box-shadow: 0 16px 32px rgba(18, 27, 111, 0.08);
+}
+
+.doctor-related__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+  line-height: 1.4;
+}
+
+.doctor-related__label svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--color-blue-600);
+}
+
+.doctor-related__desc {
+  font-size: 0.89rem;
+  line-height: 1.6;
+  color: rgba(18, 27, 111, 0.66);
+}
+
+.doctor-related__note {
+  margin-top: 28px;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: rgba(18, 27, 111, 0.7);
+}
+
+.doctor-related__note a {
+  color: var(--color-blue-600);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.doctor-related__note a:hover,
+.doctor-related__note a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .doctor-education,
+  .doctor-faq,
+  .doctor-related {
+    padding: 48px 18px 56px;
+  }
+
+  .doctor-education__item {
+    padding: 18px 18px;
+  }
+
+  .doctor-faq__item summary {
+    padding: 16px 18px;
+  }
+
+  .doctor-faq__item > p {
+    padding: 0 18px 18px;
+  }
+}

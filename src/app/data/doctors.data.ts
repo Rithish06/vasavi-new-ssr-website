@@ -20,6 +20,85 @@ export interface AwardEntry {
   description: string;
 }
 
+/**
+ * One row of the "Education & Training" section on a doctor's profile
+ * page. Kept as degree + institution rather than a single string so the
+ * same data can feed both the visible list and the `alumniOf` /
+ * `hasCredential` arrays in the page's JSON-LD.
+ */
+export interface EducationEntry {
+  /** e.g. "MS - Obstetrics & Gynaecology". */
+  degree: string;
+  /** e.g. "JSS Medical College, Mysuru, Karnataka". Omit when the institution isn't confirmed. */
+  institution?: string;
+  /** Optional one-line note - typically what a fellowship actually covered. */
+  detail?: string;
+  /** Picks the row's icon: 'degree' gets the graduation cap, the others get a badge/certificate. */
+  kind?: 'degree' | 'fellowship' | 'certification';
+}
+
+/**
+ * A question/answer pair rendered in the profile page's FAQ section and
+ * emitted as FAQPage structured data. Answers should be plain prose with
+ * no markup, and self-contained: Google's snippets and the AI answer
+ * engines lift them close to verbatim, so a tight 40-60 word answer that
+ * reads on its own does far more work than a long one.
+ */
+export interface FaqEntry {
+  question: string;
+  answer: string;
+}
+
+/**
+ * "Related care at Vasavi" link on a doctor's page. These are the
+ * internal links that pass topical relevance between a doctor's profile
+ * and the matching department/procedure pages - `path` must be a real
+ * route from app.routes.ts, or the link 404s and actively hurts.
+ */
+export interface RelatedLink {
+  /** Route path, leading slash included, e.g. "/hysterectomy-surgery-in-bangalore". */
+  path: string;
+  /** Anchor text - the phrase people actually search, never "click here". */
+  label: string;
+  /** Short supporting line under the anchor. */
+  description?: string;
+}
+
+/**
+ * Per-page SEO overrides for a doctor's profile page. Present only for
+ * doctors whose page has been through an SEO pass; doctor-detail.ts falls
+ * back to generated defaults for everyone else, so filling this in for
+ * one doctor never changes another doctor's page.
+ */
+export interface DoctorSeo {
+  /** <title>. Aim for ~55-62 characters so Google doesn't truncate it in the SERP. */
+  metaTitle: string;
+  /** <meta name="description">. Aim for ~150-160 characters and end with a reason to click. */
+  metaDescription: string;
+  /** <meta name="keywords"> - ignored by Google, still read by Bing and several Indian health aggregators. */
+  keywords?: string;
+  /**
+   * Second line inside the <h1>, rendered smaller than the name. This is
+   * what puts the primary keyword ("Gynaecologist & Gynaec-Oncologist in
+   * Bangalore") inside the page's only H1 without wrecking the hero design.
+   */
+  h1Subtitle?: string;
+  /** Replaces the hero designation line when a longer, more specific one is wanted. */
+  heroSubtitle?: string;
+  /** Small location line under the designation - a real local-SEO signal, and genuinely useful to patients. */
+  heroLocation?: string;
+  /**
+   * Subjects the doctor is an authority on, emitted as `knowsAbout` on the
+   * Person/Physician node. This is the field that helps entity and AI
+   * answer engines connect a doctor to a condition or procedure.
+   */
+  knowsAbout?: string[];
+  /** Procedures offered, emitted as `availableService` MedicalProcedure nodes. */
+  procedures?: string[];
+  /** Verified external profiles for `sameAs`. Only add URLs someone has actually opened and checked. */
+  sameAs?: string[];
+}
+
 export interface Doctor {
   id: string;
   name: string;
@@ -45,10 +124,27 @@ export interface Doctor {
    * its field is missing/empty rather than showing a blank heading.
    */
   briefProfile?: string;
+  /**
+   * Multi-paragraph version of `briefProfile`. When present it wins, and
+   * each string becomes its own <p> - which is what lets an SEO-written
+   * profile run to three or four readable paragraphs instead of one wall
+   * of text. `briefProfile` stays the single-paragraph fallback for every
+   * doctor who hasn't been rewritten yet.
+   */
+  briefProfileParagraphs?: string[];
   expertiseHighlights?: string[];
   professionalAffiliations?: AffiliationEntry[];
   honorsAwards?: AwardEntry[];
   publications?: string[];
+
+  /** "Education & Training" section - hidden entirely when absent. */
+  education?: EducationEntry[];
+  /** FAQ section + FAQPage structured data - hidden entirely when absent. */
+  faqs?: FaqEntry[];
+  /** "Related care at Vasavi" internal links - hidden entirely when absent. */
+  relatedLinks?: RelatedLink[];
+  /** Per-page SEO overrides - see DoctorSeo. Falls back to generated defaults when absent. */
+  seo?: DoctorSeo;
 }
 
 /** Primary department checkboxes - the most common ones, shown expanded by default. */
@@ -159,16 +255,34 @@ export const DOCTORS: Doctor[] = [
     alt: 'Dr. Nisha Buchade | Gynecologist | Vasavi Hospitals Bangalore',
     title: 'Consultant Gynecologist',
     department: 'Gynecology',
-    qualifications: 'MBBS, MS (OBG)',
+    qualifications: 'MBBS, MS (OBG), Fellowship in Gynaec Oncology',
     experienceYears: 15,
     slug: '/dr-nisha-buchade',
     briefProfile:
       "Dedicated gynecologist providing compassionate, ethical, and evidence-based care with a focus on women's health.",
+    // SEO-written profile copy. `briefProfileParagraphs` wins over the
+    // single-paragraph `briefProfile` above (kept as the fallback), and the
+    // keyword targets are worked into prose rather than stuffed: the page
+    // is aiming at "gynecologist in Bangalore", "gynaec oncologist in
+    // Bangalore", "hysterectomy / myomectomy / fibroid removal", and the
+    // long-tail condition terms further down.
+    briefProfileParagraphs: [
+      'Dr. Nisha Buchade is a Consultant Obstetrician, Gynaecologist and Gynaec-Oncologist at Vasavi Hospitals, Kumaraswamy Layout, Bengaluru, with more than 15 years of clinical practice in women’s health. She is one of relatively few gynaecologists in Bangalore who pairs everyday obstetric and gynaecological care with the surgical training of a gynaecologic cancer specialist - which means a woman in South Bengaluru can have her pregnancy, her fibroid or endometriosis surgery, and, if it ever comes to it, her cancer surgery managed under one roof by a doctor who already knows her history.',
+      'Her surgical practice is built around minimally invasive gynaecology. She performs robotic and laparoscopic hysterectomy (removal of the uterus), myomectomy and fibroid removal that preserves the uterus, ovarian cystectomy, surgery for endometriosis and adenomyosis, pelvic organ prolapse repair, and staging and radical surgery for cervical, endometrial and ovarian cancer - including robotic lymphadenectomy, the subject of her award-winning video presentation at the IAGE national conference. Because these operations are done through keyhole incisions rather than an open cut, most patients have less blood loss, less pain afterwards and a shorter stay in hospital.',
+      'On the obstetric side, Dr. Nisha manages high-risk pregnancies - diabetes and high blood pressure in pregnancy, twin pregnancy, previous caesarean, recurrent miscarriage, placental problems and IVF conceptions - with NICU and critical care support on the same campus. She is known for painless normal deliveries supported by labour analgesia. Her outpatient practice covers PCOD/PCOS, infertility evaluation, abnormal uterine bleeding, menopause and hormone therapy, and urinary incontinence and pelvic floor problems.',
+      'Prevention is a large part of how she works. Certified by PINCC (Prevention International: No Cervical Cancer) to both perform and teach VIA screening, colposcopy, cervical biopsy and cryotherapy, she runs cervical cancer screening and HPV vaccination for women and adolescent girls. Her stated approach is compassionate, ethical and evidence-based: explaining what a scan or a biopsy actually shows, laying out every option including the option of not operating, and reaching the decision together with the patient rather than for her.',
+    ],
     expertiseHighlights: [
-      'High risk pregnancy, painless normal deliveries',
-      'Robotic/ laparoscopic surgeries for fibroids, endometriosis, removal of uterus, cancer surgeries, prolapse repairs',
-      'Prevention and treatment of gynaecological cancers',
-      'PCOD, Infertility, menopause, urinary incontinence',
+      'High-risk pregnancy care and painless normal deliveries',
+      'Robotic and laparoscopic hysterectomy (removal of the uterus)',
+      'Myomectomy and fibroid removal that preserves the uterus',
+      'Laparoscopic surgery for endometriosis and adenomyosis',
+      'Gynaec-oncology: cervical, uterine and ovarian cancer surgery',
+      'Cervical cancer screening, colposcopy, VIA and HPV vaccination',
+      'Pelvic organ prolapse repair and urinary incontinence',
+      'PCOD/PCOS, infertility evaluation and fertility-enhancing surgery',
+      'Abnormal uterine bleeding and ovarian cyst treatment',
+      'Menopause management and hormone therapy',
     ],
     professionalAffiliations: [
       { heading: 'IAGE', description: 'Indian association of Gynecological Endoscopists', image: AFF + 'IAGE.png' },
@@ -211,6 +325,184 @@ export const DOCTORS: Doctor[] = [
     publications: [
       'Study Of Diagnostic Efficacy Of Visual Inspection With Acetic Acid (VIA) In Comparison With PAP Smear In Cervical Cancer Screening In indexed journal',
     ],
+    // Education is both a trust signal for patients and the source of the
+    // `alumniOf` / `hasCredential` nodes in this page's JSON-LD. MBBS is
+    // listed against BMCRI (RGUHS is the affiliating university, which is
+    // why some directory listings show RGUHS instead) - confirmed with the
+    // hospital before publishing.
+    education: [
+      {
+        degree: 'MBBS',
+        institution: 'Bangalore Medical College and Research Institute (BMCRI), Bengaluru, Karnataka',
+        kind: 'degree',
+      },
+      {
+        degree: 'MS - Obstetrics & Gynaecology',
+        institution: 'JSS Medical College, Mysuru, Karnataka',
+        kind: 'degree',
+      },
+      {
+        degree: 'Fellowship in Gynaecological Oncology & Minimal Access Surgery',
+        institution: 'Hyderabad, Telangana',
+        detail: 'Advanced training in laparoscopic and robotic surgery for gynaecological cancers',
+        kind: 'fellowship',
+      },
+      {
+        degree: 'Fellowship in Advanced Laparoscopy',
+        institution: "Paul's Hospital, Kochi, Kerala",
+        kind: 'fellowship',
+      },
+      {
+        degree: 'Fellowship in Advanced Infertility',
+        institution: 'Gujarat',
+        kind: 'fellowship',
+      },
+      {
+        degree: 'Certification in Colposcopy & Cervical Cancer Screening',
+        institution: 'PINCC - Prevention International: No Cervical Cancer',
+        detail: 'Certified to perform and to train other clinicians in VIA, cervical biopsy and cryotherapy',
+        kind: 'certification',
+      },
+    ],
+    // FAQ answers are written to stand alone at 40-70 words each, because
+    // that is the form Google's snippets and the AI answer engines lift.
+    // They also carry the long-tail queries the page can realistically win
+    // ("can fibroids be removed without removing the uterus", "what does a
+    // gynaec oncologist do") without diluting the main keyword targets.
+    faqs: [
+      {
+        question: 'Who is Dr. Nisha Buchade?',
+        answer:
+          'Dr. Nisha Buchade is a Consultant Obstetrician, Gynaecologist and Gynaec-Oncologist at Vasavi Hospitals, Kumaraswamy Layout, Bengaluru, with over 15 years of clinical experience. She holds an MBBS, an MS in Obstetrics & Gynaecology, and fellowships in gynaecological oncology, advanced laparoscopy and advanced infertility.',
+      },
+      {
+        question: 'What conditions does Dr. Nisha Buchade treat?',
+        answer:
+          'She treats uterine fibroids, endometriosis and adenomyosis, ovarian cysts, PCOD/PCOS, abnormal uterine bleeding, infertility, pelvic organ prolapse, urinary incontinence and menopausal problems, as well as cancers of the cervix, uterus and ovaries. She also manages routine and high-risk pregnancies through to delivery.',
+      },
+      {
+        question: 'Does Dr. Nisha Buchade perform robotic and laparoscopic hysterectomy?',
+        answer:
+          'Yes. She performs hysterectomy - removal of the uterus - by robotic and laparoscopic routes at Vasavi Hospitals, for fibroids, heavy bleeding, adenomyosis, prolapse and gynaecological cancer. Keyhole surgery usually means less blood loss, less pain and a shorter hospital stay than open surgery, though the right route depends on your individual case.',
+      },
+      {
+        question: 'Can uterine fibroids be removed without removing the uterus?',
+        answer:
+          'Often, yes. A myomectomy removes the fibroids and leaves the uterus in place, which matters if you may want to conceive later. Whether it suits you depends on the number, size and position of the fibroids, your age and your plans. Dr. Nisha discusses both myomectomy and hysterectomy before any decision is made.',
+      },
+      {
+        question: 'What does a gynaec-oncologist do, and when should I see one?',
+        answer:
+          'A gynaec-oncologist is a gynaecologist with additional fellowship training in cancers of the cervix, uterus, ovaries, vulva and vagina, including the staging and radical surgery these need. See one if a Pap smear, HPV test, scan or biopsy is abnormal, or if a gynaecological cancer has been diagnosed or suspected.',
+      },
+      {
+        question: 'Does Dr. Nisha Buchade handle high-risk pregnancies?',
+        answer:
+          'Yes. She manages high-risk pregnancies including diabetes and high blood pressure in pregnancy, twin pregnancy, previous caesarean, recurrent miscarriage, placental problems and IVF conceptions, with NICU and critical care support available on the same campus if mother or baby needs it.',
+      },
+      {
+        question: 'Is painless normal delivery possible at Vasavi Hospitals?',
+        answer:
+          'Yes. A painless delivery is a normal vaginal birth with labour analgesia, usually an epidural, controlling contraction pain while you stay awake and able to push. Dr. Nisha supports painless normal delivery wherever it is safe for mother and baby, with anaesthesia cover available round the clock.',
+      },
+      {
+        question: 'How often should I have a cervical cancer screening test?',
+        answer:
+          'Most guidelines suggest cervical screening roughly every three years with a Pap smear, or every five years with an HPV test, for women from about 25 to 65. Dr. Nisha is PINCC-certified in VIA screening, colposcopy, cervical biopsy and cryotherapy, and will advise the interval that fits your own history.',
+      },
+      {
+        question: 'Where does Dr. Nisha Buchade consult, and how do I book an appointment?',
+        answer:
+          'She consults at Vasavi Hospitals, #716, 36th Cross, 7th Block, Kumaraswamy Layout, Bengaluru 560078. You can book using the appointment form on this page or by calling the hospital. Carry any previous scans, biopsy reports and prescriptions to the first visit so nothing has to be repeated.',
+      },
+    ],
+    // Internal links from this profile into the matching department and
+    // procedure pages. Every path below is a real route in app.routes.ts -
+    // check that before adding more, since a 404 here costs more than the
+    // link gains. Ideally each of these pages links back to this profile.
+    relatedLinks: [
+      {
+        path: '/obstetrics-and-gynaecology-hospital-in-bangalore',
+        label: 'Obstetrics & Gynaecology at Vasavi',
+        description: "The full women's health department, from antenatal care to gynaec surgery.",
+      },
+      {
+        path: '/hysterectomy-surgery-in-bangalore',
+        label: 'Hysterectomy surgery in Bangalore',
+        description: 'Robotic and laparoscopic removal of the uterus, and what recovery looks like.',
+      },
+      {
+        path: '/fibroid-removal-in-bangalore',
+        label: 'Fibroid removal (myomectomy)',
+        description: 'Uterus-preserving fibroid surgery for women who may still want to conceive.',
+      },
+      {
+        path: '/ovarian-cystectomy-in-bangalore',
+        label: 'Ovarian cystectomy',
+        description: 'Keyhole removal of ovarian cysts while preserving healthy ovarian tissue.',
+      },
+      {
+        path: '/surgical-oncology-cancer-hospital-in-bangalore',
+        label: 'Cancer surgery at Vasavi',
+        description: 'Surgical oncology services, including gynaecological cancer surgery.',
+      },
+      {
+        path: '/minimally-invasive-surgery-in-bangalore',
+        label: 'Minimally invasive & robotic surgery',
+        description: 'How keyhole and robotic surgery differ from open operations.',
+      },
+    ],
+    seo: {
+      metaTitle: 'Dr. Nisha Buchade - Gynecologist & Gynaec Oncologist, Bangalore',
+      metaDescription:
+        'Gynaecologist & gynaec-oncologist at Vasavi Hospitals, Kumaraswamy Layout, Bangalore. 15+ years in robotic hysterectomy, myomectomy & high-risk pregnancy care.',
+      keywords:
+        'gynecologist in Bangalore, gynaec oncologist in Bangalore, Dr. Nisha Buchade, gynecologist Kumaraswamy Layout, hysterectomy surgeon in Bangalore, myomectomy in Bangalore, fibroid removal in Bangalore, laparoscopic gynecologist Bangalore, robotic gynec surgery Bangalore, high risk pregnancy doctor Bangalore, painless normal delivery Bangalore, PCOD treatment Bangalore, infertility specialist Bangalore, cervical cancer screening Bangalore',
+      h1Subtitle: 'Gynaecologist & Gynaec-Oncologist in Bangalore',
+      heroSubtitle: 'Consultant Obstetrician, Gynaecologist & Gynaec-Oncologist',
+      heroLocation: 'Vasavi Hospitals, Kumaraswamy Layout, Bengaluru',
+      knowsAbout: [
+        'Gynaecologic oncology',
+        'Robotic hysterectomy',
+        'Laparoscopic hysterectomy',
+        'Myomectomy',
+        'Uterine fibroids',
+        'Endometriosis',
+        'Adenomyosis',
+        'Ovarian cysts',
+        'Cervical cancer screening',
+        'HPV vaccination',
+        'Colposcopy',
+        'High-risk pregnancy',
+        'Painless normal delivery',
+        'PCOS',
+        'Female infertility',
+        'Menopause',
+        'Urinary incontinence',
+        'Pelvic organ prolapse',
+      ],
+      procedures: [
+        'Robotic hysterectomy',
+        'Laparoscopic hysterectomy',
+        'Myomectomy (fibroid removal)',
+        'Laparoscopic ovarian cystectomy',
+        'Laparoscopic excision of endometriosis',
+        'Pelvic organ prolapse repair',
+        'Radical hysterectomy for cervical cancer',
+        'Staging surgery for endometrial and ovarian cancer',
+        'Robotic pelvic lymphadenectomy',
+        'Colposcopy and cervical biopsy',
+        'Cervical cryotherapy',
+        'HPV vaccination',
+        'Normal delivery with labour analgesia',
+        'Caesarean section',
+      ],
+      // Add verified external profile URLs here (Google Business Profile,
+      // Practo, IMA/KMC listing) once someone has actually opened each one
+      // and confirmed it is this doctor - a wrong sameAs merges her entity
+      // with someone else's, which is hard to undo.
+      sameAs: [],
+    },
   },
   {
     id: 'dr-venkatesh-rathod-r',

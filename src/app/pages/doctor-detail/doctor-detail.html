@@ -18,10 +18,28 @@
       </div>
     }
 
-    <a routerLink="/doctors" class="doctor-hero__back">
-      <app-doctors-icon name="chevron-left" />
-      Back
-    </a>
+    <!-- Back link + visible breadcrumb trail. The breadcrumb isn't
+         decoration: it's the on-page counterpart of the BreadcrumbList
+         JSON-LD emitted in doctor-detail.ts, and Google will only show a
+         breadcrumb in the SERP when the markup matches a real trail on the
+         page. It also gives the Doctors listing page an extra inbound
+         internal link from every profile. -->
+    <div class="doctor-hero__topbar">
+      <a routerLink="/doctors" class="doctor-hero__back">
+        <app-doctors-icon name="chevron-left" />
+        Back
+      </a>
+
+      <nav class="doctor-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a routerLink="/">Home</a></li>
+          <li aria-hidden="true"><app-doctors-icon name="chevron-right" /></li>
+          <li><a routerLink="/doctors">Our Doctors</a></li>
+          <li aria-hidden="true"><app-doctors-icon name="chevron-right" /></li>
+          <li><span aria-current="page">{{ doc.name }}</span></li>
+        </ol>
+      </nav>
+    </div>
 
     <!-- Floating WhatsApp shortcut, echoing the reference design. Uses the
          same published hospital phone number as "Call Now" for now - swap
@@ -52,7 +70,20 @@
           @if (!hasFramedPhoto()) {
             <span class="doctor-hero__decor-cross doctor-hero__decor-cross--photo" aria-hidden="true">+</span>
           }
-          <img class="doctor-hero__photo" [src]="heroImg()" [alt]="doc.alt || doc.name" width="420" height="560" />
+          <!-- This image is the page's LCP element on every viewport, so it
+               is loaded eagerly with high priority rather than lazily -
+               `loading="lazy"` here would actively hurt Largest Contentful
+               Paint, which is a ranking input. -->
+          <img
+            class="doctor-hero__photo"
+            [src]="heroImg()"
+            [alt]="doc.alt || doc.name"
+            width="420"
+            height="560"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
 
         <div class="doctor-hero__info">
@@ -62,9 +93,26 @@
               <circle cx="118" cy="190" r="6"></circle>
             </svg>
           }
-          <h1>{{ doc.name }}</h1>
+          <!-- One H1 per page, containing the doctor's name plus (where an
+               SEO pass has supplied one) a smaller second line carrying the
+               page's primary keyword - "Gynaecologist & Gynaec-Oncologist
+               in Bangalore". Both lines sit inside the H1 so the keyword is
+               genuinely in the page's main heading, while the type scale
+               keeps the name visually dominant. -->
+          <h1>
+            {{ doc.name }}
+            @if (h1Subtitle()) {
+              <span class="doctor-hero__h1-sub">{{ h1Subtitle() }}</span>
+            }
+          </h1>
           <span class="doctor-hero__name-underline" aria-hidden="true"></span>
-          <p class="doctor-hero__title">{{ doc.title }}</p>
+          <p class="doctor-hero__title">{{ heroSubtitle() }}</p>
+          @if (heroLocation()) {
+            <p class="doctor-hero__location">
+              <app-doctors-icon name="pin" />
+              {{ heroLocation() }}
+            </p>
+          }
 
           <span class="doctor-hero__facts-decor-cross" aria-hidden="true">
             <app-doctors-icon name="plus-outline" />
@@ -133,7 +181,7 @@
        when neither is present, and the grid drops to a single column when
        only one of the two is, via `--single` (see doctor-detail.css). -->
   @if (profileBio().length > 0 || expertiseHighlights().length > 0) {
-    <section class="doctor-profile">
+    <section class="doctor-profile" id="about">
       <div
         class="doctor-profile__grid"
         [class.doctor-profile__grid--single]="profileBio().length === 0 || expertiseHighlights().length === 0"
@@ -141,7 +189,7 @@
         @if (profileBio().length > 0) {
           <div class="doctor-profile__bio">
             <span class="doctor-profile__eyebrow">About the Doctor</span>
-            <h2>Brief Profile</h2>
+            <h2>About {{ doc.name }}</h2>
             @for (para of profileBio(); track para) {
               <p>{{ para }}</p>
             }
@@ -165,6 +213,42 @@
     </section>
   }
 
+  <!-- ============ Education & Training ============ -->
+  <!-- Qualifications spelled out in full, with the institution for each.
+       This is the strongest E-E-A-T signal a doctor page can carry for a
+       medical (YMYL) query, and it's the visible counterpart of the
+       `alumniOf` / `hasCredential` nodes in the page's JSON-LD - Google
+       expects structured claims about credentials to be verifiable on the
+       page itself. Hidden entirely for doctors with no `education` data. -->
+  @if (education().length > 0) {
+    <section class="doctor-education" id="education">
+      <div class="doctor-education__inner">
+        <div class="doctor-education__head">
+          <span class="doctor-profile__eyebrow">Qualifications</span>
+          <h2>Education &amp; Training</h2>
+          <span class="doctor-education__underline" aria-hidden="true"></span>
+        </div>
+
+        <ol class="doctor-education__list">
+          @for (item of education(); track item.degree) {
+            <li class="doctor-education__item">
+              <span class="doctor-education__icon"><app-doctors-icon [name]="item.icon" /></span>
+              <div class="doctor-education__body">
+                <h3>{{ item.degree }}</h3>
+                @if (item.institution) {
+                  <p class="doctor-education__institution">{{ item.institution }}</p>
+                }
+                @if (item.detail) {
+                  <p class="doctor-education__detail">{{ item.detail }}</p>
+                }
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </section>
+  }
+
   <!-- ============ Professional Affiliations ============ -->
   @if (professionalAffiliations().length > 0) {
     <section class="doctor-affiliations">
@@ -182,7 +266,7 @@
             <div class="doctor-affiliations__card">
               @if (item.image) {
                 <span class="doctor-affiliations__logo doctor-affiliations__logo--img">
-                  <img [src]="item.image" [alt]="item.heading" loading="lazy" />
+                  <img [src]="item.image" [alt]="item.description || item.heading" loading="lazy" />
                 </span>
               } @else {
                 <span class="doctor-affiliations__logo"><app-doctors-icon name="badge" /></span>
@@ -253,6 +337,79 @@
             </li>
           }
         </ol>
+      </div>
+    </section>
+  }
+
+  <!-- ============ FAQ ============ -->
+  <!-- The questions here are the long-tail queries this page can win
+       ("can fibroids be removed without removing the uterus", "what does a
+       gynaec-oncologist do"). Native <details>/<summary> is used rather
+       than a JS accordion for two reasons: the answers are in the DOM and
+       crawlable whether or not the panel is expanded, and it works with
+       keyboard and screen readers for free. The first answer is expanded
+       so the section doesn't read as an empty list of links. -->
+  @if (faqs().length > 0) {
+    <section class="doctor-faq" id="faq">
+      <div class="doctor-faq__inner">
+        <div class="doctor-faq__head">
+          <span class="doctor-profile__eyebrow">Patient Questions</span>
+          <h2>Frequently Asked Questions</h2>
+          <span class="doctor-education__underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="doctor-faq__list">
+          @for (faq of faqs(); track faq.question; let i = $index) {
+            <details class="doctor-faq__item" [open]="i === 0">
+              <summary>
+                <h3>{{ faq.question }}</h3>
+                <span class="doctor-faq__chevron" aria-hidden="true">
+                  <app-doctors-icon name="chevron-down" />
+                </span>
+              </summary>
+              <p>{{ faq.answer }}</p>
+            </details>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ============ Related care ============ -->
+  <!-- Internal links out to the department and procedure pages this doctor
+       actually works on. These do real SEO work in both directions: they
+       tell Google what this profile is topically about, and they push
+       authority from the profile into the pages that have to rank for the
+       procedure keywords. Every `path` is validated against app.routes.ts
+       when the data is written - a 404 here costs more than the link
+       gains. -->
+  @if (relatedLinks().length > 0) {
+    <section class="doctor-related">
+      <div class="doctor-related__inner">
+        <div class="doctor-related__head">
+          <h2>Related care at Vasavi Hospitals</h2>
+          <span class="doctor-education__underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="doctor-related__grid">
+          @for (link of relatedLinks(); track link.path) {
+            <a class="doctor-related__card" [routerLink]="link.path">
+              <span class="doctor-related__label">
+                {{ link.label }}
+                <app-doctors-icon name="arrow-up-right" />
+              </span>
+              @if (link.description) {
+                <span class="doctor-related__desc">{{ link.description }}</span>
+              }
+            </a>
+          }
+        </div>
+
+        <p class="doctor-related__note">
+          Not sure which is right for you? Book a consultation with {{ doc.name }} and bring any previous
+          scans or reports along &mdash; call
+          <a [href]="'tel:' + hospitalPhoneTel">{{ hospitalPhoneDisplay }}</a> or use the form above.
+        </p>
       </div>
     </section>
   }
